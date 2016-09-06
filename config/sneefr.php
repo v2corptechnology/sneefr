@@ -7,8 +7,8 @@ return [
     | Config for sneefr website
     |--------------------------------------------------------------------------
     */
-    'LOAD_DEBUGBAR' => env('LOAD_DEBUGBAR'),
-    'APP_ENV'       => env('APP_ENV'),
+    'APP_DEBUGBAR' => env('APP_DEBUGBAR'),
+    'APP_ENV'      => env('APP_ENV'),
 
     'NOTIFY_UNREAD_NOTIFICATION_AFTER' => 60 * 24, // Minutes
     'NOTIFY_UNREAD_MESSAGE_AFTER'      => 15, // Minutes
@@ -21,7 +21,7 @@ return [
     | Keys used across different services
     |--------------------------------------------------------------------------
     */
-    'keys' => [
+    'keys'                             => [
         'APP_HASH_KEY'           => env('APP_HASH_KEY'),
         // Google services
         'GOOGLE_API_KEY'         => env('GOOGLE_API_KEY'),
@@ -66,7 +66,7 @@ return [
     |
     */
 
-    'staff_user_ids'             => [
+    'staff_user_ids' => [
         1, // Romain
         2, // Arthur
         3, // Selma
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'staff_facebook_ids'         => [
+    'staff_facebook_ids' => [
         // Those who can see the stats
         'administrators' => [
             603204913117901, // Selma
@@ -101,7 +101,7 @@ return [
         'developers'     => [
             10152914548827090,  // Romain
             1211978335509141,   // Bilel
-        ]
+        ],
     ],
 
 ];
