@@ -249,10 +249,10 @@ Route::group(['middleware' => ['auth', 'team.developer']], function ($router) {
 /**
  * Route bindings
  */
-Route::bind('shops', function ($value) {
+Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
 });
-Route::bind('places', function ($value) {
+Route::bind('place', function ($value) {
     return \Sneefr\Models\Place::where('slug', $value)->first();
 });
 Route::bind('profile', function ($value, $route) {
