@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
@@ -35,6 +36,7 @@ class User extends Model implements AuthenticatableContract,
     use AlgoliaEloquentTrait;
     use Authenticatable, Authorizable, Encryptable, CanResetPassword, Follower, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
     use LogsActivity;
+    use Notifiable;
 
     /**
      * Searchable rules.
