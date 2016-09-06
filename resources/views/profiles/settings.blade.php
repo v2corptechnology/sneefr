@@ -61,23 +61,6 @@
 
                     <input type="hidden" name="settings_category" value="application">
 
-                    <div class="form-group row col-md-12">
-                        <label>
-                            {{-- Control to choose the locale of the application --}}
-                            @lang('profile.parameters.app_locale_label')
-                        </label>
-                        <select name="locale" id="locale" class="form-control">
-
-                            @foreach (Config::get('app.supported_locales') as $code)
-                                <option value="{{ $code }}"
-                                @if ($code === auth()->user()->getLanguage()) selected @endif>
-                                    @lang('profile.parameters.locale_code_'.$code)
-                                </option>
-                            @endforeach
-
-                        </select>
-                    </div>
-
                     <button class="btn btn-success" type="submit">
                         @lang('profile.parameters.button_save_notifications')
                     </button>

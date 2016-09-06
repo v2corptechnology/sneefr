@@ -122,10 +122,6 @@ return [
         'button_save_notifications' => "Save",
         'application_settings'      => 'Preferences',
         'button_danger_zone'        => "Delete my account",
-        // Panel of application settings.
-        'app_locale_label'          => 'Language',
-        'locale_code_fr'            => 'French',
-        'locale_code_en'            => 'English',
         // Phone panel
         'phone_title'               => 'Phone verification',
         'phone_verified_label'      => 'Phone number verified',
