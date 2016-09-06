@@ -1,15 +1,17 @@
 # OS
 .DS_Store
 Thumbs.db
+Homestead.json
+Homestead.yaml
 
 # Packages
 vendor/
 node_modules/
 
 # Laravel 5 & Lumen
-bootstrap/cache/
 .env
 /storage/debugbar
+/public/storage
 /public/images
 /public/build
 /public/css
