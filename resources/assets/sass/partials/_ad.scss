@@ -1,0 +1,106 @@
+.ad--small {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 2px 0px rgba(200, 200, 200, 0.1),
+              0px 0px 0px 1px #DDD;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.ad--small__image {
+  background: #DDD no-repeat center center / cover;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  display: block;
+  height: 200px;
+  width: 100%;
+}
+
+.ad--small__seller {
+  opacity: 0.9;
+  position: absolute;
+  right: 0.75rem;
+  top: 17.25rem;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+    transition: opacity 0.1s;
+  }
+}
+
+.ad--small__seller-image {
+  border-radius: 50%;
+  border: 1px solid #FFF;
+}
+
+.ad--small__caption {
+  @extend .text-muted;
+  border-top: 1px solid #DDD;
+  font-size: 1.3rem;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ad--small__title {
+  margin: 0.5rem 0 0.25rem 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ad--small__price {
+  color: #000;
+}
+
+.ad--small__price-separator {
+  font-size: 85%;
+  padding: 0 0.25rem;
+}
+
+.ad__image {
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+}
+
+.preview {
+  display: flex;
+}
+
+.preview__heading {
+  font-size: 1.6rem;
+}
+
+.preview__link {
+  color: #445868;
+}
+
+.preview__figure {
+  flex-grow: 1;
+  margin-right: 1em;
+  width: 33%;
+}
+
+.preview__image {
+  max-width: 100%;
+  width: 100%;
+}
+
+.preview__body {
+  color: #1968A6;
+  flex-grow: 3;
+  width: 67%;
+}
+
+.preview__edit {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+.preview__edit a {
+  font-size: 1.4rem;
+  text-decoration: underline;
+}

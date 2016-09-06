@@ -62,6 +62,23 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'images' => [
+            'driver' => env('STORAGE_IMAGES_DRIVER', 's3'),
+            'key'    => env('STORAGE_IMAGES_KEY', 'AwesomeKey'),
+            'secret' => env('STORAGE_IMAGES_SECRET', 'AwesomeSecret'),
+            'region' => env('STORAGE_IMAGES_REGION', 'elephpant-land'),
+            'bucket' => env('STORAGE_IMAGES_BUCKET', 'bucket'),
+            'root'   => env('STORAGE_IMAGES_ROOT', public_path('images')),
+        ],
+
+        'dumps' => [
+            'driver' => env('STORAGE_DUMPS_DRIVER', 's3'),
+            'key'    => env('STORAGE_DUMPS_KEY', 'AwesomeKey'),
+            'secret' => env('STORAGE_DUMPS_SECRET', 'AwesomeSecret'),
+            'region' => env('STORAGE_DUMPS_REGION', 'elephpant-land'),
+            'bucket' => env('STORAGE_DUMPS_BUCKET', 'bucket'),
+            'root'   => env('STORAGE_DUMPS_ROOT', public_path('images')),
+        ],
     ],
 
 ];

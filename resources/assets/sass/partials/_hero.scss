@@ -1,0 +1,23 @@
+.hero {
+  color: $brand-text;
+  margin-bottom: 2rem;
+}
+
+.hero--centered {
+  @extend .text-center;
+}
+
+.hero__title {
+  color: $brand-text;
+  font-size: 2.4rem;
+}
+
+.hero__tagline {
+  font-size: 1.8rem;
+}
+
+.hero__link {
+  color: $brand-lightest-text;
+  font-size: 1.4rem;
+  text-decoration: underline;
+}

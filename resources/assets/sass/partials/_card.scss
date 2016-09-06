@@ -1,0 +1,162 @@
+.card {
+  background-color: #FFF;
+  border-radius: 3px;
+  box-shadow: 0px 2px 10px 0px rgba(56, 75, 88, 0.15);
+  margin: 1rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.card.card--transparent {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.card__content {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.card__image {
+  max-width: 100%;
+}
+
+.card__avatar {
+  border: 2px solid #FFF;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 1rem;
+  position: absolute;
+  right: 0;
+  transform: translateY(-75%);
+  z-index: 2;
+}
+
+.card__title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.card__title-separator {
+  color: #777777;
+  font-size: 0.9em;
+}
+
+.card__text {
+  margin-top: 0.75rem;
+}
+
+.card__text :last-child {
+  margin-bottom: 0;
+}
+
+.card__footer {
+  color: #777777;
+  font-size: 1.2rem;
+  margin-top: 0.75rem;
+}
+
+.card__footer :last-child {
+  margin-bottom: 0;
+}
+
+.card__delete {
+  background-color: rgba(255, 255, 255, 0.85);
+  line-height: 1ex;
+  padding: 0.75rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: background 0.2s, border-radius 0.1s;
+  z-index: 100;
+}
+
+.card__delete:hover,
+.card__delete:focus
+{
+  background-color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+  border-radius: 50%;
+}
+.card.card--xs .card__content {
+  padding: 0.5rem;
+}
+
+.card.card--xs .card__title {
+  font-size: 1.1rem;
+}
+
+.card--columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.card--columns .card__gallery {
+  width: 30%;
+}
+
+.card--columns .card__content {
+  padding: 0 0 0 1.5rem;
+  width: 70%;
+}
+
+.card--columns .card__avatar {
+  border: none;
+  margin: 0 1rem 0 0;
+  position: static;
+  transform: none;
+}
+
+.card--columns .card__title {
+  padding-right: 3rem;
+}
+
+.card--columns {
+  border-radius: 0;
+}
+
+.card--center {
+  text-align: center;
+}
+
+.card--center .card__avatar {
+  left: 50%;
+  margin: 0;
+  right: auto;
+  transform: translate(-50%, -75%);
+}
+
+.card--center .card__gallery {
+  background: transparent no-repeat center center / cover;
+  min-height: 120px;
+}
+
+.card--center .card__content {
+  padding-top: 1.75rem;
+}
+
+.card--no-footer .card__footer {
+  display: none;
+}
+
+.card--no-content .card__content {
+  display: none;
+}
+
+.card--no-avatar .card__avatar {
+  display: none;
+}
+
+.card--no-delete .card__delete {
+  display: none;
+}
+
+.card--no-delete .card__title {
+  padding-right: 0;
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Sneefr\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +23,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(BillingInterface::class, StripeBilling::class);
+
+        if (config('sneefr.LOAD_DEBUGBAR')) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
+
+        if (in_array($this->app->environment(), ['staging', 'production'])) {
+            $this->app->register(\Jenssegers\Rollbar\RollbarServiceProvider::class);
+        }
     }
 }
