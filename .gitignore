@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Packages
+vendor/
+node_modules/
+
+# Laravel 5 & Lumen
+bootstrap/cache/
+.env
+/storage/debugbar
+/public/images
+/public/build
+/public/css
+/public/js
+
+# Tooling
+.idea/
+_ide_helper.php
+*.sublime-*
