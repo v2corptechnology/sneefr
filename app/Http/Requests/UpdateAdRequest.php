@@ -62,7 +62,7 @@ namespace Sneefr\Http\Requests {
                 $userShops = auth()->user()->administrableShops;
 
                 // count where
-                if (in_array($slug, $userShops->lists('slug')->all())) {
+                if (in_array($slug, $userShops->pluck('slug')->all())) {
                     unset($input['shop_slug']);
 
                     $input['shop_id'] = $userShops->where('slug', $slug)->first()->id;

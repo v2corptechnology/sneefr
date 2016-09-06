@@ -66,7 +66,7 @@ class ActivityFeedBuilder
         $followedShopIds = Follow::where('user_id', $this->data['person'])
             ->where('followable_type', 'shop')
             ->get()
-            ->lists('followable_id')
+            ->pluck('followable_id')
             ->all();
 
         $this->with('followedShopIds', $followedShopIds);

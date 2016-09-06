@@ -127,7 +127,7 @@ class EloquentDiscussionRepository implements DiscussionRepository
     public function startWithShop(int $userId, Shop $shop) : Discussion
     {
         $participatingDiscussionIds = \Sneefr\Models\DiscussionUser::where('user_id', $userId)
-            ->lists('discussion_id')
+            ->pluck('discussion_id')
             ->all();
 
         // Todo: use the relationship

@@ -26,7 +26,7 @@ if (!class_exists('FactoryUtilities')) {
                 $reason = 'Factory needs at least one existing User to create an Ad';
             }
 
-            $userIdentifiers = User::lists('id')->all();
+            $userIdentifiers = User::pluck('id')->all();
 
             // If there is no existing user, abort.
             if (!$userIdentifiers) {
@@ -52,7 +52,7 @@ if (!class_exists('FactoryUtilities')) {
                 $reason = 'Factory needs at least one existing Category to create an Ad';
             }
 
-            $categoryIdentifiers = Category::lists('id')->all();
+            $categoryIdentifiers = Category::pluck('id')->all();
 
             // If there is no existing user, abort.
             if (!$categoryIdentifiers) {

@@ -331,6 +331,6 @@ class Shop extends Model
     {
         $userId = $userId ?? auth()->id();
 
-        return in_array($userId, $this->followers->lists('id')->all());
+        return in_array($userId, $this->followers->pluck('id')->all());
     }
 }

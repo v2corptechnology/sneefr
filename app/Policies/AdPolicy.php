@@ -25,7 +25,7 @@ class AdPolicy
         }
 
         // Is it one of the administrators of the shop ?
-        if ($ad->shop_id && in_array($user->getId(), $ad->shop->admins->lists('id')->all())) {
+        if ($ad->shop_id && in_array($user->getId(), $ad->shop->admins->pluck('id')->all())) {
             return true;
         }
 

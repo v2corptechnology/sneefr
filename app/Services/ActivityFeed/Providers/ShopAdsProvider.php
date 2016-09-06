@@ -43,7 +43,7 @@ class ShopAdsProvider extends AbstractProvider
     {
         $followedhopIds = Follow::where('user_id', $this->data('person'))
             ->where('followable_type', 'shop')
-            ->lists('followable_id')->all();
+            ->pluck('followable_id')->all();
 
         return AdModel::whereIn('shop_id', $followedhopIds)
             ->has('shop')

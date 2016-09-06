@@ -16,7 +16,7 @@ trait Follower
         return $this->hasMany(Follow::class)
             ->with('followable')
             ->get()
-            ->lists('followable');
+            ->pluck('followable');
     }
 
     /**
