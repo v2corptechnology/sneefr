@@ -15,7 +15,7 @@
         "hashids/hashids": "^1.0",
         "intervention/image": "^2.3",
         "jenssegers/rollbar": "^1.5",
-        "laravel/cashier": "~6.0",
+        "laravel/cashier": "~7.0",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.2",
         "league/color-extractor": "^0.3.0",
