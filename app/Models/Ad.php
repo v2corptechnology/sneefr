@@ -54,7 +54,7 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $hidden = ['lat', 'long'];
+    protected $hidden = ['latitude', 'longitude'];
 
     /**
      * The attributes we can mass assign.
@@ -73,8 +73,8 @@ class Ad extends Model
         'delivery',
         'transaction',
         'location',
-        'lat',
-        'long',
+        'latitude',
+        'longitude',
         'images',
         'locked_for',
         'final_amount',
@@ -91,7 +91,7 @@ class Ad extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'category_id', 'condition_id', 'title', 'description', 'amount', 'location', 'lat', 'long', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'category_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -103,8 +103,8 @@ class Ad extends Model
         'images'            => 'array',
         'transaction'       => 'array',
         'amount'            => 'float',
-        'lat'               => 'float',
-        'long'              => 'float',
+        'latitude'          => 'float',
+        'longitude'         => 'float',
         'category_id'       => 'int',
         'condition_id'      => 'int',
     ];
@@ -539,7 +539,7 @@ class Ad extends Model
      */
     public function latitude() : float
     {
-        return (float) $this->lat;
+        return (float) $this->latitude;
     }
 
     /**
@@ -549,7 +549,7 @@ class Ad extends Model
      */
     public function longitude() : float
     {
-        return (float) $this->long;
+        return (float) $this->longitude;
     }
 
     /**
@@ -732,7 +732,7 @@ class Ad extends Model
      */
     public function getLatitude()
     {
-        return $this->lat ?? null;
+        return $this->latitude ?? null;
     }
 
     /**
@@ -742,7 +742,7 @@ class Ad extends Model
      */
     public function getLongitude()
     {
-        return $this->long ?? null;
+        return $this->longitude ?? null;
     }
 
     /**
@@ -794,7 +794,7 @@ class Ad extends Model
 
         $user = auth()->user();
 
-        return vincentyGreatCircleDistance($user->lat, $user->long, $this->lat, $this->long);
+        return vincentyGreatCircleDistance($user->lat, $user->long, $this->latitude, $this->longitude);
     }
 
     /**
