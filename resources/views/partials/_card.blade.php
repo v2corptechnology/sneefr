@@ -68,7 +68,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
 
     $title = $item->getName();
     $url = route('shops.show', $item);
-    $footer = $item->ads->count() . ' ads';
+    $footer = ($item->ads_count ?? $item->ads->count()) . ' ads';
     $deletable = $item->isOwner();
     $avatar = [
         'url' => route('shops.show', $item),
