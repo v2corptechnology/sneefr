@@ -12,222 +12,161 @@
 
 @section('content')
     <style>
-        .profile-details__title, .profile-details__tagline {
-            color: #FFF;
-            text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8);
-            font-size: 3rem;
-        }
-
-        .profile--place {
+        .cover__img {
             background-image: url('{{ $shop->getCover('360x120') }}');
             background-color: {{ $shop->getBackgroundColor() }};
             color: {{ $shop->getFontColor() }};
-            min-height: 20rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 200px;
             position: relative;
+            text-align: center;
         }
 
-        .profile-nav {
-            margin-top: auto;
-            position: absolute;
-            bottom: 0;
-        }
-
-        .profile-nav__item {color: #000000;}
-
-        .summary__item--header {
-
-        }
-        .js-summary__item--hidden {
-            display: none;
-        }
-        .js-summary__item--expandable {
-            overflow: hidden;
-        }
-        .js-summary__item--collapsed {
-            max-height: 4rem;
-        }
-
-        @media screen and (max-width: 768px) {
-            .profile--place .profile-details {
-                margin-top: 0;
-            }
-            .summary__item--header {
-                display: none;
-            }
+        .cover__avatar{
+            border-radius: 50%;
+            margin-top: 60px;
         }
 
         /* 1.5 dpr */
         @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-            .profile--place {
+            .cover__img {
                 background-image: url('{{ $shop->getCover('720x240') }}');
             }
         }
 
         @media screen and (min-width: 768px) {
-            .profile--place {
+            .cover__img {
                 background-image: url('{{ $shop->getCover('1400x450') }}');
-                min-height: 40rem;
-            }
-            .profile-details__title, .profile-details__tagline {
-                font-size: 6rem;
             }
         }
     </style>
 
-    <header class="cover">
-        <div class="profile--place">
-            <div class="profile-details">
-                <h1 class="profile-details__title">{{ $shop->getName() }}</h1>
+    <header class="header">
+
+        <div class="cover">
+            <div class="cover__img">
+                <a href="#" data-toggle="modal" data-target="#profilePicture">
+                    <img class="cover__avatar" src="{{ $shop->getLogo('80x80') }}" alt="{{ $shop->getName() }}">
+                </a>
             </div>
+        </div>
 
-            <div class="profile-details__tagline">
+        <div class="container">
+
+            <div class="summary col-xs-12  col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+                <h1 class="summary__name">{{ $shop->getName() }}</h1>
+                <span class="summary__address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $shop->getLocation() }}</span>
+                <ul class="summary__keypoints">
+                    <li class="summary__keypoints__item">
+                        <div class="summary__icon"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div>  25
+                    </li>
+                    <li class="summary__keypoints__item">
+                        <div class="summary__icon"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div>  11
+                    </li>
+                </ul>
+                <hr>
+                <p class="summary__description summary__description--narrow text-muted js-summary__item--expandable js-summary__item--collapsed">
+                    {{ $shop->getDescription() }}
+                </p>
+                <a class="summary__toggle js-summary__toggle" href="#"><i class="fa fa-chevron-down"></i></a>
             </div>
+            <div class="hidden-xs col-sm-3 col-md-3">
+                <div class="actions pull-right">
 
-            <ul class="profile-nav">
-                <li>
-            <span class="profile-nav__item">
-                <i class="fa fa-map-marker"></i> {{ $shop->getLocation() }}
+                    @if ($shop->isOwner())
+                        <a class="btn btn-block btn-primary btn-primary2"
+                           href="{{ route('shops.edit', $shop) }}" title="___">
+                            <i class="fa fa-cog"></i>
+                            Edit
+                        </a>
+                    @else
+                        @if ($shop->isFollowed())
+                            <form action="{{ route('follows.destroy', [0, 'type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.unfollow')</button>
+                            </form>
+                        @else
+                            <form action="{{ route('follows.store', ['type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
+                                {!! csrf_field() !!}
+                                <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.follow')</button>
+                            </form>
+                        @endif
+                    @endif
 
-                @if (auth()->check() && $shop->isOwner() && App::environment('local', 'staging'))
-                    <form class="form-inline" style="display: inline-block;" action="{{ route('shops.destroy', $shop) }}" method="post">
-                        {!! method_field('DELETE') !!}
-                        {!! csrf_field() !!}
-                        <button class="btn btn-xs btn-danger" type="submit">delete</button>
-                    </form>
-                @endif
-            </span>
+                    <a href="#" class="btn btn-default actions__item">Share</a>
+
+                    <div class="dropdown" style="display: inline-block;">
+                        <a class="btn dropdown-toggle actions__item" type="button" id="actions-menu" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="actions-menu">
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Report this profile</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar sections__nav">
+            <ul class="nav navbar-nav sections__nav__items">
+                <li class="sections__nav__item sections__nav__item--selected">
+                    <a href="#">
+                        <span class="sections__nav__item--emphasis">{{ $shop->ads->count() }}</span>
+                        <span>ADS</span>
+                    </a>
+                </li>
+                <li class="sections__nav__item">
+                    <a href="#">
+                        <span class="sections__nav__item--emphasis">{{ $shop->followers->count() }}</span>
+                        <span>Followers</span>
+                    </a>
+                </li>
+                <li class="sections__nav__item">
+                    <a href="#">
+                        <span class="sections__nav__item--emphasis">0</span>
+                        <span>PLACES</span>
+                    </a>
                 </li>
             </ul>
+        </nav>
+
+        <div class="actions visible-xs">
+
+            @if ($shop->isOwner())
+                <a class="btn btn-block btn-primary btn-primary2"
+                   href="{{ route('shops.edit', $shop) }}" title="___">
+                    <i class="fa fa-cog"></i>
+                    Edit
+                </a>
+            @else
+                @if ($shop->isFollowed())
+                    <form action="{{ route('follows.destroy', [0, 'type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.unfollow')</button>
+                    </form>
+                @else
+                    <form action="{{ route('follows.store', ['type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
+                        {!! csrf_field() !!}
+                        <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.follow')</button>
+                    </form>
+                @endif
+            @endif
+
+            <a href="#" class="btn actions__item"><i class="actions__icon fa fa-comment-o" aria-hidden="true"></i></a>
+            <a href="#" class="btn actions__item"><i class="actions__icon fa fa-share-alt" aria-hidden="true"></i></a>
+            <a href="#" class="btn actions__item"><i class="actions__icon fa fa-info-circle" aria-hidden="true"></i></a>
         </div>
     </header>
 
+
     <div class="timeline">
         <div class="row">
-            
-            <div class="col-md-4">
-                <ul class="summary">
-                    <li class="summary__item{{ setActive('xxx', '--selected') }} text-center summary__item--header"
-                        style="background-color: {{ $shop->getBackgroundColor() }};padding-top: 1rem;">
 
-                        <a href="#" data-toggle="modal" data-target="#profilePicture">
-                            <img class="profile__image" alt="{{ $shop->getName() }}"
-                                 src="{{ $shop->getLogo('80x80') }}" width="40" height="40">
-                        </a>
-
-                        <h2 class="summary__head" style="color:{{ $shop->getFontColor() }}; padding-left: 0;padding-top: 1rem;">
-                            {{ $shop->getName() }}
-                        </h2>
-                    </li>
-                    <li class="summary__item{{ setActive('xxx', '--selected') }}">
-                        <p class="text-muted js-summary__item--expandable" style="font-size:1.3rem; margin-bottom: 0;">
-                            {{ $shop->getDescription() }}
-                        </p>
-                        <a class="summary__toggle js-summary__toggle" href="#"><i class="fa fa-chevron-down"></i></a>
-                    </li>
-                    {{--<li class="summary__item js-summary__item--hidden">
-                        <p class="summary__content">
-                            <i class="fa fa-phone summary__icon"></i>
-                            PHONE
-                        </p>
-                    </li>
-                    <li class="summary__item js-summary__item--hidden">
-                        <p class="summary__content">
-                            <i class="fa fa-home summary__icon"></i>
-                            ADDRESS
-                        </p>
-                    </li>
-                    <li class="summary__item js-summary__item--hidden">
-                        <i class="fa fa-calendar summary__icon"></i>
-                        <dl class="summary__content">
-                            <dt>Lundi - Jeudi</dt>
-                            <dd>8:00 - 13:00 —14:00 - 19:00</dd>
-                            <dt>Vendredi</dt>
-                            <dd>8:00 - 13:00</dd>
-                            <dt>Samedi - Dimanche</dt>
-                            <dd>Fermé</dd>
-                        </dl>
-                    </li>--}}
-                    <li class="summary__item{{ setActive('shops.show', '--selected') }}">
-                        <h2 class="summary__head">
-                            <i class="fa fa-globe summary__icon"></i>
-                            <a href="{{ route('shops.show', $shop) }}">
-                                {{ $shop->ads->count() }} ads
-                            </a>
-                        </h2>
-                        <p class="summary__content summary__content--extra">
-                            Details
-                        </p>
-                    </li>
-                    <!-- evaluation section -->
-                    <li class="summary__item{{ setActive('profiles.evaluations.index', '--selected') }}">
-                        <h2 class="summary__head">
-                            <i class="fa fa-trophy summary__icon"></i>
-                            <a href="{{ route('shops.evaluations', $shop) }}"
-                               title="@choice('shop.sidebar.evaluations_title', $shop->evaluations->ratio()), [
-                                'ratio' => $shop->evaluations->ratio()),
-                                'name' => $shop->getName()])">
-                                @choice('profile.sidebar.evaluations', $shop->evaluations->ratio(), ['ratio' => $shop->evaluations->ratio()])
-                            </a>
-                        </h2>
-                    </li>
-                    <!-- end of evaluation section -->
-                    <li class="summary__item">
-                        <h2 class="summary__head">
-                            <i class="fa fa-users summary__icon"></i>
-                            Followers
-                        </h2>
-                        <p class="summary__content summary__content--extra">
-                            {{ $shop->followers->count() }} followers
-                        </p>
-                    </li>
-                    <li class="summary__item{{ setActive('xxx', '--selected') }}">
-                        <h2 class="summary__head">
-                            <i class="fa fa-smile-o summary__icon"></i>
-                            {{--<a href="#"
-                               title="">--}}
-                            {{ $shop->employees->count() }} people in team
-                            {{--</a>--}}
-                        </h2>
-                        <p class="summary__content summary__content--extra">
-                            @foreach ($shop->employees as $employee)
-                                <a class="user__picture" data-toggle="tooltip"
-                                   href="{{ route('profiles.show', $employee) }}"
-                                   title="@lang('ad.show_profile_title', ['name' => $employee->present()->givenName()])">
-                                    {!! HTML::profilePicture($employee->socialNetworkId(), $employee->present()->fullName(), 20) !!}
-                                </a>
-                            @endforeach
-                        </p>
-                    </li>
-                    <li>
-                        @if ($shop->isOwner())
-                            <a class="btn btn-block btn-primary btn-primary2"
-                               href="{{ route('shops.edit', $shop) }}" title="___">
-                                <i class="fa fa-cog"></i>
-                                Edit
-                            </a>
-                        @else
-                            @if ($shop->isFollowed())
-
-                                <form action="{{ route('follows.destroy', [0, 'type' => 'shop', 'item' => $shop]) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    {!! method_field('DELETE') !!}
-                                    <button class="btn btn-block btn-default btn-default2" type="submit">@lang('shop.unfollow')</button>
-                                </form>
-
-                            @else
-
-                                <form action="{{ route('follows.store', ['type' => 'shop', 'item' => $shop]) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    <button class="btn btn-block btn-primary btn-primary2" type="submit">@lang('shop.follow')</button>
-                                </form>
-
-                            @endif
-                        @endif
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-md-8">
+            <div class="col-md-12">
 
                 @if (! $shop->owner->subscribed('shop') && $shop->isOwner())
                     @include('shops._subscription')
