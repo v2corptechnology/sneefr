@@ -1,27 +1,4 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
-
-/*
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: 'body'
-});
-*/
-
-
 var TimeagoWidget = {
     settings: {
         // miliseconds : 30 days
@@ -34,6 +11,33 @@ var TimeagoWidget = {
     },
 };
 
+var ExpeandableTextWidget = {
+    settings: {
+        hiddenNodes: $('.js-summary__item--hidden'),
+        expandableNodes: $('.js-summary__item--expandable'),
+        toggleButtons: $('.js-summary__toggle')
+    },
+
+    init: function () {
+        if (this.settings.toggleButtons) {
+            this.bindUIActions();
+            this.settings.hiddenNodes.addClass('js-summary__item--hidden');
+            this.settings.expandableNodes.addClass('js-summary__item--collapsed');
+        }
+    },
+
+    bindUIActions: function () {
+        this.settings.toggleButtons.on('click', this.toggleContent);
+    },
+
+    toggleContent: function (event) {
+        ExpeandablrTextWidget.settings.hiddenNodes.toggleClass('js-summary__item--hidden');
+        ExpeandablrTextWidget.settings.expandableNodes.toggleClass('js-summary__item--collapsed');
+        ExpeandablrTextWidget.settings.toggleButtons.find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
+        event.preventDefault();
+    }
+};
+
 $(function () {
     $.ajaxSetup({
         headers: {
@@ -41,6 +45,7 @@ $(function () {
         }
     });
 
+    ExpeandableTextWidget.init();
     TimeagoWidget.init();
 
     // Image sliders
