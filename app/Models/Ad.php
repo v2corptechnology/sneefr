@@ -195,7 +195,7 @@ class Ad extends Model
             'evaluationRatio' => $this->seller->evaluations->ratio(),
             '_geoloc' => [
                 "latitude" => $this->getLatitude(),
-                "lngitude" => $this->getLongitude()
+                "longitude" => $this->getLongitude()
             ],
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
