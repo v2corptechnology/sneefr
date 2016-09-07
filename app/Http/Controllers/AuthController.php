@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function index(UserRepository $userRepository, ShopRepository $shopRepository, PlaceRepository $placeRepository, AdRepository $adRepository)
     {
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
-        $topShops = $shopRepository->biggestSellers(3);
+        $topShops = \Sneefr\Models\Shop::withCount(['ads'])->orderBy('ads_count', 'desc')->take(3)->get();
         $topPlaces = $placeRepository->biggestSellers(3);
         $topUsers = $userRepository->biggestSellers(8);
         $highlighted = [
