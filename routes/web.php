@@ -152,10 +152,10 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::patch('discussions/{id}/ads/{ad}',
         ['as' => 'discussions.ads.update', 'uses' => 'DiscussionsController@sold']);
     // Shop discussions
-    Route::get('shopDiscussions/{shop}',
+    Route::get('shopDiscussions/{shopSlug}',
         ['as' => 'shop_discussions.index', 'uses' => 'DiscussionsController@index']);
     // Show a specific discussion
-    Route::get('shopDiscussions/{id}/{shop}',
+    Route::get('shopDiscussions/{id}/{shopSlug}',
         ['as' => 'shop_discussions.show', 'uses' => 'DiscussionsController@show']);
 
     // Choose a buyer for this ad
@@ -277,4 +277,5 @@ Route::bind('ad', function ($value, $route) {
 // http://stackoverflow.com/a/18690202
 Route::pattern('places', '^@[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$');
 // Shop's slug
+Route::pattern('shopSlug', '[a-zA-Z-]+');
 Route::pattern('shop', '[a-zA-Z-]+');
