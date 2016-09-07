@@ -20,7 +20,7 @@ class ViewTrendingItemsTest extends TestCase
     public function test_can_view_trending_users()
     {
         $user = factory(\Sneefr\Models\User::class)->create();
-        $shop = factory(\Sneefr\Models\Shop::class)->create(['data' => ['name' => 'Trending test shop']]);
+        $shop = factory(\Sneefr\Models\Shop::class)->create();
         factory(\Sneefr\Models\Ad::class, 1)->create(['user_id' => $user->id, 'shop_id' => $shop->id]);
         factory(\Sneefr\Models\Ad::class, 2)->create(['user_id' => $user->id]);
 
