@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ViewTrendingItemsTest extends TestCase
 {
@@ -15,7 +13,8 @@ class ViewTrendingItemsTest extends TestCase
         $shop->ads()->saveMany($ads);
 
         $this->visit('/')
-             ->see('Trending test shop');
+            ->see('3 ads')
+            ->see('Trending test shop');
     }
 
     public function test_can_view_trending_users()
@@ -26,6 +25,7 @@ class ViewTrendingItemsTest extends TestCase
         factory(\Sneefr\Models\Ad::class, 2)->create(['user_id' => $user->id]);
 
         $this->visit('/')
+            ->see($user->present()->truncatedName())
             ->see('2 ads');
     }
 }
