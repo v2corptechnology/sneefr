@@ -13,7 +13,11 @@ class AddBatchSlugToPlacesTable extends Migration
      */
     public function up()
     {
-        DB::update("update places set slug = concat('@', places.latitude,',', places.longitude)  ");
+        if(env('DB_CONNECTION') == 'sqlite') {
+            DB::update("update places set slug = '@' || places.latitude || ',' || places.longitude");
+        } else {
+            DB::update("update places set slug = concat('@', places.latitude,',', places.longitude)");
+        }
     }
 
     /**
