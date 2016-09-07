@@ -1,18 +1,14 @@
 <?php
 
-use FactoryUtilities as Utils;
 use Sneefr\Models\Search;
+use Sneefr\Models\User;
 
 /**
  * Default factory.
  */
 $factory->define(Search::class, function ($faker) {
-
-    // We will pretend that the search has been done by an existing user.
-    $userIdentifier = Utils::randomUserIdentifier($faker);
-
     return [
-        'user_id' => $userIdentifier,
-        'body' => $faker->sentence,
+        'user_id' => factory(User::class)->create()->id,
+        'body'    => $faker->sentence,
     ];
 });

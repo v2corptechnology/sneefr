@@ -1,27 +1,18 @@
 <?php
 
-use FactoryUtilities as Utils;
+use Sneefr\Models\Discussion;
 use Sneefr\Models\Message;
+use Sneefr\Models\User;
 
 /**
  * Default factory.
  */
 $factory->define(Message::class, function ($faker) {
-
-    // We will pretend that the discussion is involving two existing users.
-    $fromUserId = Utils::randomUserIdentifier($faker);
-    $toUserId = Utils::randomUserIdentifier($faker);
-
-    // Dedupe IDs in case they are identical.
-    if ($fromUserId === $toUserId) {
-        $toUserId += 1;
-    }
-
     return [
-        'discussion_id' => 1,
-        'from_user_id' => $fromUserId,
-        'to_user_id' => $toUserId,
-        'body' => $faker->paragraph,
+        'discussion_id' => factory(Discussion::class)->create()->id,
+        'from_user_id'  => factory(User::class)->create()->id,
+        'to_user_id'    => factory(User::class)->create()->id,
+        'body'          => $faker->paragraph,
     ];
 });
 
@@ -30,7 +21,7 @@ $factory->define(Message::class, function ($faker) {
  */
 $factory->defineAs(Message::class, 'read', function ($faker) use ($factory) {
 
-    $user = $factory->raw(Message::class);
+    $message = $factory->raw(Message::class);
 
-    return array_merge($user, ['read_at' => $faker->dateTime('yesterday')]);
+    return array_merge($message, ['read_at' => $faker->dateTime('yesterday')]);
 });
