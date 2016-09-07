@@ -31,9 +31,9 @@ var ExpeandableTextWidget = {
     },
 
     toggleContent: function (event) {
-        ExpeandablrTextWidget.settings.hiddenNodes.toggleClass('js-summary__item--hidden');
-        ExpeandablrTextWidget.settings.expandableNodes.toggleClass('js-summary__item--collapsed');
-        ExpeandablrTextWidget.settings.toggleButtons.find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
+        ExpeandableTextWidget.settings.hiddenNodes.toggleClass('js-summary__item--hidden');
+        ExpeandableTextWidget.settings.expandableNodes.toggleClass('js-summary__item--collapsed');
+        ExpeandableTextWidget.settings.toggleButtons.find('.fa').toggleClass('fa-chevron-down fa-chevron-up');
         event.preventDefault();
     }
 };
