@@ -578,15 +578,20 @@ class Ad extends Model
      * Get image urls for this ad.
      *
      * @param mixed $dimensions (120, [120, 120], 120x120)
+     * @param bool  $crop
      *
      * @return array
      */
-    public function images($dimensions = 120)
+    public function images($dimensions = 120, bool $crop = false)
     {
         $images = [];
 
         foreach ($this->imageNames() as $image) {
-            $images[] = Img::thumbnail($this, $image, $dimensions);
+            if ($crop) {
+                $images[] = Img::cropped($this, $image, $dimensions);
+            } else {
+                $images[] = Img::thumbnail($this, $image, $dimensions);
+            }
         }
 
         return $images;
