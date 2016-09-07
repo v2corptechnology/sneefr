@@ -337,7 +337,7 @@ class Ad extends Model
     }
 
     /**
-     * Display only ads that can be viewed.
+     * Display only ads that can be v.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
      *
