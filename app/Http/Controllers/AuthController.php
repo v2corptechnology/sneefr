@@ -9,8 +9,6 @@ use Sneefr\Models\LikeAd;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\Place\PlaceRepository;
-use Sneefr\Repositories\Shop\ShopRepository;
-use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
@@ -27,13 +25,12 @@ class AuthController extends Controller
     }
 
     /**
-     * @param \Sneefr\Repositories\User\UserRepository   $userRepository
-     * @param \Sneefr\Repositories\Shop\ShopRepository   $shopRepository
      * @param \Sneefr\Repositories\Place\PlaceRepository $placeRepository
+     * @param \Sneefr\Repositories\Ad\AdRepository       $adRepository
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(UserRepository $userRepository, ShopRepository $shopRepository, PlaceRepository $placeRepository, AdRepository $adRepository)
+    public function index(PlaceRepository $placeRepository, AdRepository $adRepository)
     {
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
