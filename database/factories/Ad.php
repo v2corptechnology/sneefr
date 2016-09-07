@@ -16,8 +16,8 @@ $factory->define(Ad::class, function ($faker) {
         'amount'       => $faker->randomNumber(3),
         'currency'     => 'USD',
         'location'     => $faker->postcode . ' ' . $faker->city,
-        'lat'          => $faker->latitude,
-        'long'         => $faker->longitude,
+        'latitude'     => $faker->latitude,
+        'longitude'    => $faker->longitude,
         'images'       => '["0.jpg"]',
         'condition_id' => $faker->numberBetween(1, 5),
     ];
