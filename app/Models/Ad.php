@@ -194,8 +194,8 @@ class Ad extends Model
         return array_merge($this->toArray(), [
             'evaluationRatio' => $this->seller->evaluations->ratio(),
             '_geoloc' => [
-                "latitude" => $this->getLatitude(),
-                "longitude" => $this->getLongitude()
+                "lat" => $this->getLatitude(),
+                "lng" => $this->getLongitude()
             ],
             'created_at' => $this->created_at->timestamp,
             'updated_at' => $this->updated_at->timestamp,
