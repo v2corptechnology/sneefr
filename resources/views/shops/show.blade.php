@@ -28,7 +28,7 @@
     {{-- Show the filtered or all the ads --}}
     <div class="row">
         @forelse($displayedAds as $ad)
-            <div class="col-md-4">
+            <div class="col-md-6">
                 @include('ad._ad', ['ad' => $ad])
             </div>
         @empty
