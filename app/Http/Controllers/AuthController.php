@@ -4,7 +4,6 @@ use Hashids\Hashids;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\Ad;
 use Sneefr\Models\LikeAd;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
@@ -35,6 +34,7 @@ class AuthController extends Controller
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
         $topPlaces = $placeRepository->biggestSellers(3);
+        $topAds = \Sneefr\Models\Ad::latest()->displayable()->take(4)->get();
         $topUsers = \Sneefr\Models\User::withCount(['ads' => function($query){$query->whereNull('shop_id');}])->orderBy('ads_count', 'desc')->take(8)->get();
         $highlighted = [
             ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
@@ -42,13 +42,6 @@ class AuthController extends Controller
             ['class' => 'third', 'parentId' => 25, 'ids' => [26, 27, 28, 29, 30], 'ads' => $adRepository->byCategory(26, 27, 28, 29, 30)],
             ['class' => 'fourth', 'parentId' => 40, 'ids' => [41, 42, 43, 44, 45], 'ads' => $adRepository->byCategory(41, 42, 43, 44, 45)],
         ];
-
-        $topAds = Ad::where('is_locked', 0)
-            ->whereNull('sold_to')
-            ->orderBy('created_at', 'desc')
-            ->take(4)
-            ->get();
-
 
         if (! $randomAd) {
             return('No ads yet, please <a href="' . route('ad.create') . '">create one</a>');

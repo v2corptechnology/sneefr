@@ -337,6 +337,18 @@ class Ad extends Model
     }
 
     /**
+     * Display only ads that can be.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeDisplayable($query)
+    {
+        return $query->where('is_locked', 0)->whereNull('sold_to');
+    }
+
+    /**
      * Scope to order by random.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
