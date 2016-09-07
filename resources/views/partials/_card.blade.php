@@ -80,7 +80,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
 } elseif ($item instanceof \Sneefr\Models\User) {
     $title = $item->present()->fullName();
     $url = route('profiles.ads.index', $item);
-    $footer = count($item->ads) . ' ads';
+    $footer = ($item->ads_count ?? $item->ads->count()) . ' ads';
     $avatar = [
         'url' => $url,
         'image'  => \Img::avatar($item->socialNetworkId(), [$avatarSizes['width'], $avatarSizes['height'], 2]),

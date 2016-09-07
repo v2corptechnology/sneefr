@@ -38,7 +38,7 @@ class AuthController extends Controller
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
         $topPlaces = $placeRepository->biggestSellers(3);
-        $topUsers = $userRepository->biggestSellers(8);
+        $topUsers = \Sneefr\Models\User::withCount(['ads' => function($query){$query->whereNull('shop_id');}])->orderBy('ads_count', 'desc')->take(8)->get();
         $highlighted = [
             ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
             ['class' => 'second', 'parentId' => 14, 'ids' => [15, 16, 17, 18], 'ads' => $adRepository->byCategory(15, 16, 17, 18)],
