@@ -57,7 +57,7 @@ class AuthController extends Controller
             return('No ads yet, please <a href="' . route('ad.create') . '">create one</a>');
         }
 
-        return view('home.index', compact('randomAd', 'topShops', 'topUsers', 'topPlaces', 'highlighted', 'topAds'));
+        return view('pages.home.index', compact('randomAd', 'topShops', 'topUsers', 'topPlaces', 'highlighted', 'topAds'));
     }
 
     /**
