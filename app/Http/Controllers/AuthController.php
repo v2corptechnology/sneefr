@@ -31,10 +31,10 @@ class AuthController extends Controller
      */
     public function index(PlaceRepository $placeRepository, AdRepository $adRepository)
     {
-        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
+        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
         $topPlaces = $placeRepository->biggestSellers(3);
-        $topAds = \Sneefr\Models\Ad::latest()->displayable()->take(4)->get();
+        $topAds = \Sneefr\Models\Ad::latest()->displayable()->with(['seller', 'shop'])->take(4)->get();
         $topUsers = \Sneefr\Models\User::withCount(['ads' => function($query){$query->whereNull('shop_id');}])->orderBy('ads_count', 'desc')->take(8)->get();
         $highlighted = [
             ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
