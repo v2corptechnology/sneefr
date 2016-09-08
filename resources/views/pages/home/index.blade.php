@@ -64,8 +64,6 @@
 
     <main>
 
-        @include('pages.home.featured-shops', ['shops' => $topShops])
-
         @include('pages.home.featured-users', ['users' => $topUsers])
 
     </main>
