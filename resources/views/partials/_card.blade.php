@@ -19,7 +19,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
     $url = route('places.show', $item);
     $galleryKey = null;
     $gallery = [$item->getMapUrl($gallerySizes['width'], $gallerySizes['height'])];
-    $footer = trans_choice('card.place.footer_ads_count', $item->countFollowerAds(), ['nb' => $item->countFollowerAds()]);
+    $footer = trans_choice('card.place.footer_ads_count', 0, ['nb' => 0]);
 } elseif ($item instanceof \Sneefr\Models\Shop) {
 
     $title = $item->getName();
