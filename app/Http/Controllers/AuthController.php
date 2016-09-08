@@ -7,7 +7,6 @@ use Sneefr\Models\ActionLog;
 use Sneefr\Models\LikeAd;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
-use Sneefr\Repositories\Place\PlaceRepository;
 use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
@@ -24,18 +23,18 @@ class AuthController extends Controller
     }
 
     /**
-     * @param \Sneefr\Repositories\Place\PlaceRepository $placeRepository
-     * @param \Sneefr\Repositories\Ad\AdRepository       $adRepository
+     * @param \Sneefr\Repositories\Ad\AdRepository $adRepository
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(PlaceRepository $placeRepository, AdRepository $adRepository)
+    public function index(AdRepository $adRepository)
     {
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
-        $topPlaces = $placeRepository->biggestSellers(3);
+        $topPlaces = \Sneefr\Models\Place::latest()->take(3)->get();
         $topAds = \Sneefr\Models\Ad::latest()->displayable()->with(['seller', 'shop'])->take(4)->get();
-        $topUsers = \Sneefr\Models\User::withCount(['ads' => function($query){$query->whereNull('shop_id');}])->orderBy('ads_count', 'desc')->take(8)->get();
+        $topUsers = \Sneefr\Models\User::withCount(['ads' => function ($query) {$query->whereNull('shop_id');
+        }])->orderBy('ads_count', 'desc')->take(8)->get();
         $highlighted = [
             ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
             ['class' => 'second', 'parentId' => 14, 'ids' => [15, 16, 17, 18], 'ads' => $adRepository->byCategory(15, 16, 17, 18)],

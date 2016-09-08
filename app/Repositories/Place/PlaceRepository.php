@@ -23,14 +23,4 @@ interface PlaceRepository
      * @return \Illuminate\Support\Collection
      */
     public function bySequence(array $sequence) : Collection;
-
-    /**
-     * Get the shops that have the biggest number of ads.
-     *
-     * @param int   $limit   The number of sellers to retrieve.
-     * @param array $placeIds (optional) The place identifiers we want to limit.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function biggestSellers(int $limit = 3, array $placeIds = []) : Collection;
 }

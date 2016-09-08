@@ -38,31 +38,4 @@ class EloquentPlaceRepository implements PlaceRepository
             return $posA - $posB;
         });
     }
-
-    /**
-     * Get the shops that have the biggest number of ads.
-     *
-     * @param int   $limit   The number of sellers to retrieve.
-     * @param array $placeIds (optional) The place identifiers we want to limit.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function biggestSellers(int $limit = 3, array $placeIds = []) : Collection
-    {
-        $query = Place::with('followers.ads');
-
-        if ($placeIds) {
-            $query->whereIn('id', $placeIds);
-        }
-
-        $results = $query->get()->sortByDesc(function ($place) {
-            return $place->countFollowerAds();
-        });
-
-        if ($limit) {
-            return $results->take($limit);
-        }
-
-        return $results;
-    }
 }
