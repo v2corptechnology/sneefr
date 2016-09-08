@@ -7,4 +7,9 @@ return [
     'locale_name'      => "en_US.utf8",
     'currency'         => "USD",
     'currency_symbol'  => "$",
+
+    'like' => [
+        'like' => 'sneef',
+        'unlike' => 'unsneef',
+    ]
 ];

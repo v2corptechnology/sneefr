@@ -78,12 +78,16 @@
 
 .action__like {
   margin-right: 2rem;
+
+  img {filter: grayscale(1);}
 }
 
 .action__like--active,
 .action__like--active:hover,
 .action__like--active:focus {
-  color: #337AB7;
+  color: #F4A0AC;
+
+  img {filter: grayscale(0);}
 }
 
 .action__like,
