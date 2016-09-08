@@ -16,10 +16,6 @@ Route::get('terms', function () {
 Route::get('privacy', function () {
     return view('pages.privacy');
 });
-// Display key points
-Route::get('more', function () {
-    return view('pages.more');
-});
 // Pricing screen
 Route::get('pricing', ['as' => 'pricing', function () {
     return view('pages.pricing');

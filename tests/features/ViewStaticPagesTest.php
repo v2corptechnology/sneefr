@@ -23,12 +23,6 @@ class ViewStaticPagesTest extends TestCase
             ->see(trans('privacy.sections.3.heading'));
     }
 
-    public function test_can_view_more()
-    {
-        $this->visit('/more')
-            ->assertResponseOk();
-    }
-
     public function test_can_view_pricing()
     {
         $this->visit('/pricing')
