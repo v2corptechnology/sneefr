@@ -6,51 +6,49 @@ class ViewNavbarTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $user;
-
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(\Sneefr\Models\User::class)->create();
-        $shop = factory(\Sneefr\Models\Shop::class)->create();
-        $ads = factory(\Sneefr\Models\Ad::class, 3)->create();
-        $shop->ads()->saveMany($ads);
+
+        // Homepage needs at least one ad to work
+        factory(\Sneefr\Models\Ad::class, 1)->create();
     }
 
-    public function test_presence_of_dropdown_when_not_connected()
+    public function test_cannot_view_avatar_and_menu_when_guest()
     {
-        $this->visit('/')->dontSee('role="dropdown-menu"');
-    }
-
-    public function test_presence_of_dropdown_when_connected()
-    {
-        $this->actingAs($this->user);
-        $this->visit('/')->see('role="dropdown-menu"');
-    }
-
-    public function test_can_not_view_nav_avatar_when_not_connected(){
-        $this->visit('/')->dontSee('role="card__avatar"');
-    }
-
-    public function test_presence_of_user_avatar()
-    {
-        $this->actingAs($this->user);
         $this->visit('/')
-             ->see('role="card__avatar"')
-             ->see($this->user->present()->fullName());
+            ->dontSee('<li role="presentation" class="navbar__avatar">')
+            ->dontSee('<li role="presentation"><a class="card__avatar"');
     }
 
-    public function test_presence_of_shop_avatar()
+    public function test_view_avatar_and_menu_when_auth()
     {
-        $this->actingAs($this->user);
+        $this->actingAs(factory(\Sneefr\Models\User::class)->create());
+
+        $this->visit('/')
+            ->see('<a class="navbar__profile dropdown-toggle" data-toggle="dropdown"')
+            ->see('<li role="presentation" class="navbar__avatar">');
+    }
+
+    public function test_view_users_avatar_when_having_no_shop()
+    {
+        $user = factory(\Sneefr\Models\User::class)->create();
+
+        $this->actingAs($user);
+
+        $this->visit('/')
+            ->see($user->facebook_id . '.jpg" alt="'.$user->present()->fullName().'" height="25" width="25">');
+    }
+
+    public function test_view_shops_avatar_when_having_a_shop()
+    {
+        $user = factory(\Sneefr\Models\User::class)->create();
         $shop = factory(\Sneefr\Models\Shop::class)->make();
-        $this->user->shop()->save($shop);
+        $user->shop()->save($shop);
+
+        $this->actingAs($user);
+
         $this->visit('/')
-             ->see('role="card__avatar"')
-             ->see('src="' . $shop->getLogo('25x25') . '"')
-             ->see('alt="' . $shop->getName() . '"');
+            ->see('<img class="card__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'" height="25" width="25">');
     }
-
-
-
 }
