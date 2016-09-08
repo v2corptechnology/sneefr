@@ -160,7 +160,7 @@
                     </li>
                 @endif
                 <li role="card__avatar">
-                    @include('partials.avatar', ['of' => auth()->user()->shop ??  auth()->user(), 'size' => '25x25' ])
+                    @include('partials.avatar', ['of' => auth()->user()->shop ??  auth()->user(), 'size' => '25x25@2x' ])
                 </li>
                 <li role="dropdown-menu" class="dropdown hidden-xs">
                     <a class="navbar__profile dropdown-toggle"
