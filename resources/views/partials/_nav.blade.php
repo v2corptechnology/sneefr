@@ -159,8 +159,10 @@
                         </a>
                     </li>
                 @endif
-                    @include('partials.avatar', ['of' => auth()->user()->shop ??  auth()->user(), 'size' => '25x25@2x' ])
                 <li role="presentation" class="navbar__avatar">
+
+                    @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '25x25' ])
+
                 </li>
                 <li role="presentation" class="dropdown hidden-xs">
                     <a class="navbar__profile dropdown-toggle"
