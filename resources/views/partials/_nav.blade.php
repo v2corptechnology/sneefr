@@ -159,10 +159,10 @@
                         </a>
                     </li>
                 @endif
-                <li role="presentation">
+                <li role="card__avatar">
                     @include('partials.avatar', ['of' => auth()->user()->shop ??  auth()->user(), 'size' => '25x25' ])
                 </li>
-                <li role="presentation" class="dropdown hidden-xs">
+                <li role="dropdown-menu" class="dropdown hidden-xs">
                     <a class="navbar__profile dropdown-toggle"
                        data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
