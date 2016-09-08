@@ -22,8 +22,6 @@ return [
     'empty_text'                    => "Looks like your feed is fairly empty, please choose <a href=\":user_link\" title=\"Search for users\">some users</a> to follow, <a href=\":place_link\" title=\"Search for places\">some places</a> or even <a href=\":shop_link\" title=\"Search for a shop\">a shop</a>.",
 
     'activity' => [
-        'like'            => "Like",
-        'unlike'          => "Unlike",
         'share'           => "Share",
         'private_ad'      => "This ad is private, your followers can't see it.",
         'liked_by_friend' => ":name liked this.",
