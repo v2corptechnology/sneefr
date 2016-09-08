@@ -6,23 +6,19 @@
 Route::get('/', ['as' => 'home', 'uses' => 'AuthController@index']);
 // Display FAQ
 Route::get('help', function () {
-    return View::make('home.help');
+    return view('pages.help');
 });
 // Terms of use
 Route::get('terms', function () {
-    return View::make('home.terms');
+    return view('pages.terms');
 });
 // Privacy policy
 Route::get('privacy', function () {
-    return View::make('home.privacy');
-});
-// Display key points
-Route::get('more', function () {
-    return View::make('home.more');
+    return view('pages.privacy');
 });
 // Pricing screen
 Route::get('pricing', ['as' => 'pricing', function () {
-    return view('home.pricing');
+    return view('pages.pricing');
 }]);
 
 

@@ -26,11 +26,6 @@ return [
         'refuse'           => "Refuse",
         'refuse_title'     => "Refuse to buy this ad",
     ],
-    // Connect
-    'connect'        => [
-        'simple'       => "Connect me",
-        'simple_title' => "Connect me",
-    ],
     // Filter ads "in page"
     'filter'         => [
         'placeholder' => "Search…",

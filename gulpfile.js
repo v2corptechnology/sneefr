@@ -19,6 +19,7 @@ var path_to_modules = '../../../node_modules/';
 elixir(mix => {
     mix.sass('app.scss');
     mix.sass(['pages/login.scss'], 'public/css/sneefr.login.css');
+    mix.sass(['pages/pricing.scss'], 'public/css/sneefr.pricing.css');
     // Styles coming from JavaScript components.
     mix.styles([
         path_to_modules + 'dropzone/dist/min/dropzone.min.css',
@@ -102,6 +103,7 @@ elixir(mix => {
     mix.version([
         'css/all.css',
         'css/sneefr.login.css',
+        'css/sneefr.pricing.css',
         'js/all.js',
         'js/sneefr.dashboard.js',
         'js/sneefr.autovalidate.js',
