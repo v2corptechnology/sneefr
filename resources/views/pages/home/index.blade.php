@@ -66,12 +66,6 @@
 
         @include('pages.home.featured-shops', ['shops' => $topShops])
 
-        @include('pages.home.featured-ads', ['ads' => $topAds])
-
-        @include('pages.home.featured-places', ['places' => $topPlaces])
-
-        @include('pages.home.featured-users', ['users' => $topUsers])
-
     </main>
 
     <aside class="keypoints">
