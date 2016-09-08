@@ -5,15 +5,6 @@
     $body = null;
 
     switch (get_class($notification->notifiable)) {
-        case Sneefr\Models\Follow::class :
-            $from = Sneefr\Models\User::withTrashed()->where('id', $notification->notifiable->user_id)->first();
-            $heading = '<a href="' . route('profiles.show', $from) . '">' . $from->present()->fullName() . '</a>';
-            $body = trans('profile.notifications.someone_followed_you', [
-                    'url' => route('profiles.show', $from),
-                    'title' => $from->present()->givenName(),
-                    'link' => $from->present()->givenName()
-            ]);
-            break;
 
         case Sneefr\Models\Like::class :
             $item = $notification->notifiable->likeable;

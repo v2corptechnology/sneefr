@@ -12,7 +12,6 @@ class Gamificator
     const USER_FILLED_HIS_LOCATION = 'user.location';
     const USER_HAS_VERIFIED_EMAIL = 'user.email';
     const USER_HAS_VERIFIED_PHONE = 'user.phone';
-    const USER_FOLLOWS_A_SNEEFER = 'follow.1';
     const USER_SENT_A_MESSAGE = 'message.send.1';
     const USER_RECEIVED_A_MESSAGE = 'message.receive.1';
     const USER_SHARED_AN_AD_ON_FACEBOOK = 'share.facebook.1';
@@ -45,8 +44,7 @@ class Gamificator
             self::USER_FILLED_A_PLACE_OF_INTEREST,
             self::USER_HAS_CREATED_AN_AD,
         ],
-        'second'  => [
-            self::USER_FOLLOWS_A_SNEEFER,
+        'second'  => [,
             //self::USER_SENT_A_MESSAGE,
             self::USER_SHARED_AN_AD_ON_FACEBOOK,
             //self::USER_RECEIVED_A_MESSAGE,

@@ -170,16 +170,7 @@
                             </a>
                         </h2>
                     </li>
-                    <!-- end of evaluation section -->
-                    <li class="summary__item">
-                        <h2 class="summary__head">
-                            <i class="fa fa-users summary__icon"></i>
-                            Followers
-                        </h2>
-                        <p class="summary__content summary__content--extra">
-                            {{ $shop->followers->count() }} followers
-                        </p>
-                    </li>
+
                     <li class="summary__item{{ setActive('xxx', '--selected') }}">
                         <h2 class="summary__head">
                             <i class="fa fa-smile-o summary__icon"></i>
@@ -205,23 +196,6 @@
                                 <i class="fa fa-cog"></i>
                                 Edit
                             </a>
-                        @else
-                            @if ($shop->isFollowed())
-
-                                <form action="{{ route('follows.destroy', [0, 'type' => 'shop', 'item' => $shop]) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    {!! method_field('DELETE') !!}
-                                    <button class="btn btn-block btn-default btn-default2" type="submit">@lang('shop.unfollow')</button>
-                                </form>
-
-                            @else
-
-                                <form action="{{ route('follows.store', ['type' => 'shop', 'item' => $shop]) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    <button class="btn btn-block btn-primary btn-primary2" type="submit">@lang('shop.follow')</button>
-                                </form>
-
-                            @endif
                         @endif
                     </li>
                 </ul>

@@ -9,7 +9,6 @@ use Sneefr\Jobs\DeleteAd;
 use Sneefr\Jobs\SaveAdView;
 use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Follow;
 use Sneefr\Models\Referral;
 use Sneefr\Models\Shares;
 use Sneefr\Models\User;
@@ -269,13 +268,10 @@ class AdController extends Controller
         // All relationships the seller has
         $other = collect();
 
-        // all Users following this seller
-        $all = Follow::where('followable_type', 'user')->where('followable_id', $seller->getId())->with('initiator')->get()->pluck('initiator');
-
         return [
             'common' => $common,
             'other'  => $other,
-            'all'    => $all,
+            'all'    => collect(),
         ];
     }
 }

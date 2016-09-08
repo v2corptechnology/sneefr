@@ -24,7 +24,6 @@ use Sneefr\PhoneNumber;
 use Sneefr\Presenters\UserPresenter;
 use Sneefr\Services\Gamificator;
 use Sneefr\Traits\Encryptable;
-use Sneefr\Traits\Follower;
 use Sneefr\UserEvaluations;
 use Sneefr\UserPayment;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -34,7 +33,7 @@ class User extends Model implements AuthenticatableContract,
                                     CanResetPasswordContract
 {
     use AlgoliaEloquentTrait;
-    use Authenticatable, Authorizable, Encryptable, CanResetPassword, Follower, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
+    use Authenticatable, Authorizable, Encryptable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
     use LogsActivity;
     use Notifiable;
 
@@ -204,17 +203,6 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany(Shop::class)->latest()->withTrashed();
     }
 
-    /**
-     * User's places relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function places()
-    {
-        //return $this->belongsToMany(Place::class)->withTimestamps()->latest();
-        return $this->morphedByMany(Place::class, 'followable')->withTimestamps()->latest();
-    }
-
     public function scopeGeolocated($query)
     {
         return $query->whereNotNull('location');
@@ -274,47 +262,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->morphMany(Report::class, 'reportable');
     }
-
-    /**
-     * Get the User models that have initiated a
-     * relationship targeting the current model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     * @deprecated
-     */
-    public function followers()
-    {
-        //return $this->belongsToMany(self::class, 'relationships', 'to_user_id', 'from_user_id');
-        return $this->morphToMany(Self::class, 'followable')->withTimestamps();
-    }
-
-    /**
-     * Get the User models which are targeted by relationships
-     * initiated by the current model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function followedUsers()
-    {
-        //return $this->belongsToMany(self::class, 'relationships', 'from_user_id', 'to_user_id');
-        return $this->morphedByMany(Self::class, 'followable')->withTimestamps();
-
-    }
     
     public function referrals()
     {
         return $this->hasMany(Referral::class, 'referent_user_id');
-    }
-
-    /**
-     * Relationship to the the shops the user is following.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function followedShops()
-    {
-        //return $this->belongsToMany(Shop::class);
-        return $this->morphedByMany(Shop::class, 'followable')->withTimestamps();
     }
 
     /**

@@ -3,7 +3,6 @@
 use Illuminate\Support\ServiceProvider;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Discussion;
-use Sneefr\Models\Follow;
 use Sneefr\Models\Place;
 use Sneefr\Models\Search;
 use Sneefr\Models\Shop;
@@ -99,7 +98,6 @@ class DatabaseServiceProvider extends ServiceProvider
             'search'     => Search::class,
             'shop'       => Shop::class,
             'user'       => User::class,
-            'follow'     => Follow::class,
         ]);
     }
 }
