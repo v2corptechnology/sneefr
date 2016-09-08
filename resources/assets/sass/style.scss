@@ -610,7 +610,7 @@ time {
 .btn-stripe {
   color: #fff;
   background: #008cdd;
-  background: linear-gradient(top, #7dc5ee, #008cdd 85%, #30a2e4);
+  background: linear-gradient(to bottom, #7dc5ee, #008cdd 85%, #30a2e4);
   text-shadow: 0 1px 1px rgba(0,0,0,0.53);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
 }
@@ -624,7 +624,7 @@ time {
 
 .notification-badge {
   background-color: rgb(220, 13, 23);
-  background-image: linear-gradient(top, rgb(250, 60, 69), rgb(220, 13, 23));
+  background-image: linear-gradient(to bottom, rgb(250, 60, 69), rgb(220, 13, 23));
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.701961) 0px 1px 1px 0px;
   color: #FFF;
