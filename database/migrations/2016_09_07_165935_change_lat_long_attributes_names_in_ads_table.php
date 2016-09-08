@@ -13,8 +13,10 @@ class ChangeLatLongAttributesNamesInAdsTable extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE ads CHANGE `lat` `latitude` float");
-        DB::statement("ALTER TABLE ads CHANGE `long`  `longitude` float");
+        if(!env('DB_CONNECTION') == 'sqlite') {
+            DB::statement("ALTER TABLE ads CHANGE `lat` `latitude` float");
+            DB::statement("ALTER TABLE ads CHANGE `long`  `longitude` float");
+        }
     }
 
     /**
@@ -24,7 +26,9 @@ class ChangeLatLongAttributesNamesInAdsTable extends Migration
      */
     public function down()
     {
-        DB::statement("ALTER TABLE ads CHANGE `latitude`  `lat` float");
-        DB::statement("ALTER TABLE ads CHANGE `longitude`  `long` float");
+        if(!env('DB_CONNECTION') == 'sqlite') {
+            DB::statement("ALTER TABLE ads CHANGE `latitude`  `lat` float");
+            DB::statement("ALTER TABLE ads CHANGE `longitude`  `long` float");
+        }
     }
 }

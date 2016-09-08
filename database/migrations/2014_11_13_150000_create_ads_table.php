@@ -36,6 +36,11 @@ class CreateAdsTable extends Migration
             $table->integer('condition_id')->unsigned();
             $table->boolean('is_hidden_from_friends')->unsigned()->default(0);
 
+            if(env('DB_CONNECTION') == 'sqlite') {
+                $table->float('latitude', 10, 6)->nullable();
+                $table->float('longitude', 10, 6)->nullable();
+            }
+
             // Define timestamps to record dates and times of changes.
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
