@@ -31,7 +31,6 @@ class AuthController extends Controller
     {
         $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
         $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
-        $topPlaces = \Sneefr\Models\Place::latest()->take(3)->get();
         $topAds = \Sneefr\Models\Ad::latest()->displayable()->with(['seller', 'shop'])->take(4)->get();
         $topUsers = \Sneefr\Models\User::withCount(['ads' => function ($query) {$query->whereNull('shop_id');
         }])->orderBy('ads_count', 'desc')->take(8)->get();
