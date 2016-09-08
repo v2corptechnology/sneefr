@@ -54,15 +54,15 @@
 
         <div class="container">
 
-            <div class="summary col-xs-12  col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+            <div class="summary col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
                 <h1 class="summary__name">{{ $shop->getName() }}</h1>
                 <span class="summary__address"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $shop->getLocation() }}</span>
                 <ul class="summary__keypoints">
                     <li class="summary__keypoints__item">
-                        <div class="summary__icon"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div>  25
+                        <div class="summary__icon"><i class="fa fa-thumbs-up" aria-hidden="true"></i></div> 25
                     </li>
                     <li class="summary__keypoints__item">
-                        <div class="summary__icon"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div>  11
+                        <div class="summary__icon"><i class="fa fa-thumbs-down" aria-hidden="true"></i></div> 11
                     </li>
                 </ul>
                 <hr>
@@ -115,7 +115,7 @@
                 <li class="sections__nav__item sections__nav__item--selected">
                     <a href="#">
                         <span class="sections__nav__item--emphasis">{{ $shop->ads->count() }}</span>
-                        <span>ADS</span>
+                        <span>ads</span>
                     </a>
                 </li>
                 <li class="sections__nav__item">
