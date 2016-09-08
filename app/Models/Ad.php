@@ -54,7 +54,7 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $hidden = ['lat', 'long'];
+    protected $hidden = ['latitude', 'longitude'];
 
     /**
      * The attributes we can mass assign.
@@ -73,8 +73,8 @@ class Ad extends Model
         'delivery',
         'transaction',
         'location',
-        'lat',
-        'long',
+        'latitude',
+        'longitude',
         'images',
         'locked_for',
         'final_amount',
@@ -91,7 +91,7 @@ class Ad extends Model
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'category_id', 'condition_id', 'title', 'description', 'amount', 'location', 'lat', 'long', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'category_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -103,8 +103,8 @@ class Ad extends Model
         'images'            => 'array',
         'transaction'       => 'array',
         'amount'            => 'float',
-        'lat'               => 'float',
-        'long'              => 'float',
+        'latitude'          => 'float',
+        'longitude'         => 'float',
         'category_id'       => 'int',
         'condition_id'      => 'int',
     ];
@@ -337,6 +337,18 @@ class Ad extends Model
     }
 
     /**
+     * Display only ads that can be v.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeDisplayable($query)
+    {
+        return $query->where('is_locked', 0)->whereNull('sold_to');
+    }
+
+    /**
      * Scope to order by random.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
@@ -539,7 +551,7 @@ class Ad extends Model
      */
     public function latitude() : float
     {
-        return (float) $this->lat;
+        return (float) $this->latitude;
     }
 
     /**
@@ -549,7 +561,7 @@ class Ad extends Model
      */
     public function longitude() : float
     {
-        return (float) $this->long;
+        return (float) $this->longitude;
     }
 
     /**
@@ -566,15 +578,20 @@ class Ad extends Model
      * Get image urls for this ad.
      *
      * @param mixed $dimensions (120, [120, 120], 120x120)
+     * @param bool  $crop
      *
      * @return array
      */
-    public function images($dimensions = 120)
+    public function images($dimensions = 120, bool $crop = false)
     {
         $images = [];
 
         foreach ($this->imageNames() as $image) {
-            $images[] = Img::thumbnail($this, $image, $dimensions);
+            if ($crop) {
+                $images[] = Img::cropped($this, $image, $dimensions);
+            } else {
+                $images[] = Img::thumbnail($this, $image, $dimensions);
+            }
         }
 
         return $images;
@@ -732,7 +749,7 @@ class Ad extends Model
      */
     public function getLatitude()
     {
-        return $this->lat ?? null;
+        return $this->latitude ?? null;
     }
 
     /**
@@ -742,7 +759,7 @@ class Ad extends Model
      */
     public function getLongitude()
     {
-        return $this->long ?? null;
+        return $this->longitude ?? null;
     }
 
     /**
@@ -794,7 +811,7 @@ class Ad extends Model
 
         $user = auth()->user();
 
-        return vincentyGreatCircleDistance($user->lat, $user->long, $this->lat, $this->long);
+        return vincentyGreatCircleDistance($user->lat, $user->long, $this->latitude, $this->longitude);
     }
 
     /**

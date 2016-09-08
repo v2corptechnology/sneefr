@@ -82,22 +82,21 @@
         @if (auth()->check())
             <ul class="collapse navbar-collapse nav navbar-nav navbar-right" id="menu">
                 <li class="row visible-xs text-center menu__item--wide menu__item--split" role="presentation">
-                    @if (! auth()->user()->shops->isEmpty())
-                        <?php $shop = auth()->user()->shops->first(); ?>
-                            <a role="menuitem" tabindex="-1"
-                               href="{{ route('shops.show', $shop) }}"
-                               title="{{  $shop->getName() }}">
-                                <img class="menu-icon nav-profile-image img-circle"
-                                     src="{{  $shop->getLogo('30x30') }}"
-                                     srcset="{{  $shop->getLogo('60x60') }} 2x"
-                                     width="30" height="30"
-                                     alt="{{  $shop->getName() }}"><br/>
-                                {{ $shop->getName() }}
-                            </a>
+                    @if (auth()->user()->shop)
+                        <a role="menuitem" tabindex="-1"
+                           href="{{ route('shops.show', auth()->user()->shop) }}"
+                           title="{{  auth()->user()->shop->getName() }}">
+                            <img class="menu-icon nav-profile-image img-circle"
+                                 src="{{  auth()->user()->shop->getLogo('30x30') }}"
+                                 srcset="{{  auth()->user()->shop->getLogo('60x60') }} 2x"
+                                 width="30" height="30"
+                                 alt="{{  auth()->user()->shop->getName() }}"><br/>
+                            {{ auth()->user()->shop->getName() }}
+                        </a>
                     @endif
                 </li>
 
-                @can('createAd', auth()->user())
+                @if(auth()->user()->shop)
                     <li>
                         <a href="{{ route('ad.create') }}" title="@lang('navigation.create_ad_title')"
                            class="menu-icon {{ setActive('ad.create', 'active') }}">
@@ -105,9 +104,7 @@
                             @lang('navigation.create_ad')
                         </a>
                     </li>
-                @endif
-
-                @cannot('createAd', auth()->user())
+                @else
                     <li role="presentation" class="visible-xs">
                         <a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')"
                            class="menu-icon">
@@ -115,7 +112,7 @@
                             @lang('navigation.create_shop')
                         </a>
                     </li>
-                @endunless
+                @endif
 
                 <li class="notifications js-notifications {{ setActive('profile.notifications.index', 'active') }}">
                     <a href="{{ route('profiles.notifications.index', auth()->user()) }}" title="@lang('navigation.notifications_title')" class="menu-icon">
@@ -135,10 +132,9 @@
                     </a>
                 </li>
 
-                @if (auth()->user()->subscribed('shop') && auth()->user()->shops->count())
-                    <?php $shop = auth()->user()->shops->first(); ?>
-                    <li class="js-messages js-pushes-target-{{ $shop->getRouteKey() }} {{ setActive(['shop_discussions.index', 'shop_discussions.show'], 'active') }}">
-                        <a class="menu-icon" href="{{ route('shop_discussions.index', $shop) }}#latest"
+                @if (auth()->user()->shop)
+                    <li class="js-messages js-pushes-target-{{ auth()->user()->shop->getRouteKey() }} {{ setActive(['shop_discussions.index', 'shop_discussions.show'], 'active') }}">
+                        <a class="menu-icon" href="{{ route('shop_discussions.index', auth()->user()->shop) }}#latest"
                            title="@lang('navigation.messages_title')">
                             <sup class="notification-badge js-notification-badge @if (!$unreadShop) hidden @endif">{{ $unreadShop }}</sup>
                             <span class="label label-primary bottom-label">shop</span>
@@ -190,7 +186,7 @@
                         </a>
                     @endif
                     <ul class="dropdown-menu">
-                        @unless(auth()->user()->shops->count())
+                        @unless(auth()->user()->shop)
                             <li><a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a></li>
                         @endunless
                         <li>

@@ -1,0 +1,132 @@
+body {background-color: #FFF;}
+
+.jumbotron {
+  background: url('../../img/shops-welcome__background.jpg') no-repeat center center / cover;
+  color: #FFF;
+  min-height: 400px;
+}
+.jumbotron__heading {
+  font-size: 2.5rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+.jumbotron__subheading {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 5rem 0 2rem;
+}
+.feature-list__item {
+  color: #FFF;
+  display: block;
+  font-size: 1.6rem;
+  margin: 1rem 0;
+}
+.feature-list__item:hover,
+.feature-list__item:focus {
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.price {text-align: center;}
+.price__amount {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 400;
+}
+.price__recursion {
+  font-weight: 200;
+}
+
+.bullet:before {
+  background: transparent no-repeat center center;
+  content: "";
+  display: block;
+  float: left;
+  height: 50px;
+  margin: 0 1rem 0 3rem;
+  transform: translateY(-25%);
+  width: 50px;
+}
+.bullet--circle:before {
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+}
+.bullet--unlimited_ads:before {background-image: url('/img/shops-welcome__unlimited-ads.svg');}
+.bullet--no_fees:before {background-image: url('/img/shops-welcome__no-fees.svg');}
+.bullet--support:before {background-image: url('/img/shops-welcome__support.svg');}
+
+.separator {margin: 3rem auto;}
+.separator:after {display: none!important;}/* Remove that asap*/
+.separator--md {width: 30%;}
+.separator--discreet {opacity: 0.25;}
+
+.video {
+  padding: 3rem 0 6rem;
+}
+.video h1 {
+  margin-bottom: 2rem;}
+
+.pricing {
+  background: #F1F4F9 url('/img/shops-welcome__pictos.png') repeat-x center left;
+  padding: 6rem 0;
+}
+
+.pricing-table {
+  color: #445868;
+  width: 100%;
+}
+.pricing-table td {
+  border-left: 1px solid #E7ECF4;
+  text-align: center;
+}
+.pricing-table td:first-child {
+  border-left: none;
+  text-align: left;
+}
+.pricing-table th {
+  font-weight: normal;
+  text-align: center;
+}
+.pricing-table th:first-child {text-align: left;}
+.pricing-table strong {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.pricing-table p {
+  color: #95A0A9;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.plan__name {display: block;}
+.plan__price {
+  color: #2499D6;
+  font-size: 2.4rem;
+}
+.plan__price-detail {color: #2499D6}
+
+
+
+@media screen and (min-width: 48rem) {
+  .jumbotron__heading {
+    font-size: 3.6rem;
+    padding-top: 6rem;
+  }
+
+  .jumbotron__subheading {
+    font-size: 3rem;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 1rem 2rem;
+  }
+
+  .feature-list {
+    text-align: center;
+  }
+}

@@ -12,52 +12,8 @@ $avatarSizes = array_combine(['width', 'height'], explode('x', $avatarSize));
 $gallerySizes = array_combine(['width', 'height'], explode('x', $gallerySize));
 
 if ($item instanceof \Sneefr\Models\Ad) {
-    $title = $item->getTitle();
-    $url = route('ad.show', $item->getSlug());
-    $deletable = $item->isMine();
-    $galleryKey = 'slider-ad-' . $item->getId() . mt_rand();
-    $gallery = array_map(function ($image) use ($item, $gallerySize) {
-        return Img::cropped($item, $image, $gallerySize);
-    }, $item->imageNames());
-
-
-    if( $item->isInShop() ){
-        
-        $shop = $item->shop;
-        
-        $avatar = [
-            'url' => route('shops.show', $shop),
-            'image'  => $shop->getLogo($avatarSize),
-            'title' => $shop->getName(),
-        ];
-    }else{
-        $avatar = [
-            'url' => route('profiles.ads.index', $item->user),
-            'image'  => \Img::avatar($item->user->facebook_id, [$avatarSizes['width'], $avatarSizes['height'], 2]),
-            'title' => $item->user->present()->fullName(),
-        ];
-    }
-
-      
-
-
-    $price = [
-        'amount' => $item->price(),
-        'currency' => $item->price()->getCurrency(),
-        'formatted' => $item->present()->price(),
-    ];
-
-    $detail = isset($detail) ? $detail : null;
-
-    if ($detail == 'proximity') {
-        $footer = '<i class="fa fa-map-marker"></i> ' . $item->present()->distance() . ' &mdash; ' . $item->location();
-    } elseif ($detail == 'condition') {
-        $footer = trans('condition.'.$item->getConditionId().'_alt');
-    } elseif ($detail == 'evaluation') {
-        $footer = trans_choice('ad.show.evaluations_ratio', $item->present()->evaluationRatio(), ['ratio' => $item->present()->evaluationRatio()]);
-    } else {
-        $footer = HTML::time($item->created_at);
-    }
+    echo view('ads.card', ['ad' => $item, 'classes'=> $modifiers, 'detail' => $detail])->render();
+    return;
 } elseif ($item instanceof \Sneefr\Models\Place) {
     $title = $item->getName();
     $url = route('places.show', $item);
@@ -68,7 +24,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
 
     $title = $item->getName();
     $url = route('shops.show', $item);
-    $footer = $item->ads->count() . ' ads';
+    $footer = ($item->ads_count ?? $item->ads->count()) . ' ads';
     $deletable = $item->isOwner();
     $avatar = [
         'url' => route('shops.show', $item),
@@ -80,7 +36,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
 } elseif ($item instanceof \Sneefr\Models\User) {
     $title = $item->present()->fullName();
     $url = route('profiles.ads.index', $item);
-    $footer = count($item->ads) . ' ads';
+    $footer = ($item->ads_count ?? $item->ads->count()) . ' ads';
     $avatar = [
         'url' => $url,
         'image'  => \Img::avatar($item->socialNetworkId(), [$avatarSizes['width'], $avatarSizes['height'], 2]),

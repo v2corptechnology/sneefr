@@ -58,9 +58,7 @@ namespace Sneefr\Http\Requests {
         {
             $input = $this->all();
 
-            // Rename fields while the ad's columns are not updated
-            $input['lat'] = $this->get('latitude');
-            $input['long'] = $this->get('longitude');
+            // chnage amount to cents
             $input['amount'] = $this->get('amount') * 100;
 
             // Boolean needed

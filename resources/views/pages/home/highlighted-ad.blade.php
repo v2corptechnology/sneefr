@@ -1,0 +1,26 @@
+@if($ad->isInShop())
+    @include('partials._link_to_shop', ['shop' => $ad->shop, 'size' => 40])
+
+@else
+    @include('partials._link_to_user', ['user' => $ad->seller, 'showRank' => false, 'showName' => false, 'size' => 40])
+@endif
+<div class="featured__content">
+    <a class="featured__heading"
+       href="{{ route('ad.show', $ad->getSlug()) }}"
+       title="{{ $ad->present()->title() }}">{{ $ad->present()->title() }}</a>
+    <div class="featured__description">
+        @lang('login.sold_by')
+        @if($ad->isInShop())
+            <a class="featured__link"
+               href="{{ route('shops.show', $ad->shop->getRouteKey())  }}"
+               title="{{ $ad->shop->getName() }}">{{ $ad->shop->getName() }}
+            </a>
+        @else
+            <a class="featured__link"
+               href="{{ route('profiles.ads.index', $ad->seller) }}"
+               title="{{ $ad->seller->present()->fullName() }}">{{ $ad->seller->present()->fullName() }}
+            </a>
+        @endif
+    </div>
+    <div class="featured__price">{!! $ad->present()->price() !!}</div>
+</div>

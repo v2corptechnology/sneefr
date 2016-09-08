@@ -32,7 +32,7 @@ class NotificationComposer
 
             $unreadMessages = Message::where('to_user_id', auth()->id())->unread()->with('discussion')->get();
 
-            if (auth()->user()->shops->count()) {
+            if (auth()->user()->shop) {
                 $unreadShopDiscussions = $unreadMessages->filter(function ($message) {
                     return $message->discussion->isShopDiscussion();
                 })->groupBy('discussion_id')->count();

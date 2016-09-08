@@ -4,13 +4,10 @@ use Hashids\Hashids;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\Ad;
 use Sneefr\Models\LikeAd;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\Place\PlaceRepository;
-use Sneefr\Repositories\Shop\ShopRepository;
-use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
@@ -27,18 +24,18 @@ class AuthController extends Controller
     }
 
     /**
-     * @param \Sneefr\Repositories\User\UserRepository   $userRepository
-     * @param \Sneefr\Repositories\Shop\ShopRepository   $shopRepository
      * @param \Sneefr\Repositories\Place\PlaceRepository $placeRepository
+     * @param \Sneefr\Repositories\Ad\AdRepository       $adRepository
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(UserRepository $userRepository, ShopRepository $shopRepository, PlaceRepository $placeRepository, AdRepository $adRepository)
+    public function index(PlaceRepository $placeRepository, AdRepository $adRepository)
     {
-        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with('seller')->take(1)->get()->first();
-        $topShops = $shopRepository->biggestSellers(3);
+        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
+        $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
         $topPlaces = $placeRepository->biggestSellers(3);
-        $topUsers = $userRepository->biggestSellers(8);
+        $topAds = \Sneefr\Models\Ad::latest()->displayable()->with(['seller', 'shop'])->take(4)->get();
+        $topUsers = \Sneefr\Models\User::withCount(['ads' => function($query){$query->whereNull('shop_id');}])->orderBy('ads_count', 'desc')->take(8)->get();
         $highlighted = [
             ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
             ['class' => 'second', 'parentId' => 14, 'ids' => [15, 16, 17, 18], 'ads' => $adRepository->byCategory(15, 16, 17, 18)],
@@ -46,18 +43,11 @@ class AuthController extends Controller
             ['class' => 'fourth', 'parentId' => 40, 'ids' => [41, 42, 43, 44, 45], 'ads' => $adRepository->byCategory(41, 42, 43, 44, 45)],
         ];
 
-        $topAds = Ad::where('is_locked', 0)
-            ->whereNull('sold_to')
-            ->orderBy('created_at', 'desc')
-            ->take(4)
-            ->get();
-
-
         if (! $randomAd) {
             return('No ads yet, please <a href="' . route('ad.create') . '">create one</a>');
         }
 
-        return view('home.index', compact('randomAd', 'topShops', 'topUsers', 'topPlaces', 'highlighted', 'topAds'));
+        return view('pages.home.index', compact('randomAd', 'topShops', 'topUsers', 'topPlaces', 'highlighted', 'topAds'));
     }
 
     /**

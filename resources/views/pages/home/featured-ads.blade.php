@@ -8,10 +8,9 @@
     <ol class="best-of__list">
         @foreach ($ads as $ad)
             <li class="best-of__list-item best-of__list-item--small">
-                @include('partials._card', [
-                    'item' => $ad,
-                    'modifiers'=> 'card--no-avatar'
-                ])
+
+                @include('ads.card', ['ad' => $ad, 'classes'=> 'card--no-avatar'])
+
             </li>
         @endforeach
     </ol>
