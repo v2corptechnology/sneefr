@@ -1,5 +1,7 @@
 <?php namespace Sneefr\Http\Controllers;
 
+use Sneefr\Contracts\BillingInterface;
+
 class SettingsController extends Controller
 {
     /**
@@ -7,8 +9,8 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function show(BillingInterface $billing)
     {
-        return view('me.show');
+        return view('me.show', ['authorizeUrl' => $billing->getAuthorizeUrl()]);
     }
 }
