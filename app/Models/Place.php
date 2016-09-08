@@ -41,18 +41,6 @@ class Place extends Model
     ];
 
     /**
-     * Relationship to the followers of this place.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function followers()
-    {
-        //return $this->belongsToMany(User::class)->withTimestamps();
-        return $this->morphToMany(User::class, 'followable')->withTimestamps();
-
-    }
-
-    /**
      * Get the collection of likes related to this record.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -170,18 +158,6 @@ class Place extends Model
     }
 
     /**
-     * Get the total number of ads in the followers of the place.
-     *
-     * @return int
-     */
-    public function countFollowerAds() : int
-    {
-        return $this->followers->sum(function ($follower) {
-            return count($follower->ads->where('shop_id', null));
-        });
-    }
-
-    /**
      * Get the map URL of this place.
      *
      * @param int  $width
@@ -208,19 +184,5 @@ class Place extends Model
                 $retina,
                 config('sneefr.keys.MAPBOX_KEY')
         ]);
-    }
-
-    /**
-     * Check if this user is following the place.
-     *
-     * @param int $userId
-     *
-     * @return bool
-     */
-    public function isFollowed(int $userId = null) : bool
-    {
-        $userId = $userId ?? auth()->id();
-
-        return in_array($userId, $this->followers->pluck('id')->all());
     }
 }

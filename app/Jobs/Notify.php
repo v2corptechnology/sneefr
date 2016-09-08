@@ -108,10 +108,6 @@ class Notify extends Job implements ShouldQueue
             $userIds = (array) $this->trigger->user->id();
         }
 
-        if ($this->trigger instanceof \Sneefr\Models\Follow) {
-            $userIds = (array) $this->trigger->followable_id;
-        }
-
         if ($this->trigger instanceof \Sneefr\Models\Ad) {
             $ad = $this->trigger;
 
@@ -151,10 +147,6 @@ class Notify extends Job implements ShouldQueue
 
             case \Sneefr\Models\Discussion::class:
                 return $liked->participants->pluck('id')->all();
-                break;
-
-            case \Sneefr\Models\Follow::class:
-                return [$liked->user_id, $liked->followable_id];
                 break;
 
             case \Sneefr\Models\User::class:
