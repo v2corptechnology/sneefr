@@ -16,6 +16,6 @@ if ($of instanceof \Sneefr\Models\Shop) {
 
 }
 ?>
-<a class="card__avatar" href="{{ $route }}" title="{{ $name }}">
-    <img class="card__image" src="{{ $src }}" alt="{{ $name }}" height="{{ $height }}" width="{{ $width }}">
+<a class="navbar__profile" href="{{ $route }}" title="{{ $name }}">
+    <img class="nav-profile-image" src="{{ $src }}" alt="{{ $name }}" height="{{ $height }}" width="{{ $width }}">
 </a>
