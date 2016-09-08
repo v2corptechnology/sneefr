@@ -51,7 +51,7 @@ class ShopsController extends Controller
         // Quickfix : a disconnected user cannot see a shop
         //$this->authorize($shop);
 
-        $shop->load('ads', 'followers', 'evaluations');
+        $shop->load('ads', 'evaluations');
 
         $displayedAds = $shop->ads;
 
@@ -74,7 +74,7 @@ class ShopsController extends Controller
             return redirect()->route('shops.show', $shop);
         }
 
-        $shop->load('ads', 'followers', 'evaluations');
+        $shop->load('ads', 'evaluations');
 
         $q = $request->get('q');
 
@@ -234,7 +234,7 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
-        $shop->load('ads', 'followers', 'evaluations');
+        $shop->load('ads', 'evaluations');
 
         return view('shops.evaluations', compact('shop'));
     }
