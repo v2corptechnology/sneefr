@@ -18,7 +18,7 @@ class ViewNavbarTest extends TestCase
     {
         $this->visit('/')
             ->dontSee('<li role="presentation" class="navbar__avatar">')
-            ->dontSee('<li role="presentation"><a class="card__avatar"');
+            ->dontSee('<li role="presentation"><a class="avatar"');
     }
 
     public function test_view_avatar_and_menu_when_auth()
@@ -49,6 +49,6 @@ class ViewNavbarTest extends TestCase
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see('<img class="card__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'"');
+            ->see('<img class="avatar__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'"');
     }
 }
