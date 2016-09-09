@@ -44,7 +44,7 @@ class Gamificator
             self::USER_FILLED_A_PLACE_OF_INTEREST,
             self::USER_HAS_CREATED_AN_AD,
         ],
-        'second'  => [,
+        'second'  => [
             //self::USER_SENT_A_MESSAGE,
             self::USER_SHARED_AN_AD_ON_FACEBOOK,
             //self::USER_RECEIVED_A_MESSAGE,
