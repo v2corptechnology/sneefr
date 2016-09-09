@@ -37,7 +37,7 @@ class ViewNavbarTest extends TestCase
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see($user->facebook_id . '.jpg" alt="'.$user->present()->fullName().'" height="25" width="25">');
+            ->see($user->facebook_id . '.jpg" alt="'.$user->present()->fullName().'"');
     }
 
     public function test_view_shops_avatar_when_having_a_shop()
@@ -49,6 +49,6 @@ class ViewNavbarTest extends TestCase
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see('<img class="card__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'" height="25" width="25">');
+            ->see('<img class="card__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'"');
     }
 }
