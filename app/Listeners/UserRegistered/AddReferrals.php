@@ -1,7 +1,6 @@
 <?php namespace Sneefr\Listeners\UserRegistered;
 
 use Sneefr\Events\UserRegistered;
-use Sneefr\Models\Follow;
 use Sneefr\Models\Referral;
 use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\FacebookConnector;
@@ -60,20 +59,6 @@ class AddReferrals
                 'referent_user_id' => $missingReferredId,
                 'referred_user_id' => $event->user->getId(),
             ]);
-
-            Follow::create([
-                'user_id' => $event->user->getId(),
-                'followable_id' => $missingReferredId,
-                'followable_type' => 'user',
-            ]);
-
-            Follow::create([
-                'user_id' => $missingReferredId,
-                'followable_id' => $event->user->getId(),
-                'followable_type' => 'user',
-            ]);
-
-            //$this->shop->followers()->attach(auth()->id());
         }
 
         // use sync method ? $cart->items()->sync([$item->id], false);

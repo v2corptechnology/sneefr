@@ -5,7 +5,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Message;
-use Sneefr\Models\Follow;
 use Sneefr\Models\Share;
 use Sneefr\Models\User;
 use Sneefr\Services\Gamificator;
@@ -63,7 +62,6 @@ class UpdateRank extends Job implements ShouldQueue
         return collect()
             ->merge($this->getAchievedForUser())
             ->merge($this->getAchievedForAds())
-            ->merge($this->getAchievedForFollows())
             ->merge($this->getAchievedForMessages())
             ->toArray();
     }
@@ -138,29 +136,6 @@ class UpdateRank extends Job implements ShouldQueue
 
         if ($adsShared->count()) {
             $objectives->push(Gamificator::USER_SHARED_AN_AD_ON_FACEBOOK);
-        }
-
-        return $objectives;
-    }
-
-    /**
-     * Get objectives relative to follows.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    protected function getAchievedForFollows()
-    {
-        $objectives = collect();
-
-        $followedUsers = Follow::where('user_id', $this->user->getId())->where('followable_type','user')->get();
-        $followedPlaces = $this->user->places;
-
-        if ($followedUsers->count()) {
-            $objectives->push(Gamificator::USER_FOLLOWS_A_SNEEFER);
-        }
-
-        if ($followedPlaces->count()) {
-            $objectives->push(Gamificator::USER_FILLED_A_PLACE_OF_INTEREST);
         }
 
         return $objectives;

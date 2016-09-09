@@ -10,7 +10,6 @@ use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
 use Sneefr\Jobs\UpdateRank;
 use Sneefr\Jobs\VerifyEmail;
-use Sneefr\Models\Follow;
 use Sneefr\Models\Notification;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
@@ -283,7 +282,7 @@ class ProfilesController extends Controller
         $searches = $this->searchRepository->getSearchesFor($person->getId());
 
         // Users following this user
-        $followingPersons = Follow::where('followable_type', 'user')->where('followable_id', $person->getId())->with('initiator')->get()->pluck('initiator');
+        $followingPersons = collec();
 
         // Users followed by this user
         $followedPersons = $person->following()->users();

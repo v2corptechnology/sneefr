@@ -19,7 +19,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
     $url = route('places.show', $item);
     $galleryKey = null;
     $gallery = [$item->getMapUrl($gallerySizes['width'], $gallerySizes['height'])];
-    $footer = trans_choice('card.place.footer_ads_count', $item->countFollowerAds(), ['nb' => $item->countFollowerAds()]);
+    $footer = trans_choice('card.place.footer_ads_count', 0, ['nb' => 0]);
 } elseif ($item instanceof \Sneefr\Models\Shop) {
 
     $title = $item->getName();
@@ -54,7 +54,7 @@ if ($item instanceof \Sneefr\Models\Ad) {
             @foreach ($gallery as $i => $image)
                 <a href="{{ $url }}" title="{{ $title }}">
                     <?php $srcPrefix = ($i !== 0) ? 'data-' : null;?>
-                    <img class="card__image" {{ $srcPrefix }}src="{{ $image }}"
+                    <img class="avatar__image" {{ $srcPrefix }}src="{{ $image }}"
                          alt="{{ $title }}" width="{{ $gallerySizes['width'] }}"
                          height="{{ $gallerySizes['height'] }}" itemprop="image">
                 </a>
@@ -63,11 +63,9 @@ if ($item instanceof \Sneefr\Models\Ad) {
     @endif
 
     @if (isset($avatar) && $avatar)
-        <a class="card__avatar" href="{{ $avatar['url'] }}" title="{{ $avatar['title'] }}">
-            <img class="card__image" src="{{ $avatar['image'] }}"
-                 alt="{{ $avatar['title'] }}" height="{{ $avatarSizes['height'] }}"
-                 width="{{ $avatarSizes['width'] }}">
-        </a>
+
+        @include('partials.avatar', ['of' => $item, 'size' => '40x40'])
+
     @endif
 
     <div class="card__content">

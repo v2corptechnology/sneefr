@@ -9,7 +9,8 @@
 
             @if ($discussion->shop && $discussion->shop->owner->getId() != auth()->id())
                 <img class="pull-left"
-                     src="{{ $discussion->shop->getLogo('70x70') }}"
+                     src="{{ $discussion->shop->getLogo('35x35') }}"
+                     srcset="{{ $discussion->shop->getLogo('70x70') }} 2x"
                      alt="{{ $discussion->shop->getName() }}" width="35"
                      height="35">
 

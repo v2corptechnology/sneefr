@@ -159,32 +159,17 @@
                         </a>
                     </li>
                 @endif
+                <li role="presentation" class="navbar__avatar">
+
+                    @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '25x25' ])
+
+                </li>
                 <li role="presentation" class="dropdown hidden-xs">
-                    @if(auth()->user()->shop)
-                        <a class="navbar__profile dropdown-toggle"
-                           href="{{ route('shops.show', auth()->user()->shop) }}"
-                           title="@lang('navigation.profile_title')"
-                           data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
-                            <img class="nav-profile-image"
-                                 src="{{ auth()->user()->shop->getLogo('25x25') }}"
-                                 srcset="{{ auth()->user()->shop->getLogo('50x50') }} 2x"
-                                 alt="{{ auth()->user()->shop->getName() }}"
-                                 width="25" height="25">
-                            <span class="visible-xs-inline">{{ auth()->user()->shop->getName() }}</span>
-                            <span class="caret"></span>
-                        </a>
-                    @else
-                        <a class="navbar__profile dropdown-toggle"
-                           href="#"
-                           title="@lang('navigation.profile_title')"
-                           data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
-                            {!! HTML::profilePicture(auth()->user()->getSocialNetworkId(), auth()->user()->present()->fullName(), 25, ['nav-profile-image']) !!}
-                            <span class="visible-xs-inline">{{ auth()->user()->present()->fullName() }}</span>
-                            <span class="caret"></span>
-                        </a>
-                    @endif
+                    <a class="navbar__profile dropdown-toggle"
+                       data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
                         @unless(auth()->user()->shop)
                             <li><a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a></li>

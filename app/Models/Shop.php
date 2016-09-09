@@ -123,16 +123,6 @@ class Shop extends Model
     }
 
     /**
-     * Relationship to the followers of the shop.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function followers()
-    {
-        return $this->morphToMany(User::class, 'followable')->latest()->withTimestamps();
-    }
-
-    /**
      * Relationship from the shop to its discussions.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -318,19 +308,5 @@ class Shop extends Model
         $userId = $userId ?? auth()->id();
 
         return $this->owner->getId() === $userId;
-    }
-
-    /**
-     * Check if this user is following the shop.
-     *
-     * @param int $userId
-     *
-     * @return bool
-     */
-    public function isFollowed(int $userId = null) : bool
-    {
-        $userId = $userId ?? auth()->id();
-
-        return in_array($userId, $this->followers->pluck('id')->all());
     }
 }
