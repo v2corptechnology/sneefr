@@ -107,7 +107,7 @@
                 </li>
                 <li class="sections__nav__item">
                     <a href="#">
-                        <span class="sections__nav__item--emphasis">{{ $shop->followers->count() }}</span>
+                        <span class="sections__nav__item--emphasis">{{ 0 }}</span>
                         <span>Followers</span>
                     </a>
                 </li>
