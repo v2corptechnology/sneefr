@@ -1,5 +1,7 @@
 <?php
 
+$size = $size ?? '40x40';
+
 list($width, $height) = explode('x', $size);
 
 if ($of instanceof \Sneefr\Models\Shop) {
@@ -18,6 +20,7 @@ if ($of instanceof \Sneefr\Models\Shop) {
 
 }
 ?>
-<a class="card__avatar" href="{{ $route }}" title="{{ $name }}">
-    <img class="card__image" src="{{ $src }}" alt="{{ $name }}" srcset="{{ $src2x }} 2x" height="{{ $height }}" width="{{ $width }}">
+<a class="avatar {{ $classes ?? '' }}" href="{{ $route }}" title="{{ $name }}">
+    <img class="avatar__image" src="{{ $src }}" alt="{{ $name }}"
+         srcset="{{ $src2x }} 2x" height="{{ $height }}" width="{{ $width }}">
 </a>
