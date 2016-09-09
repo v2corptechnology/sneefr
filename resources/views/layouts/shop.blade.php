@@ -107,7 +107,7 @@
                 </li>
                 <li class="sections__nav__item">
                     <a href="#">
-                        <span class="sections__nav__item--emphasis">{{ $shop->followers->count() }}</span>
+                        <span class="sections__nav__item--emphasis">{{ 0 }}</span>
                         <span>Followers</span>
                     </a>
                 </li>
@@ -128,19 +128,6 @@
                     <i class="fa fa-cog"></i>
                     Edit
                 </a>
-            @else
-                @if ($shop->isFollowed())
-                    <form action="{{ route('follows.destroy', [0, 'type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
-                        {!! csrf_field() !!}
-                        {!! method_field('DELETE') !!}
-                        <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.unfollow')</button>
-                    </form>
-                @else
-                    <form action="{{ route('follows.store', ['type' => 'shop', 'item' => $shop]) }}" method="POST" style="display: inline-block;">
-                        {!! csrf_field() !!}
-                        <button class="btn btn-info actions__item actions__btn" type="submit">@lang('shop.follow')</button>
-                    </form>
-                @endif
             @endif
 
             <a href="#" class="btn actions__item"><i class="actions__icon fa fa-comment-o" aria-hidden="true"></i></a>
