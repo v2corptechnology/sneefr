@@ -17,6 +17,16 @@ class AdPolicy
         return true;
     }
 
+    public function create(User $user)
+    {
+        if(!$user->shop()->count()) {
+            abort(404, 'shop not found');
+        } else if(!$user->payment()->hasOne()) {
+            return false;
+        }
+        return true;
+    }
+
     public function update(User $user, Ad $ad)
     {
         // Is it the owner of this ad ?
