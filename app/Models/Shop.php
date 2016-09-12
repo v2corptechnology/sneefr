@@ -1,13 +1,13 @@
 <?php namespace Sneefr\Models;
 
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Shop extends Model
 {
-    use AlgoliaEloquentTrait, LogsActivity, SoftDeletes;
+    use LogsActivity, Searchable, SoftDeletes;
 
     /**
      * Indicates if the model should be timestamped.
@@ -15,39 +15,6 @@ class Shop extends Model
      * @var bool
      */
     public $timestamps = true;
-
-    /**
-     * Set whether or not Algolia has to auto-index
-     * models when they are saved.
-     *
-     * @var bool
-     */
-    public static $autoIndex = true;
-
-    /**
-     * Whether or not Algolia has to append environment name to index.
-     * Ie.: shops_staging
-     *
-     * @var bool
-     */
-    public static $perEnvironment = true;
-
-
-    /**
-     * Algolia's specific indexing settings.
-     *
-     * @var array
-     */
-    public $algoliaSettings = [
-        'attributesToIndex' => [
-            'id',
-            'slug',
-            'data',
-        ],
-        'customRanking' => [
-            'desc(user_id)',
-        ],
-    ];
 
     /**
      * The database table used by the model.
@@ -76,6 +43,25 @@ class Shop extends Model
      * @var array
      */
     protected $casts = ['data' => 'array'];
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $record = $this->toArray();
+        $record = array_merge($record, $record['data']);
+        $record['_geoloc'] = [
+            'lat' => $record['latitude'],
+            'lng' => $record['longitude'],
+        ];
+
+        unset($record['data'], $record['latitude'], $record['longitude']);
+
+        return $record;
+    }
 
     public function owner()
     {

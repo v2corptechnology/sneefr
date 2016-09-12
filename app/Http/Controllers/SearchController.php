@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Session;
 use Sneefr\Jobs\SaveSearch;
 use Sneefr\Models\PlaceName;
+use Sneefr\Models\Shop;
 use Sneefr\Repositories\Category\CategoryRepository;
 use Sneefr\Repositories\Place\PlaceRepository;
 use Sneefr\Repositories\Search\SearchRepository;
@@ -45,7 +46,7 @@ class SearchController extends Controller {
         $type = $request->get('type', 'ad');
 
         $ads = $search->for('ad')->with($request->all());
-        $shops = $search->for('Shop')->with($request->all());
+        $shops = Shop::search($query)->get()->take(20);
 
         // When displaying ads, detect commonly linked categories to query terms
         if ($type === 'ad') {
