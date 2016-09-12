@@ -21,39 +21,15 @@
                 @include('profiles.settings.general')
 
                 {{-- Payment panel --}}
-                @include('profiles.settings.payment', ['authUrl' => $authorizeUrl])
+                @if(auth()->user()->shop)
+                    @include('profiles.settings.payment', ['authUrl' => $authorizeUrl])
+                @endif
 
                 {{-- Phone validation panel --}}
                 @include('profiles.settings.phone')
-
-                {{-- stripe panel --}}
-                @if(auth()->user()->shop)
-                    @include('profiles.settings.payment', ['authorizeUrl' => $authorizeUrl])
-                @endif
             </div>
 
             <div class="col-md-4">
-                {{--
-                    Settings panel for application config.
-                --}}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-cog"></i>
-                        @lang('profile.parameters.application_settings')
-                    </div>
-                    <div class="panel-body">
-
-                        {{-- Create an HTML form for sending changes of application settings --}}
-                        {!! Form::open(['route'=>['profiles.settings.update', auth()->user()], 'method'=>'put']) !!}
-
-                        <input type="hidden" name="settings_category" value="application">
-
-                        <button class="btn btn-success" type="submit">
-                            @lang('profile.parameters.button_save_notifications')
-                        </button>
-                        {!! Form::close() !!}
-                    </div>
-                </div>
                 {{--
                     Settings panel for notifications.
                 --}}

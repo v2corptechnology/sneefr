@@ -120,7 +120,6 @@ return [
         'your_notifications'        => "Notification settings",
         'daily_digest_label'        => "Get a daily alert if I have unread notifications",
         'button_save_notifications' => "Save",
-        'application_settings'      => 'Preferences',
         'button_danger_zone'        => "Delete my account",
         // Phone panel
         'phone_title'               => 'Phone verification',
