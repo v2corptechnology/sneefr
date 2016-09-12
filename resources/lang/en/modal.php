@@ -24,6 +24,11 @@ return [
         'connect_first'     => "you need to log in before doing this ;-)",
         'btn_connect'       => "log in",
     ],
+    'stripe' => [
+        'header'            => "One last step",
+        'message'           => "you need to Link or create your business Stripe account so that you can create an ad ;-)",
+        'btn_action'        => "Link my Stripe account",
+    ],
 
     'close'                       => "Close",
     'delete_account_header'       => "Are you sure?",

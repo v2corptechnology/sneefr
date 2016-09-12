@@ -50,7 +50,11 @@ class AdController extends Controller
      */
     public function create()
     {
-        $this->authorize('createAd', auth()->user());
+        if(auth()->user()->cannot('create', Ad::class))
+        {
+            return redirect()->route('shops.show', auth()->user()->shop)
+                             ->with('stripe_modal', true);
+        }
 
         $categories = $this->getCategoryTree();
 
@@ -67,6 +71,8 @@ class AdController extends Controller
      */
     public function store(CreateAdRequest $request)
     {
+        $this->authorize('create', Ad::class);
+
         // Store the ad
         $ad = Ad::create($request->all());
 

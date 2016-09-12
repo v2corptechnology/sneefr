@@ -11,7 +11,7 @@
             <p>@lang('profile.settings.payment.explain')</p>
 
             <p>
-                <a href="{{ $authorizeUrl }}" class="stripe-connect" title="@lang('profile.settings.payment.btn_link_title')">
+                <a href="{{ $authUrl }}" class="stripe-connect" title="@lang('profile.settings.payment.btn_link_title')">
                     <span class="stripe-connect__text">@lang('profile.settings.payment.btn_link')</span>
                 </a>
             </p>

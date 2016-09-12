@@ -47,4 +47,19 @@
             </div>
         @endforelse
     </div>
+
+    @if(session('stripe_modal'))
+        @include('partials.modals._link_stripe')
+        <script>
+
+            window.addEventListener('load', function () {
+                $('#link-stripe-modal').modal({
+                    backdrop: 'static',
+                    keyboard: false,
+                    show: true
+                });
+            }, false );
+
+        </script>
+    @endif
 @stop
