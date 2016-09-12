@@ -39,7 +39,7 @@ return [
 
         'main' => [
             'id' => env('ALGOLIA_APP_ID'),
-            'key' => env('ALGOLIA_WRITE_API_KEY'),
+            'key' => env('ALGOLIA_SECRET'),
         ],
 
         'alternative' => [

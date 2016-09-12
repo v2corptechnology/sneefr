@@ -54,8 +54,8 @@ class Shop extends Model
         $record = $this->toArray();
         $record = array_merge($record, $record['data']);
         $record['_geoloc'] = [
-            'lat' => $record['latitude'],
-            'lng' => $record['longitude'],
+            'lat' => $this->getLatitude(),
+            'lng' => $this->getLongitude(),
         ];
 
         unset($record['data'], $record['latitude'], $record['longitude']);
