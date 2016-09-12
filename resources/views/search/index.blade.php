@@ -74,7 +74,7 @@
         @elseif ($type == 'shop')
 
             <!-- Display the found shops  -->
-            @foreach ($shops->get() as $shop)
+            @foreach ($shops as $shop)
                 <div class="col-sm-4 col-md-3">
                     @include('partials._card', [
                         'item' => $shop,
