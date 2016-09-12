@@ -5,14 +5,8 @@
 @section('shop_content')
     <div class="row">
 
-        <div class="col-sm-8">
-            <h1 class="content-head" id="common">
-                @choice('shops.show.heading', $displayedAds->count(), ['name' => $shop->getName(), 'nb' => $displayedAds->count()])
-            </h1>
-        </div>
-
         {{-- Filter the ads --}}
-        <div class="col-sm-4">
+        <div class="col-sm-4 col-sm-offset-4">
             @include('partials._filter', ['q' => $q ?? null, 'route' => route('shops.search', $shop)])
         </div>
 
@@ -28,7 +22,7 @@
     {{-- Show the filtered or all the ads --}}
     <div class="row">
         @forelse($displayedAds as $ad)
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-4">
                 @include('ad._ad', ['ad' => $ad])
             </div>
         @empty
