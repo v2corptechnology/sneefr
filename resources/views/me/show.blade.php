@@ -25,6 +25,11 @@
 
                 {{-- Phone validation panel --}}
                 @include('profiles.settings.phone')
+
+                {{-- stripe panel --}}
+                @if(auth()->user()->shop)
+                    @include('profiles.settings.payment', ['authorizeUrl' => $authorizeUrl])
+                @endif
             </div>
 
             <div class="col-md-4">

@@ -33,7 +33,7 @@ switch ($detail ?? 'date') {
             title="{{ $ad->present()->title() }}" data-slider-target="#{{ $galleryKey }}">
         @foreach ($images as $i => $image)
             <a href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
-                <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
+                <img class="avatar__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
                      height="{{ $height }}" itemprop="image">
             </a>
@@ -41,9 +41,7 @@ switch ($detail ?? 'date') {
     </figure>
 
     @include('partials.avatar', [
-        'of' => $ad->shop ?? $ad->seller,
-        'size' => $avatar ?? '40x40'
-    ])
+        'of' => $ad->shop ?? $ad->seller, 'size' => $avatar ?? null])
 
     <div class="card__content">
         <h1 class="card__title" itemprop="name">

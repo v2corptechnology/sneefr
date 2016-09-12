@@ -1,18 +1,17 @@
-@if($ad->isInShop())
-    @include('partials._link_to_shop', ['shop' => $ad->shop, 'size' => 40])
 
-@else
-    @include('partials._link_to_user', ['user' => $ad->seller, 'showRank' => false, 'showName' => false, 'size' => 40])
-@endif
+@include('partials.avatar', ['of' => $ad->shop ?? $ad->seller, 'classes' => 'user'])
+
 <div class="featured__content">
     <a class="featured__heading"
        href="{{ route('ad.show', $ad->getSlug()) }}"
        title="{{ $ad->present()->title() }}">{{ $ad->present()->title() }}</a>
     <div class="featured__description">
+
         @lang('login.sold_by')
+
         @if($ad->isInShop())
             <a class="featured__link"
-               href="{{ route('shops.show', $ad->shop->getRouteKey())  }}"
+               href="{{ route('shops.show', $ad->shop)  }}"
                title="{{ $ad->shop->getName() }}">{{ $ad->shop->getName() }}
             </a>
         @else

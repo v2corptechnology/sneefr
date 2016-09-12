@@ -13,8 +13,6 @@ class SettingsController extends Controller
      */
     public function show(BillingInterface $billing)
     {
-        $authorizeUrl = $billing->getAuthorizeUrl();
-
-        return view('me.show', compact('authorizeUrl'));
+        return view('me.show', ['authorizeUrl' => $billing->getAuthorizeUrl()]);
     }
 }
