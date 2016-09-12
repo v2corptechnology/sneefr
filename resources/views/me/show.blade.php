@@ -20,6 +20,9 @@
                 {{-- General info such as email and geoloc panel --}}
                 @include('profiles.settings.general')
 
+                {{-- Payment panel --}}
+                @include('profiles.settings.payment', ['authUrl' => $authorizeUrl])
+
                 {{-- Phone validation panel --}}
                 @include('profiles.settings.phone')
             </div>
