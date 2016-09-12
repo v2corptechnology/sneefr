@@ -6,62 +6,41 @@ class ShopOnboardingTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $user;
-
-    protected $shop;
-
-    public function setUp()
+    public function test_shop_owner_is_asked_to_subscribe()
     {
-        parent::setUp();
-        $this->user = factory(\Sneefr\Models\User::class)->create();
-        $this->shop = factory(\Sneefr\Models\Shop::class)->create(['user_id' => $this->user->getId() ]);
+        $user = factory(\Sneefr\Models\User::class)->create();
+        $shop = factory(\Sneefr\Models\Shop::class)->make();
+        $user->shop()->save($shop);
+
+        $this->actingAs($user);
+
+        $this->visit(route('shops.show', $shop))
+            ->see('subscription-plan');
     }
 
-    public function test_shop_not_subscribed()
+    public function test_shop_owner_is_asked_to_link_payment_account_once_subscribed()
     {
-        $this->actingAs($this->user);
-        $this->visit('shops/' . $this->shop->getRouteKey())
-             ->see('subscription-plan');
+        $user = factory(\Sneefr\Models\User::class)->create();
+        factory(\Laravel\Cashier\Subscription::class)->create(['user_id' => $user['id']]);
+        $shop = factory(\Sneefr\Models\Shop::class)->make();
+        $user->shop()->save($shop);
+
+        $this->actingAs($user);
+
+        $this->visit(route('shops.show', $shop))
+            ->see(trans('shops.show.link_payment_action'));
     }
 
-    public function test_subscribed_shop()
+    public function test_shop_owner_is_asked_to_create_first_ad_when_subscribed_and_payment_linked()
     {
-        $this->actingAs($this->user);
-        $this->subscribe($this->user);
-        $this->visit('shops/' . $this->shop->getRouteKey())
-             ->see(trans('shops.show.link_payment_action'));
-    }
+        $user = factory(\Sneefr\Models\User::class, 'with-payment')->create();
+        factory(\Laravel\Cashier\Subscription::class)->create(['user_id' => $user['id']]);
+        $shop = factory(\Sneefr\Models\Shop::class)->make();
+        $user->shop()->save($shop);
 
-    public function test_can_view_btn_create_first_ad()
-    {
-        $this->actingAs($this->user);
-        $this->subscribe($this->user);
-        $this->linkStripeAccount($this->user);
-        $this->visit('shops/' . $this->shop->getRouteKey())
-             ->see(trans('shop.ads.btn_create_first_ad'));
-    }
+        $this->actingAs($user);
 
-    protected function linkStripeAccount($user)
-    {
-        $user->stripe_id = 'cus_99L5CJCSCky5Ft';
-        $user->card_brand = 'visa';
-        $user->card_last_four = '4242';
-        $user->payment = '{"scope": "read_write", "livemode": true}';
-        $user->save();
-    }
-
-    protected function subscribe($user)
-    {
-        DB::table('subscriptions')->insert(
-            [
-                'user_id'       => $user->getId(),
-                'name'          => 'shop',
-                'stripe_id'     => 'sub_8zk4J6ZTYeBaka',
-                'stripe_plan'   => 'yearlyadopters',
-                'quantity'      => 1,
-                'created_at'    => '2016-08-12 18:40:56',
-                'updated_at'    => '2016-08-12 18:40:56'
-            ]
-        );
+        $this->visit(route('shops.show', $shop))
+            ->see(trans('shop.ads.btn_create_first_ad'));
     }
 }
