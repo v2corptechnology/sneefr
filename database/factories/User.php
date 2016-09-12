@@ -32,19 +32,15 @@ $factory->define(User::class, function ($faker) {
 });
 
 /**
- * Factory for a male person.
+ * Factory for a user with a payment card
  */
-$factory->defineAs(User::class, 'male', function ($faker) use ($factory) {
-    return array_merge($factory->raw(User::class), [
-        'gender' => 'male',
-    ]);
-});
+$factory->defineAs(User::class, 'with-payment', function ($faker) use ($factory) {
+    $user = $factory->raw(User::class);
 
-/**
- * Factory for a female person.
- */
-$factory->defineAs(User::class, 'female', function ($faker) use ($factory) {
-    return array_merge($factory->raw(User::class), [
-        'gender' => 'female',
+    return array_merge($user, [
+        'stripe_id'      => $faker->lexify('cus_??????????????'),
+        'card_brand'     => "visa",
+        'card_last_four' => "4242",
+        'payment'        => '{"scope": "read_write", "livemode": true}',
     ]);
 });

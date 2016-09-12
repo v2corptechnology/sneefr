@@ -23,7 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BillingInterface::class, StripeBilling::class);
+        $this->app->bind(
+            \Sneefr\Contracts\BillingInterface::class,
+            \Sneefr\Services\StripeBilling::class);
 
         if (config('sneefr.APP_DEBUGBAR')) {
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
