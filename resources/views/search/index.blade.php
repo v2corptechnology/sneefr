@@ -63,11 +63,9 @@
             {{-- Display the found ads using a partial --}}
             @foreach ($ads->get() as $ad)
                 <div class="col-sm-4 col-md-3">
-                    @include('partials._card', [
-                        'item' => $ad,
-                        'gallerySize' => '260x200',
-                        'detail' => $request->get('sort', 'relevance')
-                    ])
+
+                    @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200', 'detail' => request('sort', 'relevance')])
+
                 </div>
             @endforeach
 
