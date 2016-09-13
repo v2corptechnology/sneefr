@@ -27,9 +27,12 @@
   z-index: 2;
 }
 
-.avatar__image {
+.avatar__image,
+.card__image {
   max-width: 100%;
 }
+
+.card__image--hidden {visibility: hidden;}
 
 .card__title {
   font-size: 1.4rem;

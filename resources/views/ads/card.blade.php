@@ -33,7 +33,7 @@ switch ($detail ?? 'date') {
     <figure class="card__gallery js-slider" id="{{ $galleryKey }}" data-slider-h="{{ $height }}"
             title="{{ $ad->present()->title() }}" data-slider-target="#{{ $galleryKey }}">
         @foreach ($images as $i => $image)
-            <a href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
+            <a class="{{ !$loop->first ? 'hidden' : '' }}" href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
                 <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
                      {{-- srcset="{{ $images2x[$loop->index] }} 2x" --}}
