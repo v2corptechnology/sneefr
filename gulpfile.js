@@ -47,13 +47,6 @@ elixir(mix => {
 
     ], 'public/js/all.js');
 
-    // Dashboard
-    mix.scripts([
-            path_to_modules+'ideal-image-slider/ideal-image-slider.min.js',
-            'sneefr.dashboard.js'],
-        'public/js/sneefr.dashboard.js'
-    );
-
     // Validation on-the-fly of forms
     mix.scripts([
             path_to_modules+'jquery-validation/dist/jquery.validate.js',
@@ -99,13 +92,18 @@ elixir(mix => {
     // Auto Complete
     mix.scripts(['sneefr.autocomplete.js'], 'public/js/sneefr.autocomplete.js');
 
+    // Sliders
+    mix.scripts([
+        path_to_modules+'ideal-image-slider/ideal-image-slider.min.js',
+        'sneefr.slider.js'
+    ], 'public/js/sneefr.slider.js');
+
     // Cache buster
     mix.version([
         'css/all.css',
         'css/sneefr.login.css',
         'css/sneefr.pricing.css',
         'js/all.js',
-        'js/sneefr.dashboard.js',
         'js/sneefr.autovalidate.js',
         'js/sneefr.ad.js',
         'js/sneefr.ad_edition.js',
@@ -115,10 +113,7 @@ elixir(mix => {
         'js/sneefr.like.js',
         'js/sneefr.auto-navigate.js',
         'js/sneefr.messages.js',
-        'js/sneefr.autocomplete.js'
+        'js/sneefr.autocomplete.js',
+        'js/sneefr.slider.js'
     ]);
-
-    mix.browserSync({
-        proxy: 'sneefr.dev'
-    });
 });

@@ -6,7 +6,8 @@ $gallerySize = $gallerySize ?? '360x250';
 // Extract width and height from given size
 list($width, $height) = explode('x', $gallerySize);
 
-$images = $ad->images($gallerySize ?? '360x250', true);
+$images = $ad->images($gallerySize, true);
+$images2x = $ad->images($gallerySize . '@2x', true);
 
 switch ($detail ?? 'date') {
     case 'proximity':
@@ -32,9 +33,11 @@ switch ($detail ?? 'date') {
     <figure class="card__gallery js-slider" id="{{ $galleryKey }}" data-slider-h="{{ $height }}"
             title="{{ $ad->present()->title() }}" data-slider-target="#{{ $galleryKey }}">
         @foreach ($images as $i => $image)
-            <a href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
-                <img class="avatar__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
+            <a class="{{ !$loop->first ? 'hidden' : '' }}" href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
+                <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
+                     {{-- data-src-2x="{{ $images2x[$loop->index] }}"
+                     srcset="{{ $images2x[$loop->index] }} 2x" --}}
                      height="{{ $height }}" itemprop="image">
             </a>
         @endforeach

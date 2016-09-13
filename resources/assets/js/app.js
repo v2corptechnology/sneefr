@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,19 +42,6 @@ $(function () {
     });
 
     TimeagoWidget.init();
-
-    // Image sliders
-    var sliders = document.querySelectorAll('.js-slider');
-    if (sliders) {
-        for (var i = sliders.length - 1; i >= 0; i--) {
-            new IdealImageSlider.Slider({
-                selector: sliders[i].getAttribute('data-slider-target'),
-                height: parseInt(sliders[i].getAttribute('data-slider-h')),
-                transitionDuration: 400,
-                keyboardNav: false
-            });
-        }
-    }
 
     // remove FB ugly hash
     if (window.location.hash == '#_=_') {

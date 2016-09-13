@@ -7,7 +7,7 @@
 @endif
 
 @push('footer-js')
-    <script src="//rawgit.com/gilbitron/Ideal-Image-Slider/master/ideal-image-slider.min.js"></script>
+    <script src="{{ elixir('js/sneefr.slider.js') }}"></script>
 @endpush
 
 @section('content')
@@ -63,24 +63,19 @@
             {{-- Display the found ads using a partial --}}
             @foreach ($ads->get() as $ad)
                 <div class="col-sm-4 col-md-3">
-                    @include('partials._card', [
-                        'item' => $ad,
-                        'gallerySize' => '260x200',
-                        'detail' => $request->get('sort', 'relevance')
-                    ])
+
+                    @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200', 'detail' => request('sort', 'relevance')])
+
                 </div>
             @endforeach
 
         @elseif ($type == 'shop')
 
-            <!-- Display the found shops  -->
             @foreach ($shops as $shop)
                 <div class="col-sm-4 col-md-3">
-                    @include('partials._card', [
-                        'item' => $shop,
-                        'gallerySize' => '260x200',
-                        'modifiers' => 'card--center'
-                    ])
+
+                    @include('shops.card', ['shop' => $shop, 'coverSize' => '260x200', 'classes' => 'card--center'])
+
                 </div>
             @endforeach
 
