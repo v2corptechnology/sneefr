@@ -6,7 +6,8 @@ $gallerySize = $gallerySize ?? '360x250';
 // Extract width and height from given size
 list($width, $height) = explode('x', $gallerySize);
 
-$images = $ad->images($gallerySize ?? '360x250', true);
+$images = $ad->images($gallerySize, true);
+$images2x = $ad->images($gallerySize . '@2x', true);
 
 switch ($detail ?? 'date') {
     case 'proximity':
@@ -35,6 +36,7 @@ switch ($detail ?? 'date') {
             <a href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
                 <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
+                     {{-- srcset="{{ $images2x[$loop->index] }} 2x" --}}
                      height="{{ $height }}" itemprop="image">
             </a>
         @endforeach
