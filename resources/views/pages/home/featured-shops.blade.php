@@ -10,11 +10,9 @@
     <ol class="best-of__list">
         @foreach ($shops as $shop)
             <li class="best-of__list-item">
-                @include('partials._card', [
-                    'item' => $shop,
-                    'gallerySize' => '360x120',
-                    'modifiers' => 'card--center'
-                ])
+
+                @include('shops.card', ['shop' => $shop, 'coverSize' => '360x120', 'classes' => 'card--center'])
+
             </li>
         @endforeach
     </ol>
