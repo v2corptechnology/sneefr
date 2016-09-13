@@ -33,7 +33,7 @@ switch ($detail ?? 'date') {
             title="{{ $ad->present()->title() }}" data-slider-target="#{{ $galleryKey }}">
         @foreach ($images as $i => $image)
             <a href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
-                <img class="avatar__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
+                <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
                      height="{{ $height }}" itemprop="image">
             </a>
