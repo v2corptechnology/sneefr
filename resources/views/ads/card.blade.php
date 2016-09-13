@@ -36,7 +36,8 @@ switch ($detail ?? 'date') {
             <a class="{{ !$loop->first ? 'hidden' : '' }}" href="{{ route('ad.show', $ad) }}" title="{{ $ad->present()->title() }}">
                 <img class="card__image" {{ !$loop->first ? 'data-' : null }}src="{{ $image }}"
                      alt="{{ $ad->present()->title() }}" width="{{ $width }}"
-                     {{-- srcset="{{ $images2x[$loop->index] }} 2x" --}}
+                     {{-- data-src-2x="{{ $images2x[$loop->index] }}"
+                     srcset="{{ $images2x[$loop->index] }} 2x" --}}
                      height="{{ $height }}" itemprop="image">
             </a>
         @endforeach

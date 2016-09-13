@@ -7,7 +7,7 @@
 @endif
 
 @push('footer-js')
-    <script src="//rawgit.com/gilbitron/Ideal-Image-Slider/master/ideal-image-slider.min.js"></script>
+    <script src="{{ elixir('js/sneefr.slider.js') }}"></script>
 @endpush
 
 @section('content')
