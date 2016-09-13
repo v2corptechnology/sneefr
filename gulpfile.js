@@ -117,8 +117,4 @@ elixir(mix => {
         'js/sneefr.messages.js',
         'js/sneefr.autocomplete.js'
     ]);
-
-    mix.browserSync({
-        proxy: 'sneefr.dev'
-    });
 });
