@@ -23,6 +23,7 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToBuyer::class,
             \Sneefr\Listeners\AdWasPurchased\RemoveFromDiscussion::class,
             \Sneefr\Listeners\AdWasPurchased\ForgetAboutThisAd::class,
+            \Sneefr\Listeners\AdWasPurchased\UpdateStock::class,
             \Sneefr\Listeners\AdWasPurchased\StoreSuccessfulDealConnections::class,
             \Sneefr\Listeners\AdWasPurchased\NotifyDealers::class,
             \Sneefr\Listeners\AdWasPurchased\StoreCharge::class,
