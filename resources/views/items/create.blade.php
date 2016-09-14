@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-6">
 
-            <form class="form2 js-auto-validate" action="{{ route('ad.store') }}" method="POST">
+            <form class="form2 js-auto-validate" action="{{ route('items.store') }}" method="POST">
                 {!! csrf_field() !!}
                 <header class="hero">
                     <h1 class="hero__title">

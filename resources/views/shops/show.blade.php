@@ -37,7 +37,7 @@
                     <p class="bg-info text-info">
                         @lang('shop.ad.empty_text_for_owner', ['name' => $shop->getName() ])
                     </p>
-                    <a class="btn btn-primary" href="{{ route('ad.create') }}"
+                    <a class="btn btn-primary" href="{{ route('items.create') }}"
                        title="@lang('shop.ads.btn_create_first_ad_title')">@lang('shop.ads.btn_create_first_ad')</a>
                 @else
                     <p class="text-muted">

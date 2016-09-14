@@ -183,7 +183,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Follows
     Route::resource('follows', 'FollowsController', ['only' => ['store', 'destroy']]);
     // Items
-    Route::resource('items', 'ItemsController', ['only' => ['create']]);
+    Route::resource('items', 'ItemsController', ['only' => ['create', 'store']]);
     // Likes
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Messages

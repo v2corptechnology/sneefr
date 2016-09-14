@@ -21,7 +21,7 @@
                     <a class="btn btn-default" style="border-radius:2px; text-transform: lowercase; font-variant: small-caps" href="{{ route('login') }}"
                        title="@lang('login.btn_login_title')">@lang('login.btn_login')</a>
                     <a class="btn btn-primary btn-primary2"
-                       href="{{ route('ad.create') }}"
+                       href="{{ route('items.create') }}"
                        title="@lang('login.btn_add_title')">@lang('login.btn_add')</a>
                 </div>
                 <div class="navbar__links visible-xs-inline-block">

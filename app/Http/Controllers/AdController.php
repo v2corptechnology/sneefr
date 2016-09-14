@@ -152,7 +152,7 @@ class AdController extends Controller
         $this->dispatch(new DeleteAd($adId));
 
         return redirect()->home()
-            ->with('success', trans('feedback.ad_delete_success', ['url' => route('ad.create')]));
+            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
     }
 
     /**
