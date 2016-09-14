@@ -56,11 +56,15 @@
 
         .ad__condition {
             color: #F5A623;
-            display: block;
+            display: inline-block;
             font-style: normal;
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 1rem;
+        }
+
+        .ad__stock {
+            display: inline-block;
         }
 
         /* TODO: change opacity to rgba */
@@ -283,6 +287,10 @@
                             <em class="ad__condition">
                                 {{ $ad->present()->condition() }}
                             </em>
+
+                            <span class="ad__stock text-muted">
+                                &bull; @choice('ad.show.stock', $ad->stock->remaining, ['nb' => $ad->stock->remaining])
+                            </span>
 
                             {{-- Ad geolocation--}}
                             <span class="ad__location">
