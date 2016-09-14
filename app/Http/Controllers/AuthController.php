@@ -105,6 +105,10 @@ class AuthController extends Controller
         // us access to all the scopes we required. Great!
         $user = User::register($this->connector->getProfile());
 
+        if(!$user) {
+            return redirect('/login')->withError(trans('login.facebook_email_exist'));
+        }
+
         // Log in the user
         \Auth::login($user, true);
 
