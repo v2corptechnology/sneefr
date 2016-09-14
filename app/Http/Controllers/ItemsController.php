@@ -3,6 +3,7 @@
 namespace Sneefr\Http\Controllers;
 
 use Sneefr\Http\Requests;
+use Sneefr\Models\Category;
 
 class ItemsController extends Controller
 {
@@ -11,5 +12,8 @@ class ItemsController extends Controller
      */
     public function create()
     {
+        $categories = Category::getTree();
+
+        return view('ad.create', compact('categories'));
     }
 }
