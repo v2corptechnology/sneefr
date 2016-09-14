@@ -28,4 +28,6 @@ return [
     'connect_title'       => "Log in with your Facebook account",
     'discover'            => "Explore",
     'discover_title'      => "Trending shops, places and ads",
+    'register'            => "Register",
+    'register_title'      => "",
 ];

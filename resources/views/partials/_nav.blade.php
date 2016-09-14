@@ -21,8 +21,11 @@
             @if (!auth()->check())
                 <div class="pull-right visible-xs">
                     <div class="navbar-btn navbar-right">
-                        <a href="{{ route('login') }}" title="@lang('navigation.connect_title')" class="btn btn-primary btn-sm">
-                            <i class="fa fa-facebook"></i> @lang('navigation.connect')
+                        <a href="{{ url('login') }}" title="@lang('navigation.connect_title')" class="btn btn-primary btn-sm">
+                            @lang('navigation.connect')
+                        </a>
+                        <a href="{{ url('register') }}" title="@lang('navigation.register_title')" class="btn btn-default btn-sm">
+                            @lang('navigation.register')
                         </a>
                     </div>
                 </div>
@@ -209,8 +212,11 @@
         @else
             <div class="navbar-right hidden-xs navbar-login-btn">
                 <div class="navbar-btn hidden-xs">
-                    <a href="{{ route('login') }}" title="@lang('navigation.connect_title')" class="btn btn-primary btn-sm">
-                        <i class="fa fa-facebook"></i> @lang('navigation.connect')
+                    <a href="{{ url('login') }}" title="@lang('navigation.connect_title')" class="btn btn-primary btn-sm">
+                        @lang('navigation.connect')
+                    </a>
+                    <a href="{{ url('register') }}" title="@lang('navigation.register_title')" class="btn btn-default btn-sm">
+                        @lang('navigation.register')
                     </a>
                 </div>
             </div>

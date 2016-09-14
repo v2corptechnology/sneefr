@@ -18,7 +18,7 @@
                     <a class="btn btn-link navbar__cta"
                        href="{{ route('pricing') }}"
                        title="@lang('login.btn_pro_title')">@lang('login.btn_pro')</a>
-                    <a class="btn btn-default" style="border-radius:2px; text-transform: lowercase; font-variant: small-caps" href="{{ route('login') }}"
+                    <a class="btn btn-default" style="border-radius:2px; text-transform: lowercase; font-variant: small-caps" href="{{ url('/login') }}"
                        title="@lang('login.btn_login_title')">@lang('login.btn_login')</a>
                     <a class="btn btn-primary btn-primary2"
                        href="{{ route('ad.create') }}"
