@@ -35,6 +35,7 @@ return [
         'category_label'                 => "Category",
         'category_placeholder'           => "Choose",
         'condition_label'                => "Condition",
+        'quantity_label'                 => "Quantity",
         'geolocation_title'              => "Location",
         'geolocation_error'              => "Make sure to allow the geolocation request in the <a href=\"https://www.google.fr/search?q=comment+activer+la+localisation\" title=\"How to allow geolocation\">zone in your browser</a>?",
         'description_label'              => "Description",

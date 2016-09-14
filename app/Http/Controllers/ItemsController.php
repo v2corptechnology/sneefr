@@ -14,6 +14,6 @@ class ItemsController extends Controller
     {
         $categories = Category::getTree();
 
-        return view('ad.create', compact('categories'));
+        return view('items.create', compact('categories'));
     }
 }
