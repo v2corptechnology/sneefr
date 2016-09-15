@@ -32,12 +32,6 @@ class ItemsController extends Controller
         // Store the ad
         $ad = Ad::create($request->all());
 
-        // Set the stock of this ad
-        $ad->stock()->save(new Stock([
-            'initial'   => $request->input('quantity'),
-            'remaining' => $request->input('quantity'),
-        ]));
-
         // Notify the ad has been created
         event(new AdWasPosted($ad));
 

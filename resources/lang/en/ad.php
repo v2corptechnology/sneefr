@@ -31,7 +31,6 @@ return [
 
     'masked_text'          => "[masked]",
     'gone_title'           => "This ad no longer exists",
-    'gone_sold_text'       => "This ad <strong>:title</strong> is sold but here is <a href=\":url\" title=\"Rechercher :title\">a search with similar objects</a>.",
     'gone_deleted_text'    => "This ad <strong>:title</strong> has been removed by its seller but here is  <a href=\":url\" title=\"Rechercher :title\">a search with similar objects</a>.",
     'should_connect_first' => "<a href=\":url\" title=\"It's easy and takes less than 5 seconds!\">Login</a> to see if you have people in common with this user",
     'locked_for_edit'      => "This ad hasn't been confirmed yet and is therefore locked for edition.",

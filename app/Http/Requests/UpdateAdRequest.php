@@ -69,9 +69,6 @@ namespace Sneefr\Http\Requests {
                 }
             }
 
-            // Boolean needed
-            $input['is_hidden_from_friends'] = $this->has('is_hidden_from_friends');
-
             $this->replace($input);
 
             return $this->all();

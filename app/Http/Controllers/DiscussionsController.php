@@ -159,9 +159,6 @@ class DiscussionsController extends Controller
         $this->authorize('show-discussion', $discussion);
         $this->authorize('update', $ad);
 
-        // Lock the ad for this user
-        $ad = $ad->lockFor($buyerId);
-
         // Discuss this ad if not yet in discussion
         $discussion->discussAd($ad->getId());
 
@@ -171,9 +168,8 @@ class DiscussionsController extends Controller
         }else{
             $finalAmount = $ad->price();
         }
-        
-        $isSecurePayment = $request->get('secure') === "true";
-        $ad->fill(['final_amount' => $finalAmount, 'is_secure_payment' => $isSecurePayment]);
+
+        $ad->fill(['final_amount' => $finalAmount]);
         $ad->save();
 
         event(new AdWasUpdated($ad));

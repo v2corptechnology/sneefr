@@ -38,11 +38,6 @@ class Kernel extends ConsoleKernel
                 ->dispatch(app('Sneefr\Jobs\SendExpiringLocks'));
         })->everyTenMinutes();
 
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\RemoveExpiredLocks'));
-        })->everyTenMinutes();
-
         // Calls made every hour
 
         $schedule->call(function () {

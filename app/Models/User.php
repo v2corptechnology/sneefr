@@ -213,16 +213,6 @@ class User extends Model implements AuthenticatableContract,
         return $query->where('id', '>', 4);
     }
 
-    public function scopeWithoutSilent($query)
-    {
-        $query->where('is_hidden_from_friends', 0);
-    }
-
-    public function scopeWithSilent($query)
-    {
-        $query->where('is_hidden_from_friends', 1);
-    }
-
     public function likes()
     {
         return $this->hasMany(Like::class);

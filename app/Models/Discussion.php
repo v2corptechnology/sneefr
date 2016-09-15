@@ -205,7 +205,7 @@ class Discussion extends Model
     public function myUnlockedAds()
     {
         return $this->ads()->get()->filter(function($discussedAd) {
-            return $discussedAd->isMine() && ! $discussedAd->isLocked();
+            return $discussedAd->isMine();
         });
     }
 

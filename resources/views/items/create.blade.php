@@ -46,26 +46,11 @@
             <form class="form2 js-auto-validate" action="{{ route('items.store') }}" method="POST">
                 {!! csrf_field() !!}
                 <header class="hero">
+
                     <h1 class="hero__title">
                         @lang('ad_form.create.details_header')
-
-                        {{-- Toggle to hide (or unhide) the ad from friends. --}}
-                        <?php $isHidden = old('is_hidden_from_friends', false);?>
-                        {{--
-                        <span class="pull-right" data-toggle="buttons">
-                            <label class="btn btn-default btn-discreet @if($isHidden) active @endif"
-                                   title="@lang('ad_form.create.private_ad_button_title')">
-                                <input class="js-hidden-from-friends"
-                                       type="checkbox" name="is_hidden_from_friends"
-                                       @if($isHidden) checked @endif
-                                       autocomplete="off">
-                                <i class="js-hidden-from-friends-icon fa @if($isHidden) fa-lock @else fa-unlock-alt @endif"></i>
-                            </label>
-                        </span>--}}
                     </h1>
-                    <p class="bg-danger text-danger js-hidden-from-friends-danger @if(!$isHidden) hidden @endif">
-                        @lang('ad_form.create.private_ad_warning')
-                    </p>
+
                     <p class="hero__tagline">@lang('ad_form.create.details_sub_heading')</p>
 
                 </header>
