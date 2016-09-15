@@ -5,23 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'transactions';
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
      * The attributes we can mass assign.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'ad_id', 'data'];
+    protected $fillable = ['ad_id', 'buyer_id', 'seller_id', 'stripe_data', 'details'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['stripe_data' => 'array', 'details' => 'array'];
 }
