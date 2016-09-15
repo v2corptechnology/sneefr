@@ -46,4 +46,7 @@ return [
     'privacy'                => "Privacy",
     'help_title'             => "Need help? Click here",
     'help'                   => "Help",
+    'login_page_title'       => "Login",
+    'register_page_title'    => "Register",
+    'reset_page_title'       => "Reset password",
 ];

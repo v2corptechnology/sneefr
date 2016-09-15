@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', trans('login.reset_page_title'))
+
 <!-- Main Content -->
 @section('content')
 <div class="container">

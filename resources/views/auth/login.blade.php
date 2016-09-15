@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', trans('login.login_page_title'))
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -58,7 +60,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-default btn-block">
-                                    Login
+                                    @lang('button.login')
                                 </button>
                             </div>
 
@@ -66,12 +68,12 @@
                                <div class="row">
                                    <div class="checkbox col-sm-6">
                                        <label>
-                                           <input type="checkbox" name="remember"> Remember Me
+                                           <input type="checkbox" name="remember"> @lang('button.remember_me')
                                        </label>
                                    </div>
                                    <div class="col-sm-6">
                                        <a class="btn btn-link pull-right" href="{{ url('/password/reset') }}">
-                                           Forgot Your Password?
+                                           @lang('button.forgot_password')
                                        </a>
                                    </div>
                                </div>
