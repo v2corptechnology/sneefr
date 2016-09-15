@@ -261,11 +261,6 @@ class Ad extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function soldTo()
-    {
-        return $this->belongsTo(User::class, 'sold_to');
-    }
-
     public function actions()
     {
         return $this->morphMany('Action', 'actionable');
