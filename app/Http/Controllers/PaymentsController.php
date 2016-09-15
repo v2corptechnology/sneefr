@@ -9,7 +9,6 @@ use Sneefr\Jobs\SendDealCancelledToSeller;
 use Sneefr\Jobs\SendFinishedDealToBuyer;
 use Sneefr\Jobs\SendFinishedDealToSeller;
 use Sneefr\Jobs\StoreSuccessfulTransaction;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\Ad;
 use Sneefr\Services\StripeBilling;
 
@@ -95,8 +94,6 @@ class PaymentsController extends Controller
 
             auth()->user()->payment = $resp;
             auth()->user()->save();
-
-            $this->dispatch(new UpdateRank(auth()->user()));
 
             return redirect()->route('profiles.settings.edit', auth()->user())
                 ->with('success', 'feedback.payment_connected');

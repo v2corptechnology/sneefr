@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Sneefr\Contracts\BillingInterface;
 use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\Notification;
 use Sneefr\Models\User;
@@ -368,9 +367,6 @@ class ProfilesController extends Controller
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
         }
-        
-        // Update gamification objectives
-        $this->dispatch(new UpdateRank(auth()->id()));
 
         return redirect()->back();
     }
@@ -582,9 +578,6 @@ class ProfilesController extends Controller
         $user->email = $data['email'];
         $user->email_verified = true;
         $user->save();
-
-        // Update the rank of the user
-        $this->dispatch(new UpdateRank($user));
 
         return redirect()->route('home')->with('success', trans('feedback.email_validation_success'));
     }

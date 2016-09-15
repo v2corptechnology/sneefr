@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Session\Store as Session;
 use Sneefr\Events\AdWasPosted;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Repositories\User\UserRepository;
 
 class CopyAdLocationToProfile
@@ -49,9 +48,6 @@ class CopyAdLocationToProfile
             'lat'      => $event->ad->latitude(),
             'long'     => $event->ad->longitude(),
         ]);
-
-        // Update gamification objectives
-        $this->dispatch(new UpdateRank(auth()->id()));
 
         $this->session->flash('success', trans(
             'feedback.copied_ad_location_to_your_profile',

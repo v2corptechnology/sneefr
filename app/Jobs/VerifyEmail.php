@@ -44,9 +44,6 @@ class VerifyEmail extends Job implements ShouldQueue
 
         // Send the validation email
         $this->sendVerificationEmail($this->user);
-
-        // Update the rank of the user
-        $dispatcher->dispatch(new UpdateRank($this->user));
     }
 
     /**

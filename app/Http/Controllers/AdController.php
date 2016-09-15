@@ -7,7 +7,6 @@ use Sneefr\Events\AdWasPosted;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Jobs\DeleteAd;
 use Sneefr\Jobs\SaveAdView;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Referral;
 use Sneefr\Models\Shares;

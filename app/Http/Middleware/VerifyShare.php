@@ -2,7 +2,6 @@
 
 use Closure;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\Share;
 
 class VerifyShare
@@ -27,9 +26,6 @@ class VerifyShare
                 'ad_id'   => $request->get('ad'),
                 'user_id' => auth()->id(),
             ]);
-
-            // Hey gamification, do your calculations
-            $this->dispatch(new UpdateRank(auth()->id()));
         }
 
         return $next($request);
