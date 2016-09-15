@@ -2,6 +2,7 @@
 
 namespace Sneefr\Http\Controllers;
 
+use Sneefr\Events\AdWasPosted;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
