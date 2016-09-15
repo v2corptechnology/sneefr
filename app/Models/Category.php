@@ -26,4 +26,27 @@ class Category extends Model
      * @var array
      */
     protected $fillable = ['name', 'child_of'];
+
+    public static function getTree()
+    {
+        $all = self::all()->pluck('child_of', 'id')->map(function ($item, $key) {
+            return [
+                'id'       => $key,
+                'child_of' => (int) $item,
+                'name'     => trans("category.{$key}"),
+            ];
+        })->groupBy(function ($item, $key) {
+            return $item['child_of'];
+        });
+
+        return $all->get(0)->mapWithKeys(function ($item) {
+            return [$item['name'] => $item['id']];
+        })->sortBy(function($item, $key) {
+            return $key;
+        })->map(function($item, $key) use ($all) {
+            return $all->get($item)->sortBy('name')->pluck('name', 'id');
+        })
+            ->prepend(trans('ad_form.create.category_placeholder'))
+            ->toArray();
+    }
 }

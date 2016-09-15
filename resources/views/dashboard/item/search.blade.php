@@ -13,7 +13,7 @@ $headData = ['search' => $item->value->body()];
             @lang('dashboard.activity.search.body_alt')
         @else
             @lang('dashboard.activity.search.body', [
-                'link' => link_to_route('ad.create', trans('dashboard.activity.search.body_link'), ['title' => $item->value->body()])
+                'link' => link_to_route('items.create', trans('dashboard.activity.search.body_link'), ['title' => $item->value->body()])
             ])
         @endif
     </p>

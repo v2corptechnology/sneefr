@@ -6,7 +6,7 @@
         <p class="keypoint__text">@lang('login.particular_text')</p>
         <div class="keypoint__cta">
             <a class="btn btn-primary btn-primary2"
-               href="{{ route('ad.create') }}"
+               href="{{ route('items.create') }}"
                title="@lang('login.btn_particular_title')">@lang('login.btn_particular')</a>
         </div>
     </div>

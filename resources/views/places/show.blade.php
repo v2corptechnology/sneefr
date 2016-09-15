@@ -28,7 +28,7 @@
     <div class="row">
         @forelse($displayedAds as $ad)
             <div class="col-md-6">
-                @include('ad._ad', ['ad' => $ad])
+                @include('ads.card', ['ad' => $ad])
             </div>
         @empty
             <div class="col-md-12">

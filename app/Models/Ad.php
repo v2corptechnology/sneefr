@@ -282,6 +282,11 @@ class Ad extends Model
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function stock()
+    {
+        return $this->hasOne(Stock::class);
+    }
+
     public function notifications()
     {
         return $this->morphMany(Notification::class, 'notifiable');

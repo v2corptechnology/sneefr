@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-6">
 
-            <form class="form2 js-auto-validate" action="{{ route('ad.store') }}" method="POST">
+            <form class="form2 js-auto-validate" action="{{ route('items.store') }}" method="POST">
                 {!! csrf_field() !!}
                 <header class="hero">
                     <h1 class="hero__title">
@@ -71,7 +71,7 @@
                 </header>
 
                 <div class="box" style="margin-bottom: 1rem;">
-                    @include('ad._form', [
+                    @include('items.form', [
                         'buttonText'    => trans('ad_form.create.button_save'),
                         'shops'         => auth()->user()->shops,
                         'name'          => auth()->user()->present()->fullName(),
@@ -83,6 +83,8 @@
                         'location'      => old('location', auth()->user()->getLocation()),
                         'latitude'      => old('latitude', auth()->user()->getLatitude()),
                         'longitude'     => old('longitude', auth()->user()->getLongitude()),
+                        'lock_quantity' => false,
+                        'quantity' => old('quantity', 1),
                         'shop_id'     => old('shop_id', null),
                         // Todo: refactor please
                         'is_pickable'   => true,

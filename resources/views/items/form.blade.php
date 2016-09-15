@@ -92,7 +92,15 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label class="control-label" for="quantity">@lang('ad_form.create.quantity_label')</label>
+            <input class="form-control" type="number" name="quantity" min="1" max="100" value="{{ $quantity }}" required @if( $lock_quantity) disabled readonly @endif>
+        </div>
+    </div>
+
+    <div class="col-md-3">
         <div class="form-group {{ $errors->has('condition') ? ' has-error' : '' }}">
             <label class="control-label" for="condition_id">
                 @lang('ad_form.create.condition_label')
@@ -106,7 +114,7 @@
         </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="form-group location js-location-panel js-inject-geoloc {{ $errors->has('location') ? ' has-error' : '' }}">
             <label class="control-label" for="location">
                 @lang('ad_form.create.geolocation_title')

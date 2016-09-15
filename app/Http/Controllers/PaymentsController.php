@@ -49,18 +49,13 @@ class PaymentsController extends Controller
         // Is the current user authorized to buy this ad
         $this->authorize('buy', $ad);
 
-        // Charge accordingly only when secure payment is asked
-        if ($request->input('secure') == 'true') {
-            // Charge the user
-            $charge = $billing->charge($billing->generateChargeDetails($ad, $request));
-        }
+        // Charge the user
+        $charge = $billing->charge($billing->generateChargeDetails($ad, $request));
 
         // Let's say to everyone this ad was purchased
-        event(new AdWasPurchased($ad, auth()->user(), $request->all(), $charge ?? null));
+        event(new AdWasPurchased($ad, auth()->user(), $request->all(), $charge));
 
-        $successMessage = $ad->isInShop() ? trans('feedback.payment_success_shop') : trans('feedback.payment_success');
-
-        return redirect()->route('home')->with('success', $successMessage);
+        return redirect()->route('home')->with('success', trans('feedback.payment_success_shop'));
     }
 
     public function connect(Request $request)

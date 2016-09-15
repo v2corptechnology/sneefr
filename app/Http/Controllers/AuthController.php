@@ -39,7 +39,7 @@ class AuthController extends Controller
         ];
 
         if (! $randomAd) {
-            return('No ads yet, please <a href="' . route('ad.create') . '">create one</a>');
+            return('No ads yet, please <a href="' . route('items.create') . '">create one</a>');
         }
 
         return view('pages.home.index', compact('randomAd', 'topShops', 'highlighted'));

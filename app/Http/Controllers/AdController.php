@@ -44,53 +44,6 @@ class AdController extends Controller
     }
 
     /**
-     * Show the form for creating a new ad.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        if(auth()->user()->cannot('create', Ad::class))
-        {
-            return redirect()->route('shops.show', auth()->user()->shop)
-                             ->with('stripe_modal', true);
-        }
-
-        $categories = $this->getCategoryTree();
-
-        // TODO: retrieve temp images and display them in the form
-        return view('ad.create', compact('categories'));
-    }
-
-    /**
-     * Store a newly created ad in storage.
-     *
-     * @param \Sneefr\Http\Requests\CreateAdRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CreateAdRequest $request)
-    {
-        $this->authorize('create', Ad::class);
-
-        // Store the ad
-        $ad = Ad::create($request->all());
-
-        // Notify the ad has been created
-        event(new AdWasPosted($ad));
-
-        // Update gamification and rank
-        $this->dispatch(new UpdateRank(auth()->user()));
-
-        // Redirect when auto-sharing was checked
-        if ($request->input('auto_share')) {
-            return redirect()->route('ads.share', $ad);
-        }
-
-        return redirect()->route('ad.show', $ad);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
@@ -152,7 +105,7 @@ class AdController extends Controller
         $this->dispatch(new DeleteAd($adId));
 
         return redirect()->home()
-            ->with('success', trans('feedback.ad_delete_success', ['url' => route('ad.create')]));
+            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
     }
 
     /**

@@ -98,7 +98,7 @@
 
                 @if(auth()->user()->shop)
                     <li>
-                        <a href="{{ route('ad.create') }}" title="@lang('navigation.create_ad_title')"
+                        <a href="{{ route('items.create') }}" title="@lang('navigation.create_ad_title')"
                            class="menu-icon {{ setActive('ad.create', 'active') }}">
                             <i class="fa fa-plus-circle"></i>
                             @lang('navigation.create_ad')
