@@ -15,6 +15,11 @@ class ItemsController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->cannot('create', Ad::class)) {
+            return redirect()->route('shops.show', auth()->user()->shop)
+                ->with('stripe_modal', true);
+        }
+
         $categories = Category::getTree();
 
         return view('items.create', compact('categories'));
