@@ -8,32 +8,7 @@
     <script src="{{ elixir('js/sneefr.ad_edition.js') }}"></script>
 @endpush
 
-@unless ($shops->isEmpty())
-    <div class="form-group hidden">
-        <label class="control-label" for="shop_id">
-            @lang('ad_form.create.as_label')
-        </label>
-        <select class="form-control js-publish-as" name="shop_id" id="shop_id"
-                autocomplete="off">
-            {{--<option value=""
-                    data-location="{{ $location }}"
-                    data-latitude="{{ $latitude }}"
-                    data-longitude="{{ $longitude }}">
-                @lang('ad_form.create.as_default', ['name' => $name])
-            </option>--}}
-            @foreach ($shops as $shop)
-                <option value="{{ $shop->getId() }}" selected
-                        data-location="{{ $shop->getLocation() }}"
-                        data-latitude="{{ $shop->getLatitude() }}"
-                        data-longitude="{{ $shop->getLongitude() }}"
-                        @if($shop_id == $shop->getRouteKey()) selected @endif>
-                    {{ $shop->getName() }}
-                </option>
-            @endforeach
-        </select>
-        {!! $errors->first('shop_id', '<p class="help-block">:message</p>') !!}
-    </div>
-@endunless
+<input type="hidden" name="shop_id" value="{{ auth()->user()->shop->getId() }}">
 
 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
     <label class="control-label" for="title">
@@ -121,9 +96,9 @@
             </label>
             <div class="js-location-field-group">
                 @include('partials._geolocation_field', [
-                    'location'      => $location,
-                    'latitude'      => $latitude,
-                    'longitude'     => $longitude,
+                    'location'      => auth()->user()->shop->getLocation(),
+                    'latitude'      => auth()->user()->shop->getLatitude(),
+                    'longitude'     => auth()->user()->shop->getLongitude(),
                     'extraClasses'  => 'js-add-geocomplete js-add-geolocation',
                 ])
             </div>
@@ -134,51 +109,46 @@
     </div>
 </div>
 
+<div class="form-group js-delivery-options">
+    <label class="control-label" for="delivery">
+        @lang('ad_form.create.delivery_label')
+        <small class="text-muted">@lang('ad_form.create.delivery_label_tip')</small>
+    </label>
 
-@unless ($shops->isEmpty())
-
-    <div class="form-group js-delivery-options">
-        <label class="control-label" for="delivery">
-            @lang('ad_form.create.delivery_label')
-            <small class="text-muted">@lang('ad_form.create.delivery_label_tip')</small>
-        </label>
-
-        <div class="form-inline">
-            <div class="checkbox">
-                <label for="delivery_pick">
-                    <input name="delivery[]" id="delivery_pick" value="pick" type="checkbox" {{ $is_pickable === false ? null : 'checked' }} required aria-required="true" minlength="1">
-                    @lang('ad_form.create.delivery_at_shop')
-                </label>
-            </div>
+    <div class="form-inline">
+        <div class="checkbox">
+            <label for="delivery_pick">
+                <input name="delivery[]" id="delivery_pick" value="pick" type="checkbox" {{ $is_pickable === false ? null : 'checked' }} required aria-required="true" minlength="1">
+                @lang('ad_form.create.delivery_at_shop')
+            </label>
         </div>
-
-        <div class="form-inline">
-            <div class="checkbox">
-                <label for="delivery_us">
-                    <input name="delivery[]" id="delivery_us" value="us" type="checkbox" {{ $us_delivery ? 'checked' : null }} autocomplete="off">
-                    @lang('ad_form.create.delivery_us')
-                </label>
-                <input class="form-control input-sm" name="delivery_us_value" type="number" style="width:6rem" value="{{ $us_delivery ?? null }}" autocomplete="off">
-                @lang('ad_form.create.price_currency')
-            </div>
-        </div>
-
-        <div class="form-inline">
-            <div class="checkbox">
-                <label for="delivery_worldwide">
-                    <input name="delivery[]" id="delivery_worldwide" value="worldwide" type="checkbox" {{ $worldwide_delivery ? 'checked' : null }} autocomplete="off">
-                    @lang('ad_form.create.delivery_worldwide')
-                </label>
-                <input class="form-control input-sm" name="delivery_worldwide_value" type="number" style="width:6rem" value="{{ $worldwide_delivery ?? null }}" autocomplete="off">
-                @lang('ad_form.create.price_currency')
-            </div>
-        </div>
-
-        <input type="hidden" name="delivery_currency" value="@lang('ad_form.create.price_currency')">
-
     </div>
 
-@endunless
+    <div class="form-inline">
+        <div class="checkbox">
+            <label for="delivery_us">
+                <input name="delivery[]" id="delivery_us" value="us" type="checkbox" {{ $us_delivery ? 'checked' : null }} autocomplete="off">
+                @lang('ad_form.create.delivery_us')
+            </label>
+            <input class="form-control input-sm" name="delivery_us_value" type="number" style="width:6rem" value="{{ $us_delivery ?? null }}" autocomplete="off">
+            @lang('ad_form.create.price_currency')
+        </div>
+    </div>
+
+    <div class="form-inline">
+        <div class="checkbox">
+            <label for="delivery_worldwide">
+                <input name="delivery[]" id="delivery_worldwide" value="worldwide" type="checkbox" {{ $worldwide_delivery ? 'checked' : null }} autocomplete="off">
+                @lang('ad_form.create.delivery_worldwide')
+            </label>
+            <input class="form-control input-sm" name="delivery_worldwide_value" type="number" style="width:6rem" value="{{ $worldwide_delivery ?? null }}" autocomplete="off">
+            @lang('ad_form.create.price_currency')
+        </div>
+    </div>
+
+    <input type="hidden" name="delivery_currency" value="@lang('ad_form.create.price_currency')">
+
+</div>
 
 @if(!isset($hide_share))
     <div class="row">
