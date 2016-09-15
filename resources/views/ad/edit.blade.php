@@ -79,7 +79,7 @@
                         'longitude'     => old('longitude', $ad->longitude()),
                         'shop_id'       => old('shop_id', $ad->getShopId()),
                         'lock_quantity' => true,
-                        'quantity' => $ad->stock->initial,
+                        'quantity' => $ad->initial_quantity,
                         'hide_share'    => true,
                         // Todo: refactor please
                         'is_pickable'   => $ad->delivery->isPickable(),

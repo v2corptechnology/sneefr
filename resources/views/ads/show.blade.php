@@ -289,7 +289,7 @@
                             </em>
 
                             <span class="ad__stock text-muted">
-                                &bull; @choice('ad.show.stock', $ad->stock->remaining, ['nb' => $ad->stock->remaining])
+                                &bull; @choice('ad.show.stock', $ad->remaining_quantity, ['nb' => $ad->remaining_quantity])
                             </span>
 
                             {{-- Ad geolocation--}}

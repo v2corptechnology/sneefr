@@ -20,6 +20,7 @@ namespace Sneefr\Http\Requests {
                 'latitude'     => 'required|numeric',
                 'longitude'    => 'required|numeric',
                 'shop_id'      => 'sometimes|required|numeric|exists:shops,id,deleted_at,NULL',
+                'quantity'     => 'required|numeric|between:1,100',
                 'amount'       => [
                     'required',
                     'min:0.1',
@@ -67,6 +68,8 @@ namespace Sneefr\Http\Requests {
             // Fill in missing attributes for the ad
             $input['user_id'] = auth()->id();
             $input['currency'] =  trans('common.currency');
+            $input['remaining_quantity'] = $this->get('quantity');
+            $input['initial_quantity'] = $this->get('quantity');
 
             // Ad's cover should not be predicable
             shuffle($input['images']);

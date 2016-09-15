@@ -17,6 +17,10 @@ class CreateAdsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->unsignedInteger('shop_id')->nullable();
+            if(env('DB_CONNECTION') == 'sqlite') {
+                $table->unsignedInteger('initial_quantity');
+                $table->unsignedInteger('remaining_quantity');
+            }
             $table->integer('category_id')->unsigned();
             $table->string('title');
             $table->text('description')->nullable();

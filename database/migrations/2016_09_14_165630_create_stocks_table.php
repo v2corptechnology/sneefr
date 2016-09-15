@@ -13,13 +13,15 @@ class CreateStocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('stocks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('ad_id')->references('id')->on('ads');
-            $table->unsignedInteger('initial');
-            $table->unsignedInteger('remaining');
-            $table->timestamps();
-        });
+        if(!env('DB_CONNECTION') == 'sqlite') {
+            Schema::create('stocks', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('ad_id')->references('id')->on('ads');
+                $table->unsignedInteger('initial');
+                $table->unsignedInteger('remaining');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -29,6 +31,8 @@ class CreateStocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stocks');
+        if(!env('DB_CONNECTION') == 'sqlite') {
+            Schema::dropIfExists('stocks');
+        }
     }
 }
