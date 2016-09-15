@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->boolean('email_verified')->default(false);
-            $table->bigInteger('facebook_id')->unsigned();
+            $table->bigInteger('facebook_id')->unsigned()->nullable();
             $table->string('facebook_email')->unique()->nullable();
             $table->string('surname')->nullable();
             $table->string('given_name')->nullable();
