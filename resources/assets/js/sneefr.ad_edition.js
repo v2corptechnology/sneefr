@@ -1,12 +1,5 @@
 $(function(){
     if (document.getElementsByClassName('ad-create').length) {
-        // When changing the lock, toggle the warning
-        $('.js-hidden-from-friends').on('change', function (event) {
-            event.preventDefault();
-            $('.js-hidden-from-friends-icon').toggleClass('fa-unlock-alt fa-lock');
-            $('.js-hidden-from-friends-danger').toggleClass('hidden');
-        });
-
         // When publishing as a shop, display options
         $('.js-publish-as').on('change', function (event) {
             this.value ? displayShopOptions() : hideShopOptions();

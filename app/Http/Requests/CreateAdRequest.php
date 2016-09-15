@@ -61,9 +61,6 @@ namespace Sneefr\Http\Requests {
             // chnage amount to cents
             $input['amount'] = $this->get('amount') * 100;
 
-            // Boolean needed
-            $input['is_hidden_from_friends'] = $this->has('is_hidden_from_friends');
-
             // Normalize delivery input
             $input['delivery'] = Ad::normalizeDeliveryOptions($this);
 

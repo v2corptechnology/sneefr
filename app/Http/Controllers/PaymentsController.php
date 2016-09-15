@@ -122,9 +122,6 @@ class PaymentsController extends Controller
         // Is the current user authorized to buy this ad
         $this->authorize('buy', $ad);
 
-        // Unlock the ad
-        $ad->unlock();
-
         // Send a special notification
         $this->dispatch(new Notify($ad, Notify::SPECIAL));
 

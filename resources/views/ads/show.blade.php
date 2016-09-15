@@ -336,33 +336,21 @@
 
                         {{-- Show administration buttons --}}
                         @if ($ad->isMine() || (auth()->check() && auth()->user()->isAdmin()))
-                            @if ($ad->isLocked())
-                                <p class="bg-warning text-warning text-center">
-                                    @lang('ad.locked_for_edit')
-                                </p>
-                            @else
-                                <a class="btn btn-default btn-default2" href="{{ route('ads.chooseBuyer', $ad->getSlug()) }}"
-                                   title="@lang('ad.show.btn_remove_title')">
-                                    @lang('ad.show.btn_remove')
-                                </a>
-                                <a class="btn btn-default btn-default2" href="{{ route('ad.edit', $ad->getId()) }}"
-                                   title="@lang('ad.show.btn_edit_title')">
-                                    @lang('ad.show.btn_edit')
-                                </a>
-                            @endif
+                            <a class="btn btn-default btn-default2" href="{{ route('ads.chooseBuyer', $ad->getSlug()) }}"
+                               title="@lang('ad.show.btn_remove_title')">
+                                @lang('ad.show.btn_remove')
+                            </a>
+                            <a class="btn btn-default btn-default2" href="{{ route('ad.edit', $ad->getId()) }}"
+                               title="@lang('ad.show.btn_edit_title')">
+                                @lang('ad.show.btn_edit')
+                            </a>
                         @endif
 
                         <div class="social-interactions js-activity">
-                            {{-- Show warning when ad is private --}}
-                            @if ($ad->isHiddenFromFriends())
-                                <p>@lang('ad.show.hidden_from_friends')</p>
-                            @else
-                                {{-- Include ‘Like’ button --}}
-                                @include('widgets.like', ['item' => $ad])
+                            {{-- Include ‘Like’ button --}}
+                            @include('widgets.like', ['item' => $ad])
 
-                                @include('partials._share_button', ['ad' => $ad])
-
-                            @endif
+                            @include('partials._share_button', ['ad' => $ad])
                         </div>{{-- .social-interactions --}}
                     </div>{{-- .ad__actions --}}
                 </div>{{-- .col-md-3 --}}

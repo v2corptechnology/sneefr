@@ -78,10 +78,8 @@ class Ad extends Model
         'images',
         'locked_for',
         'final_amount',
-        'is_secure_payment',
         'sold_to',
         'condition_id',
-        'is_hidden_from_friends',
         'created_at',
         'updated_at',
     ];
@@ -99,7 +97,6 @@ class Ad extends Model
      * @var array
      */
     protected $casts = [
-        'is_secure_payment' => 'boolean',
         'images'            => 'array',
         'transaction'       => 'array',
         'amount'            => 'float',
@@ -342,18 +339,6 @@ class Ad extends Model
     }
 
     /**
-     * Display only ads that can be v.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query
-     *
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function scopeDisplayable($query)
-    {
-        return $query->where('is_locked', 0)->whereNull('sold_to');
-    }
-
-    /**
      * Scope to order by random.
      *
      * @param  \Illuminate\Database\Query\Builder  $query
@@ -386,26 +371,6 @@ class Ad extends Model
     public function getTitleAttribute()
     {
         return htmlspecialchars($this->attributes['title'], ENT_QUOTES, false);
-    }
-
-    /**
-     * Accessor indicating if this ad is sold to someone
-     *
-     * @return bool
-     */
-    public function getIsSoldAttribute()
-    {
-        return (bool) $this->sold_to && $this->deleted_at;
-    }
-
-    /**
-     * Accessor indicating if this ad is deleted without being sold
-     *
-     * @return bool
-     */
-    public function getIsDeletedAttribute()
-    {
-        return (bool) ! $this->sold_to && $this->deleted_at;
     }
 
     /**
@@ -600,90 +565,6 @@ class Ad extends Model
         }
 
         return $images;
-    }
-
-    /**
-     * Is this ad locked ?
-     *
-     * @return bool
-     */
-    public function isLocked() : bool
-    {
-        return (bool) $this->locked_for;
-    }
-
-    /**
-     * Check if this ad is marked as private
-     *
-     * @return bool
-     */
-    public function isHiddenFromFriends()
-    {
-        return (bool) $this->is_hidden_from_friends;
-    }
-
-    /**
-     * Is this ad locked for this user ?
-     *
-     * @return bool
-     */
-    public function isLockedFor(int $userId) : bool
-    {
-        return $this->locked_for == $userId;
-    }
-
-    /**
-     * Is this ad requiring a secure payment ?
-     *
-     * @return bool
-     */
-    public function isSecurePaymentAsked()
-    {
-        return (bool) $this->is_secure_payment;
-    }
-
-    /**
-     * Lock this ad.
-     *
-     * @param int $userId
-     *
-     * @return $this
-     */
-    public function lockFor(int $userId) : \Sneefr\Models\Ad
-    {
-        $this->locked_for = $userId;
-        $this->save();
-
-        return $this;
-    }
-
-    /**
-     * Unlock this ad.
-     *
-     * @return AdContract
-     */
-    public function unlock() : \Sneefr\Models\Ad
-    {
-        $this->locked_for = null;
-        $this->final_amount = null;
-        $this->save();
-
-        return $this;
-    }
-
-    /**
-     * Mark this ad as sold to a user identifier.
-     *
-     * @param int $userId
-     *
-     * @return AdContract
-     */
-    public function sellTo(int $userId) : \Sneefr\Models\Ad
-    {
-        $this->sold_to = $userId;
-        $this->save();
-
-        return $this;
     }
 
 
@@ -891,6 +772,6 @@ class Ad extends Model
 
     public function canMakeSecurePayement(): bool
     {
-        return (bool) (($this->isSecurePaymentAsked() || ($this->isInShop() && $this->seller->payment()->hasOne())) && $this->amount >= 100 );
+        return (bool) (($this->isInShop() && $this->seller->payment()->hasOne()) && $this->amount >= 100 );
     }
 }

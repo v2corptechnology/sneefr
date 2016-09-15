@@ -58,10 +58,6 @@ class AdPolicy
      */
     public function buy(User $user, Ad $ad)
     {
-        if (! $ad->isInShop() && ! $ad->isLockedFor($user->getId())) {
-            abort(401, trans('feedback.ad_is_not_locked_for_you'));
-        }
-
         return true;
     }
 
