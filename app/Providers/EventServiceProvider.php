@@ -13,12 +13,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        AdWasPosted::class => [
+        \Sneefr\Events\AdWasPosted::class => [
             \Sneefr\Listeners\AdWasPosted\MoveTemporaryImages::class,
             \Sneefr\Listeners\AdWasPosted\CopyAdLocationToProfile::class,
         ],
 
-        AdWasPurchased::class => [
+        \Sneefr\Events\AdWasPurchased::class => [
             \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToSeller::class,
             \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToBuyer::class,
             \Sneefr\Listeners\AdWasPurchased\RemoveFromDiscussion::class,
@@ -29,15 +29,15 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\AdWasPurchased\StoreCharge::class,
         ],
 
-        AdWasUpdated::class => [
+        \Sneefr\Events\AdWasUpdated::class => [
             \Sneefr\Listeners\SendUpdatedNotification::class,
         ],
 
-        MessageWasSent::class => [
+        \Sneefr\Events\MessageWasSent::class => [
             \Sneefr\Listeners\UpdateDiscussionStatus::class,
         ],
 
-        UserRegistered::class => [
+        \Sneefr\Events\UserRegistered::class => [
             \Sneefr\Listeners\UserRegistered\AddReferrals::class,
             \Sneefr\Listeners\UserRegistered\LogLogin::class,
         ],
