@@ -2,6 +2,7 @@
 
 namespace Sneefr\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Sneefr\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +36,43 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        $credentials = $this->credentials($request);
+
+        if ($this->guard()->attempt($credentials, $request->has('remember'))) {
+
+            if(!auth()->user()->isVerified()) {
+                $this->guard()->logout();
+                return $this->sendFailedNotActiveAccountResponse($request);
+            };
+
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    /**
+     * Get the failed login for not activated account response instance.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendFailedNotActiveAccountResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->with('error', trans('feedback.account_not_activated'));
     }
 }

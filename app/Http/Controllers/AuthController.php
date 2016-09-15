@@ -1,8 +1,10 @@
 <?php namespace Sneefr\Http\Controllers;
 
 use Hashids\Hashids;
+use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\ActionLog;
 use Sneefr\Models\LikeAd;
 use Sneefr\Models\User;
@@ -172,5 +174,38 @@ class AuthController extends Controller
         \Session::flush();
 
         return redirect('/login');
+    }
+
+    /**
+     * Activate account using data from email link
+     *
+     * @param $key
+     * @param Encrypter $encrypter
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Activate($key, Encrypter $encrypter)
+    {
+        // Decrypt the verification key
+        $data = $encrypter->decrypt($key);
+
+        // Basic check
+        if ( !empty($data) &&  isset($data['id']) && isset($data['email']) )
+        {
+            // Get the person based on this user identifier
+            $user = User::findOrFail($data['id']);
+
+            if($user->getEmail() == $data['email'] && !$user->isVerified())
+            {
+                $user->email_verified = true;
+                $user->verified = true;
+                $user->save();
+
+                $this->dispatch(new UpdateRank($user));
+
+                return redirect()->route('home')->with('success', trans('feedback.email_activation_success'));
+            }
+        }
+
+        return redirect()->route('home')->with('error', trans('feedback.email_activation_error'));
     }
 }

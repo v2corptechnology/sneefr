@@ -2,6 +2,8 @@
 
 namespace Sneefr\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Sneefr\Jobs\SendActivationEmail;
 use Sneefr\Models\User;
 use Validator;
 use Sneefr\Http\Controllers\Controller;
@@ -40,6 +42,26 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        $this->guard()->login($user);
+
+        $this->dispatch(new SendActivationEmail($user));
+
+        return redirect($this->redirectPath())
+                        ->with('success', trans('auth.activation'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -66,7 +88,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'avatar'   => 'pig.jpg',
             'locale'   => config('app.locale'),
-            'verified' => 1
+            'verified' => 0
         ]);
     }
 }

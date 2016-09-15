@@ -25,6 +25,7 @@ Route::get('pricing', ['as' => 'pricing', function () {
 /** Auth mechanisms */
 
 Auth::routes();
+Route::get('register/activation/{key}', ['as' => 'account_activation', 'uses' => 'AuthController@activate']);
 
 // Disconnect the user
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
