@@ -79,7 +79,7 @@
                 </header>
 
                 <div class="box" style="margin-bottom: 1rem;">
-                    @include('ad._form', [
+                    @include('items.form', [
                         'buttonText'    => trans('ad_form.edit.apply_button'),
                         'shops'         => $shops,
                         'name'          => auth()->user()->present()->fullName(),
@@ -92,6 +92,8 @@
                         'latitude'      => old('latitude', $ad->latitude()),
                         'longitude'     => old('longitude', $ad->longitude()),
                         'shop_id'       => old('shop_id', $ad->getShopId()),
+                        'lock_quantity' => true,
+                        'quantity' => $ad->stock->initial,
                         'hide_share'    => true,
                         // Todo: refactor please
                         'is_pickable'   => $ad->delivery->isPickable(),

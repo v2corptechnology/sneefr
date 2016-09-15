@@ -96,7 +96,7 @@
     <div class="col-md-2">
         <div class="form-group">
             <label class="control-label" for="quantity">@lang('ad_form.create.quantity_label')</label>
-            <input class="form-control" type="number" name="quantity" min="1" max="100" value="1" required>
+            <input class="form-control" type="number" name="quantity" min="1" max="100" value="{{ $quantity }}" required @if( $lock_quantity) disabled readonly @endif>
         </div>
     </div>
 
