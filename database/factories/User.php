@@ -8,7 +8,7 @@ use Sneefr\Models\User;
 $factory->define(User::class, function ($faker) {
     return [
         'avatar'                  => "pig.jpg",
-        'email'                   => $faker->optional(0.2)->safeEmail,
+        'email'                   => $faker->safeEmail,
         'password'                => $faker->password,
         'facebook_id'             => $faker->numerify('#################'),
         'facebook_email'          => $faker->optional(0.8)->safeEmail,
