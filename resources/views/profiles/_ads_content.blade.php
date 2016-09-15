@@ -32,7 +32,7 @@
         @foreach ($displayedAds as $ad)
             <div class="col-sm-6">
 
-                @include('ad._ad', ['ad' => $ad, 'isDeletable' => $ad->sellerId() === auth()->id() ])
+                @include('ads.card', ['ad' => $ad])
 
             </div>
         @endforeach
