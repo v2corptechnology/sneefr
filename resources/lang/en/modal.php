@@ -18,6 +18,9 @@ return [
         'btn_send_title'    => "Send the message",
         'btn_cancel'        => "Cancel",
         'btn_cancel_title'  => "Do not send the message",
+        'complete_info_first' => "you need to complete your info before doing this ;-)",
+        'btn_settings_title' => "Complete my info to contact the user",
+        'btn_settings'      => "Settings"
     ],
     'login' => [
         'header'            => "Log in",
