@@ -40,4 +40,9 @@ return [
         'buyer' => 'Choose...',
         'ad'    => 'Choose...',
     ],
+
+    'login' => "Login",
+    'remember_me' => "Remember Me",
+    'register' => "Register",
+    'forgot_password' => "Forgot Your Password?",
 ];

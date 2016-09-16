@@ -26,7 +26,8 @@ class Image
     protected $patterns = [
         'ad'         => 'bound/{dimensions}/q75/_originals_/{name}',
         'ad_cropped' => 'crop/{dimensions}/q75/_originals_/{name}',
-        'avatar'     => 'https://res.cloudinary.com/sneefr/image/facebook/w_{width},h_{height},c_fill,q_75/{name}.jpg',
+        //'avatar'     => 'https://res.cloudinary.com/sneefr/image/facebook/w_{width},h_{height},c_fill,q_75/{name}',
+        'avatar'     => 'crop/{dimensions}/q75/_avatar/{name}',
         'cover'      => 'crop/{dimensions}/q75/_shops_/{name}',
         'logo'       => 'crop/{dimensions}/q75/_shops_/{name}',
     ];
@@ -87,11 +88,9 @@ class Image
      *
      * @return string
      */
-    public function avatar($person, $dimensions = 40) : string
+    public function avatar($avatar, $dimensions = 40) : string
     {
-        $id = $this->getIdentifier($person);
-
-        return $this->getImageUrl('avatar', $id, $dimensions);
+        return $this->getImageUrl('avatar', $avatar, $dimensions);
     }
 
     /**
@@ -202,7 +201,7 @@ class Image
         if (is_numeric($argument)) {
             $identifier = $argument;
         } elseif ($argument instanceof UserModel) {
-            $identifier = $argument->facebook_id;
+            $identifier = $argument->getId();
         } elseif ($argument instanceof AdModel) {
             $identifier = $argument->id;
         } else {
@@ -272,10 +271,6 @@ class Image
         $dimensions = $this->parseDimensions($dimensions);
 
         $path = $this->getPath($type, $name, $dimensions);
-
-        if ($type == 'avatar') {
-            return $path;
-        }
 
         return $this->baseUrl.'/'.$path;
     }

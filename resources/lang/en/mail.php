@@ -30,6 +30,14 @@ return [
         'button_title' => "Answer on sneefR",
     ],
 
+    'activation-email' => [
+        'title'        => "sneefR : activate your account",
+        'lead'         => "Do you want to activate your account on sneefR?",
+        'text'         => "It's easy, simply click on the huge button below to complete the procedure!",
+        'button'       => "Active your account",
+        'button_title' => "Commplete account activation procedure",
+    ],
+
     'verify-email' => [
         'title' => "sneefR : Confirm your email address",
         'lead'         => "Do you want to update your email address on sneefR?",

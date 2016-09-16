@@ -28,25 +28,35 @@ if ($recipient instanceof \Sneefr\Models\Shop) {
                     </h4>
                 </div>
                 <div class="modal-body">
-                    @if (auth()->id())
-                        <label class="control-label sr-only" for="message-body"> 
-                            @lang('modal.write.body_label')
-                        </label> 
-                        <textarea class="form-control" rows="5" cols="10"
-                                  id="body" name="body"
-                                  placeholder="@lang('modal.write.body_placeholder')"
-                                  required></textarea> 
+                    @if (auth()->check())
+                        @if(auth()->user()->inCompleteInfo())
+                            <p class="text-center">
+                                @lang('modal.write.complete_info_first')
+                                <br><br>
+                                <a href="{{ url('/me') }}"
+                                   title="@lang('modal.write.btn_settings_title')"
+                                   class="btn btn-lg btn-primary btn-primary2">@lang('modal.write.btn_settings')</a>
+                            </p>
+                        @else
+                            <label class="control-label sr-only" for="message-body"> 
+                                @lang('modal.write.body_label')
+                            </label> 
+                            <textarea class="form-control" rows="5" cols="10"
+                                      id="body" name="body"
+                                      placeholder="@lang('modal.write.body_placeholder')"
+                                      required></textarea> 
+                        @endif
                     @else
                         <p class="text-center">
                             @lang('modal.write.connect_first')
                             <br><br>
-                            <a href="{{ route('login') }}"
+                            <a href="{{ url('/login') }}"
                                title="@lang('modal.write.btn_connect_title')"
                                class="btn btn-lg btn-primary btn-primary2">@lang('modal.write.btn_connect')</a>
                         </p>
                     @endif
                 </div>
-                @if(auth()->id())
+                @if(auth()->check() && !auth()->user()->inCompleteInfo())
                     <div class="modal-footer">
                         <input type="hidden" name="ad_id" id="ad_id"
                                value="{{ $adId }}">  

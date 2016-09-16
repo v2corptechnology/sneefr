@@ -37,7 +37,7 @@ class ViewNavbarTest extends TestCase
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see($user->facebook_id . '.jpg" alt="'.$user->present()->fullName().'"');
+            ->see($user->avatar . '" alt="'.$user->present()->fullName().'"');
     }
 
     public function test_view_shops_avatar_when_having_a_shop()

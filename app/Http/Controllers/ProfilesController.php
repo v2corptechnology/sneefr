@@ -415,6 +415,11 @@ class ProfilesController extends Controller
             $userModel->{$key} = $value;
         }
 
+        // Persisting the new given_name or surname data.
+        foreach (Arr::only($data, ['given_name', 'surname']) as $key => $value) {
+            if($value != '') $userModel->{$key} = $value;
+        }
+
         if ($userModel->save()) {
             session()->flash('success', trans('feedback.profile_edit_success'));
         }

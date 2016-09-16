@@ -24,12 +24,9 @@ Route::get('pricing', ['as' => 'pricing', function () {
 
 /** Auth mechanisms */
 
-// User login screen
-Route::get('login', function () {
-    \Log::debug('Someone hit /login coming from ' . \URL::previous());
+Auth::routes();
+Route::get('register/activation/{key}', ['as' => 'account_activation', 'uses' => 'AuthController@activate']);
 
-    return redirect('/', 301);
-});
 // Disconnect the user
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 // Redirection to connection provider

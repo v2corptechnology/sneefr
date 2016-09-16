@@ -64,6 +64,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = [
+        'password',
         'remember_token',
         'plain',
         'token',
@@ -77,10 +78,12 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = [
+        'avatar',
         'facebook_id',
         'facebook_email',
         'email',
         'email_verified',
+        'password',
         'location',
         'lat',
         'long',
@@ -532,11 +535,11 @@ class User extends Model implements AuthenticatableContract,
      *
      * @return \Sneefr\Models\User
      */
-    public static function register(array $data) : self
+    public static function register(array $data)
     {
         $data = self::normalize($data);
 
-        $user = self::withTrashed()->where('facebook_id', $data['facebook_id'])->first();
+        $user = self::withTrashed()->where('facebook_id', $data['facebook_id'])->orWhere('email', $data['email'])->first();
 
         $verifyEmail = false;
 
@@ -551,7 +554,9 @@ class User extends Model implements AuthenticatableContract,
             $verifyEmail = true;
         } // This is a simple login, don't update everything
         else {
-            if (!$user->hasVerifiedEmail() && ($user->getEmail() != $data['email'])) {
+            if($user->getSocialNetworkId() != $data['facebook_id']){
+                return null;
+            }else if (!$user->hasVerifiedEmail() && ($user->getEmail() != $data['email'])) {
                 $verifyEmail = true;
             }
 
@@ -605,5 +610,10 @@ class User extends Model implements AuthenticatableContract,
     public function getPhoneAttribute() : PhoneNumber
     {
         return new PhoneNumber($this->attributes['phone']);
+    }
+
+    public function inCompleteInfo() : bool
+    {
+        return (is_null($this->given_name) || is_null($this->given_name) );
     }
 }
