@@ -47,7 +47,7 @@ class DiscussionsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request$request, string $shopSlug = null)
+    public function index(Request $request, string $shopSlug = null)
     {
         // Todo: move it to a policy
         $this->guardAgainstWrongShop($shopSlug);
