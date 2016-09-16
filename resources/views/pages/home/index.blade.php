@@ -2,10 +2,6 @@
 
 @section('title', trans('login.page_title'))
 
-@push('footer-js')
-    <script src="{{ elixir('js/sneefr.dashboard.js') }}"></script>
-@endpush
-
 @if (! auth()->check())
     @section('nav')
         <nav class="navbar">
