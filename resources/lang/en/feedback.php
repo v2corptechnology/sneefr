@@ -23,6 +23,7 @@ return [
     'email_activation_success'           => "Alright captain, your account is activated!",
     'email_activation_error'             => "Captain, we couldn't process your request, if this problem persists, please contact us.",
     'account_not_activated'              => "This account not activated, you need to activate your account by click the link of activation sent to you by e-mail",
+    'info_incomplete_warning'            => "You need to complete your info",
     'email_validation_success'           => "Alright captain, we'll use this email address to contact you!",
     'email_validation_error'             => "Captain, we couldn't verify this email address, if this problem persists, please contact us.",
     'profile_location_adding_success'    => "This place has been successfully added to your places of interest",

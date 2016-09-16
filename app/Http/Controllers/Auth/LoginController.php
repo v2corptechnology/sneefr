@@ -52,11 +52,6 @@ class LoginController extends Controller
 
         if ($this->guard()->attempt($credentials, $request->has('remember'))) {
 
-            if(!auth()->user()->isVerified()) {
-                $this->guard()->logout();
-                return $this->sendFailedNotActiveAccountResponse($request);
-            };
-
             return $this->sendLoginResponse($request);
         }
 
@@ -74,5 +69,27 @@ class LoginController extends Controller
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->with('error', trans('feedback.account_not_activated'));
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        if(!auth()->user()->isVerified()) {
+            $this->guard()->logout();
+            return $this->sendFailedNotActiveAccountResponse($request);
+        }
+
+        if(auth()->user()->inCompleteInfo()) {
+            return redirect('/me')
+                    ->with('warning', trans('feedback.info_incomplete_warning'));
+        };
+
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
     }
 }
