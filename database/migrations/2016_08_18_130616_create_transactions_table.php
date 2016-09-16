@@ -15,11 +15,11 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('ad_id');
-            $table->unsignedInteger('buyer_id')->nullable();
-            $table->unsignedInteger('seller_id')->nullable();
-            $table->json('stripe_data')->nullable();
-            $table->json('details')->nullable();
-            
+            $table->unsignedInteger('buyer_id');
+            $table->unsignedInteger('seller_id');
+            $table->json('stripe_data');
+            $table->json('details');
+
             // Define timestamps to record dates and times of changes.
             $table->timestamps();
 
