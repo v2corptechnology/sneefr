@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('seller_id')->nullable();
             $table->json('stripe_data')->nullable();
             $table->json('details')->nullable();
+            
             // Define timestamps to record dates and times of changes.
             $table->timestamps();
 
