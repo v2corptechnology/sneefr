@@ -42,9 +42,6 @@ class SendActivationEmail implements ShouldQueue
 
         // Send the validation email
         $this->sendActivationEmail($this->user);
-
-        // Update the rank of the user
-        $dispatcher->dispatch(new UpdateRank($this->user));
     }
 
     /**
@@ -83,7 +80,6 @@ class SendActivationEmail implements ShouldQueue
 
             \Log::error('Cannot send verification E-mail', [
                 'email'    => $user->getEmail(),
-                'name'    => $user->present()->fullName(),
                 'Exception'    => $e->getMessage(),
             ]);
 
