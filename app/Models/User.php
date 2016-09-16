@@ -621,4 +621,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return new PhoneNumber($this->attributes['phone']);
     }
+
+    public function inCompleteInfo() : bool
+    {
+        return (is_null($this->given_name) || is_null($this->given_name) );
+    }
 }
