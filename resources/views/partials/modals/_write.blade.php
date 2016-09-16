@@ -50,7 +50,7 @@ if ($recipient instanceof \Sneefr\Models\Shop) {
                         <p class="text-center">
                             @lang('modal.write.connect_first')
                             <br><br>
-                            <a href="{{ route('login') }}"
+                            <a href="{{ url('/login') }}"
                                title="@lang('modal.write.btn_connect_title')"
                                class="btn btn-lg btn-primary btn-primary2">@lang('modal.write.btn_connect')</a>
                         </p>
