@@ -1,0 +1,108 @@
+
+.activity {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0rem;
+
+  .activity__header {
+    @extend .clearfix;
+    @extend .text-muted;
+    margin-bottom: .25rem;
+  }
+
+  .activity__author {
+    float: left;
+    margin-right: .8rem;
+  }
+
+  .activity__heading {
+    @extend .h5;
+    font-weight: normal;
+    margin: 0;
+  }
+
+  .activity__content {
+    @extend .content;
+    padding-bottom: 0;
+  }
+
+  .activity__body {
+    clear: both;
+    margin-bottom: .5rem;
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .activity__pre-header {
+    border-bottom: 1px solid #E1E2E3;
+    font-size: 1.2rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .activity__actions {
+    border-top: 1px solid #E1E2E3;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.75rem 0;
+  }
+
+  .activity__footer {
+    background-color: #F6F7F8;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid #E1E2E3;
+    font-size: 1.2rem;
+    margin: 0 -1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  // TODO: This is not related to activity, rename it
+  .activity__price {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0 2px 2px 0;
+    bottom: 5%;
+    color: #FFF;
+    font-size: 1.8rem;
+    left: 0;
+    padding: 0.25rem 0.75rem;
+    position: absolute;
+    z-index: 200;
+  }
+
+  .activity__slider {
+    margin-bottom: 0.5rem;
+  }
+
+  .like-form { display: inline-block; }
+}
+
+.action__like {
+  margin-right: 2rem;
+
+  img {filter: grayscale(1);}
+}
+
+.action__like--active,
+.action__like--active:hover,
+.action__like--active:focus {
+  color: #F4A0AC;
+
+  img {filter: grayscale(0);}
+}
+
+.action__like,
+.action__share {
+  @extend .text-muted;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    @extend .text-muted;
+    text-decoration: underline;
+  }
+
+  .fa { padding-right: 0.25rem; }
+}

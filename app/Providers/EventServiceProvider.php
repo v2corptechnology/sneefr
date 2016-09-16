@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Sneefr\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,32 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        \Sneefr\Events\AdWasPosted::class => [
+            \Sneefr\Listeners\AdWasPosted\MoveTemporaryImages::class,
+            \Sneefr\Listeners\AdWasPosted\CopyAdLocationToProfile::class,
+        ],
+
+        \Sneefr\Events\AdWasPurchased::class => [
+            \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToSeller::class,
+            \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToBuyer::class,
+            \Sneefr\Listeners\AdWasPurchased\RemoveFromDiscussion::class,
+            \Sneefr\Listeners\AdWasPurchased\UpdateStock::class,
+            \Sneefr\Listeners\AdWasPurchased\StoreSuccessfulDealConnections::class,
+            \Sneefr\Listeners\AdWasPurchased\SaveTransaction::class,
+            //\Sneefr\Listeners\AdWasPurchased\NotifyDealers::class,
+        ],
+
+        \Sneefr\Events\AdWasUpdated::class => [
+            \Sneefr\Listeners\SendUpdatedNotification::class,
+        ],
+
+        \Sneefr\Events\MessageWasSent::class => [
+            \Sneefr\Listeners\UpdateDiscussionStatus::class,
+        ],
+
+        \Sneefr\Events\UserRegistered::class => [
+            \Sneefr\Listeners\UserRegistered\AddReferrals::class,
+            \Sneefr\Listeners\UserRegistered\LogLogin::class,
         ],
     ];
 

@@ -1,0 +1,33 @@
+.user {
+  @extend .text-center;
+  display: block;
+}
+
+.user--inline {
+  display: inline;
+}
+
+.user__image {
+  border-radius: 2px;
+  display: block;
+  margin: 0 auto;
+}
+
+.user__rank {
+  display: block;
+  position: relative;
+  top: -1rem;
+}
+
+.user__rank-label {
+  background-color: #2FCAD8;
+  border-radius: 2px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.user__name {
+  color: #1968A6;
+  display: inline-block;
+}

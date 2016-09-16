@@ -1,0 +1,122 @@
+.dropzone {
+  @extend .text-center;
+  color: $brand-ligth-text;
+}
+
+.dropzone__illustration {
+  display: block;
+  margin: 0 auto 2.5rem;
+}
+
+.dropzone__upload {
+  margin-bottom: 1rem;
+}
+
+.dropzone__upload-button {
+  display: inline-block;
+  margin: 0 auto 1rem;
+}
+
+.dropzone__tip {
+  @extend .text-center;
+  color: $brand-ligth-text;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+}
+
+
+/* Override Dropzone.js styling */
+.dropzone {
+  border: 2px solid transparent;
+  padding: 0;
+
+  &.dz-drag-hover {border-color: rgba($brand-success, 0.5);}
+
+  &.dz-started {text-align: left;}
+
+  .dz-message {margin: 0;}
+
+  .dz-preview {
+    margin: 1rem;
+    position: relative;
+  }
+
+  .dz-preview .dz-remove {
+    border: 2px solid #FFF;
+    border-radius: 50%;
+    box-shadow: 0 0 2px #666, inset 0 0 2px #666;
+    color: #FFF;
+    display: none;
+    font-weight: bold;
+    height: 1.8rem;
+    line-height: 1.1rem;
+    position: absolute;
+    right: 0.5rem;
+    text-shadow: 0 0 1px #333;
+    top: 0.5rem;
+    width: 1.8rem;
+    z-index: 10;
+
+    &:hover, &:focus {text-decoration: none;}
+  }
+
+  .dz-preview .dz-details {display: none;}
+
+  .dz-preview .dz-progress {border-radius: 0;}
+
+  .dz-preview .dz-image,
+  .dz-preview.dz-file-preview .dz-image {
+    border-radius: 2px;
+    height: 80px;
+    width: 80px;
+  }
+
+  .dz-preview:hover .dz-image img {
+    filter: none;
+    transform: none;
+  }
+}
+
+/*
+
+.dropzone {
+    min-height: auto;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    padding: 1rem;
+
+    .dz-preview {margin: 10px;}
+
+    .dz-preview.dz-file-preview .dz-image,
+    .dz-preview .dz-image {
+        height: 85px;
+        width: 85px;
+        border-radius: 0;
+    }
+
+    .dz-preview .dz-progress {
+        width: 60px;
+        height: 12px;
+        margin-top: -14px;
+        margin-left: -30px;
+    }
+
+    .dz-preview .dz-remove {
+        display: none;
+        // position: absolute;
+        // top: -5px;
+        // z-index: 10;
+        // right: -5px;
+        // font-size: 1.2rem;
+    }
+
+    .dz-preview .dz-error-message {
+        top: 90px;
+        left: -27px;
+    }
+
+    .dz-preview .dz-success-mark, .dz-preview .dz-error-mark {margin-top: -37px;}
+}
+*/

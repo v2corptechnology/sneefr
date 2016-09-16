@@ -1,9 +1,25 @@
+@import "style";
+@import "theme";
+// @import "bootstrap";
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import "variables"; // include variables after bootstrap since they have some names in common
 
-// Variables
-@import "variables";
+// @import "partials/buttons";
+@import "partials/navigation";
+@import "partials/ad";
+@import "partials/buttons";
+@import "partials/box";
+@import "partials/hero";
+@import "partials/activity";
+@import "partials/dropzone";
+@import "partials/form";
+@import "partials/user";
+@import "partials/card";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "pages/profile";
+@import "pages/dashboard";
+@import "pages/messages";
+@import "pages/choose-buyer";
+@import "pages/login";
+
+@import "responsive";

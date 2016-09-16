@@ -5,14 +5,20 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
+    "baguettebox.js": "^1.5.0",
     "bootstrap-sass": "^3.3.7",
+    "clipboard": "^1.5.10",
+    "dropzone": "~4.3",
+    "geocomplete": "git://github.com/ubilabs/geocomplete#1.6.5",
     "gulp": "^3.9.1",
+    "ideal-image-slider": "~1.5.1",
+    "javascript-flex-images": "git://github.com/Pixabay/JavaScript-flexImages",
     "jquery": "^3.1.0",
+    "jquery-validation": "1.15.0",
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-vue": "^0.1.4",
     "laravel-elixir-webpack-official": "^1.0.2",
-    "lodash": "^4.14.0",
-    "vue": "^1.0.26",
-    "vue-resource": "^0.9.3"
+    "pusher-js": "~3.0.0",
+    "timeago": "^1.5.2"
   }
 }

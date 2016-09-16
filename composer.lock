@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c90793884b3893e4c4bd61198260b4d6",
-    "content-hash": "bfc60a01462d32c7865eb963188d6174",
+    "hash": "75b5a47b4c7272a2ce7fde771a07fc2f",
+    "content-hash": "b695c06a2fe6a64ea0d507ed7b6c4fc1",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -1682,31 +1682,31 @@
         },
         {
             "name": "laravel/cashier",
-            "version": "v6.0.18",
+            "version": "v7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier.git",
-                "reference": "1e5c092a14150af194e3ec2d774f07c5b1c4da01"
+                "reference": "be91d37fc0d3bfb432cdecc06e4b0cfa7b88335b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier/zipball/1e5c092a14150af194e3ec2d774f07c5b1c4da01",
-                "reference": "1e5c092a14150af194e3ec2d774f07c5b1c4da01",
+                "url": "https://api.github.com/repos/laravel/cashier/zipball/be91d37fc0d3bfb432cdecc06e4b0cfa7b88335b",
+                "reference": "be91d37fc0d3bfb432cdecc06e4b0cfa7b88335b",
                 "shasum": ""
             },
             "require": {
                 "dompdf/dompdf": "^0.6.1",
-                "illuminate/database": "~5.1",
-                "illuminate/support": "~5.1",
+                "illuminate/database": "~5.3",
+                "illuminate/support": "~5.3",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.5.9",
                 "stripe/stripe-php": "~3.0",
                 "symfony/http-kernel": "~2.7|~3.0"
             },
             "require-dev": {
-                "illuminate/http": "~5.1",
-                "illuminate/routing": "~5.1",
-                "illuminate/view": "~5.1",
+                "illuminate/http": "~5.3",
+                "illuminate/routing": "~5.3",
+                "illuminate/view": "~5.3",
                 "mockery/mockery": "~0.9",
                 "phpunit/phpunit": "~4.0",
                 "vlucas/phpdotenv": "~2.0"
@@ -1714,7 +1714,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "8.0-dev"
                 }
             },
             "autoload": {
@@ -1738,7 +1738,7 @@
                 "laravel",
                 "stripe"
             ],
-            "time": "2016-06-17 18:59:32"
+            "time": "2016-08-16 18:41:04"
         },
         {
             "name": "laravel/framework",
@@ -1866,6 +1866,68 @@
                 "laravel"
             ],
             "time": "2016-09-01 14:06:47"
+        },
+        {
+            "name": "laravel/scout",
+            "version": "v1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/scout.git",
+                "reference": "a1ee788a62699145078d3e8aae10f374acadee15"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/a1ee788a62699145078d3e8aae10f374acadee15",
+                "reference": "a1ee788a62699145078d3e8aae10f374acadee15",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.3",
+                "illuminate/database": "~5.3",
+                "illuminate/support": "~5.3",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "algolia/algoliasearch-client-php": "^1.10",
+                "elasticsearch/elasticsearch": "^2.2",
+                "illuminate/bus": "~5.3",
+                "illuminate/pagination": "~5.3",
+                "illuminate/queue": "~5.3",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~5.0"
+            },
+            "suggest": {
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine.",
+                "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Scout\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
+            "keywords": [
+                "algolia",
+                "laravel",
+                "search"
+            ],
+            "time": "2016-09-02 14:52:17"
         },
         {
             "name": "laravelcollective/html",

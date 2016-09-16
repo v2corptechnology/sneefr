@@ -1,0 +1,272 @@
+.navbar {
+  background: #FFF;
+  border: none;
+  border-radius: 0;
+  min-height: auto;
+}
+
+.navbar-form {
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.navbar-btn {
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+
+.navbar-brand,
+.navbar-nav > li > a {
+  height: auto;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.navbar-nav > li > a.avatar {
+  padding-top: 8px;
+  padding-bottom: 9px;
+  position: relative;
+  border-radius: 0;
+  transform: translateY(0%);
+  margin: 0;
+  border: none;
+}
+
+.navbar-form.pull-left {
+  border: none;
+  padding: 0 0 0 15px;
+  width: 180px;
+}
+
+.navbar-form.pull-left .form-group,
+.navbar-form.pull-left .input-group {
+  display: inline-table;
+}
+
+.navbar-toggle {
+  color: #888;
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
+.navbar {
+  .menu-icon .fa {
+    font-size: 1.6rem;
+  }
+
+  .navbar-left-special {
+    width: 33%;
+  }
+
+  .navbar-form-special {
+    padding: 6px 15px 0;
+    margin: 0 -15px;
+
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.navbar-search-wide {
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+}
+
+.navbar-toggle-search {
+  padding: 6px 14px;
+  margin-right: 10px;
+}
+
+.navbar-toggle .notification-badge {
+  left: auto;
+  right: 0.25rem;
+  top: 0.25rem;
+}
+
+.menu-icon{
+
+  .icon--shop{
+    color: $gold-color;
+
+    &:hover{
+      color: $gold-darker-color;
+    }
+  }
+
+  .bottom-label{
+    position: absolute;
+    display: inline-block;
+    left: 1.25rem;
+    bottom: 0.6rem;
+    font-size: 0.6rem;
+  }
+}
+
+
+@media screen and (max-width: 479px) {
+  .navbar-form.pull-left {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-header > .pull-right {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .navbar-toggle-search {
+    display: none;
+  }
+  .navbar-form.pull-left .input-group {
+    width: 170px;
+  }
+  .navbar-search-wide.in {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .navbar-form.pull-left .input-group {
+    width: 240px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .navbar-form.pull-left .input-group {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .navbar-form.pull-left .input-group {
+    padding-left: 0;
+    width: 180px;
+  }
+  #menu {
+    margin-right: -30px;
+  }
+}
+
+@media screen and (min-width: 830px) {
+  .navbar-form.pull-left .input-group {
+    width: 210px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .navbar-form.pull-left .input-group {
+    width: 300px;
+  }
+  .navbar-login-btn {
+    margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #menu {
+    margin-right: -15px;
+  }
+}
+
+/**************************/
+/*  Auto-complete style   */
+/**************************/
+
+.algolia-autocomplete {
+  width: 100%;
+}
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  min-height: 30px;
+}
+.algolia-autocomplete .aa-hint {
+
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 100%;
+  min-width: 400px;
+  background-color: #fff;
+  border: 1px solid #e9eaed;
+  text-align: left;
+}
+
+@media screen and (max-width: 479px) {
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  border-top: 1px solid #e9eaed;
+  cursor: pointer;
+  padding: 5px 4px;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background: #f8f8f8;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+.algolia-autocomplete .category {
+  text-align: left;
+  border-top: 1px solid #e9eaed;
+  color: #000;
+  padding: 7px 5px;
+  font-weight: bold;
+}
+
+.algolia-autocomplete .category:hover {
+  color: #000;
+}
+
+.auto-complete-item a{
+  text-decoration: none;;
+}
+.auto-complete-item .image{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.auto-complete-item .name{
+  width: 100%;
+  overflow: hidden;
+  font-size: 8pt;
+  color: #999;
+}
+
+.auto-complete-item .image.round{
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+.algolia-autocomplete{
+  .nav-search {
+    top: 2px;
+    display: block;
+    width: 100% !important;
+    padding: 5px 10px;
+    height: 30px;
+  }
+
+  .nav-mobile-search{
+    padding: 5px 10px;
+    height: 30px;
+  }
+
+  .home-search{
+    padding: 10px 16px;
+    height: 46px;
+  }
+}
+
+.navbar-form {
+    margin-bottom: 2px;
+    margin-top: 4px;
+}

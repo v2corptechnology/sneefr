@@ -20,7 +20,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -30,9 +30,19 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'model'     => \Sneefr\Models\User::class,
+        'client_id' => env('PAYMENT_CLIENT_ID'),
+        'key'       => env('PAYMENT_KEY'),
+        'secret'    => env('PAYMENT_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id'     => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+    ],
+
+    'rollbar' => [
+        'access_token' => env('ROLLBAR_TOKEN'),
+        'level'        => env('ROLLBAR_LEVEL'),
+    ],
 ];

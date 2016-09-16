@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console;
+namespace Sneefr\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \Sneefr\Console\Commands\ClearAlgoliaIndex::class,
+        \Sneefr\Console\Commands\InitAlgoliaIndices::class,
     ];
 
     /**
@@ -24,8 +25,59 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Very frequent calls
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\SendWaitingMessageEmail'));
+        })->everyTenMinutes();
+
+        // Keep it synced with 10 minutes job's expiration date
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\SendExpiringLocks'));
+        })->everyTenMinutes();
+
+        // Calls made every hour
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\BackupDatabase'));
+        })->hourly();
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\DeleteOutdatedTemporaryImages'));
+        })->hourly();
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\ForceOutdatedEvaluations'));
+        })->hourly();
+
+        // Daily calls
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\SendWaitingNotificationEmail'));
+        })->dailyAt('18:30');
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\RemoveOutdatedDatabaseDumps'));
+        })->dailyAt('04:00');
+
+        $schedule->call(function () {
+            app('Illuminate\Contracts\Bus\Dispatcher')
+                ->dispatch(app('Sneefr\Jobs\ImportProdDatabase'));
+        })->dailyAt('05:00');
+
+        // Sporadic calls
+
+        $schedule->exec('(composer outdated --outdated && npm outdated)')
+            ->sendOutputTo(storage_path('app/outDatedDependencies.log'))
+            ->emailOutputTo('romain.sauvaire@gmail.com')
+            ->weekly();
     }
 
     /**

@@ -1,0 +1,33 @@
+.form2 {
+  .has-error {
+    .control-label,
+    .help-block {
+      color: $brand-error;
+      font-weight: normal;
+    }
+
+    .form-control,
+    .input-group-addon,
+    .input-group-btn .btn {
+      border-color: $brand-error;
+    }
+  }
+
+  .control-label {
+    color: $brand-ligth-text;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control,
+  .input-group-addon,
+  .input-group-btn .btn {
+    border-color: $brand-light-border;
+  }
+
+  .form-group {
+    margin-bottom: 2.5rem;
+  }
+}

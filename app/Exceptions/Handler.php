@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Sneefr\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
@@ -32,6 +32,12 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($this->shouldReport($exception)) {
+            \Log::error($exception, [
+                'url'  => request()->fullUrl(),
+                'user' => auth()->user(),
+            ]);
+        }
         parent::report($exception);
     }
 
