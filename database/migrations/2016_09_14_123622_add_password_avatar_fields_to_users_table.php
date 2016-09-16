@@ -14,6 +14,7 @@ class AddPasswordAvatarFieldsToUsersTable extends Migration
      */
     public function up()
     {
+        /*
         if(!env('DB_CONNECTION') == 'sqlite') {
             Schema::table('users', function (Blueprint $table) {
                 $table->string('avatar')->default('pig.jpg')->nullable()->after('id');
@@ -26,6 +27,7 @@ class AddPasswordAvatarFieldsToUsersTable extends Migration
             DB::statement(" alter table `users` MODIFY `preferences` json null ");
             DB::statement(" alter table `users` MODIFY `token` varchar(255) null ");
         }
+        */
     }
 
     /**
@@ -35,11 +37,13 @@ class AddPasswordAvatarFieldsToUsersTable extends Migration
      */
     public function down()
     {
+        /*
         if(!env('DB_CONNECTION') == 'sqlite') {
             Schema::table('users', function (Blueprint $table) {
                 $table->dropColumn('avatar');
                 $table->dropColumn('password');
             });
         }
+        */
     }
 }
