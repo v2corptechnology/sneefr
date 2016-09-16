@@ -32,12 +32,6 @@ class Kernel extends ConsoleKernel
                 ->dispatch(app('Sneefr\Jobs\SendWaitingMessageEmail'));
         })->everyTenMinutes();
 
-        // Keep it synced with 10 minutes job's expiration date
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\SendExpiringLocks'));
-        })->everyTenMinutes();
-
         // Calls made every hour
 
         $schedule->call(function () {
