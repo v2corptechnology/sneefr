@@ -162,7 +162,7 @@
                         </a>
                     </li>
                 @endif
-                <li role="presentation" class="navbar__avatar">
+                <li role="presentation" class="navbar__avatar {{ auth()->user()->shop ? 'hidden-xs' : '' }}">
 
                     @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '25x25' ])
 
