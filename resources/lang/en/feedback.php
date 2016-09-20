@@ -13,6 +13,8 @@ return [
     'user_unfollow_success'              => "You're not following this user anymore! We're sure you have good reasons ;-)",
     'message_sent_success'               => "Your message has been sent",
     'profile_edit_success'               => "Your settings have been successfully changed.",
+    'profile_edit_avatar_success'        => "Your profile picture have been successfully changed.",
+    'profile_edit_avatar_error'          => "Captain, we couldn't process your request, if this problem persists, please contact us.",
     'profile_email_validation_sent'      => "Click on the link we've sent you to verify your email address",
     'profile_deleted_success'            => "Account deleted, we hope to see you again soon.",
     'profile_not_exists_error'           => "This user doesn't exist anymore.",

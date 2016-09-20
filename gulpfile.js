@@ -44,6 +44,7 @@ elixir(mix => {
         // Main script of the application.
         'app.js',
         'sneefr.pushes.js',
+        'sneefr.settings.js'
 
     ], 'public/js/all.js');
 
