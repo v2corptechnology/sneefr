@@ -26,8 +26,7 @@ class Image
     protected $patterns = [
         'ad'         => 'bound/{dimensions}/q75/_originals_/{name}',
         'ad_cropped' => 'crop/{dimensions}/q75/_originals_/{name}',
-        //'avatar'     => 'https://res.cloudinary.com/sneefr/image/facebook/w_{width},h_{height},c_fill,q_75/{name}',
-        'avatar'     => 'crop/{dimensions}/q75/_avatar/{name}',
+        'avatar'     => 'crop/{dimensions}/q75/http://s3.amazonaws.com/sneefr.prod.ad-images/avatar/{name}',
         'cover'      => 'crop/{dimensions}/q75/_shops_/{name}',
         'logo'       => 'crop/{dimensions}/q75/_shops_/{name}',
     ];
