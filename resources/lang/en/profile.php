@@ -156,5 +156,7 @@ return [
             'btn_link'       => "Stripe Connect",
             'btn_link_title' => "You will be redirected to Stripe's website",
         ],
+        'avatar_title'              => 'Profile picture',
+        'avatar_upload_button'      => 'Upload Image',
     ],
 ];
