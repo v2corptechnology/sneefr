@@ -39,6 +39,7 @@ class EventServiceProvider extends ServiceProvider
         \Sneefr\Events\UserRegistered::class => [
             \Sneefr\Listeners\UserRegistered\AddReferrals::class,
             \Sneefr\Listeners\UserRegistered\LogLogin::class,
+            \Sneefr\Listeners\UserRegistered\AddAvatar::class,
         ],
     ];
 
