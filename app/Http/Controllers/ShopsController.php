@@ -168,6 +168,7 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
+        $images = [];
         // Update the images only if necessary
         if ($this->imagesHasBeenChanged($request)) {
             $images = $this->moveImages($shop, $request);
