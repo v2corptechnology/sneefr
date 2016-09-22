@@ -4,7 +4,7 @@
     <style>
         .shop__pub {
             background-color: #ff3d7b;
-            background-image: url('{{ url("/images/shop-background.png") }}');
+            background-image: url('{{ url("/img/shop-background.png") }}');
             background-repeat: no-repeat;
             background-position: center;
             background-size: 100%;
