@@ -14,6 +14,7 @@
     @section('styles')
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @show
 
     {{--
@@ -41,13 +42,14 @@
     <meta name="_stripe_key" content="{{ config('services.stripe.key') }}" />
     <meta name="_token" content="{{ csrf_token() }}" />
 
-@yield('social_media')
+    @yield('social_media')
+    @stack('style')
 
 </head>
 <body class="@yield('body')">
 
     @section('nav')
-        @include('partials._nav')
+        @include('partials._navbar')
     @show
 
     @include('partials._feedback')
@@ -70,6 +72,8 @@
             </div>
         </div>
     @endif
+
+    @include('partials.footer')
 
     @section('scripts')
         <script src="{{ elixir('js/all.js') }}"></script>
