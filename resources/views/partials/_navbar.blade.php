@@ -14,15 +14,22 @@
         </div>
 
         <div class="collapse navbar-collapse navbar__sneefr__collapse">
-            <form class=" navbar-left navbar__sneefr__form" role="search">
+            <form action="{{ route('search.index') }}" class=" navbar-left navbar__sneefr__form" role="search">
                 <div class="form-group col-sm-6">
-                    <input type="text" class="form-control navbar__sneefr__input" placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…">
+                    <input type="search"
+                           class="form-control navbar__sneefr__input"
+                           placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…"
+                           value="{{ $query }}" id="q">
+                    <input type="hidden" name="type" value="{{ $type }}">
                 </div>
                 <div class="form-group col-sm-4 col-md-5">
-                    <input type="text" class="form-control navbar__sneefr__input" placeholder="À proximité de Las Vegas, NV">
+                    <input type="text"
+                           class="form-control navbar__sneefr__input"
+                           placeholder="À proximité de Las Vegas, NV"
+                           name="locale">
                 </div>
                 <div class="form-group col-sm-1">
-                    <button type="submit" class="btn btn-primary navbar__sneefr__search"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-sky-blue navbar__sneefr__search"><i class="fa fa-search"></i></button>
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
