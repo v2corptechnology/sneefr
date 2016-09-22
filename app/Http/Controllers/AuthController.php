@@ -29,22 +29,13 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(AdRepository $adRepository)
+    public function index()
     {
-        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
-        $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
-        $highlighted = [
-            ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
-            ['class' => 'second', 'parentId' => 14, 'ids' => [15, 16, 17, 18], 'ads' => $adRepository->byCategory(15, 16, 17, 18)],
-            ['class' => 'third', 'parentId' => 25, 'ids' => [26, 27, 28, 29, 30], 'ads' => $adRepository->byCategory(26, 27, 28, 29, 30)],
-            ['class' => 'fourth', 'parentId' => 40, 'ids' => [41, 42, 43, 44, 45], 'ads' => $adRepository->byCategory(41, 42, 43, 44, 45)],
-        ];
-
-        if (! $randomAd) {
-            return('No ads yet, please <a href="' . route('items.create') . '">create one</a>');
-        }
-
-        return view('pages.home.index', compact('randomAd', 'topShops', 'highlighted'));
+        $shopsByCategory = \Sneefr\Models\Shop::take(6)->get();
+        $bestSellers = \Sneefr\Models\Ad::take(6)->get();
+        $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(4)->get();
+        
+        return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers'));
     }
 
     /**
