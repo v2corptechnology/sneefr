@@ -21,10 +21,17 @@
         $title = $item->getName();
         $logo = $item->getLogo();
         $location = $item->getLocation();
-        if($multiple)
+        if($multiple){
             foreach ($item->ads->take(3) as $ad){
                 array_push($images, $ad->images($gallerySize, true)[0]);
             }
+            if(count($images) < 3 && count($images ) > 0){
+                $multiple = false;
+            }else if(count($images ) == 0){
+                $multiple = false;
+                $images[0] = $item->getCover($gallerySize);
+            }
+         }
         else{
             $images[0] = $item->getCover($gallerySize);
         }

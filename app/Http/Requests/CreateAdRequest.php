@@ -14,7 +14,7 @@ namespace Sneefr\Http\Requests {
         {
             return [
                 'title'        => 'required|between:3,255',
-                'category_id'  => 'required|min:1',
+                'category_id'  => 'required|min:1|exists:categories,id',
                 'condition_id' => 'required',
                 'location'     => 'required',
                 'latitude'     => 'required|numeric',
@@ -72,7 +72,10 @@ namespace Sneefr\Http\Requests {
             $input['initial_quantity'] = $this->get('quantity');
 
             // Ad's cover should not be predicable
-            shuffle($input['images']);
+            if(isset($input['images'])){
+                shuffle($input['images']);
+            }
+
 
             // Trim fields
             array_walk_recursive($input, function(&$in) {
