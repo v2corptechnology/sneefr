@@ -1,0 +1,281 @@
+.ad {
+  font-family: "Open Sans";
+}
+.ad__images {
+  padding: 0;
+}
+
+.ad__images__preview {
+  min-height: 100px;
+}
+
+.ad__images__slides {
+  height: 90px;
+  margin-top: -90px;
+  z-index: 10;
+}
+
+.ad__images__slides__content {
+  background-color: rgba(#000000, 0.3);
+}
+
+.carousel-control {
+  background-color: transparent;
+  background-image: none;
+  color: #ffffff;
+  line-height: 100px;
+
+  .icon {
+    font-size: 36px;
+  }
+}
+
+.ad__images__slide__item {
+  padding: 10px 5px;
+  text-align: center;
+}
+
+.ad__images__slide__img {
+  height: 70px;
+  width: 70px;
+  cursor: pointer;
+}
+
+
+
+.ad__title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.42;
+  color: #454545;
+  margin-top: 0;
+}
+
+.ad__label {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #595959;
+}
+
+.badge-gold {
+  height: 27px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #f5a623;
+}
+
+.ad__price {
+    font-size: 34px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.47;
+    color: #0473c0;
+}
+
+.ad__input {
+  width: 60px;
+  height: 50px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  border: solid 1px #848484;
+  text-align: center;
+}
+
+.ad__buy {
+  height: 50px;
+  padding: 15px 10px;
+  border-radius: 2px;
+  background-color: #0473c0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.ad__buy:hover {
+  background-color: #044285;
+  color: #ffffff;
+}
+
+.ad__social__list {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    display: inline-block;
+    border-right: 1px solid rgba(#d8d8d8, 0.5);
+
+    &:last-child {
+      border-right: none;
+    }
+
+    a {
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5;
+      color: #0473c0;
+
+      .icon {
+        font-size: 23px;
+        padding-right: 5px;
+      }
+
+      &:hover {
+        color: #035b99;
+      }
+    }
+  }
+}
+
+.ad__description {
+  margin-top: 30px;
+  padding: 0;
+}
+
+.ad__description__tabs {
+  background-color: rgba(#d8d8d8, 0.5);
+}
+
+.nav-tabs .ad__description__tabs__item {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  a {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: 16px;
+    opacity: 0.7;
+    padding: 27px 30px;
+    font-weight: 600;
+    color: #171717;
+  }
+
+}
+
+.nav-tabs .ad__description__tabs__item.active a {
+  background-color: #fff;
+  color: #171717;
+  opacity: 1;
+}
+
+.nav-tabs .ad__description__tabs__item:last-child a {
+  width: 100%;
+}
+
+.ad__description__content {
+  min-height: 300px;
+  padding: 20px;
+  line-height: 1.79;
+  font-size: 14px;
+  color: #595959;
+}
+
+.ad__description__table {
+  max-width: 600px;
+
+  tbody > tr {
+    &:first-child {
+      td {
+        border-top: none;
+      }
+    }
+
+    &:last-child {
+      td {
+        border-bottom: 1px solid rgb(221, 221, 221);
+      }
+    }
+  }
+}
+
+.text-blue {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  color: #0473c0;
+}
+
+.text-gold {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  color: #f5a623;
+}
+
+.text-black {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  color: #000000;
+}
+/**********************/
+/*
+/**********************/
+
+.ad__shop {
+  padding: 15px;
+}
+
+.ad__shop .card__box__footer {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.ad__shop__description {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.79;
+  color: #595959;
+}
+
+.ad__shop__map {
+  padding-bottom: 15px;
+  padding-top: 5px;
+}
+
+.ad__shop__map__img {
+  width: 100%;
+  height: auto;
+}
+
+.ad__shop__divider {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.timetable {
+  tbody > tr > td {
+    font-family: "Open Sans";
+    border-top: none;
+    font-size: 14px;
+    line-height: 1.71;
+    color: #595959;
+    padding-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.timetable__title {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  color: #171717;
+}
