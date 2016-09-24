@@ -39,6 +39,79 @@
   color: #ffffff;
 }
 
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  .home__header__title {
+    font-size: 17px;
+  }
+  .home__header__dscription, .home__header__locale {
+    font-size: 12px;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .home__header__content {
+    top: 10px;
+    left: 15px;
+    right: 15px;
+  }
+
+  .home__header__title {
+    font-size: 17px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .home__header__content {
+    top: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .home__header__title {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+  .home__header__content {
+    top: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .home__header__title {
+    font-size: 11px;
+    margin-top: 0;
+    margin-bottom: 3px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 8px;
+    margin-bottom: 0;
+  }
+
+}
+
 /****************************
 /*      Home section
 ****************************/

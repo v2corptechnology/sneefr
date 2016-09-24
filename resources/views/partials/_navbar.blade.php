@@ -46,51 +46,6 @@
                     </li>
                 @else
 
-                    <li class="row visible-xs text-center menu__item--wide menu__item--split" role="presentation">
-                        @if (auth()->user()->shop)
-                            <a role="menuitem" tabindex="-1"
-                               href="{{ route('shops.show', auth()->user()->shop) }}"
-                               title="{{  auth()->user()->shop->getName() }}">
-                                <img class="menu-icon nav-profile-image img-circle"
-                                     src="{{  auth()->user()->shop->getLogo('30x30') }}"
-                                     srcset="{{  auth()->user()->shop->getLogo('60x60') }} 2x"
-                                     width="30" height="30"
-                                     alt="{{  auth()->user()->shop->getName() }}"><br/>
-                                {{ auth()->user()->shop->getName() }}
-                            </a>
-                        @endif
-                    </li>
-
-                    <li class="notifications js-notifications {{ setActive('profile.notifications.index', 'active') }}">
-                        <a href="{{ route('profiles.notifications.index', auth()->user()) }}" title="@lang('navigation.notifications_title')" class="menu-icon">
-                            @if ($notifications)
-                                <sup class="notification-badge js-notification-badge">{{ $notifications }}</sup>
-                            @endif
-                            <i class="fa fa-bell"></i>
-                            <span class="visible-xs-inline">@lang('navigation.notifications')</span>
-                        </a>
-                    </li>
-                    <li class="js-messages js-pushes-target-{{ auth()->user()->getRouteKey() }} {{ setActive(['discussions.index', 'discussions.show', 'discussions.ads.index'], 'active') }}">
-                        <a class="menu-icon" href="{{ route('discussions.index') }}#latest"
-                           title="@lang('navigation.messages_title')">
-                            <sup class="notification-badge js-notification-badge {{ $unread ? null : 'hidden' }}">{{ $unread }}</sup>
-                            <i class="fa fa-envelope"></i>
-                            <span class="visible-xs-inline">@lang('navigation.messages')</span>
-                        </a>
-                    </li>
-
-                    @if (auth()->user()->shop)
-                        <li class="js-messages js-pushes-target-{{ auth()->user()->shop->getRouteKey() }} {{ setActive(['shop_discussions.index', 'shop_discussions.show'], 'active') }}">
-                            <a class="menu-icon" href="{{ route('shop_discussions.index', auth()->user()->shop) }}#latest"
-                               title="@lang('navigation.messages_title')">
-                                <sup class="notification-badge js-notification-badge @if (!$unreadShop) hidden @endif">{{ $unreadShop }}</sup>
-                                <span class="label label-primary bottom-label">shop</span>
-                                <i class="fa fa-envelope icon--shop"></i>
-                                <span class="visible-xs-inline">@lang('navigation.messages')</span>
-                            </a>
-                        </li>
-                    @endif
-
                     <li role="presentation" class="visible-xs">
                         <a role="menuitem" tabindex="-1" href="{{ route('me.index') }}" title="@lang('navigation.profile_title')" class="menu-icon">
                             <i class="fa fa-cog"></i>
@@ -107,7 +62,7 @@
                         </li>
                     @endif
 
-                    <li class="navbar__avatar">
+                    <li class="navbar__avatar hidden-xs">
                         @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '25x25' ])
                     </li>
                     <li class="dropdown hidden-xs">
@@ -155,47 +110,56 @@
             </ul>
         </div>
     </div>
-</nav>
-<nav class="navbar" role="navigation">
-    <div class="container">
-        <div class="collapse navbar-collapse navbar__sneefr__collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a class="navbar__sneefr__item{{ (request()->path() == "/") ? '--active' : '' }}" href="{{ route('home') }}">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a class="navbar__sneefr__item{{ (request()->path() == "me") ? '--active' : '' }}" href="{{ route('me.index') }}">
-                        My profile
-                    </a>
-                </li>
-                @if(auth()->check())
-                    @if( auth()->user()->shop)
-                        <li>
-                            <a class="navbar__sneefr__item{{ ( url(request()->path() ) == route('shops.show', auth()->user()->shop)) ? '--active' : '' }}"
-                               href="{{ route('shops.show', auth()->user()->shop) }}">
-                                My Shop
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('items.create') }}" title="@lang('navigation.create_ad_title')"
-                               class="navbar__sneefr__item{{ ( url(request()->path() ) == route('items.create')) ? '--active' : '' }}">
-                                <i class="fa fa-plus-circle"></i>
-                                @lang('navigation.create_ad')
-                            </a>
-                        </li>
-                    @else
-                        <li role="presentation" class="visible-xs">
-                            <a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')"
-                               class="navbar__sneefr__item">
-                                <i class="fa fa-usd text-warning"></i>
-                                @lang('navigation.create_shop')
-                            </a>
-                        </li>
+    <div class="navbar__menu">
+        <div class="container">
+            <div class="collapse navbar-collapse navbar__sneefr__collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="navbar__sneefr__item{{ (request()->path() == "/") ? '--active' : '' }}" href="{{ route('home') }}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a class="navbar__sneefr__item{{ (request()->path() == "me") ? '--active' : '' }}" href="{{ route('me.index') }}">
+                            My profile
+                        </a>
+                    </li>
+                    @if(auth()->check())
+                        @if( auth()->user()->shop)
+                            <li>
+                                <a class="navbar__sneefr__item{{ ( url(request()->path() ) == route('shops.show', auth()->user()->shop)) ? '--active' : '' }}"
+                                   href="{{ route('shops.show', auth()->user()->shop) }}">
+                                    My Shop
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('items.create') }}" title="@lang('navigation.create_ad_title')"
+                                   class="navbar__sneefr__item{{ ( url(request()->path() ) == route('items.create')) ? '--active' : '' }}">
+                                    <i class="fa fa-plus-circle"></i>
+                                    @lang('navigation.create_ad')
+                                </a>
+                            </li>
+                            <li class="js-messages js-pushes-target-{{ auth()->user()->shop->getRouteKey() }} ">
+                                <a class="navbar__sneefr__item{{ setActive(['shop_discussions.index', 'shop_discussions.show'], '--active') }}"
+                                   href="{{ route('shop_discussions.index', auth()->user()->shop) }}#latest"
+                                   title="@lang('navigation.messages_title')">
+                                    <sup class="notification-badge js-notification-badge {{ $unreadShop ? '' : 'hidden' }}">{{ $unreadShop }}</sup>
+                                    @lang('navigation.messages')
+                                </a>
+                            </li>
+                        @else
+                            <li class="js-messages js-pushes-target-{{ auth()->user()->getRouteKey() }} ">
+                                <a class="navbar__sneefr__item{{ setActive(['discussions.index', 'discussions.show', 'discussions.ads.index'], '--active') }}"
+                                   href="{{ route('discussions.index') }}#latest"
+                                   title="@lang('navigation.messages_title')">
+                                    <sup class="notification-badge js-notification-badge {{ $unread ? '' : 'hidden' }}">{{ $unread }}</sup>
+                                    @lang('navigation.messages')
+                                </a>
+                            </li>
+                        @endif
                     @endif
-                @endif
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
