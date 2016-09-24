@@ -41,6 +41,13 @@ class AdPresenter extends Presenter
         return $this->formatAmount((string) $amount);
     }
 
+    public function priceWithFee($fee)
+    {
+        $amount = $this->model->price()->withFee($fee)->readable();
+
+        return $this->formatAmount((string) $amount);
+    }
+
     public function negotiatedPrice()
     {
         return $this->formatAmount((string) $this->model->negotiatedPrice()->readable());
@@ -80,6 +87,6 @@ class AdPresenter extends Presenter
 
         $symbol = $formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
 
-        return str_replace($symbol, "<sup>{$symbol}</sup>", $price);
+        return str_replace($symbol, "", $price) . $symbol;
     }
 }

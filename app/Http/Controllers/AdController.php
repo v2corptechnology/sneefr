@@ -39,7 +39,7 @@ class AdController extends Controller
         // Save visit
         Queue::push(new SaveAdView($ad->getId(), auth()->id()));
 
-        return view('ads.show', compact('ad', 'relationships'));
+        return view('ad.show', compact('ad', 'relationships'));
     }
 
     /**
