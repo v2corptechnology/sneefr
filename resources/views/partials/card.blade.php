@@ -11,10 +11,13 @@
     $url = "";
     $shop_url = "";
 
+    $singleSize = '300x128';
+    $multipleSize = '320x204';
+
     if($multiple) {
-        $gallerySize = $gallerySize ?? '320x204';
+        $gallerySize = $gallerySize ?? $multipleSize;
     }else {
-        $gallerySize = $gallerySize ?? '300x170';
+        $gallerySize = $gallerySize ?? $singleSize;
     }
 
     if($item instanceof \Sneefr\Models\Shop){
@@ -25,15 +28,13 @@
             foreach ($item->ads->take(3) as $ad){
                 array_push($images, $ad->images($gallerySize, true)[0]);
             }
-            if(count($images) < 3 && count($images ) > 0){
+            if(count($images) < 3 && count($images ) >= 0){
                 $multiple = false;
-            }else if(count($images ) == 0){
-                $multiple = false;
-                $images[0] = $item->getCover($gallerySize);
+                $images[0] = $item->getCover($singleSize);
             }
          }
         else{
-            $images[0] = $item->getCover($gallerySize);
+            $images[0] = $item->getCover($singleSize);
         }
         $url = route('shops.show', $item);
         $shop_url = $url;
