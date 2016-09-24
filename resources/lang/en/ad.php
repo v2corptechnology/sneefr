@@ -27,6 +27,12 @@ return [
         'btn_edit_title'             => "Edit this ad",
         'btn_pay'                    => "buy",
         'evaluations_ratio'          => "[-100,-1] No review |[1,Inf] :ratio% positive reviews",
+        'delivery_pick'              => "Pick-up instore :",
+        'delivery_us'                => "National shipping :",
+        'delivery_worldwide'         => "Internationnal schipping :",
+        'delevery_fee'               => "{0} Free|[1,Inf] +:fee",
+        'ad_detail_title'            => "Article details",
+        'ad_shipping_title'         => "Shipping & Conditions",
     ],
 
     'masked_text'          => "[masked]",
