@@ -20,7 +20,7 @@
   position: relative;
   min-height: 70px;
   margin: 10px;
-  margin-top: 5px;
+  margin-top: 10px;
   overflow: hidden;
 }
 
@@ -83,4 +83,15 @@
   padding-right: 0;
   margin-left: 0;
   margin-right: 0;
+}
+
+.card__box__description__marker {
+  position: absolute;
+  width: 10px;
+  left: 0;
+  bottom: 4px
+}
+
+.card__box__description__location {
+  padding-left: 10px;
 }

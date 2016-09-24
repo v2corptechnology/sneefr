@@ -85,7 +85,8 @@
                 <div>
                     <i class="fa fa-thumbs-up no-lr-padding color-green"></i> {{ $like }} <i class="fa fa-thumbs-down no-lr-padding color-red"></i> {{ $notLike }}
                 </div>
-                <span><i class="fa fa-map-marker"></i> {{ $location }}</span>
+                <i class="fa fa-map-marker card__box__description__marker"></i>
+                <span class="text-indent card__box__description__location">{{ $location }}</span>
             </div>
         </div>
     </div>
