@@ -45,6 +45,30 @@
   font-size: 22px;
 }
 
+.navbar__sneefr__form__mobile {
+  margin-top: 15px;
+}
+
+.navbar__sneefr__input--mobile {
+  @extend .navbar__sneefr__input;
+
+  &:first-child {
+    margin-bottom: 5px;
+  }
+}
+
+.search__mobile {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.navbar__sneefr__search--mobile {
+  @extend .navbar__sneefr__search;
+  height: 95px;
+  padding-left: 2px;
+  padding-right: 2px
+}
+
 .navbar-nav li a {
 
   font-family: "Open Sans";

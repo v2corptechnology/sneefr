@@ -11,15 +11,41 @@
             <a class="navbar-brand" href="/">
                 <img class="img-responsive" src="{{ url('img/logo-sneefr.png') }}" alt="">
             </a>
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search-responsive" style="margin-top: 5px;">
+                <i class="fa fa-search color-pink"></i>
+            </button>
         </div>
 
+        <form action="{{ route('search.index') }}" class="collapse navbar__sneefr__form__mobile" role="search" id="search-responsive">
+            <div class="form-group col-xs-10 search__mobile">
+                <input type="search"
+                       class="form-control navbar__sneefr__input--mobile"
+                       placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…"
+                       name="q"  id="q" autocomplete="of"
+                       value="{{ $query }}">
+                <input type="text"
+                       class="form-control navbar__sneefr__input--mobile"
+                       placeholder="À proximité de Las Vegas, NV"
+                       name="location" autocomplete="off">
+                <input type="hidden" name="type" value="{{ $type }}">
+            </div>
+
+            <div class="form-group col-xs-2 search__mobile">
+                <button type="submit" class="btn btn-sky-blue navbar__sneefr__search--mobile btn-block">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </form>
+
         <div class="collapse navbar-collapse navbar__sneefr__collapse">
-            <form action="{{ route('search.index') }}" class=" navbar-left navbar__sneefr__form" role="search">
+            <form action="{{ route('search.index') }}" class=" navbar-left navbar__sneefr__form hidden-xs" role="search">
                 <div class="form-group col-sm-6">
                     <input type="search"
                            class="form-control navbar__sneefr__input"
                            placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…"
-                           value="{{ $query }}" id="q">
+                           name="q" id="q"
+                           value="{{ $query }}">
                     <input type="hidden" name="type" value="{{ $type }}">
                 </div>
                 <div class="form-group col-sm-4 col-md-5">
