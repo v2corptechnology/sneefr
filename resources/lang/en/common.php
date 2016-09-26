@@ -11,5 +11,13 @@ return [
     'like' => [
         'like' => 'sneef',
         'unlike' => 'unsneef',
-    ]
+    ],
+
+    'pub'       => [
+        'title'          => "Shop owner?",
+        'description'    => "Sneefr hepls you online and attract more customers in your city. No fees on sales."
+    ],
+    'trending_shops'     => "Trending shops",
+    'trending_description'  => "Selected by sneefr, for you every week",
+    'browse_by_category'  => "Naviguer par catégories",
 ];

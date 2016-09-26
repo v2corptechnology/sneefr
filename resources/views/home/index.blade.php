@@ -33,8 +33,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="home__section home__section--padding">
-                            <h4 class="home__section__title">Trending shops <span class="home__section__description">Selected by sneefr, for you every week</span></h4>
-                            <a href="" class="btn btn-default-o pull-right">See All</a>
+                            <h4 class="home__section__title">@lang('common.trending_shops') <span class="home__section__description">@lang('common.trending_description')</span></h4>
+                            <a href="" class="btn btn-default-o pull-right">@lang('button.see_all')</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         @endforeach
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-default-o" href="#">See more</a>
+                        <a class="btn btn-default-o" href="#">@lang('button.see_more')</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
 
             <div class="col-sm-12">
                 <div class="home__section home__section--padding">
-                    <h4 class="home__section__title">Naviguer par catégories</h4>
+                    <h4 class="home__section__title">@lang('common.browse_by_category')</h4>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
                             @endforeach
                         </div>
                         <div class="col-sm-12" style="padding-right: 30px;">
-                            <a href="#" class="btn btn-default-o pull-right">See more</a>
+                            <a href="#" class="btn btn-default-o pull-right">@lang('button.see_more')</a>
                         </div>
                     </div>
 
@@ -154,11 +154,11 @@
     <div class="shop__pub text-center color-white">
         <div class="container">
             <div class="col-sm-6 col-sm-offset-3">
-                <h1 class="shop__pub__title">Shop owner?</h1>
+                <h1 class="shop__pub__title">@lang('common.pub.title')</h1>
                 <p class="shop__pub__description">
-                    Sneefr hepls you online and attract more customers in your city. No fees on sales.
+                    @lang('common.pub.description')
                 </p>
-                <div class="btn btn-blue">LEARN MORE</div>
+                <a href="{{ route('pricing') }}" class="btn btn-blue text-uppcase">@lang('button.learn_more')</a>
             </div>
         </div>
     </div>
