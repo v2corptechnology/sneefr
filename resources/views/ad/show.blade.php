@@ -105,12 +105,12 @@
                                 <span class="ad__label" style="line-height: 30px;">Condition : {{ $ad->present()->condition() }}</span> <span class="badge badge-gold"> @choice('ad.show.stock', $ad->remaining_quantity, ['nb' => $ad->remaining_quantity])</span>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-xs-4">
+                            <div class="row text-center-mobile">
+                                <div class="col-sm-4">
                                     <span class="ad__price">{{ $ad->present()->price() }}</span>
                                 </div>
                                 @if ($ad->isMine() || (auth()->check() && auth()->user()->isAdmin()))
-                                    <div class="col-xs-8" style="text-align: right;">
+                                    <div class="col-sm-8">
                                         <a class="btn ad__buy btn-danger" href="{{ route('ads.chooseBuyer', $ad->getSlug()) }}"
                                            title="@lang('ad.show.btn_remove_title')">
                                             <i class="fa fa-trash"></i>
@@ -124,12 +124,12 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div class="col-xs-5">
+                                    <div class="col-sm-5" style="margin-bottom: 2px;">
                                         <span class="ad__label">Quantity : </span>
                                         <input type="numeric" class="form-control ad__input" value="1" min="1" max="{{ $ad->remaining_quantity }}" style="width: 60px;display: inline-block;">
                                     </div>
-                                    <div class="col-xs-3">
-                                        <a class="btn ad__buy"
+                                    <div class="col-sm-3">
+                                        <a class="btn ad__buy btn-block"
                                            @if(auth()->check())
                                            href="{{ route('payments.create', ['ad' => $ad]) }}"
                                            @else
