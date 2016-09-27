@@ -18,6 +18,7 @@ body.with-fixed {
 
 .vertical-list {
   @extend .list-group;
+  margin-top: 10px;
   border-radius: 0;
   box-shadow: none;
   position: relative;
@@ -45,6 +46,8 @@ body.with-fixed {
 
 .messages-container {
   padding-bottom: 6rem;
+  background-color: #fff;
+  border: 1px solid #DDD;
 }
 
 .messages-head {
@@ -52,15 +55,13 @@ body.with-fixed {
   background-color: #E9EAED;
   border-bottom: 1px solid #DDD;
   padding: 0.5rem 0;
-  position: fixed;
   z-index: 100;
 }
 
 .messages {
-  border: 1px solid #DDD;
   border-top: none;
   background-color: #fff;
-  padding: 6rem 1rem 1rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
 }
 
 .messages .media-body {

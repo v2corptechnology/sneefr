@@ -1,5 +1,5 @@
 <?php $recipient = $currentDiscussion->recipient();?>
-<nav class="answer-container navbar navbar-default navbar-fixed-bottom">
+<nav class="answer-container navbar navbar-fixed-bottom">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">

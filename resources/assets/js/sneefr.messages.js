@@ -5,6 +5,7 @@ var MessagingWidget = {
         messageHead: $('.js-message-head'),
         fixedStartingAtWidth: 991,
         delayBeforeRead: 2500,
+        footer: $('.footer'),
     },
 
     init: function () {
@@ -13,6 +14,7 @@ var MessagingWidget = {
             this.resizeLists();
             this.removeActiveStateForResponsive();
         }
+        this.settings.footer.addClass('hidden');
     },
 
     bindUIActions: function () {
@@ -28,7 +30,6 @@ var MessagingWidget = {
             MessagingWidget.settings.fixedHeightNodes.each(function () {
                 var $column = $(this);
                 $column.height($(window).height() - $('.navbar-default').height())
-                    .css('position', 'fixed')
                     .width($column.parent().width());
             });
         } else {
@@ -79,8 +80,8 @@ $.fn.dontScrollParent = function()
 
         return true;
     });
-}
+};
 
 $(function() {
     MessagingWidget.init();
-})
+});
