@@ -31,7 +31,7 @@ class ForceOutdatedEvaluations extends Job implements ShouldQueue
     public function handle(EvaluationRepository $EvaluationRepository)
     {
         $outdated = Ad::onlyTrashed()
-            ->whereNotNull('sold_to')
+            ->sold()
             ->whereDate('deleted_at', '>', Carbon::now()->subDays(11))
             ->whereDate('deleted_at', '<', Carbon::now()->subDays(10))
             ->with('evaluation')
