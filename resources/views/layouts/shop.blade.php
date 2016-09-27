@@ -182,7 +182,6 @@
                         <p class="summary__content summary__content--extra">
                             @foreach ($shop->employees as $employee)
                                 <a class="user__picture" data-toggle="tooltip"
-                                   href="{{ route('profiles.show', $employee) }}"
                                    title="@lang('ad.show_profile_title', ['name' => $employee->present()->givenName()])">
                                     {!! HTML::profilePicture($employee->socialNetworkId(), $employee->present()->fullName(), 20) !!}
                                 </a>
