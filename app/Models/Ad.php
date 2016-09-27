@@ -80,7 +80,6 @@ class Ad extends Model
         'images',
         'locked_for',
         'final_amount',
-        'sold_to',
         'condition_id',
         'created_at',
         'updated_at',
@@ -288,7 +287,7 @@ class Ad extends Model
 
     public function scopeSold($query)
     {
-        return $query->onlyTrashed()->whereNotNull('sold_to');
+        return $query->onlyTrashed()->where('remaining_quantity', 0);
     }
 
     /**
@@ -302,12 +301,12 @@ class Ad extends Model
     public function scopeOnlySold()
     {
         // Explicitly narrow to only soft-deleted elements.
-        return $this->onlyTrashed()->whereNotNull('sold_to');
+        return $this->onlyTrashed()->where('remaining_quantity', 0);
     }
 
     public function scopeDeletedWithoutSold()
     {
-        return $this->onlyTrashed()->whereNull('sold_to');
+        return $this->onlyTrashed()->where('remaining_quantity', '>', 0);
     }
 
     public function scopeInArray($query, $ids)
