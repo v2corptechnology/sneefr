@@ -191,8 +191,6 @@ class AuthController extends Controller
                 $user->verified = true;
                 $user->save();
 
-                $this->dispatch(new UpdateRank($user));
-
                 return redirect()->route('home')->with('success', trans('feedback.email_activation_success'));
             }
         }
