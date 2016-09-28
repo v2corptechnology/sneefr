@@ -30,7 +30,8 @@ class CreateShopRequest extends Request
             'longitude'   => 'required|numeric',
             'logo'        => 'required|image',
             'cover'       => 'required|image',
-            'terms'       => 'required'
+            'terms'       => 'required',
+            'category'    => 'required|exists:categories,id',
         ];
     }
 
