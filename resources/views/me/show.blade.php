@@ -30,6 +30,10 @@
             </div>
 
             <div class="col-md-4">
+
+                {{-- Profile avatar panel --}}
+                @include('profiles.settings.avatar')
+
                 {{--
                     Settings panel for notifications.
                 --}}
