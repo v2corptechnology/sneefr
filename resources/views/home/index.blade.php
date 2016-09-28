@@ -78,7 +78,7 @@
             {{-- end best seller --}}
         </div>
 
-        <div class="row">
+        <div class="row" id="shop-categories">
 
             <div class="col-sm-12">
                 <div class="home__section home__section--padding">
@@ -93,36 +93,25 @@
                         <div class="col-xs-12">
                             <ul class="home__categories">
                                 <li>
-                                    <a href="#">All</a>
+                                    <a href="{{ route('home') }}#shop-categories">All</a>
                                 </li>
-                                <li>
-                                    <a href="#">Véhicles</a>
-                                </li>
-                                <li class="home__categories__item--active">
-                                    <a href="#">Multimedia</a>
-                                </li>
-                                <ul class="home__categories home__categories--child">
-                                    <li class="home__categories__item--active">
-                                        <i class="fa fa-check color-pink home__categories__item--checked"></i>
-                                        <a href="#">Computers</a>
+                                @foreach($categories as $category)
+                                    <li class="home__categories__item{{ $categories->parent == $category->id ? '--active' : '' }}">
+                                        <a href="{{ route('home', "category={$category->id}#shop-categories") }}">{{ trans("category.{$category->id}") }}</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Video games & Consoles </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Home entertainement</a>
-                                    </li>
-                                </ul>
-
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li>
-                                    <a href="#">Fashion</a>
-                                </li>
-                                <li>
-                                    <a href="#">Jewelry</a>
-                                </li>
+                                    @if( $categories->parent == $category->id && $category->childrens)
+                                        <ul class="home__categories home__categories--child">
+                                            @foreach($category->childrens as $child)
+                                                <li class="home__categories__item{{ $categories->child == $child->id ? '--active' : '' }}">
+                                                    @if($categories->child == $child->id)
+                                                        <i class="fa fa-check color-pink home__categories__item--checked"></i>
+                                                    @endif
+                                                    <a href="{{ route('home', "category={$child->id}") }}#shop-categories">{{ trans("category.{$child->id}") }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>
