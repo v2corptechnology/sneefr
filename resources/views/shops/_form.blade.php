@@ -60,16 +60,9 @@
            accept="image/*" autocomplete="off" @if(!$isEditMode) required @endif>
     {!! $errors->first('cover', '<p class="help-block">:message</p>') !!}
 </div>
-<style>
-    label .margin-right{
-        margin-right: 10px;
-    }
-    .gray-light {
-        color: #888888;
-    }
-</style>
+
 <div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
-    <label class="control-label" for="cover">@lang('shop.create.cover_label')</label>
+    <label class="control-label" for="cover">@lang('shop.create.category_label')</label>
    <div class="row">
        @foreach($categories as $category)
            <div class="col-sm-4">

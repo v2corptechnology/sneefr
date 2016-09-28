@@ -28,6 +28,7 @@ return [
         'terms_label'             => "I’ve read and agree to the <a href=\":link\" title=\"Read the terms of use\" target=\"_blank\">terms of use</a>",
         'save_label'              => "Open my shop",
         'edit_label'              => "Save changes",
+        'category_label'          => "The categories of products in your shop",
     ],
     'sidebar'     => [
         'evaluations'       => "[-1,0] No review |[0,Inf] :ratio% of positive reviews",
