@@ -34,7 +34,7 @@
                     <div class="col-sm-12">
                         <div class="home__section home__section--padding">
                             <h4 class="home__section__title">@lang('common.trending_shops') <span class="home__section__description">@lang('common.trending_description')</span></h4>
-                            <a href="" class="btn btn-default-o pull-right">@lang('button.see_all')</a>
+                            <a href="{{ route('search.index', ['type' => 'shop']) }}" class="btn btn-default-o pull-right">@lang('button.see_all')</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         @endforeach
                     </div>
                     <div class="text-center">
-                        <a class="btn btn-default-o" href="#">@lang('button.see_more')</a>
+                        <a class="btn btn-default-o" href="{{ route('search.index', ['type' => 'ad']) }}">@lang('button.see_more')</a>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
                             @endforeach
                         </div>
                         <div class="col-sm-12" style="padding-right: 30px;">
-                            <a href="#" class="btn btn-default-o pull-right">@lang('button.see_more')</a>
+                            <a href="{{ route('search.index', ['type' => 'shop']) }}" class="btn btn-default-o pull-right">@lang('button.see_more')</a>
                         </div>
                     </div>
 
