@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'site_description' => "Good deals, great people",
+    'site_description' => "Buy from great local shops in your city, all in one place",
     'cgu'              => "<a href=\":url\" title=\"Terms of use\">Terms</a>",
     'faq'              => "<a href = \":url\" title=\"List of frequently asked questions\">FAQ</a>",
     'locale_name'      => "en_US.utf8",
@@ -19,5 +19,5 @@ return [
     ],
     'trending_shops'     => "Trending shops",
     'trending_description'  => "Selected by sneefr, for you every week",
-    'browse_by_category'  => "Naviguer par catégories",
+    'browse_by_category'  => "Browse categories",
 ];
