@@ -4,11 +4,11 @@ use Hashids\Hashids;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
-use Sneefr\Jobs\UpdateRank;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\LikeAd;
+use Sneefr\Models\Ad;
+use Sneefr\Models\Category;
+use Sneefr\Models\Shop;
 use Sneefr\Models\User;
-use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
@@ -29,13 +29,28 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $shopsByCategory = \Sneefr\Models\Shop::take(6)->get();
-        $bestSellers = \Sneefr\Models\Ad::take(6)->get();
-        $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(4)->get();
+        $categories = Category::parent()->with('childrens')->get();
+        $categories->child = null;
+        $categories->parent = null;
+        $category = Category::find($request->get('category'));
+
+        if($category) {
+            $categories->child = $category->id;
+            $categories->parent = $category->child_of ?: $category->id;
+        }
+
+        if($category) {
+            $shopsByCategory = Category::whereIn('id', $category->getChildsIds())->with('shops')->get()->take(6)->pluck('shops')->collapse();
+        }else {
+            $shopsByCategory = Shop::with('evaluations')->take(6)->get();
+        }
+
+        $bestSellers = Ad::take(6)->get();
+        $topShops = Shop::withCount('ads')->with(['evaluations','ads' => function ($query) { $query->take(3);}])->orderBy('ads_count', 'desc')->take(4)->get();
         
-        return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers'));
+        return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers', 'categories'));
     }
 
     /**

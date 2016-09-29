@@ -49,4 +49,27 @@ class Category extends Model
             ->prepend(trans('ad_form.create.category_placeholder'))
             ->toArray();
     }
+
+    public function getChildsIds()
+    {
+        $category_list = self::where('child_of', $this->id)->pluck('id')->toArray();
+        array_push($category_list, $this->id);
+        return $category_list;
+    }
+
+    public function scopeParent($query)
+    {
+        return $query->whereNull('child_of');
+    }
+
+    public function childrens()
+    {
+        return $this->hasMany(self::class, 'child_of');
+    }
+
+
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class, 'shop_categorie')->with('evaluations');
+    }
 }

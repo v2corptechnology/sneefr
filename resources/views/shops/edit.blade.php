@@ -52,6 +52,8 @@
                         'location' => $shop->getLocation(),
                         'latitude' => $shop->getLatitude(),
                         'longitude' => $shop->getLongitude(),
+                        'categories' => $categories,
+                        'shop_categories' => $shop->categories->pluck('id')->toArray(),
                         'isEditMode' => true,
                     ])
 
