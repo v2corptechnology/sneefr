@@ -121,7 +121,7 @@ Route::put('profiles/{profile}/settings', [
 Route::get('profiles/{profile}/parameters/confirmEmail/{key}', [
     'as'         => 'email_confirmation',
     'uses'       => 'ProfilesController@confirmEmail',
-    'middleware' => ['auth', 'auth.expected'],
+    'middleware' => ['auth'],
 ]);
 
 
