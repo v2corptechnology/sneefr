@@ -7,6 +7,7 @@ use Sneefr\Http\Requests\CreateShopRequest;
 use Sneefr\Http\Requests\UpdateShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
+use Sneefr\Models\Category;
 use Sneefr\Models\DiscussedAd;
 use Sneefr\Models\Discussion;
 use Sneefr\Models\DiscussionUser;
@@ -95,7 +96,9 @@ class ShopsController extends Controller
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
-        return view('shops.create');
+        $categories = Category::parent()->with('childrens')->get();
+
+        return view('shops.create', compact('categories'));
     }
 
     /**
@@ -116,7 +119,7 @@ class ShopsController extends Controller
         $shop = new Shop([
             'slug'    => $request->input('slug'),
             'user_id' => auth()->id(),
-            'data'    => $request->except('cover', 'logo'),
+            'data'    => $request->except('cover', 'logo', 'category'),
         ]);
 
         // Store the images
@@ -127,6 +130,9 @@ class ShopsController extends Controller
 
         // Save new shop
         $shop->save();
+
+        // Save categories for this shop
+        $shop->categories()->sync($request->get('category'));
 
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
@@ -153,7 +159,9 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
-        return view('shops.edit', compact('shop'));
+        $categories = Category::parent()->with('childrens')->get();
+
+        return view('shops.edit', compact('shop', 'categories'));
     }
 
     /**
@@ -174,10 +182,13 @@ class ShopsController extends Controller
             $images = $this->moveImages($shop, $request);
         }
 
+        // Update categories of this shop
+        $shop->categories()->sync($request->get('category'));
+
         // Start by using the existing data then overwrite it
         // with any new piece of data that may come from the request.
         $updatedData = collect($shop->data)
-            ->merge($request->except('slug', 'terms'))
+            ->merge($request->except('slug', 'terms', 'category'))
             ->merge($images);
 
         // Persist the changes
