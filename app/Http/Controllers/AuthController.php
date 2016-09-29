@@ -48,7 +48,7 @@ class AuthController extends Controller
         }
 
         $bestSellers = Ad::take(6)->get();
-        $topShops = Shop::withCount('ads')->with(['evaluations','ads' => function ($query) { $query->take(3);}])->orderBy('ads_count', 'desc')->take(4)->get();
+        $topShops = Shop::withCount('ads')->with('evaluations')->orderBy('ads_count', 'desc')->take(4)->get();
         
         return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers', 'categories'));
     }
