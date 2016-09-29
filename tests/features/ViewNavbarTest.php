@@ -17,8 +17,8 @@ class ViewNavbarTest extends TestCase
     public function test_cannot_view_avatar_and_menu_when_guest()
     {
         $this->visit('/')
-            ->dontSee('<li role="presentation" class="navbar__avatar">')
-            ->dontSee('<li role="presentation"><a class="avatar"');
+            ->dontSee('<li class="navbar__avatar"')
+            ->dontSee('<li><a class="avatar"');
     }
 
     public function test_view_avatar_and_menu_when_auth()
@@ -27,7 +27,7 @@ class ViewNavbarTest extends TestCase
 
         $this->visit('/')
             ->see('<a class="navbar__profile dropdown-toggle" data-toggle="dropdown"')
-            ->see('<li role="presentation" class="navbar__avatar">');
+            ->see(' <li class="navbar__avatar');
     }
 
     public function test_view_users_avatar_when_having_no_shop()
@@ -37,7 +37,7 @@ class ViewNavbarTest extends TestCase
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see($user->facebook_id . '.jpg" alt="'.$user->present()->fullName().'"');
+            ->see($user->avatar . '" alt="'.$user->present()->fullName().'"');
     }
 
     public function test_view_shops_avatar_when_having_a_shop()

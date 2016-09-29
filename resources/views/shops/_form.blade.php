@@ -60,3 +60,25 @@
            accept="image/*" autocomplete="off" @if(!$isEditMode) required @endif>
     {!! $errors->first('cover', '<p class="help-block">:message</p>') !!}
 </div>
+
+<div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
+    <label class="control-label" for="cover">@lang('shop.create.category_label')</label>
+   <div class="row">
+       @foreach($categories as $category)
+           <div class="col-sm-4">
+               <label>
+                   <input class="margin-right" type="checkbox" name="category[]" value="{{ $category->id }}" {{ in_array($category->id, $shop_categories) ? 'checked' : '' }}>{{ trans("category.{$category->id}") }}
+               </label>
+           </div>
+           @foreach($category->childrens as $child)
+               <div class="col-sm-4">
+                   <label class="gray-light">
+                       <input class="margin-right" type="checkbox" name="category[]" value="{{ $child->id }}" {{ in_array($category->id, $shop_categories) ? 'checked' : '' }}>{{ trans("category.{$child->id}") }}
+                   </label>
+               </div>
+           @endforeach
+
+       @endforeach
+   </div>
+    {!! $errors->first('category', '<p class="help-block">:message</p>') !!}
+</div>

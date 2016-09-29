@@ -5,7 +5,11 @@
 @import "variables"; // include variables after bootstrap since they have some names in common
 
 // @import "partials/buttons";
-@import "partials/navigation";
+@import "partials/general";
+@import "partials/nav";
+@import "partials/card__box";
+@import "partials/footer";
+//@import "partials/navigation";
 @import "partials/ad";
 @import "partials/buttons";
 @import "partials/box";
@@ -16,6 +20,8 @@
 @import "partials/user";
 @import "partials/card";
 
+@import "pages/home";
+@import "pages/ad";
 @import "pages/profile";
 @import "pages/dashboard";
 @import "pages/messages";

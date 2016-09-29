@@ -107,6 +107,8 @@ return [
     'parameters' => [
         'page_title'                => "My settings",
         'your_info'                 => "Your information",
+        'given_name_label'          => "First name",
+        'surname_name_label'        => "Last name",
         'email_label'               => "Your email address",
         'email_placeholder'         => "Ex: hello@sneefr.com",
         'email_not_yet_validated'   => "You have not confirmed your email <strong>:email</strong> yet",
@@ -154,5 +156,7 @@ return [
             'btn_link'       => "Stripe Connect",
             'btn_link_title' => "You will be redirected to Stripe's website",
         ],
+        'avatar_title'              => 'Profile picture',
+        'avatar_upload_button'      => 'Upload Image',
     ],
 ];

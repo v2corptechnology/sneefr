@@ -15,12 +15,12 @@ class UserPresenter extends Presenter
 
     public function givenName() : string
     {
-        return (string) $this->model->given_name;
+        return (string) $this->model->given_name ?? '';
     }
 
     public function surname() : string
     {
-        return $this->model->surname;
+        return $this->model->surname ?? '';
     }
 
     public function truncatedName() : string

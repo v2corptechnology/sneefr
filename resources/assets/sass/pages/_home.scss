@@ -1,0 +1,228 @@
+
+/****************************
+/*       Home header
+****************************/
+.home__header {
+  position: relative;
+}
+
+.home__header__img {
+
+}
+
+.home__header__content {
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  right: 40px;
+  color: #ffffff;
+}
+
+.home__header__title {
+  max-width: 680px;
+  font-family: "Open Sans";
+  font-size: 38px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  color: #ffffff;
+}
+
+.home__header__dscription {
+  max-width: 500px;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.56;
+  color: #ffffff;
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  .home__header__title {
+    font-size: 17px;
+  }
+  .home__header__dscription, .home__header__locale {
+    font-size: 12px;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .home__header__content {
+    top: 10px;
+    left: 15px;
+    right: 15px;
+  }
+
+  .home__header__title {
+    font-size: 17px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .home__header__content {
+    top: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .home__header__title {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 10px;
+    margin-bottom: 0;
+  }
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+  .home__header__content {
+    top: 5px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .home__header__title {
+    font-size: 11px;
+    margin-top: 0;
+    margin-bottom: 3px;
+  }
+
+  .home__header__dscription, .home__header__locale {
+    font-size: 8px;
+    margin-bottom: 0;
+  }
+
+}
+
+/****************************
+/*      Home section
+****************************/
+
+.home__section {
+  border-bottom: 1px solid #d8d8d8;
+  margin-bottom: 15px;
+}
+
+.home__section--padding {
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+.home__section__title{
+  display: inline-block;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-stretch: normal;
+  font-size: 24px;
+  font-weight: 600;
+  color: #454545;
+  margin: 0px;
+}
+
+.home__section__description {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  color: #646464;
+}
+
+.home__section__title--small{
+  font-size: 18px;
+}
+
+
+/****************************
+/*     Categorie list
+****************************/
+
+.home__categories {
+  list-style: none;
+  padding-left: 15px;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.94;
+
+  a {
+    color: #878787;
+  }
+}
+
+li.home__categories__item--active, li.home__categories__child--active {
+    a {
+      color: #000000;
+    }
+}
+
+.home__categories--child {
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.home__categories__item--checked {
+  margin-left: -20px;
+}
+
+/****************************
+/*     shop pub
+****************************/
+
+.shop__pub__title {
+  height: 65px;
+  font-family: "Open Sans";
+  font-size: 48px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #ffffff;
+}
+
+.shop__pub__description {
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.44;
+  text-align: center;
+  color: #ffffff;
+  padding-bottom: 20px;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .shop__pub__title {
+    height: 65px;
+    font-size: 38px;
+  }
+
+  .shop__pub__description {
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+
+
+}

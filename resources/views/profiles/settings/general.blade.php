@@ -10,6 +10,39 @@
 
             <input type="hidden" name="settings_category" value="info">
 
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <label class="control-label" for="given_name">
+                        @lang('profile.parameters.given_name_label')
+                    </label>
+                    <input type="text"
+                           name="given_name" class="form-control"
+                           placeholder="{{ auth()->user()->present()->givenName() }}"
+                           value="{{ old('given_name') }}"
+                           autocomplete="off">
+
+                    {{-- Potential error messages following a form submit --}}
+                    @if ($errors->has('given_name'))
+                        <p class="help-block">{{ $errors->first('given_name') }}</p>
+                    @endif
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label" for="surname">
+                        @lang('profile.parameters.surname_name_label')
+                    </label>
+                    <input type="text"
+                           name="surname" class="form-control"
+                           placeholder="{{ auth()->user()->present()->surName() }}"
+                           value="{{ old('surname') }}"
+                           autocomplete="off">
+
+                    {{-- Potential error messages following a form submit --}}
+                    @if ($errors->has('surname'))
+                        <p class="help-block">{{ $errors->first('surname') }}</p>
+                    @endif
+                </div>
+            </div>
+
             <div class="form-group row {{ $errors->has('email') ? 'has-error' : '' }}">
                 <div class="col-md-12">
                     <label class="control-label" for="email">

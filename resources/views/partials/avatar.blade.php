@@ -14,8 +14,8 @@ if ($of instanceof \Sneefr\Models\Shop) {
 } else {
 
     $route = route('profiles.ads.index', $of);
-    $src = \Img::avatar($of->facebook_id, $size);
-    $src2x = \Img::avatar($of->facebook_id, $size . '@2x');
+    $src = \Img::avatar($of->avatar, $size);
+    $src2x = \Img::avatar($of->avatar, $size . '@2x');
     $name = $of->present()->fullName();
 
 }

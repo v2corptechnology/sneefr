@@ -5,6 +5,8 @@ return [
     'img_logo'               => "sneefR's pig",
     'btn_login_title'        => "Just 1 click to start using sneefR",
     'btn_login'              => "Login",
+    'btn_facebook_login'     => "Login with Facebook",
+    'facebook_email_exist'   => "This user has not yet linked their Facebook account",
     'btn_pro_title'          => "Open your shop on sneefR in 2 minutes",
     'btn_pro'                => "Pro Seller?",
     'btn_add_title'          => "Sell what you want in 2 clicks",
@@ -44,4 +46,7 @@ return [
     'privacy'                => "Privacy",
     'help_title'             => "Need help? Click here",
     'help'                   => "Help",
+    'login_page_title'       => "Login",
+    'register_page_title'    => "Register",
+    'reset_page_title'       => "Reset password",
 ];

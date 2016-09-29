@@ -51,6 +51,8 @@
                         'location' => old('location', auth()->user()->getLocation()),
                         'latitude' => old('latitude', auth()->user()->getLatitude()),
                         'longitude' => old('longitude', auth()->user()->getLongitude()),
+                        'categories' => $categories,
+                        'shop_categories' => old('category', []),
                         'isEditMode' => false,
                     ])
 

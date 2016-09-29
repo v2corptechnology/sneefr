@@ -1,0 +1,108 @@
+/****************************
+/*    General
+****************************/
+.color-pink {
+  color: #ff1b54;
+}
+
+.color-white {
+  color: #ffffff;
+}
+
+.btn-default-o {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  color: #555555;
+  border-radius: 2px;
+  border: solid 1px #555555;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.btn-default-o:hover {
+  color: #ffffff;;
+  border: solid 1px #ffffff;
+  background-color: #555555;;
+}
+
+
+.no-lr-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.color-green {
+  color: #7ed321;
+}
+
+.color-red {
+  color: #f01815;
+}
+
+.text-indent {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.btn-blue {
+  font-family: OpenSans;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  color: #ffffff;
+  border-radius: 2px;
+  background-color: #00324d;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.28);
+  padding: 14px 40px;
+}
+
+.btn-sky-blue {
+  background-color: #007dc3;
+  color: #fff;
+}
+
+.btn-sky-blue:hover {
+  border: 1px solid #007dc3;
+  background-color: #ffffff;
+  color: #007dc3;
+}
+
+.btn-blue:hover {
+  color: #00324d;
+  background-color: #ffffff;
+}
+
+.space {
+  height: 100px;
+}
+
+.btn {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-stretch: normal;
+}
+
+.text-uppcase {
+  text-transform: uppercase;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .text-center-mobile {
+    text-align: center;
+  }
+}
+
+label .margin-right{
+  margin-right: 10px;
+}
+.gray-light {
+  color: #888888;
+}

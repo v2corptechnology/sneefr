@@ -1,12 +1,14 @@
 <?php namespace Sneefr\Http\Controllers;
 
 use Hashids\Hashids;
+use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\LikeAd;
+use Sneefr\Models\Ad;
+use Sneefr\Models\Category;
+use Sneefr\Models\Shop;
 use Sneefr\Models\User;
-use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
@@ -27,22 +29,28 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(AdRepository $adRepository)
+    public function index(Request $request)
     {
-        $randomAd = \Sneefr\Models\Ad::orderByRandom()->with(['seller', 'shop'])->take(1)->get()->first();
-        $topShops = \Sneefr\Models\Shop::withCount('ads')->orderBy('ads_count', 'desc')->take(3)->get();
-        $highlighted = [
-            ['class' => 'first', 'parentId' => 1, 'ids' => [2, 3, 4, 5, 6, 7], 'ads' => $adRepository->byCategory(2, 3, 4, 5, 6, 7)],
-            ['class' => 'second', 'parentId' => 14, 'ids' => [15, 16, 17, 18], 'ads' => $adRepository->byCategory(15, 16, 17, 18)],
-            ['class' => 'third', 'parentId' => 25, 'ids' => [26, 27, 28, 29, 30], 'ads' => $adRepository->byCategory(26, 27, 28, 29, 30)],
-            ['class' => 'fourth', 'parentId' => 40, 'ids' => [41, 42, 43, 44, 45], 'ads' => $adRepository->byCategory(41, 42, 43, 44, 45)],
-        ];
+        $categories = Category::parent()->with('childrens')->get();
+        $categories->child = null;
+        $categories->parent = null;
+        $category = Category::find($request->get('category'));
 
-        if (! $randomAd) {
-            return('No ads yet, please <a href="' . route('items.create') . '">create one</a>');
+        if($category) {
+            $categories->child = $category->id;
+            $categories->parent = $category->child_of ?: $category->id;
         }
 
-        return view('pages.home.index', compact('randomAd', 'topShops', 'highlighted'));
+        if($category) {
+            $shopsByCategory = Category::whereIn('id', $category->getChildsIds())->with('shops')->get()->take(6)->pluck('shops')->collapse()->unique('shop');
+        }else {
+            $shopsByCategory = Shop::with('evaluations')->take(6)->get();
+        }
+
+        $bestSellers = Ad::take(6)->get();
+        $topShops = Shop::withCount('ads')->with('evaluations')->orderBy('ads_count', 'desc')->take(4)->get();
+        
+        return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers', 'categories'));
     }
 
     /**
@@ -104,6 +112,10 @@ class AuthController extends Controller
         // The person is properly authenticated and has given
         // us access to all the scopes we required. Great!
         $user = User::register($this->connector->getProfile());
+
+        if(!$user) {
+            return redirect('/login')->withError(trans('login.facebook_email_exist'));
+        }
 
         // Log in the user
         \Auth::login($user, true);
@@ -168,5 +180,36 @@ class AuthController extends Controller
         \Session::flush();
 
         return redirect('/login');
+    }
+
+    /**
+     * Activate account using data from email link
+     *
+     * @param $key
+     * @param Encrypter $encrypter
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Activate($key, Encrypter $encrypter)
+    {
+        // Decrypt the verification key
+        $data = $encrypter->decrypt($key);
+
+        // Basic check
+        if ( !empty($data) &&  isset($data['id']) && isset($data['email']) )
+        {
+            // Get the person based on this user identifier
+            $user = User::findOrFail($data['id']);
+
+            if($user->getEmail() == $data['email'] && !$user->isVerified())
+            {
+                $user->email_verified = true;
+                $user->verified = true;
+                $user->save();
+
+                return redirect()->route('home')->with('success', trans('feedback.email_activation_success'));
+            }
+        }
+
+        return redirect()->route('home')->with('error', trans('feedback.email_activation_error'));
     }
 }

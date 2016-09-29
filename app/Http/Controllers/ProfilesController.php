@@ -2,6 +2,7 @@
 
 use Auth;
 use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +18,7 @@ use Sneefr\Repositories\Notification\NotificationRepository;
 use Sneefr\Repositories\Place\PlaceRepository;
 use Sneefr\Repositories\Search\SearchRepository;
 use Sneefr\Repositories\User\UserRepository;
+use Sneefr\Services\Image;
 
 
 class ProfilesController extends Controller
@@ -47,11 +49,17 @@ class ProfilesController extends Controller
     protected $placeRepository;
 
     /**
+     * @var Factory
+     */
+    protected $disk;
+
+    /**
      * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
      * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
      * @param \Sneefr\Repositories\Search\SearchRepository             $searchRepository
      * @param \Sneefr\Repositories\Notification\NotificationRepository $notificationRepository
      * @param \Sneefr\Repositories\Place\PlaceRepository               $placeRepository
+     * @param \Illuminate\Contracts\Filesystem\Factory                 $filesystemFactory
      */
     public function __construct(
         UserRepository $userRepository,
@@ -59,13 +67,15 @@ class ProfilesController extends Controller
         EvaluationRepository $evaluationRepository,
         SearchRepository $searchRepository,
         NotificationRepository $notificationRepository,
-        PlaceRepository $placeRepository
+        PlaceRepository $placeRepository,
+        Factory $filesystemFactory
     ) {
         $this->userRepository = $userRepository;
         $this->adRepository = $adRepository;
         $this->searchRepository = $searchRepository;
         $this->notificationRepository = $notificationRepository;
         $this->placeRepository = $placeRepository;
+        $this->disk = $filesystemFactory->disk('avatars');
     }
 
     /**
@@ -363,6 +373,9 @@ class ProfilesController extends Controller
                 case 'handlingPhone':
                     $this->handlingPhone($request);
                     break;
+                case 'avatar':
+                    $this->updateAvatar($request);
+                    break;
             }
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->errors());
@@ -413,6 +426,11 @@ class ProfilesController extends Controller
         // Persisting the new data.
         foreach ($locationData as $key => $value) {
             $userModel->{$key} = $value;
+        }
+
+        // Persisting the new given_name or surname data.
+        foreach (Arr::only($data, ['given_name', 'surname']) as $key => $value) {
+            if($value != '') $userModel->{$key} = $value;
         }
 
         if ($userModel->save()) {
@@ -630,5 +648,32 @@ class ProfilesController extends Controller
         } else {
             session()->flash('success', trans('feedback.phone_verification_success'));
         }
+    }
+
+    protected function updateAvatar(Request $request)
+    {
+        $this->validate($request, [
+            'avatar' => 'required|image',
+        ]);
+
+        $imageService = new Image();
+        $extention = $request->file('avatar')->extension();;
+        $name = auth()->user()->getId() . '.' . $extention;
+        // Path for uploading
+        $path = "avatar/" . $name;
+
+       //$file = $request->file('avatar');
+        $image = $imageService::standardize($request->file('avatar'));
+
+        // Move the file
+        if (! $this->disk->put($path, $image)) {
+            // add logs
+            return redirect()->back()->with('error', trens('feedback.profile_edit_avatar_error'));
+        }
+
+        auth()->user()->avatar = $name;
+        auth()->user()->save();
+
+        return redirect()->back()->with('success', trans('feedback.profile_edit_avatar_success'));
     }
 }
