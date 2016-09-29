@@ -50,6 +50,13 @@ class Category extends Model
             ->toArray();
     }
 
+    public function getChildsIds()
+    {
+        $category_list = self::where('child_of', $this->id)->pluck('id')->toArray();
+        array_push($category_list, $this->id);
+        return $category_list;
+    }
+
     public function scopeParent($query)
     {
         return $query->whereNull('child_of');
@@ -63,6 +70,6 @@ class Category extends Model
 
     public function shops()
     {
-        return $this->belongsToMany(Shop::class, 'shop_categorie');
+        return $this->belongsToMany(Shop::class, 'shop_categorie')->with('evaluations');
     }
 }
