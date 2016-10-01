@@ -21,12 +21,12 @@
             <div class="form-group col-xs-10 search__mobile">
                 <input type="search"
                        class="form-control navbar__sneefr__input--mobile"
-                       placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…"
+                       placeholder="@lang('navigation.search_label')"
                        name="q"  id="q" autocomplete="of"
                        value="{{ $query }}">
                 <input type="text"
                        class="form-control navbar__sneefr__input--mobile"
-                       placeholder="À proximité de Las Vegas, NV"
+                       placeholder="@lang('navigation.search_place_label')"
                        name="location" autocomplete="off">
                 <input type="hidden" name="type" value="{{ $type }}">
             </div>
@@ -43,7 +43,7 @@
                 <div class="form-group col-sm-6">
                     <input type="search"
                            class="form-control navbar__sneefr__input"
-                           placeholder="Que voulez vous acheter? Phonecase, wallet, tshirt…"
+                           placeholder="@lang('navigation.search_label')"
                            name="q" id="q"
                            value="{{ $query }}">
                     <input type="hidden" name="type" value="{{ $type }}">
@@ -51,7 +51,7 @@
                 <div class="form-group col-sm-4 col-md-5">
                     <input type="text"
                            class="form-control navbar__sneefr__input"
-                           placeholder="À proximité de Las Vegas, NV"
+                           placeholder="@lang('navigation.search_place_label')"
                            name="locale">
                 </div>
                 <div class="form-group col-sm-1">

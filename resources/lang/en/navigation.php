@@ -30,4 +30,6 @@ return [
     'discover_title'      => "Trending shops, places and ads",
     'register'            => "Register",
     'register_title'      => "",
+    'search_label'        => "What would you buy? Phonecase, wallet, tshirt…",
+    'search_place_label'        => "Nearby Las Vegas, NV",
 ];

@@ -8,14 +8,14 @@
             </div>
             <div class="col-sm-4 col-md-3">
                 <ul class="footer__list">
-                    <li><a href="#">MENTIONS LÉGALES</a></li>
-                    <li><a href="#">CONDITIONS GÉNÉRALES</a></li>
+                    <li><a href="#">@lang('common.footer.legal_notice')</a></li>
+                    <li><a href="#">@lang('common.footer.terms_condition')</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
                 <ul class="footer__list">
-                    <li><a href="#">CONTACT</a></li>
-                    <li><a href="#">A PROPOS</a></li>
+                    <li><a href="#">@lang('common.footer.contact')</a></li>
+                    <li><a href="#">@lang('common.footer.about')</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
