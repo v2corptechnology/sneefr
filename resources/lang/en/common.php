@@ -20,4 +20,10 @@ return [
     'trending_shops'     => "Trending shops",
     'trending_description'  => "Selected by sneefr, for you every week",
     'browse_by_category'  => "Browse categories",
+    'footer' => [
+        'legal_notice'  => "Legal notice",
+        'terms_condition'  => "Terms and conditions",
+        'contact'  => "Contact",
+        'about'  => "About",
+    ],
 ];
