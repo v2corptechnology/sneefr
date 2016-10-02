@@ -31,5 +31,5 @@ return [
     'register'            => "Register",
     'register_title'      => "",
     'search_label'        => "What do you want to buy? Phonecase, wallet, tshirt…",
-    'search_place_label'        => "Near Los Angeles, CA",
+    'search_place_label'        => "Where? Los Angeles, CA",
 ];
