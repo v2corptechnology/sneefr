@@ -58,8 +58,9 @@
                     <button type="submit" class="btn btn-sky-blue navbar__sneefr__search"><i class="fa fa-search"></i></button>
                 </div>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                @if(!auth()->check())
+
+            @unless(auth()->check())
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a class="navbar__sneefr__item" href="{{ url('login') }}">
                             @lang('navigation.connect')
@@ -70,62 +71,9 @@
                             @lang('navigation.register')
                         </a>
                     </li>
-                @else
+                </ul>
+            @endunless
 
-                    <li role="presentation" class="visible-xs">
-                        <a role="menuitem" tabindex="-1" href="{{ route('me.index') }}" title="@lang('navigation.profile_title')" class="menu-icon">
-                            <i class="fa fa-cog"></i>
-                            @lang('navigation.parameters')
-                        </a>
-                    </li>
-
-                    @if (auth()->user()->canSeeStats)
-                        <li class="visible-xs">
-                            <a href="{{ route('admin.users') }}" class="menu-icon">
-                                <i class="fa fa-bar-chart"></i>
-                                Stats
-                            </a>
-                        </li>
-                    @endif
-
-                    <li class="navbar__avatar hidden-xs">
-                        @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '25x25' ])
-                    </li>
-                    <li class="dropdown hidden-xs">
-                        <a class="navbar__profile dropdown-toggle"
-                           data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @unless(auth()->user()->shop)
-                                <li><a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a></li>
-                            @endunless
-                            <li role="separator" class="divider"></li>
-                            @if (auth()->user()->canSeeLogs)
-                                <li><a href="{{ url('logs') }}">Logs</a></li>
-                            @endif
-                            @if (auth()->user()->canSeeStats)
-                                <li><a href="{{ route('admin.users') }}">Stats</a></li>
-                            @endif
-                            @if (auth()->user()->canSeeStats || auth()->user()->canSeeLogs)
-                                <li role="separator" class="divider"></li>
-                            @endif
-                            <li>
-                                <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
-                                    @lang('navigation.logout')
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li role="presentation" class="visible-xs">
-                        <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')" class="menu-icon">
-                            <i class="fa fa-sign-out"></i>
-                            @lang('navigation.logout')
-                        </a>
-                    </li>
-                @endif
-            </ul>
         </div>
     </div>
     <div class="navbar__menu">
@@ -143,6 +91,10 @@
                         </a>
                     </li>
                     @if(auth()->check())
+                        @unless(auth()->user()->shop)
+                            <li>
+                                <a class="navbar__sneefr__item" href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a></li>
+                        @endunless
                         @if( auth()->user()->shop)
                             <li>
                                 <a class="navbar__sneefr__item{{ ( url(request()->path() ) == route('shops.show', auth()->user()->shop)) ? '--active' : '' }}"
@@ -176,6 +128,35 @@
                             </li>
                         @endif
                     @endif
+                    <li class="visible-xs">
+                        <a class="navbar__sneefr__item" role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
+                            @lang('navigation.logout')
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '16x16', 'nolink' => 'true' ])
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @if (auth()->user()->canSeeLogs)
+                                <li><a href="{{ url('logs') }}">Logs</a></li>
+                            @endif
+                            @if (auth()->user()->canSeeStats)
+                                <li><a href="{{ route('admin.users') }}">Stats</a></li>
+                            @endif
+                            @if (auth()->user()->canSeeStats || auth()->user()->canSeeLogs)
+                                <li role="separator" class="divider"></li>
+                            @endif
+                            <li>
+                                <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
+                                    @lang('navigation.logout')
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

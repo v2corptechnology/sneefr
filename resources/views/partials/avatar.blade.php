@@ -2,6 +2,8 @@
 
 $size = $size ?? '40x40';
 
+$nolink = $nolink ?? false;
+
 list($width, $height) = explode('x', $size);
 
 if ($of instanceof \Sneefr\Models\Shop) {
@@ -20,7 +22,14 @@ if ($of instanceof \Sneefr\Models\Shop) {
 
 }
 ?>
-<a class="avatar {{ $classes ?? '' }}" href="{{ $route }}" title="{{ $name }}">
+
+@unless($nolink)
+    <a class="avatar {{ $classes ?? '' }}" href="{{ $route }}" title="{{ $name }}">
+@endunless
+
     <img class="avatar__image" src="{{ $src }}" alt="{{ $name }}"
          srcset="{{ $src2x }} 2x" height="{{ $height }}" width="{{ $width }}">
-</a>
+
+@unless($nolink)
+    </a>
+@endunless
