@@ -52,7 +52,7 @@
                     <input type="text"
                            class="form-control navbar__sneefr__input"
                            placeholder="@lang('navigation.search_place_label')"
-                           name="locale">
+                           name="geo">
                 </div>
                 <div class="form-group col-sm-1">
                     <button type="submit" class="btn btn-sky-blue navbar__sneefr__search"><i class="fa fa-search"></i></button>
