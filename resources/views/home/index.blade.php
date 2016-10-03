@@ -22,7 +22,7 @@
             <div class="col-sm-9">
 
                 <div class="home__header">
-                    <img class="img-responsive home__header__img" src="{{ url('/img/img-header.png') }}" alt="" >
+                    <img class="img-responsive home__header__img" src="{{ url('/img/img-header.jpg') }}" srcset="{{ url('/img/img-header@2x.jpg') }} 2x" alt="" >
                     <div class="home__header__content">
                         <h1 class="home__header__title">Buy from great local trusted shops in your city, all in one place</h1>
                         <p class="home__header__dscription">Search what you want, sneefR shows you the shops around you that sell what you’re looking for at the best price. Buy directly online and get delivered or go instore to pickup your item for free.</p>
