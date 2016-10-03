@@ -20,6 +20,12 @@
             </div>
             <div class="col-sm-2">
                 <ul class="footer__list">
+                    <li>
+                        <a href="{{ route('help') }}" title="@lang('navigation.help_title')">
+                            <i class="fa fa-life-ring"></i>
+                            @lang('navigation.help')
+                        </a>
+                    </li>
                     <li><a href="#"><i class="fa fa-facebook-official"></i> Facebook</a></li>
                 </ul>
             </div>

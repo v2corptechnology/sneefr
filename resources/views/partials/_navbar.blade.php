@@ -101,11 +101,6 @@
                             @unless(auth()->user()->shop)
                                 <li><a href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a></li>
                             @endunless
-                            <li>
-                                <a role="menuitem" tabindex="-1" href="{{ route('me.index') }}" title="@lang('navigation.parameters_title')">
-                                    @lang('navigation.parameters')
-                                </a>
-                            </li>
                             <li role="separator" class="divider"></li>
                             @if (auth()->user()->canSeeLogs)
                                 <li><a href="{{ url('logs') }}">Logs</a></li>
@@ -116,9 +111,6 @@
                             @if (auth()->user()->canSeeStats || auth()->user()->canSeeLogs)
                                 <li role="separator" class="divider"></li>
                             @endif
-                            <li><a href="{{ url('help') }}" title="@lang('navigation.help_title')">@lang('navigation.help')</a></li>
-                            <li><a href="{{ url('terms') }}" title="@lang('navigation.terms_title')">@lang('navigation.terms')</a></li>
-                            <li role="separator" class="divider"></li>
                             <li>
                                 <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
                                     @lang('navigation.logout')
