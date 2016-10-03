@@ -74,9 +74,9 @@
     <div class="card__box__footer">
         <div class="card__box__footer__content">
             <div class="card__box__avatar card__box__avatar--circle">
-                <a href="{{ $shop_url }}">
-                    <img class="card__box__avatar__img" src="{{ $logo }}" alt="{{ $title }}">
-                </a>
+
+                @include('partials.avatar', ['of' => $item, 'size' => '60x60'])
+
             </div>
             <div class="card__box__description">
                 <a href="{{ $url }}">
