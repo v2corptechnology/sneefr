@@ -8,8 +8,8 @@
             </div>
             <div class="col-sm-4 col-md-3">
                 <ul class="footer__list">
-                    <li><a href="#">@lang('common.footer.legal_notice')</a></li>
-                    <li><a href="#">@lang('common.footer.terms_condition')</a></li>
+                    <li><a href="{{ route('privacy') }}">@lang('common.footer.legal_notice')</a></li>
+                    <li><a href="{{ route('terms') }}">@lang('common.footer.terms_condition')</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
