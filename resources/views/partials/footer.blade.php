@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-2">
                 <ul class="footer__list">
-                    <li><a href="#"><i class="fa fa-facebook"></i> FACEBOOK</a></li>
+                    <li><a href="#"><i class="fa fa-facebook-official"></i> Facebook</a></li>
                 </ul>
             </div>
         </div>
