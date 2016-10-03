@@ -134,30 +134,32 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right hidden-xs">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '16x16', 'nolink' => 'true' ])
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @if (auth()->user()->canSeeLogs)
-                                <li><a href="{{ url('logs') }}">Logs</a></li>
-                            @endif
-                            @if (auth()->user()->canSeeStats)
-                                <li><a href="{{ route('admin.users') }}">Stats</a></li>
-                            @endif
-                            @if (auth()->user()->canSeeStats || auth()->user()->canSeeLogs)
-                                <li role="separator" class="divider"></li>
-                            @endif
-                            <li>
-                                <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
-                                    @lang('navigation.logout')
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                @if (auth()->check())
+                    <ul class="nav navbar-nav navbar-right hidden-xs">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                @include('partials.avatar', ['of' => auth()->user()->shop ?? auth()->user(), 'size' => '16x16', 'nolink' => 'true' ])
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (auth()->user()->canSeeLogs)
+                                    <li><a href="{{ url('logs') }}">Logs</a></li>
+                                @endif
+                                @if (auth()->user()->canSeeStats)
+                                    <li><a href="{{ route('admin.users') }}">Stats</a></li>
+                                @endif
+                                @if (auth()->user()->canSeeStats || auth()->user()->canSeeLogs)
+                                    <li role="separator" class="divider"></li>
+                                @endif
+                                <li>
+                                    <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" title="@lang('navigation.logout_title')">
+                                        @lang('navigation.logout')
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
             </div>
         </div>
     </div>
