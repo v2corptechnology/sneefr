@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <a href="/">
-                    <img class="img-responsive footer__logo" src="{{ url('/img/logo-footer.png') }}" alt="">
+                    <img class="img-responsive footer__logo" src="{{ asset('/img/logo-sneefr-negative.svg') }}" alt="Buy from great local trusted shops in your city, all in one place">
                 </a>
             </div>
             <div class="col-sm-4 col-md-3">
