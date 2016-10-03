@@ -5,17 +5,17 @@
 // Homepage
 Route::get('/', ['as' => 'home', 'uses' => 'AuthController@index']);
 // Display FAQ
-Route::get('help', function () {
+Route::get('help', ['as' => 'help', function () {
     return view('pages.help');
-});
+}]);
 // Terms of use
-Route::get('terms', function () {
+Route::get('terms', ['as' => 'terms', function () {
     return view('pages.terms');
-});
+}]);
 // Privacy policy
-Route::get('privacy', function () {
+Route::get('privacy', ['as' => 'privacy', function () {
     return view('pages.privacy');
-});
+}]);
 // Pricing screen
 Route::get('pricing', ['as' => 'pricing', function () {
     return view('pages.pricing');
