@@ -1,4 +1,4 @@
-<nav class="navbar navbar__sneefr hidden" role="navigation">
+<nav class="navbar navbar__sneefr" role="navigation">
 	<div class="container">
 
         <div class="navbar-header">
@@ -76,12 +76,19 @@
     <div class="container">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">
+
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-nav-menu" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-nav-menu" aria-expanded="false">
+                <span class="sr-only">Toggle search</span>
+                <i class="fa fa-lg fa-search"></i>
+            </button>
+
             <a class="navbar-brand visible-xs" href="{{ route('home') }}">
                 <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}"
                      alt="Buy from great local trusted shops in your city, all in one place">
