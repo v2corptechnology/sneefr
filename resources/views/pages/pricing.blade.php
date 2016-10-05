@@ -93,22 +93,10 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <?php
-                                // Todo: remove this crap
-                                $hasRedirect = request()->has('redirect');
-
-                                $monthlyUrl = $hasRedirect
-                                        ? url(request()->get('redirect')).'?plan=monthly'
-                                        : route('shops.login', 'monthly');
-
-                                $yearlyUrl = $hasRedirect
-                                        ? url(request()->get('redirect')).'?plan=yearly'
-                                        : route('shops.login', 'yearly');
-                            ?>
-                            <td><a href="{{ $monthlyUrl }}" class="btn btn-primary"
+                            <td><a href="{{ route('shops.create', ['plan' =>'monthly']) }}" class="btn btn-primary"
                                    title="@lang('pricing.table.btn_monthly_title')">@lang('pricing.table.btn_monthly')</a>
                             </td>
-                            <td><a href="{{ $yearlyUrl }}" class="btn btn-primary"
+                            <td><a href="{{ route('shops.create', ['plan' =>'yearly']) }}" class="btn btn-primary"
                                    title="@lang('pricing.table.btn_yearly_title')">@lang('pricing.table.btn_yearly')</a>
                             </td>
                         </tr>
