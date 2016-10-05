@@ -22,7 +22,7 @@
                             @foreach ($users as $user)
                                 <tr class="{{ $user->trashed() ? 'warning' : '' }}">
                                     <td>
-                                        <a href="{{ route('profiles.show', $user) }}">
+                                        <a href="{{ route('profiles.show', $user) }}" title="{{ $user->getEmail() }}">
                                             {!! HTML::profilePicture($user->facebook_id, $user->present()->surname(), 20, ['img-circle']) !!}
                                             {{ $user->present()->fullName() }}
                                         </a>
