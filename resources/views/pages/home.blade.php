@@ -1,19 +1,5 @@
 @extends('layouts.master')
 
-@push('style')
-    <style>
-        .shop__pub {
-            background-color: #ff3d7b;
-            background-image: url('{{ url("/img/shop-background.svg") }}');
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            background-size: 100%;
-            height: 380px;
-            padding-top: 50px;
-        }
-    </style>
-@endpush
-
 @section('content')
 
     <div class="container">
