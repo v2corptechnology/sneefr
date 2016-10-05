@@ -3,54 +3,22 @@
 use Hashids\Hashids;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
+use Laravel\Socialite\Facades\Socialite;
+use Sneefr\Events\UserRegistered;
+use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\Ad;
-use Sneefr\Models\Category;
-use Sneefr\Models\Shop;
 use Sneefr\Models\User;
-use Sneefr\Services\FacebookConnector;
 
 class AuthController extends Controller
 {
     /**
-     * @var \Sneefr\Services\FacebookConnector
-     */
-    private $connector;
-
-    public function __construct()
-    {
-        // TODO: implement proper application binding
-        $this->connector = app(FacebookConnector::class);
-    }
-
-    /**
-     * @param \Sneefr\Repositories\Ad\AdRepository $adRepository
+     * Redirect the user to authentication provider.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return mixed
      */
-    public function index(Request $request)
+    public function login()
     {
-        $categories = Category::parent()->with('childrens')->get();
-        $categories->child = null;
-        $categories->parent = null;
-        $category = Category::find($request->get('category'));
-
-        if($category) {
-            $categories->child = $category->id;
-            $categories->parent = $category->child_of ?: $category->id;
-        }
-
-        if($category) {
-            $shopsByCategory = Category::whereIn('id', $category->getChildsIds())->with('shops')->get()->take(6)->pluck('shops')->collapse()->unique('shop');
-        }else {
-            $shopsByCategory = Shop::with('evaluations')->take(6)->get();
-        }
-
-        $bestSellers = Ad::take(6)->get();
-        $topShops = Shop::withCount('ads')->with('evaluations')->orderBy('ads_count', 'desc')->take(4)->get();
-        
-        return view('home.index', compact('shopsByCategory', 'topShops', 'bestSellers', 'categories'));
+        return Socialite::driver('facebook')->redirect();
     }
 
     /**
@@ -58,79 +26,38 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function login()
+    public function callback()
     {
-        session(['url.intended-to' => url()->previous() ]);
-        return redirect($this->connector->getAuthenticationUrl());
-    }
+        $providerUser = Socialite::driver('facebook')->fields(['email', 'first_name', 'last_name'])->user();
 
-    /**
-     * Log the user in again via a third-party authentication provider.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function reauthenticate()
-    {
-        return redirect($this->connector->getReAuthenticationUrl());
-    }
+        $user = User::where('facebook_id', $providerUser->getId())->first();
 
-    /**
-     * Perform a ‘shop’ login via a third-party authentication provider.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @param \Illuminate\Session\Store $sessionStore
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
-    public function loginShops(Request $request, Store $sessionStore)
-    {
-        $sessionStore->put('plan', $request->segment(2, 'monthly'));
+        if (!$user) {
 
-        $this->connector->setAuthenticationType('shop');
+            $user = User::whereEmail($providerUser->getEmail())->OrWhere('facebook_email', $providerUser->getEmail())->get()->first();
 
-        return redirect($this->connector->getAuthenticationUrl());
-    }
+            if($user) {
+                return redirect()->back()->with('warning', trans('login.account_by_fb_exist'));
+            }
 
-    /**
-     * Handle authentication calls coming back from the auth provider.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     * @event \Sneefr\Events\UserRegistered
-     */
-    public function handleProviderCallback(Request $request)
-    {
-        // Authentication failed or not access to the required scopes.
-        if (!$this->connector->passes()) {
+            $user = User::create([
+                'email' => $providerUser->getEmail(),
+                'facebook_email' => $providerUser->getEmail(),
+                'facebook_id' => $providerUser->getId(),
+                'given_name' => $providerUser->user['first_name'],
+                'surname' => $providerUser->user['last_name'],
+                'email_verified' => 0,
+                'verified' => 1,
+                'locale'   => config('app.locale'),
+            ]);
 
-            return view('errors.missing_social_network_scopes')
-                ->with('missingScopes', $this->connector->getMissingScopes());
+            dispatch(new VerifyEmail($user));
+            event(new UserRegistered($user));
         }
 
-        // The person is properly authenticated and has given
-        // us access to all the scopes we required. Great!
-        $user = User::register($this->connector->getProfile());
+        auth()->login($user);
 
-        if(!$user) {
-            return redirect('/login')->withError(trans('login.facebook_email_exist'));
-        }
-
-        // Log in the user
-        \Auth::login($user, true);
-
-        // If we performed a ‘shop’ type of login
-        if ($this->connector->isShop()) {
-            return redirect()->route('shops.create');
-        }
-        
-        // Redirect back where intended.
-        if (strpos(session()->get('url.intended'), '/login')  && !strpos(session()->get('url.intended'), 'pusherAuth')) {
-            return redirect()->intended('?first_time');
-        }
-
-        return redirect()->to(session()->get('url.intended-to'));
+        return redirect()->intended('?first_time');
     }
 
     /**

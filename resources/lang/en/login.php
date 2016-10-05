@@ -49,4 +49,5 @@ return [
     'login_page_title'       => "Login",
     'register_page_title'    => "Register",
     'reset_page_title'       => "Reset password",
+    'account_by_fb_exist'    => "An account exist with this email not linked to your Facebook account.",
 ];
