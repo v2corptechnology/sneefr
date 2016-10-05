@@ -3,7 +3,7 @@
 /** Simple routes */
 
 // Homepage
-Route::get('/', ['as' => 'home', 'uses' => 'AuthController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 // Display FAQ
 Route::get('help', ['as' => 'help', function () {
     return view('pages.help');
@@ -31,14 +31,8 @@ Route::get('register/activation/{key}', ['as' => 'account_activation', 'uses' =>
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 // Redirection to connection provider
 Route::get('auth', ['as' => 'login', 'uses' => 'AuthController@login']);
-// Redirection to connection provider for shops
-Route::get('proAuth/{subscription?}', ['as' => 'shops.login', 'uses' => 'AuthController@loginShops']);
 // Handle callback from FB
-Route::get('auth/handle-user', ['as' => 'auth.handle.user', 'uses' => 'AuthController@handleProviderCallback']);
-// Handle callback from FB for shops
-Route::get('auth/handle-shop', ['as' => 'auth.handle.shop', 'uses' => 'AuthController@handleProviderCallback']);
-// Force scopes
-Route::get('re-auth', 'AuthController@reauthenticate');
+Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@callback']);
 
 /**
  * Routes related to person display
