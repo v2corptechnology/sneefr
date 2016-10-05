@@ -1,3 +1,83 @@
+.navbar-sneefr {
+  border: none;
+  box-shadow: none;
+
+  .navbar-header {
+    padding: 1rem 0;
+  }
+
+  .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar-nav {
+    & > li > a {
+      color: #595959;
+      font-weight: 600;
+      opacity: 0.4;
+      transition: opacity 0.1s;
+
+      &:hover, &:active, &:focus {
+        opacity: 1;
+      }
+    }
+
+    & > .active {
+
+      & > a, & > a:focus, & > a:hover {
+        background: none;
+        box-shadow: none;
+        opacity: 1;
+      }
+
+      &::after {
+        border: 0 solid #ff316e;
+        border-left-width: 5px;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        z-index: 100;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border: none;
+
+    &:hover, &:focus, &:active {
+      background-color: transparent;
+    }
+
+    .icon-bar {
+      background-color: #ff316e;
+    }
+  }
+
+}
+
+@media screen and (min-width: $screen-sm-min) {
+  .navbar-sneefr {
+    .navbar-nav {
+      & > .active {
+        &::after {
+          border-left: none;
+          border-bottom-width: 4px;
+          bottom: -4px;
+          height: inherit;
+          left: auto;
+          top: auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/**
 .navbar {
   border: none;
   min-height: 40px;
@@ -131,7 +211,6 @@
   }
 }
 
-/* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
   .navbar__sneefr__form {
     max-width: 300px;
@@ -140,7 +219,6 @@
   }
 }
 
-/* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .navbar__sneefr__form {
     max-width: 100%;
@@ -160,13 +238,4 @@
     border-top: none;
   }
 }
-
-/* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
-
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (max-width : 320px) {
-
-}
+**/
