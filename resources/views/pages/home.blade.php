@@ -84,12 +84,10 @@
 
 </div>
 
-<div class="space"></div>
-
 <div class="shop__pub text-center color-white">
 
     @include('pages.home.shop-advertising')
 
 </div>
-    
+
 @endsection
