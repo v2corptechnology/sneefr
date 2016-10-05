@@ -121,7 +121,7 @@
                     </li>
                 @else
                     <li>
-                        <a class="navbar__sneefr__item" href="{{ route('pricing') }}" title="@lang('navigation.create_shop_title')">@lang('navigation.create_shop')</a>
+                        <a class="navbar__sneefr__item" href="{{ route('pricing') }}" title="Open my shop">Open my shop</a>
                     </li>
                 @endif
 
