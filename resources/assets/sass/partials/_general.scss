@@ -68,7 +68,8 @@
   color: #fff;
 }
 
-.btn-sky-blue:hover {
+.btn-sky-blue:hover,
+.btn-sky-blue:focus {
   border: 1px solid #007dc3;
   background-color: #ffffff;
   color: #007dc3;
@@ -77,6 +78,14 @@
 .btn-blue:hover {
   color: #00324d;
   background-color: #ffffff;
+}
+
+.is-narrow-pr {
+  padding-right: 3px;
+}
+
+.is-narrow-pl {
+  padding-left: 3px;
 }
 
 .space {

@@ -1,19 +1,48 @@
-@unless(auth()->check())
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a class="navbar__sneefr__item" href="{{ url('login') }}">
-                @lang('navigation.connect')
+<div class="navbar navbar-default navbar-sneefr navbar-search hidden-xs">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}"
+                     alt="Buy from great local trusted shops in your city, all in one place">
             </a>
-        </li>
-        <li>
-            <a class="navbar__sneefr__item--pink" href="{{ url('register') }}">
-                @lang('navigation.register')
-            </a>
-        </li>
-    </ul>
-@endunless
+        </div>
 
-<nav class="navbar navbar-default navbar-sneefr">
+        <form class="navbar-form navbar-left has-no-mb">
+            <div class="row">
+                <div class="col-sm-6 is-narrow-pr">
+                    <input type="search" class="form-control" name="q"
+                           placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
+                           value="{{ $query }}">
+                </div>
+                <div class="col-sm-4 is-narrow-pl is-narrow-pr">
+                    <input type="text" class="form-control has-no-mb" name="location"
+                           placeholder="Where? Los Angeles, CA">
+                </div>
+                <div class="col-sm-2 is-narrow-pl">
+                    <button type="submit" class="btn btn-sky-blue">
+                        <i class="fa fa-lg fa-search"></i>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- Login/register links --}}
+        @unless (auth()->check())
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="btn-link" href="{{ route('login') }}" title="Login">Login</a>
+                </li>
+                <li>
+                    <a class="btn-link btn-pink" href="{{ url('register') }}" title="Register">Register</a>
+                </li>
+            </ul>
+        @endunless
+
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-sneefr navbar-menu">
     <div class="container">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">
@@ -36,27 +65,29 @@
             </a>
         </div>
 
-
-        {{-- Collect the nav links, forms, and other content for toggling --}}
-        <div class="collapse navbar-collapse" id="js-nav-search">
-            <form class="navbar-form navbar-left" action="{{ route('search.index') }}" >
-                <div class="row">
-                    <div class="col-xs-10 is-narrow-pr">
-                        <input type="search" class="form-control" name="q"
-                               placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
-                               value="{{ $query }}">
-                        <input type="text" class="form-control has-no-mb" name="location"
-                               placeholder="Where? Los Angeles, CA">
+        {{-- Wrapped into another div for smooth animation --}}
+        <div class="visible-xs">
+            {{-- Collect the nav links, forms, and other content for toggling --}}
+            <div class="collapse navbar-collapse" id="js-nav-search">
+                <form class="navbar-form navbar-left" action="{{ route('search.index') }}" >
+                    <div class="row">
+                        <div class="col-xs-10 is-narrow-pr">
+                            <input type="search" class="form-control" name="q"
+                                   placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
+                                   value="{{ $query }}">
+                            <input type="text" class="form-control has-no-mb" name="location"
+                                   placeholder="Where? Los Angeles, CA">
+                        </div>
+                        <div class="col-xs-2 is-narrow-pl">
+                            <button type="submit" class="btn btn-sky-blue">
+                                <i class="fa fa-2x fa-search"></i>
+                                <span class="sr-only">Search</span>
+                            </button>
+                        </div>
+                        <input type="hidden" name="type" value="{{ $type }}">
                     </div>
-                    <div class="col-xs-2 is-narrow-pl">
-                        <button type="submit" class="btn btn-sky-blue">
-                            <i class="fa fa-2x fa-search"></i>
-                            <span class="sr-only">Search</span>
-                        </button>
-                    </div>
-                    <input type="hidden" name="type" value="{{ $type }}">
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
 
         {{-- Collect the nav links, forms, and other content for toggling --}}

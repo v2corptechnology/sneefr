@@ -1,12 +1,5 @@
-.is-narrow-pr {
-  padding-right: 3px;
-}
-
-.is-narrow-pl {
-  padding-left: 3px;
-}
-
 .navbar-sneefr {
+  background: #FFF;
   border: none;
   box-shadow: none;
 
@@ -23,12 +16,6 @@
     & > li > a {
       color: #595959;
       font-weight: 600;
-      opacity: 0.4;
-      transition: opacity 0.1s;
-
-      &:hover, &:active, &:focus {
-        opacity: 1;
-      }
     }
 
     & > .active {
@@ -36,7 +23,6 @@
       & > a, & > a:focus, & > a:hover {
         background: none;
         box-shadow: none;
-        opacity: 1;
       }
 
       &::after {
@@ -81,15 +67,88 @@
     padding: 1rem;
   }
 
+  input, .btn, .btn-link {
+    border-radius: 2px;
+  }
+
+  .navbar__register {
+    color: #ff316e;
+    border: 1px solid #ff316e;
+  }
+
   .has-no-mb {
     margin-bottom: 0;
+  }
+}
+
+.navbar-search {
+  border-bottom: 1px solid #f2f2f2;
+  padding: 1rem 0;
+
+  .navbar-brand {
+    padding-top: 0.3rem;
+  }
+
+  .navbar-header {
+    padding: 0;
+  }
+
+  .navbar-form {
+    width: 350px;
+
+    @media screen and (min-width: $screen-md-min) {
+      width: 550px;
+    }
+    
+    @media screen and (min-width: $screen-lg-min) {
+      width: 700px;
+    }
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  .navbar-nav > li > .btn-pink {
+    border: 1px solid #ff1b54;
+    color: #ff1b54;
+
+    &:hover, &:focus {
+      background-color: #ff1b54;
+      color: #FFF;
+    }
+  }
+
+  .btn-sky-blue {
+    height: auto;
+    padding: 1rem 2rem;
+    width: auto;
+  }
+}
+
+.navbar-menu {
+
+  .navbar-nav {
+    & > li > a {
+      opacity: 0.4;
+      transition: opacity 0.1s;
+
+      &:hover, &:active, &:focus {
+        opacity: 1;
+      }
+    }
+
+    & > .active {
+      & > a, & > a:focus, & > a:hover {
+        opacity: 1;
+      }
+    }
   }
 
   .btn-sky-blue {
     height: 90px;
     width: 100%;
   }
-
 }
 
 @media screen and (min-width: $screen-sm-min) {
@@ -109,166 +168,3 @@
     }
   }
 }
-
-/**
-.navbar {
-  border: none;
-  min-height: 40px;
-  height: auto;
-  background-color: #ffffff;
-}
-.navbar__sneefr {
-  min-height: 85px;
-  padding-top: 20px;
-}
-
-.navbar-brand{
-  padding: 0;
-}
-
-.navbar-form {
-  margin: 0;
-}
-
-.navbar__sneefr__form {
-  position: relative;
-  max-width: 700px;
-  width: 100%;
-  padding-left: 20px;
-
-  .form-group {
-    padding: 0 5px;
-    margin: 0;
-  }
-}
-
-.navbar__sneefr__input {
-    height: 45px;
-    width: 100%;
-    border-radius: 2px;
-    background-color: #ffffff;
-    border: solid 1px #eaeaea;
-}
-
-.navbar__sneefr__search{
-  width: 60px;
-  height: 45px;
-  border-radius: 2px;
-  background-color: #007dc3;
-  font-size: 22px;
-}
-
-.navbar__sneefr__form__mobile {
-  margin-top: 15px;
-}
-
-.navbar__sneefr__input--mobile {
-  @extend .navbar__sneefr__input;
-
-  &:first-child {
-    margin-bottom: 5px;
-  }
-}
-
-.search__mobile {
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-.navbar__sneefr__search--mobile {
-  @extend .navbar__sneefr__search;
-  height: 95px;
-  padding-left: 2px;
-  padding-right: 2px
-}
-
-.navbar-nav li a {
-
-  font-family: "Open Sans";
-  font-style: normal;
-  font-stretch: normal;
-
-  &.navbar__sneefr__item {
-    height: 45px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #595959;
-    padding-top: 13px;
-    padding-bottom: 14px;
-    padding-left: 22px;
-    padding-right: 22px;
-    margin: 0;
-  }
-
-  &.navbar__sneefr__item--active {
-    @extend .navbar__sneefr__item;
-    margin-bottom: -3px;
-    border-bottom: 3px solid #ff316e;
-  }
-
-  &.navbar__sneefr__item--pink {
-    @extend .navbar__sneefr__item;
-    font-family: "Open Sans";
-    border-radius: 2px;
-    border: solid 1px #ff316e;
-    color: #ff316e;
-  }
-
-  &.navbar__sneefr__item--pink:hover {
-    border: solid 1px #ff316e;
-    color: #ffffff;
-    background-color: #ff316e;
-  }
-}
-
-.navbar__menu {
-  border-top: 1px solid #f2f2f2;
-  margin-top: 20px;
-}
-
-.notification-badge {
-  left: auto;
-  right: 1.5rem;
-  top: 1rem;
-}
-
-.icon-bar {
-  border: 1px solid #ff316e;
-}
-
-@media only screen and (max-width : 1200px) {
-  .navbar__sneefr__form {
-    max-width: 500px;
-    width: 100%;
-    padding-left: 5px;
-  }
-}
-
-@media only screen and (max-width : 992px) {
-  .navbar__sneefr__form {
-    max-width: 300px;
-    width: 100%;
-    padding-left: 5px;
-  }
-}
-
-@media only screen and (max-width : 768px) {
-  .navbar__sneefr__form {
-    max-width: 100%;
-    width: 100%;
-    padding-left: 0;
-
-    .form-group {
-      padding: 5px 0;
-    }
-  }
-
-  .navbar__sneefr__search {
-    width: 100%;
-  }
-
-  .navbar__menu {
-    border-top: none;
-  }
-}
-**/
