@@ -26,7 +26,7 @@
                    role="button"
                    href="/re-auth">
                     <i class="fa fa-facebook"></i>
-                    @lang('login.relogin')
+                    @lang('login.relogging')
                 </a>
             </p>
         </div>
