@@ -1,3 +1,11 @@
+.is-narrow-pr {
+  padding-right: 3px;
+}
+
+.is-narrow-pl {
+  padding-left: 3px;
+}
+
 .navbar-sneefr {
   border: none;
   box-shadow: none;
@@ -61,6 +69,25 @@
     .icon-bar {
       background-color: #ff316e;
     }
+  }
+
+  .navbar-form {
+    border: none;
+  }
+
+  .form-control {
+    height: auto;
+    margin-bottom: 0.6rem;
+    padding: 1rem;
+  }
+
+  .has-no-mb {
+    margin-bottom: 0;
+  }
+
+  .btn-sky-blue {
+    height: 90px;
+    width: 100%;
   }
 
 }

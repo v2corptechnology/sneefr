@@ -1,76 +1,17 @@
-<nav class="navbar navbar__sneefr" role="navigation">
-	<div class="container">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}" alt="Buy from great local trusted shops in your city, all in one place">
+@unless(auth()->check())
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a class="navbar__sneefr__item" href="{{ url('login') }}">
+                @lang('navigation.connect')
             </a>
-
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search-responsive" style="margin-top: 5px;">
-                <i class="fa fa-search color-pink"></i>
-            </button>
-        </div>
-
-        <form action="{{ route('search.index') }}" class="collapse navbar__sneefr__form__mobile" role="search" id="search-responsive">
-            <div class="form-group col-xs-10 search__mobile">
-                <input type="search"
-                       class="form-control navbar__sneefr__input--mobile"
-                       placeholder="@lang('navigation.search_label')"
-                       name="q"  id="q" autocomplete="of"
-                       value="{{ $query }}">
-                <input type="text"
-                       class="form-control navbar__sneefr__input--mobile"
-                       placeholder="@lang('navigation.search_place_label')"
-                       name="location" autocomplete="off">
-                <input type="hidden" name="type" value="{{ $type }}">
-            </div>
-
-            <div class="form-group col-xs-2 search__mobile">
-                <button type="submit" class="btn btn-sky-blue navbar__sneefr__search--mobile btn-block">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </form>
-
-        <div class="collapse navbar-collapse navbar__sneefr__collapse">
-            <form action="{{ route('search.index') }}" class=" navbar-left navbar__sneefr__form hidden-xs" role="search">
-                <div class="form-group col-sm-6">
-                    <input type="search"
-                           class="form-control navbar__sneefr__input"
-                           placeholder="@lang('navigation.search_label')"
-                           name="q" id="q"
-                           value="{{ $query }}">
-                    <input type="hidden" name="type" value="{{ $type }}">
-                </div>
-                <div class="form-group col-sm-4 col-md-5">
-                    <input type="text"
-                           class="form-control navbar__sneefr__input"
-                           placeholder="@lang('navigation.search_place_label')"
-                           name="geo">
-                </div>
-                <div class="form-group col-sm-1">
-                    <button type="submit" class="btn btn-sky-blue navbar__sneefr__search"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-
-            @unless(auth()->check())
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="navbar__sneefr__item" href="{{ url('login') }}">
-                            @lang('navigation.connect')
-                        </a>
-                    </li>
-                    <li>
-                        <a class="navbar__sneefr__item--pink" href="{{ url('register') }}">
-                            @lang('navigation.register')
-                        </a>
-                    </li>
-                </ul>
-            @endunless
-
-        </div>
-    </div>
-</nav>
+        </li>
+        <li>
+            <a class="navbar__sneefr__item--pink" href="{{ url('register') }}">
+                @lang('navigation.register')
+            </a>
+        </li>
+    </ul>
+@endunless
 
 <nav class="navbar navbar-default navbar-sneefr">
     <div class="container">
@@ -84,7 +25,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-nav-menu" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-nav-search" aria-expanded="false">
                 <span class="sr-only">Toggle search</span>
                 <i class="fa fa-lg fa-search"></i>
             </button>
@@ -93,6 +34,29 @@
                 <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}"
                      alt="Buy from great local trusted shops in your city, all in one place">
             </a>
+        </div>
+
+
+        {{-- Collect the nav links, forms, and other content for toggling --}}
+        <div class="collapse navbar-collapse" id="js-nav-search">
+            <form class="navbar-form navbar-left" action="{{ route('search.index') }}" >
+                <div class="row">
+                    <div class="col-xs-10 is-narrow-pr">
+                        <input type="search" class="form-control" name="q"
+                               placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
+                               value="{{ $query }}">
+                        <input type="text" class="form-control has-no-mb" name="location"
+                               placeholder="Where? Los Angeles, CA">
+                    </div>
+                    <div class="col-xs-2 is-narrow-pl">
+                        <button type="submit" class="btn btn-sky-blue">
+                            <i class="fa fa-2x fa-search"></i>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="type" value="{{ $type }}">
+                </div>
+            </form>
         </div>
 
         {{-- Collect the nav links, forms, and other content for toggling --}}
