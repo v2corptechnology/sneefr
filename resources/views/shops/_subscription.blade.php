@@ -30,9 +30,9 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group hidden">
             <label for="coupon">@lang('payments.subscribe.coupon_label')</label>
-            <input class="form-control js-coupon" type="text" name="coupon"
+            <input class="form-control js-coupon" type="text" name="coupon" value="WELOVEYOU"
                    placeholder="@lang('payments.subscribe.coupon_placeholder')">
         </div>
 
