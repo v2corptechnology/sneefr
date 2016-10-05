@@ -31,7 +31,7 @@
         @unless (auth()->check())
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a class="btn-link" href="{{ route('login') }}" title="Login">Login</a>
+                    <a class="btn-link" href="{{ url('login') }}" title="Login">Login</a>
                 </li>
                 <li>
                     <a class="btn-link btn-pink" href="{{ url('register') }}" title="Register">Register</a>
