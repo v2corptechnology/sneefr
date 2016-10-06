@@ -7,7 +7,7 @@
             <article class="row best-selling">
                 <a class="best-selling__item" href="{{ route('ad.show', $item) }}">
                 <span class="col-xs-4 is-narrow-pr">
-                    <img class="img-responsive img-rounded" src="{{ $item->images('60x60', true)[0] }}"
+                    <img class="img-responsive best-selling__image" src="{{ $item->images('65x65', true)[0] }}"
                          alt="{{ $item->present()->title() }}">
                 </span>
                 <span class="col-xs-8 is-narrow-pl">
