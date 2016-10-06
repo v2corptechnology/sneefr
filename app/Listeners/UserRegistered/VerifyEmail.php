@@ -29,7 +29,7 @@ class VerifyEmail implements ShouldQueue
      * @param  UserRegistered  $event
      * @return void
      */
-    public function handle(UserRegistered $event, Dispatcher $dispatcher, Repository $config)
+    public function handle(UserRegistered $event, Repository $config)
     {
         if($event->user->email_verified == false){
             // Runtime-change the locale of the application.
