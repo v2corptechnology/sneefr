@@ -9,7 +9,7 @@
 }
 
 .box__panel--padding {
-  padding: 2rem;
+  padding: 2rem 2rem 0;
 }
 
 .card__box {
@@ -48,9 +48,17 @@
 }
 
 .card__box__description {
+  position: absolute;
+  top: 0;
+  left: 70px;
+  display: inline-block;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.60;
   color: #595959;
-  font-size: 1.2rem;
-  margin-left: 7rem;
 }
 
 .card__box__description__title {
