@@ -1,9 +1,6 @@
-<?php
-
-namespace Sneefr\Http\Controllers;
+<?php namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Sneefr\Http\Requests;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
@@ -13,6 +10,7 @@ class HomeController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
@@ -22,14 +20,14 @@ class HomeController extends Controller
         $categories->parent = null;
         $category = Category::find($request->get('category'));
 
-        if($category) {
+        if ($category) {
             $categories->child = $category->id;
             $categories->parent = $category->child_of ?: $category->id;
         }
 
-        if($category) {
+        if ($category) {
             $shopsByCategory = Category::whereIn('id', $category->getChildsIds())->with('shops')->get()->take(6)->pluck('shops')->collapse()->unique('shop');
-        }else {
+        } else {
             $shopsByCategory = Shop::with('evaluations')->take(6)->get();
         }
 
