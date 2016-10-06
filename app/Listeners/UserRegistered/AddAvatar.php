@@ -48,7 +48,7 @@ class AddAvatar
             return false;
         }
 
-        $event->user->avatar = $event->user->getId() . 'jpg';
+        $event->user->avatar = $event->user->getId() . '.jpg';
         $event->user->save();
     }
 }
