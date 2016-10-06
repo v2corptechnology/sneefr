@@ -26,7 +26,7 @@
       <![endif]-->
 
     --}}
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=QE5bo6mJ6P">
     <link rel="icon" type="image/png" href="/favicon-32x32.png?v=QE5bo6mJ6P" sizes="32x32">
     <link rel="icon" type="image/png" href="/favicon-16x16.png?v=QE5bo6mJ6P" sizes="16x16">

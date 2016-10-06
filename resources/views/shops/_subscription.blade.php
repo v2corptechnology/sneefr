@@ -37,7 +37,7 @@
         </div>
 
         <button class="btn btn-primary js-add-stripe" type="submit"
-                data-image="{{ asset('img/particular_pig.png') }}"
+                data-image="{{ asset('img/pig.svg') }}"
                 data-locale="{{ auth()->user()->getLanguage() }}"
                 data-email="{{ auth()->user()->getEmail() }}"
                 data-currency="USD"
