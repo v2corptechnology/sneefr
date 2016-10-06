@@ -1,9 +1,6 @@
 <?php
-
 namespace Sneefr\Listeners\UserRegistered;
 
-use Illuminate\Config\Repository;
-use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
@@ -29,11 +26,11 @@ class VerifyEmail implements ShouldQueue
      * @param  UserRegistered  $event
      * @return void
      */
-    public function handle(UserRegistered $event, Repository $config)
+    public function handle(UserRegistered $event)
     {
         if($event->user->email_verified == false){
             // Runtime-change the locale of the application.
-            $config->set('app.locale', $event->user->getLanguage());
+            config()->set('app.locale', $event->user->getLanguage());
 
             // Send the validation email
             $this->sendVerificationEmail($event->user);
