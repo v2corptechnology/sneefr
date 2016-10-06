@@ -54,7 +54,7 @@ class AuthController extends Controller
         }
 
         auth()->login($user);
-        return redirect()->intended('?first_time');
+        return redirect()->intended();
     }
 
     /**

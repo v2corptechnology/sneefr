@@ -16,11 +16,6 @@ class DashboardController extends Controller
         // Get the list of locations followed by the person.
         $followedPlaces = auth()->user()->following()->places();
 
-        // Hook for views telling if the person has just logged in.
-        $hasLoggedIn = $request->exists('first_time');
-
-        return view('dashboard.index',
-            compact('actions', 'hasLoggedIn', 'followedUsers', 'followedPlaces')
-        );
+        return view('dashboard.index', compact('actions', 'followedUsers', 'followedPlaces'));
     }
 }

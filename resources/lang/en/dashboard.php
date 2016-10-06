@@ -2,7 +2,6 @@
 
 return [
     'page_title'                    => "sneefR",
-    'welcome_text'                  => "Welcome on sneefR :name",
     'sneefers_head'                 => "My followers",
     'sneefers_head_title'           => "View all my followers",
     'no_sneefers'                   => "No Facebook friends on sneefR?",
