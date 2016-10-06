@@ -27,7 +27,7 @@
                     @foreach($discussing as $discussion)
                         <?php $recipient = $discussion->recipient();?>
                         <div class="col-xs-6 col-sm-4 col-md-3">
-                            <div class="box box--center">
+                            <div class="box text-center">
                                 {!! HTML::profilePicture($recipient->facebook_id, $recipient->present()->fullName(), 60, ['buyer__figure']) !!}
                                 <span class="buyer__name">{{ $recipient->present()->fullName() }}</span>
                                 <a class="btn btn-default btn-block btn-default2"

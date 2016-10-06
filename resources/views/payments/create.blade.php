@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <main class="box box--center">
+                <main class="box text-center">
                     <h1 class="box__title">@lang('payments.create.box_heading')</h1>
 
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">
