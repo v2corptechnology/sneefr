@@ -5,7 +5,6 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Sneefr\Events\UserRegistered;
-use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\ActionLog;
 use Sneefr\Models\User;
 
@@ -28,14 +27,15 @@ class AuthController extends Controller
      */
     public function callback()
     {
+        // add required fields not provided by default
         $providerUser = Socialite::driver('facebook')->fields(['email', 'first_name', 'last_name'])->user();
 
         $user = User::where('facebook_id', $providerUser->getId())->first();
 
         if (!$user) {
-            $user = User::whereEmail($providerUser->getEmail())->OrWhere('facebook_email', $providerUser->getEmail())->get()->first();
+            $user = User::where('email',$providerUser->getEmail())->OrWhere('facebook_email', $providerUser->getEmail())->get()->first();
 
-            if($user) {
+            if($providerUser->getEmail() && $user) {
                 return redirect()->back()->with('warning', trans('login.account_by_fb_exist'));
             }
 
@@ -50,7 +50,6 @@ class AuthController extends Controller
                 'locale'   => config('app.locale'),
             ]);
 
-            dispatch(new VerifyEmail($user));
             event(new UserRegistered($user));
         }
 
