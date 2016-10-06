@@ -12,7 +12,6 @@ class CreateOrReplaceEvaluationsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('evaluations');
         Schema::create('evaluations', function (Blueprint $table) {
             // add columns
             $table->integer('ad_id')->unsigned();
