@@ -529,51 +529,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Create or update a user account.
-     *
-     * @param array $data
-     *
-     * @return \Sneefr\Models\User
-     */
-    public static function register(array $data)
-    {
-        $data = self::normalize($data);
-
-        $user = self::withTrashed()->where('facebook_id', $data['facebook_id'])->orWhere('email', $data['email'])->first();
-
-        $verifyEmail = false;
-
-        // Create a new user
-        if (is_null($user)) {
-            $user = self::create($data);
-            $verifyEmail = true;
-        } // The user re-activate its account
-        elseif ($user->trashed()) {
-            $user->restore();
-            $user->update($data);
-            $verifyEmail = true;
-        } // This is a simple login, don't update everything
-        else {
-            if($user->getSocialNetworkId() != $data['facebook_id']){
-                return null;
-            }else if (!$user->hasVerifiedEmail() && ($user->getEmail() != $data['email'])) {
-                $verifyEmail = true;
-            }
-
-            $user->update(Arr::except($data, ['email', 'preferences']));
-        }
-
-        // Mark this email as not verified
-        if ($verifyEmail) {
-            dispatch(new VerifyEmail($user));
-        }
-
-        event(new UserRegistered($user));
-
-        return $user;
-    }
-
-    /**
      * Normalize data input to User fields.
      * 
      * @param array $data
