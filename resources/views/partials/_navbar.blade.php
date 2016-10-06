@@ -99,7 +99,7 @@
                 </li>
 
                 {{-- Item creation --}}
-                @if (auth()->check())
+                @if (auth()->check() && auth()->user()->shop )
                     <li class="{{ setActive('items.create') }}">
                         <a href="{{ route('items.create') }}" title="Create an ad">
                             <i class="fa fa-plus-circle hidden-xs"></i> Create an ad
