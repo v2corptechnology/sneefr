@@ -26,14 +26,14 @@
       <![endif]-->
 
     --}}
-
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('apple-touch-icon-144x144.png') }}" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ asset('apple-touch-icon-152x152.png') }}'" />
-    <link rel="icon" type="image/png" href="{{ asset('favicon-32x32.png') }}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{ asset('favicon-16x16.png') }}" sizes="16x16" />
-    <meta name="application-name" content="sneefR"/>
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta name="msapplication-TileImage" content="{{ asset('mstile-144x144.png') }}" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=QE5bo6mJ6P">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png?v=QE5bo6mJ6P" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png?v=QE5bo6mJ6P" sizes="16x16">
+    <link rel="manifest" href="/manifest.json?v=QE5bo6mJ6P">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=QE5bo6mJ6P" color="#ff316e">
+    <link rel="shortcut icon" href="/favicon.ico?v=QE5bo6mJ6P">
+    <meta name="theme-color" content="#ffffff">
 
     <meta name="_google_api_key" content="{{ config('sneefr.keys.GOOGLE_API_KEY') }}" />
     <meta name="_pusher_key" content="{{ config('sneefr.keys.PUSHER_KEY') }}" />
