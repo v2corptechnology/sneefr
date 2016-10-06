@@ -69,6 +69,29 @@
   margin-top: 100px;
 }
 
+.best-selling {
+  margin-bottom: 2rem;
+}
+
+.best-selling__item {
+  &:hover, &:focus {
+    .best-selling__heading {
+      text-decoration: underline;
+    }
+  }
+}
+
+.best-selling__heading {
+  color: #595959;
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.best-selling__image {
+  border-radius: 2px;
+}
+
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
   .home__header__content {
