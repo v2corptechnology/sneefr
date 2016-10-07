@@ -71,16 +71,16 @@
             <div class="collapse navbar-collapse" id="js-nav-search">
                 <form class="navbar-form navbar-left" action="{{ route('search.index') }}">
                     <div class="row">
-                        <div class="col-xs-10 is-narrow-pr">
+                        <div class="col-xs-10 is-narrow-pr is-narrow-pl">
                             <input type="search" class="form-control" name="q"
                                    placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
                                    value="{{ $query }}">
                             <input type="text" class="form-control has-no-mb" name="location"
                                    placeholder="Where? Los Angeles, CA">
                         </div>
-                        <div class="col-xs-2 is-narrow-pl">
+                        <div class="col-xs-2 is-narrow-pl is-narrow-pr">
                             <button type="submit" class="btn btn-sky-blue">
-                                <i class="fa fa-2x fa-search"></i>
+                                <i class="fa fa-lg fa-search"></i>
                                 <span class="sr-only">Search</span>
                             </button>
                         </div>
