@@ -6,16 +6,10 @@
   position: relative;
 }
 
-.home__header__img {
-
-}
-
 .home__header__content {
-  position: absolute;
-  top: 10px;
-  left: 40px;
-  right: 40px;
+  background: transparent url('../../img/img-header@2x.jpg') no-repeat center center / cover;
   color: #ffffff;
+  padding: 1rem 4rem 3.4rem;
 }
 
 .home__header__title {
@@ -52,9 +46,7 @@
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
   .home__header__content {
-    top: 10px;
-    left: 15px;
-    right: 15px;
+    padding: 1rem 1.4rem;
   }
 
   .home__header__title {
@@ -69,13 +61,41 @@
   }
 
 }
+.shop__pub {
+  background: #ff3d7b url("../../img/shop-background.svg") no-repeat center bottom;
+  background-size: 100%;
+  height: 380px;
+  padding-top: 50px;
+  margin-top: 100px;
+}
+
+.best-selling {
+  margin-bottom: 2rem;
+}
+
+.best-selling__item {
+  &:hover, &:focus {
+    .best-selling__heading {
+      text-decoration: underline;
+    }
+  }
+}
+
+.best-selling__heading {
+  color: #595959;
+  font-size: 1.4rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.best-selling__image {
+  border-radius: 2px;
+}
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
   .home__header__content {
-    top: 5px;
-    left: 10px;
-    right: 10px;
+    padding: 0.5rem 1rem;
   }
 
   .home__header__title {
@@ -93,11 +113,6 @@
 
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 320px) {
-  .home__header__content {
-    top: 5px;
-    left: 10px;
-    right: 10px;
-  }
 
   .home__header__title {
     font-size: 11px;

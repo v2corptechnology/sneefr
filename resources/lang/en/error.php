@@ -29,15 +29,4 @@ return [
         'text'       => "Now or a little bit later ;)",
         'help'       => "If the problem persists <a href=\":helpUrl\" title=\"We're here to help\">contact us</a> ;-)",
     ],
-    'missing_scopes' => [
-        'page_title' =>"We need more information",
-        'heading' =>"sneefR needs just a little more information",
-        'explanation' =>"Why do we need this information?",
-        'email' => "<strong>Your email</strong> : to be able to contact you when a sale is about to be made! You can manage your notification preferences from your sneefR profile.",
-        'birthdate' => "<strong>Your birth date</strong> : It allows us to protect minors. Don't worry, your age will never be public!",
-        'friendlist' => "<strong>Your friendlist</strong> : sneefR allows you to find in a flash the ads published by your friends and they will see yours so you can sell faster! You can always unfollow someone from your sneefR profile.",
-        'privacy' => "We only use your data to give you the best experience possible on sneefR. We will <strong>never</strong> sell your data.",
-        'button' => "Try again",
-        'button_title' => "Re-login",
-    ],
 ];

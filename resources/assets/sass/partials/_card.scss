@@ -17,9 +17,15 @@
 }
 
 .avatar {
+  display: inline-block;
+}
+.nav .avatar {
+  display: inline-block;
+}
+
+.card .avatar {
   border: 2px solid #FFF;
   border-radius: 2px;
-  display: inline-block;
   margin: 0 1rem;
   position: absolute;
   right: 0;

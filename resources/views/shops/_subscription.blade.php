@@ -30,14 +30,14 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group hidden">
             <label for="coupon">@lang('payments.subscribe.coupon_label')</label>
-            <input class="form-control js-coupon" type="text" name="coupon"
+            <input class="form-control js-coupon" type="text" name="coupon" value="WELOVEYOU"
                    placeholder="@lang('payments.subscribe.coupon_placeholder')">
         </div>
 
         <button class="btn btn-primary js-add-stripe" type="submit"
-                data-image="{{ asset('img/particular_pig.png') }}"
+                data-image="{{ asset('img/pig.svg') }}"
                 data-locale="{{ auth()->user()->getLanguage() }}"
                 data-email="{{ auth()->user()->getEmail() }}"
                 data-currency="USD"

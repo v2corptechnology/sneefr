@@ -58,12 +58,12 @@
            <div class="col-xs-12">
                <a href="{{ $url }}">
                    <div class="card__box__preview__item {{ ($multiple ) ? 'col-xs-8' : 'col-xs-12' }}">
-                       <img class="card__box__preview__img" src="{{ $images[0] }}" alt="">
+                       <img class="card__box__preview__img" src="{{ $images[0] }}" alt="{{ $title }}">
                    </div>
                    @if($multiple)
                        <div class="card__box__preview__item col-xs-4">
-                           <img class="card__box__preview__img" src="{{ $images[1] }}" alt="">
-                           <img class="card__box__preview__img" src="{{ $images[2] }}" alt="">
+                           <img class="card__box__preview__img" src="{{ $images[1] }}" alt="{{ $title }}">
+                           <img class="card__box__preview__img" src="{{ $images[2] }}" alt="{{ $title }}">
                        </div>
                    @endif
                </a>
@@ -74,9 +74,9 @@
     <div class="card__box__footer">
         <div class="card__box__footer__content">
             <div class="card__box__avatar card__box__avatar--circle">
-                <a href="{{ $shop_url }}">
-                    <img class="card__box__avatar__img" src="{{ $logo }}" alt="">
-                </a>
+
+                @include('partials.avatar', ['of' => $item, 'size' => '60x60'])
+
             </div>
             <div class="card__box__description">
                 <a href="{{ $url }}">

@@ -6,14 +6,6 @@ class ViewNavbarTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function setUp()
-    {
-        parent::setUp();
-
-        // Homepage needs at least one ad to work
-        factory(\Sneefr\Models\Ad::class, 1)->create();
-    }
-
     public function test_cannot_view_avatar_and_menu_when_guest()
     {
         $this->visit('/')
@@ -21,34 +13,30 @@ class ViewNavbarTest extends TestCase
             ->dontSee('<li><a class="avatar"');
     }
 
-    public function test_view_avatar_and_menu_when_auth()
+    public function test_view_logout_when_auth()
     {
         $this->actingAs(factory(\Sneefr\Models\User::class)->create());
 
         $this->visit('/')
-            ->see('<a class="navbar__profile dropdown-toggle" data-toggle="dropdown"')
-            ->see(' <li class="navbar__avatar');
+            ->see('<a href="' . route('logout'));
     }
 
-    public function test_view_users_avatar_when_having_no_shop()
+    public function test_show_ad_create_button_for_shop_owner()
     {
         $user = factory(\Sneefr\Models\User::class)->create();
+        $shop =  factory(\Sneefr\Models\Shop::class)->create(['user_id' => $user->getId()]);
 
         $this->actingAs($user);
 
         $this->visit('/')
-            ->see($user->avatar . '" alt="'.$user->present()->fullName().'"');
+            ->see('<a href="'. route('items.create') .'" title="Create an ad">');
     }
 
-    public function test_view_shops_avatar_when_having_a_shop()
+    public function test_not_showing_ad_create_button_for_none_shop_owner()
     {
-        $user = factory(\Sneefr\Models\User::class)->create();
-        $shop = factory(\Sneefr\Models\Shop::class)->make();
-        $user->shop()->save($shop);
-
-        $this->actingAs($user);
+        $this->actingAs(factory(\Sneefr\Models\User::class)->create());
 
         $this->visit('/')
-            ->see('<img class="avatar__image" src="'.$shop->getLogo('25x25').'" alt="'.$shop->getName().'"');
+            ->dontSee('<a href="'. route('items.create') .'" title="Create an ad">');
     }
 }

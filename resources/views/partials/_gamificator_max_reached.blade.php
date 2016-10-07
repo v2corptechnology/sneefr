@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-2">
-        <img class="img-responsive" src="{{ base64Image('img/b64/rank_max.png') }}" alt="@lang('rank.max_reached_head')" width="50"/>
+        <img class="img-responsive" src="{{ base64Image('img/pig.svg') }}" alt="@lang('rank.max_reached_head')" width="50"/>
     </div>
     <div class="col-md-10">
         <p>@lang('rank.max_reached_text')</p>

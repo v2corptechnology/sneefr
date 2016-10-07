@@ -24,10 +24,10 @@ class Image
      * @var array
      */
     protected $patterns = [
-        'ad'         => 'bound/{dimensions}/q75/_originals_/{name}',
-        'ad_cropped' => 'crop/{dimensions}/q75/_originals_/{name}',
+        'ad'         => 'bound/{dimensions}/q75.tjpg/_originals_/{name}',
+        'ad_cropped' => 'crop/{dimensions}/q75.tjpg/_originals_/{name}',
         'avatar'     => 'crop/{dimensions}/q75/http://s3.amazonaws.com/sneefr.prod.ad-images/avatar/{name}',
-        'cover'      => 'crop/{dimensions}/q75/_shops_/{name}',
+        'cover'      => 'crop/{dimensions}/q75.tjpg/_shops_/{name}',
         'logo'       => 'crop/{dimensions}/q75/_shops_/{name}',
     ];
 

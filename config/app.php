@@ -172,6 +172,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
@@ -244,6 +245,7 @@ return [
          * Package aliases...
          */
         'Twilio'        => Aloha\Twilio\Support\Laravel\Facade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
         /*
          * Sneefr Aliases...

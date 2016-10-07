@@ -27,7 +27,7 @@
                     @foreach($inDiscussion as $ad)
                         <?php $recipient = $discussion->recipient();?>
                         <div class="col-xs-6 col-sm-4">
-                            <div class="box box--center">
+                            <div class="box text-center">
                                 <img class="preview__image" src="{{ $ad->firstImageUrl(180) }}" alt="{{ $ad->getTitle() }}">
                                 <span class="buyer__name">{{ $ad->getTitle() }} &bull; {!! $ad->present()->price() !!}</span>
                                 <a class="btn btn-default btn-block btn-default2"
