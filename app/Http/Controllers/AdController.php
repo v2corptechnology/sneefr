@@ -40,28 +40,6 @@ class AdController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(int $id)
-    {
-        // Get the ad to edit
-        $ad = Ad::findOrFail($id);
-
-        // Check the rights for this user to edit this ad
-        $this->authorize('update', $ad);
-
-        $categories = $this->getCategoryTree();
-
-        $shops = \Auth::user()->shops;
-
-        return view('ad.edit', compact('ad', 'categories', 'shops'));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  int                                  $id
@@ -167,36 +145,6 @@ class AdController extends Controller
         }
 
         abort(404);
-    }
-
-    /**
-     * Get a multidimensional array listing categories.
-     *
-     * @return array
-     */
-    protected function getCategoryTree()
-    {
-        // Initialize the tree with an empty option.
-        $categories = [
-            '' => trans('ad_form.create.category_placeholder'),
-        ];
-
-        $categoryGroups = app(CategoryRepository::class)->getCategoriesTree();
-
-        foreach ($categoryGroups as $groupKey => $subcategories) {
-
-            $group = [];
-
-            foreach ($subcategories as $categoryKey) {
-                $group[$categoryKey] = trans('category.' . $categoryKey);
-            }
-
-            $groupName = trans('category.' . $groupKey);
-
-            $categories[$groupName] = $group;
-        }
-
-        return $categories;
     }
 
     /**

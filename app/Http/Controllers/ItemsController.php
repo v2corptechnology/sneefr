@@ -47,4 +47,23 @@ class ItemsController extends Controller
 
         return redirect()->route('ad.show', $ad);
     }
+
+    /**
+     * Edit an item.
+     *
+     * @param \Sneefr\Models\Ad $ad
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Ad $ad)
+    {
+        // Check the rights for this user to edit this ad
+        $this->authorize('update', $ad);
+
+        $categories = Category::getTree();
+
+        $shops = \Auth::user()->shops;
+
+        return view('ad.edit', compact('ad', 'categories', 'shops'));
+    }
 }

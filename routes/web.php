@@ -174,7 +174,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Follows
     Route::resource('follows', 'FollowsController', ['only' => ['store', 'destroy']]);
     // Items
-    Route::resource('items', 'ItemsController', ['only' => ['create', 'store']]);
+    Route::resource('items', 'ItemsController', ['only' => ['create', 'store', 'edit']]);
     // Likes
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Messages
@@ -238,6 +238,9 @@ Route::group(['middleware' => ['auth', 'team.developer']], function ($router) {
 /**
  * Route bindings
  */
+Route::bind('item', function ($value) {
+    return \Sneefr\Models\Ad::findOrFail(explode('-', $value)[0]);
+});
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
 });

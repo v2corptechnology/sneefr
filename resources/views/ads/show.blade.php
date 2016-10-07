@@ -340,7 +340,7 @@
                                title="@lang('ad.show.btn_remove_title')">
                                 @lang('ad.show.btn_remove')
                             </a>
-                            <a class="btn btn-default btn-default2" href="{{ route('ad.edit', $ad->getId()) }}"
+                            <a class="btn btn-default btn-default2" href="{{ route('items.edit', $ad) }}"
                                title="@lang('ad.show.btn_edit_title')">
                                 @lang('ad.show.btn_edit')
                             </a>

@@ -117,7 +117,7 @@
                                             @lang('ad.show.btn_remove')
                                         </a>
                                         <a class="btn ad__buy"
-                                           href="{{ route('ad.edit', $ad->getId()) }}"
+                                           href="{{ route('items.edit', $ad) }}"
                                            title="@lang('ad.show.btn_edit_title')">
                                             <i class="fa fa-pencil"></i>
                                             @lang('ad.show.btn_edit')
