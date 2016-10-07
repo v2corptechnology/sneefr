@@ -33,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\SendUpdatedNotification::class,
         ],
 
+        \Sneefr\Events\ItemWasViewed::class => [
+            \Sneefr\Listeners\ItemWasViewed\SaveView::class,
+        ],
+
         \Sneefr\Events\MessageWasSent::class => [
             \Sneefr\Listeners\UpdateDiscussionStatus::class,
         ],

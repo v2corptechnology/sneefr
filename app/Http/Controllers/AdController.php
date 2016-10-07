@@ -2,11 +2,9 @@
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Queue;
-use Sneefr\Events\AdWasPosted;
+use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Jobs\DeleteAd;
-use Sneefr\Jobs\SaveAdView;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Referral;
 use Sneefr\Models\Shares;
@@ -36,8 +34,7 @@ class AdController extends Controller
         // Todo: extract it to the User model/whatever
         $relationships = $this->getRelationShips($ad->seller);
 
-        // Save visit
-        Queue::push(new SaveAdView($ad->getId(), auth()->id()));
+        event(new ItemWasViewed($ad, auth()->user()));
 
         return view('ad.show', compact('ad', 'relationships'));
     }
