@@ -50,7 +50,7 @@ class Category extends Model
             ->toArray();
     }
 
-    public function getChildsIds()
+    public function getChildIds()
     {
         $category_list = self::where('child_of', $this->id)->pluck('id')->toArray();
         array_push($category_list, $this->id);
