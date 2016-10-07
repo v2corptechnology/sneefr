@@ -7,7 +7,7 @@
             </a>
         </div>
 
-        <form class="navbar-form navbar-left has-no-mb">
+        <form class="navbar-form navbar-left has-no-mb" action="{{ route('search.index') }}">
             <div class="row">
                 <div class="col-sm-6 is-narrow-pr">
                     <input type="search" class="form-control" name="q"
@@ -69,7 +69,7 @@
         <div class="visible-xs">
             {{-- Collect the nav links, forms, and other content for toggling --}}
             <div class="collapse navbar-collapse" id="js-nav-search">
-                <form class="navbar-form navbar-left" action="{{ route('search.index') }}" >
+                <form class="navbar-form navbar-left" action="{{ route('search.index') }}">
                     <div class="row">
                         <div class="col-xs-10 is-narrow-pr">
                             <input type="search" class="form-control" name="q"
