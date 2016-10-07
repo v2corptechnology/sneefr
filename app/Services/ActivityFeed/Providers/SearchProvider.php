@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\ActivityFeed\Providers;
+<?php
+
+namespace Sneefr\Services\ActivityFeed\Providers;
 
 use Sneefr\Models\Search as SearchModel;
 use Sneefr\Repositories\Search\SearchRepository;

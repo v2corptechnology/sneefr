@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Exceptions;
+<?php
+
+namespace Sneefr\Exceptions;
 
 use Exception;
 use Illuminate\Contracts\Validation\Validator;

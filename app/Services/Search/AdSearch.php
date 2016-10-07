@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\Search;
+<?php
+
+namespace Sneefr\Services\Search;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Fluent;

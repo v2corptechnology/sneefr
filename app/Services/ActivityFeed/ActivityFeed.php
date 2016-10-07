@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\ActivityFeed;
+<?php
+
+namespace Sneefr\Services\ActivityFeed;
 
 // Exceptions.
 use Countable;

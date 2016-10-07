@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Events;
+<?php
+
+namespace Sneefr\Events;
 
 use Sneefr\Models\Message;
 use Sneefr\Models\User;

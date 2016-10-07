@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Contracts\Services;
+<?php
+
+namespace Sneefr\Contracts\Services;
 
 /**
  * Contract for connectors to social networks

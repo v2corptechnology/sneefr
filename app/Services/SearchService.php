@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services;
+<?php
+
+namespace Sneefr\Services;
 
 use App;
 use Exception;

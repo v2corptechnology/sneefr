@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Jobs;
+<?php
+
+namespace Sneefr\Jobs;
 
 use Carbon\Carbon;
 use Illuminate\Config\Repository as Config;

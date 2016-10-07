@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\AdWasPurchased;
+<?php
+
+namespace Sneefr\Listeners\AdWasPurchased;
 
 use Sneefr\Events\AdWasPurchased;
 

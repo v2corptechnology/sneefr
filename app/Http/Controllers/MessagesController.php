@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 use Sneefr\Http\Requests\Request;
 use Sneefr\Http\Requests\StoreMessageRequest;

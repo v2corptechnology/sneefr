@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Middleware;
+<?php
+
+namespace Sneefr\Http\Middleware;
 
 use Closure;
 use Illuminate\Foundation\Bus\DispatchesJobs;

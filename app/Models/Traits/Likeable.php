@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models\Traits;
+<?php
+
+namespace Sneefr\Models\Traits;
 
 use Sneefr\Models\Like;
 

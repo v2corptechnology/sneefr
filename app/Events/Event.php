@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Events;
+<?php
+
+namespace Sneefr\Events;
 
 abstract class Event
 {

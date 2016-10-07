@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Support;
+<?php
+
+namespace Sneefr\Support;
 
 use Illuminate\Database\Eloquent\Collection;
 

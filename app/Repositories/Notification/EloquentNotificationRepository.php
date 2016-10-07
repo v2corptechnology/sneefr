@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Notification;
+<?php
+
+namespace Sneefr\Repositories\Notification;
 
 use Carbon\Carbon;
 use Sneefr\Models\Notification;

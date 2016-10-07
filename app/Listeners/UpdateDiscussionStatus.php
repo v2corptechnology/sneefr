@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners;
+<?php
+
+namespace Sneefr\Listeners;
 
 use Sneefr\Events\MessageWasSent;
 use Sneefr\Repositories\Discussion\DiscussionRepository;

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Report;
+<?php
+
+namespace Sneefr\Repositories\Report;
 
 interface ReportRepository
 {

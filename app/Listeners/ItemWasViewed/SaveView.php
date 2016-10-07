@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\ItemWasViewed;
+<?php
+
+namespace Sneefr\Listeners\ItemWasViewed;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sneefr\Events\ItemWasViewed;

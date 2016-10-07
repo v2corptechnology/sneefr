@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Facades;
+<?php
+
+namespace Sneefr\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

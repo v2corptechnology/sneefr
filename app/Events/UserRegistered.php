@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Events;
+<?php
+
+namespace Sneefr\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Sneefr\Models\User;

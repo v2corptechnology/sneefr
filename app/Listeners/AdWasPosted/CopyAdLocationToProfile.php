@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\AdWasPosted;
+<?php
+
+namespace Sneefr\Listeners\AdWasPosted;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Session\Store as Session;

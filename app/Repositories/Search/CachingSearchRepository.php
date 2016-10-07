@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Search;
+<?php
+
+namespace Sneefr\Repositories\Search;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Cache\Repository as Cache;

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\ActivityFeed\Providers;
+<?php
+
+namespace Sneefr\Services\ActivityFeed\Providers;
 
 // Interfaces.
 use Sneefr\Repositories\Discussion\DiscussionRepository;
