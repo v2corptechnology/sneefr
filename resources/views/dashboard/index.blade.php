@@ -15,17 +15,6 @@
         <div class="col-md-8 dashboard-flow">
             <ol class="media-list">
 
-                {{-- Show a welcome message, if needed --}}
-                @if ($hasLoggedIn)
-                    <li class="activity welcome">
-                        <div class="row">
-                            <p class="bg-success col-md-8 col-md-offset-4 text-success">
-                                @lang('dashboard.welcome_text', ['name' => auth()->user()->present()->givenName()])
-                            </p>
-                        </div>
-                    </li>
-                @endif
-
                 {{-- Show a form allowing to quickly start the creation of an ad --}}
                 <li class="media hidden-xs">
                     <div class="row">
