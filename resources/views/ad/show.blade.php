@@ -123,7 +123,8 @@
                                             @lang('ad.show.btn_edit')
                                         </a>
                                     </div>
-                                @else
+                                @endif
+                                @if (auth()->check() && !$ad->isMine())
                                     <div class="col-sm-5" style="margin-bottom: 2px;">
                                         <span class="ad__label">Quantity : </span>
                                         <input type="numeric" class="form-control ad__input" value="1" min="1" max="{{ $ad->remaining_quantity }}" style="width: 60px;display: inline-block;">
