@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Presenters;
+<?php
+
+namespace Sneefr\Presenters;
 
 use Laracodes\Presenter\Presenter;
 use NumberFormatter;

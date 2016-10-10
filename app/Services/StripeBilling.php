@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services;
+<?php
+
+namespace Sneefr\Services;
 
 use Sneefr\Contracts\BillingInterface;
 use Sneefr\Http\Requests\BillingRequest;

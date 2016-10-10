@@ -1,12 +1,12 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Queue;
-use Sneefr\Events\AdWasPosted;
+use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Jobs\DeleteAd;
-use Sneefr\Jobs\SaveAdView;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Referral;
 use Sneefr\Models\Shares;
@@ -36,32 +36,9 @@ class AdController extends Controller
         // Todo: extract it to the User model/whatever
         $relationships = $this->getRelationShips($ad->seller);
 
-        // Save visit
-        Queue::push(new SaveAdView($ad->getId(), auth()->id()));
+        event(new ItemWasViewed($ad, auth()->user()));
 
         return view('ad.show', compact('ad', 'relationships'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(int $id)
-    {
-        // Get the ad to edit
-        $ad = Ad::findOrFail($id);
-
-        // Check the rights for this user to edit this ad
-        $this->authorize('update', $ad);
-
-        $categories = $this->getCategoryTree();
-
-        $shops = \Auth::user()->shops;
-
-        return view('ad.edit', compact('ad', 'categories', 'shops'));
     }
 
     /**
@@ -170,36 +147,6 @@ class AdController extends Controller
         }
 
         abort(404);
-    }
-
-    /**
-     * Get a multidimensional array listing categories.
-     *
-     * @return array
-     */
-    protected function getCategoryTree()
-    {
-        // Initialize the tree with an empty option.
-        $categories = [
-            '' => trans('ad_form.create.category_placeholder'),
-        ];
-
-        $categoryGroups = app(CategoryRepository::class)->getCategoriesTree();
-
-        foreach ($categoryGroups as $groupKey => $subcategories) {
-
-            $group = [];
-
-            foreach ($subcategories as $categoryKey) {
-                $group[$categoryKey] = trans('category.' . $categoryKey);
-            }
-
-            $groupName = trans('category.' . $groupKey);
-
-            $categories[$groupName] = $group;
-        }
-
-        return $categories;
     }
 
     /**

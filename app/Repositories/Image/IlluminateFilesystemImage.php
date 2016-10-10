@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Image;
+<?php
+
+namespace Sneefr\Repositories\Image;
 
 use Exception;
 use UnexpectedValueException;

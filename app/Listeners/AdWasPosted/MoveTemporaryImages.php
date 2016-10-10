@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\AdWasPosted;
+<?php
+
+namespace Sneefr\Listeners\AdWasPosted;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Sneefr\Events\AdWasPosted;

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Category;
+<?php
+
+namespace Sneefr\Repositories\Category;
 
 use Sneefr\Models\Category;
 

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models;
+<?php
+
+namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Sneefr\Models\Traits\Likeable;

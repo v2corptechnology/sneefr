@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Search;
+<?php
+
+namespace Sneefr\Repositories\Search;
 
 interface SearchRepository
 {

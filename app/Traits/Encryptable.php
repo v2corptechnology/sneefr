@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Traits;
+<?php
+
+namespace Sneefr\Traits;
 
 use Illuminate\Support\Facades\Crypt;
 

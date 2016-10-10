@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Notification;
+<?php
+
+namespace Sneefr\Repositories\Notification;
 
 use Illuminate\Contracts\Cache\Repository as Cache;
 

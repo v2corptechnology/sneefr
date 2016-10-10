@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Contracts\Entities;
+<?php
+
+namespace Sneefr\Contracts\Entities;
 
 /**
  * Allows a discussed to act as an entity.

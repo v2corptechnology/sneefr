@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Contracts\Repositories;
+<?php
+
+namespace Sneefr\Contracts\Repositories;
 
 use Sneefr\Repositories\Image\AdImage;
 

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models;
+<?php
+
+namespace Sneefr\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;

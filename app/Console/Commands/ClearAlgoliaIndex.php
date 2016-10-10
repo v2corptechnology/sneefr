@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Console\Commands;
+<?php
+
+namespace Sneefr\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;

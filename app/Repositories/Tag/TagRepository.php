@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Tag;
+<?php
+
+namespace Sneefr\Repositories\Tag;
 
 interface TagRepository
 {

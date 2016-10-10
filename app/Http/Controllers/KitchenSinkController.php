@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 class KitchenSinkController extends Controller
 {

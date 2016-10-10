@@ -12,7 +12,7 @@ return [
         'relationships_empty'        => "This user doesn't have any follower yet",
         'common_relationships'       => "1 in common| :nb in common",
         'common_relationships_title' => "People you have in common",
-        'stock'                      => "{0} No stock | [1, 2] 1 in stock, hurry ! | [2,Inf] :nb in stock",
+        'stock'                      => "{0} No stock | [1, 2] :nb in stock, hurry ! | [2,Inf] :nb in stock",
         'evaluations'                => ":name's reviews",
         'evaluations_positive'       => ":percentage% positive",
         'evaluations_empty'          => ":name doesn't have any review yet",

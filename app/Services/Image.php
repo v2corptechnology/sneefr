@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services;
+<?php
+
+namespace Sneefr\Services;
 
 use InvalidArgumentException;
 use Sneefr\Models\Ad as AdModel;

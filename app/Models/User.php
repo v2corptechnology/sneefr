@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models;
+<?php
+
+namespace Sneefr\Models;
 
 use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Carbon\Carbon;

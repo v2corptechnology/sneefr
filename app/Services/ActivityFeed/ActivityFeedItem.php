@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\ActivityFeed;
+<?php
+
+namespace Sneefr\Services\ActivityFeed;
 
 use Illuminate\Support\Collection;
 

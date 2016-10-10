@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Shop;
+<?php
+
+namespace Sneefr\Repositories\Shop;
 
 use Illuminate\Support\Collection;
 use Sneefr\Models\Shop;

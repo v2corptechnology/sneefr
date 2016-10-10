@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services\ActivityFeed\Providers;
+<?php
+
+namespace Sneefr\Services\ActivityFeed\Providers;
 
 use Illuminate\Support\Collection;
 use Sneefr\Models\Follow as RelationshipModel;

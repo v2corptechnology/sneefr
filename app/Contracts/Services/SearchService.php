@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Contracts\Services;
+<?php
+
+namespace Sneefr\Contracts\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Fluent;

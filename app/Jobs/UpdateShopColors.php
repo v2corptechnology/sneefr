@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Jobs;
+<?php
+
+namespace Sneefr\Jobs;
 
 use Illuminate\Contracts\Filesystem\Factory;
 use Img;

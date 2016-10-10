@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Sneefr\Http\Requests;
@@ -26,7 +28,7 @@ class HomeController extends Controller
         }
 
         if ($category) {
-            $shopsByCategory = Category::whereIn('id', $category->getChildsIds())->with('shops')->get()->take(6)->pluck('shops')->collapse()->unique('shop');
+            $shopsByCategory = Category::whereIn('id', $category->getChildIds())->with('shops')->get()->take(6)->pluck('shops')->collapse()->unique('shop');
         } else {
             $shopsByCategory = Shop::with('evaluations')->take(6)->get();
         }
