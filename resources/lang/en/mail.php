@@ -15,14 +15,6 @@ return [
         'button_title' => "See my notifications on sneefR",
     ],
 
-    'waiting-evaluation'   => [
-        'title'        => "Don't forget to leave a review to :vendorName",
-        'lead'         => "Congrats on your deal!",
-        'text'         => "Don't forget to leave a review to :vendorName, it will help other users know if this is a good seller.",
-        'button'       => "Leave a review to :vendorName",
-        'button_title' => "Leave a review to :vendorName",
-    ],
-
     'waiting-message' => [
         'title'        => ":nb unread message on sneefR|:nb unread messages on sneefR",
         'lead'         => ":name, you have <strong>one unread message</strong> on sneefR.| :name, you have <strong>:nb unread messages</strong> on sneefR.",
