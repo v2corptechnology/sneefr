@@ -3,6 +3,7 @@
 namespace Sneefr\Http\Controllers;
 
 use Sneefr\Events\AdWasPosted;
+use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
@@ -10,6 +11,20 @@ use Sneefr\Models\Stock;
 
 class ItemsController extends Controller
 {
+    public function show(Ad $ad)
+    {
+        $ad->load('shop.evaluations');
+
+        // Verify this ad is viewable
+        // Quickfix : a disconnected user cannot see an ad
+        //$this->authorize($ad);
+
+        event(new ItemWasViewed($ad, auth()->user()));
+
+        return view('ad.show', compact('ad', 'relationships'));
+
+    }
+
     /**
      * Display the form to create a new item.
      */
