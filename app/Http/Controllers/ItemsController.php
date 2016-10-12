@@ -21,8 +21,7 @@ class ItemsController extends Controller
 
         event(new ItemWasViewed($ad, auth()->user()));
 
-        return view('ad.show', compact('ad', 'relationships'));
-
+        return view('items.show', compact('ad'));
     }
 
     /**
