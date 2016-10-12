@@ -16,7 +16,8 @@
                 </div>
                 <div class="col-sm-4 is-narrow-pl is-narrow-pr">
                     <input type="text" class="form-control has-no-mb" name="location"
-                           placeholder="Where? Los Angeles, CA">
+                           placeholder="Where? Los Angeles, CA" disabled
+                           data-toggle="tooltip" data-placement="bottom" title="More places to come soon...">
                 </div>
                 <div class="col-sm-2 is-narrow-pl">
                     <button type="submit" class="btn btn-sky-blue">
@@ -76,7 +77,7 @@
                                    placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
                                    value="{{ $query }}">
                             <input type="text" class="form-control has-no-mb" name="location"
-                                   placeholder="Where? Los Angeles, CA">
+                                   placeholder="Where? Los Angeles, CA" disabled>
                         </div>
                         <div class="col-xs-2 is-narrow-pl is-narrow-pr">
                             <button type="submit" class="btn btn-sky-blue">
