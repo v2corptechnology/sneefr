@@ -67,7 +67,6 @@ class Ad extends Model
         'id',
         'user_id',
         'shop_id',
-        'initial_quantity',
         'remaining_quantity',
         'category_id',
         'title',
