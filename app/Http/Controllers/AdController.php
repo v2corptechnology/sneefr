@@ -8,10 +8,7 @@ use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Jobs\DeleteAd;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Referral;
 use Sneefr\Models\Shares;
-use Sneefr\Models\User;
-use Sneefr\Repositories\Category\CategoryRepository;
 use Sneefr\Repositories\Discussion\DiscussionRepository;
 
 class AdController extends Controller
@@ -21,24 +18,13 @@ class AdController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show($id)
     {
-        // Get the ad
-        $ad = Ad::withTrashed()->with('seller.evaluations.user')->findOrFail($id);
+        $ad = Ad::withTrashed()->find($id)->first();
 
-        // Verify this ad is viewable
-        // Quickfix : a disconnected user cannot see an ad
-        //$this->authorize($ad);
-
-        // Todo: extract it to the User model/whatever
-        $relationships = $this->getRelationShips($ad->seller);
-
-        event(new ItemWasViewed($ad, auth()->user()));
-
-        return view('ad.show', compact('ad', 'relationships'));
+        return redirect()->route('items.show', $ad, 301);
     }
 
     /**
@@ -147,36 +133,5 @@ class AdController extends Controller
         }
 
         abort(404);
-    }
-
-    /**
-     * Generates an array with all different kind of relationships
-     *
-     * @param \Sneefr\Models\User $seller
-     *
-     * @return array
-     */
-    protected function getRelationShips(User $seller) : array
-    {
-        $common = collect();
-
-        // Fetch commons only if the user is logged and is not the seller
-        if (auth()->check() && auth()->id() != $seller->getId()) {
-            $sellerReferences = Referral::where('referent_user_id', $seller->getId())->get()->pluck('referred_user_id');
-            $userReferences = Referral::where('referent_user_id', auth()->user()->getId())->get()->pluck('referred_user_id');
-
-            $commonReferenceIds = $sellerReferences->intersect($userReferences);
-
-            $common = User::find($commonReferenceIds->toArray());
-        }
-
-        // All relationships the seller has
-        $other = collect();
-
-        return [
-            'common' => $common,
-            'other'  => $other,
-            'all'    => collect(),
-        ];
     }
 }
