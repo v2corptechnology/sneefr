@@ -171,8 +171,6 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('discussions', 'DiscussionsController', ['only' => ['index', 'show']]);
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
-    // Follows
-    Route::resource('follows', 'FollowsController', ['only' => ['store', 'destroy']]);
     // Items
     Route::resource('items', 'ItemsController', ['only' => ['show', 'create', 'store', 'edit']]);
     // Likes
