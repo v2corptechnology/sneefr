@@ -22,10 +22,11 @@
                 <main class="box text-center">
 
                     <h1 class="box__title">How many of these do you want ?</h1>
+
+                    <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
+
                     <div class="form-group">
-                        <select name="" id="">
-                            <option value="">1</option>
-                        </select>
+                        {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
                     </div>
 
                     <h1 class="box__title">@lang('payments.create.box_heading')</h1>
@@ -39,12 +40,6 @@
                             <span class="js-final-price" data-amount-with-delivery="{{ $ad->negotiatedPrice() }}">
                                 {!! $ad->present()->negotiatedPrice() !!}
                             </span>
-                            @foreach ($ad->delivery->getFees() as $name => $fee)
-                                <span class="js-final-price js-price-delivery-{{ $name }} hidden"
-                                      data-amount-with-delivery="{{ $ad->negotiatedPrice()->withFee($name) }}">
-                                    {!! $ad->present()->price($ad->negotiatedPrice()->withFee($name)->readable()) !!}
-                                </span>
-                            @endforeach
                         </div>
 
                         @if ($ad->isInShop())
@@ -54,7 +49,7 @@
 
                                 @foreach ($ad->present()->getFees() as $name => $fee)
                                     <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
-                                        <input class="js-delivery-option" type="radio"
+                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee * 100 }}"
                                                name="delivery" value="{{ $name }}" id="delivery-{{ $name }}" required autocomplete="off">
                                         @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
                                     </label>

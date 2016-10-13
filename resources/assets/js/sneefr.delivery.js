@@ -5,38 +5,54 @@
             // Options available
             this.options = $('.js-delivery-option');
 
+            // Quantity
+            this.quantity = $('.js-quantity');
+
+            // Price
+            this.price = $('.js-price');
+
             // Finally bind the events
             this.bindEvents();
         },
 
         bindEvents: function () {
-            this.options.on('change', $.proxy(this.handleDeliveryChange, this));
+            this.options.add(this.quantity).on('change', $.proxy(this.makePrice, this));
         },
 
-        handleDeliveryChange: function (event) {
+        makePrice: function (event) {
             // Be safe my friend !
             event.preventDefault();
 
-            // Delivery method details options
-            var $this = $(event.target),
-                $displayedDelivery = $('.js-price-delivery-' + $this.val()),
-                $displayedInfo = $('.js-delivery-info-' + $this.val());
+            // Total amount (*100)
+            var $checkedDelivery = $('.js-delivery-option:checked'),
+                fee = $checkedDelivery.data('delivery-fee') || 0,
+                amount = parseInt(this.quantity.val()) * parseInt(this.price.text()) + fee,
+                textAmount = "" + amount;
 
-            // Display targeted price
-            $displayedDelivery.siblings().addClass('hidden').end().removeClass('hidden');
+            // Update the payment box to bill the correct price
+            if ($checkedDelivery.length) {
+                $('.js-add-stripe').attr('data-amount', amount)
+                    // Enable pay button
+                    .attr('disabled', false)
+            } else {
+                $('.js-add-stripe').attr('data-amount', amount)
+                    // Disable pay button
+                    .attr('disabled', true)
+            }
+
+            // Update displayed price
+            $(".js-final-price").html( textAmount.slice(0, -2) + '.' + textAmount.slice(-2)+ '$');
 
             // Display targeted delivery info
             $('.js-delivery-info').addClass('hidden');
-            $displayedInfo.removeClass('hidden');
+            if ($checkedDelivery.length) {
 
-            $('.js-add-stripe')
-                // Update the payment box to bill the correct price
-                .attr('data-amount', parseFloat($displayedDelivery.data('amount-with-delivery')))
-                // Enable pay button
-                .attr('disabled', false);
+                // Display extra info
+                $('.js-extra-info').removeClass('hidden');
 
-            // Display extra info
-            $('.js-extra-info').removeClass('hidden');
+                // Display info specific to this delivery
+                $('.js-delivery-info-' + $checkedDelivery.val()).removeClass('hidden');
+            }
         },
     };
 
