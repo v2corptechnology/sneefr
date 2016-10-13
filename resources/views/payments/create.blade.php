@@ -11,7 +11,6 @@
     <div class="container">
 
         <header class="hero hero--centered">
-            <img src="{{ asset('img/pig.svg') }}" width="100" alt="sneefR" class="hero__img">
             <h1 class="hero__title">@lang('payments.create.heading')</h1>
             <p class="hero__tagline">
                 @lang('payments.create.tagline', ['name' => $ad->seller->present()->givenName()])
@@ -21,6 +20,14 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <main class="box text-center">
+
+                    <h1 class="box__title">How many of these do you want ?</h1>
+                    <div class="form-group">
+                        <select name="" id="">
+                            <option value="">1</option>
+                        </select>
+                    </div>
+
                     <h1 class="box__title">@lang('payments.create.box_heading')</h1>
 
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">

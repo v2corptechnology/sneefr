@@ -149,86 +149,13 @@
                 </div>
 
             </div>
-            {{-- end detail --}}
-            {{-- Shop detail --}}
+
             <div class="col-sm-3">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card__box ad__shop">
-                            <div class="card__box__footer">
-                                <div class="card__box__footer__content">
-                                    <div class="card__box__avatar card__box__avatar--circle">
-                                        <a href="{{ route('shops.show', $ad->shop) }}">
-                                            <img class="card__box__avatar__img" src="{{ $ad->shop->getLogo('60x60') }}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card__box__description">
-                                        <a href="{{ route('shops.show', $ad->shop) }}">
-                                            <span class="card__box__description__title text-indent">{{ $ad->shop->getName() }}</span>
-                                        </a>
-                                        <div>
-                                            <i class="fa fa-thumbs-up no-lr-padding color-green"></i> {{ $ad->shop->evaluations->positives()->count() }}
-                                            <i class="fa fa-thumbs-down no-lr-padding color-red"></i> {{ $ad->shop->evaluations->negatives()->count() }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <p>{{ $ad->shop->getDescription() }}</p>
-                                <div class="row ad__shop__map">
-                                    <img class="img-responsive ad__shop__map__img" src="https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=300x160&markers=color:red%7C{{ $ad->shop->getLatitude() }},{{ $ad->shop->getLongitude() }}&key=AIzaSyBdinlP2NwN4G3P5f3Yte6CFZAS4E7P5Kc" alt="">
-                                </div>
-                                <i class="fa fa-map-marker"></i><span> {{ $ad->shop->getLocation() }}</span>
-                                <hr class="ad__shop__divider">
-                                <h5 class="timetable__title">Horaire</h5>
-                                <table class="table timetable">
-                                    <tbody>
-                                        <tr>
-                                            <td>Lun.</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mar.</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mar.</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td><span class="color-green">Open now</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeu</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ven.</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>sam.</td>
-                                            <td>10:00 - 18:00</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>dim.</td>
-                                            <td><span class="color-red">Close</span></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="text-center">
-                            <a href="{{ route('shops.show', $ad->shop) }}" class="btn btn-default-o">Learn more</a>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+
+                {{-- Shop details --}}
+                @include ('items.show._seller', ['shop' => $ad->shop])
+
             </div>
-            {{-- end Shop detail --}}
         </div>
     </div>
 @endsection

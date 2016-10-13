@@ -38,6 +38,10 @@
   max-width: 100%;
 }
 
+.avatar--circle .avatar__image {
+  border-radius: 50%;
+}
+
 .card__image--hidden {visibility: hidden;}
 
 .card__title {
