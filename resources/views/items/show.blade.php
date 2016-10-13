@@ -26,19 +26,6 @@
           content="https://www.facebook.com/{{ $ad->seller->socialNetworkId() }}">
 @endsection
 
-@section('modals')
-    @parent
-    @include('partials.modals._report_ad', ['title' => $ad->getTitle(), 'id' => $ad->getId()])
-
-    @include('partials.modals._login')
-
-    @if ($ad->isInShop())
-        @include('partials.modals._write', ['recipient' => $ad->shop, 'adId' => $ad->getId()])
-    @else
-        @include('partials.modals._write', ['recipient' => $ad->seller, 'adId' => $ad->getId()])
-    @endif
-@stop
-
 @push('script')
     <style>
         .carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
@@ -119,73 +106,12 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <div class="box">
-                            <h4 class="ad__title">{{ $ad->present()->title() }}</h4>
-                            <div class="status">
-                                <span class="ad__label" style="line-height: 30px;">Condition : {{ $ad->present()->condition() }}</span> <span class="badge badge-gold"> @choice('ad.show.stock', $ad->remaining_quantity, ['nb' => $ad->remaining_quantity])</span>
-                            </div>
-                            <hr>
-                            <div class="row text-center-mobile">
-                                <div class="col-sm-4">
-                                    <span class="ad__price">{{ $ad->present()->price() }}</span>
-                                </div>
-                                @if ($ad->isMine() || (auth()->check() && auth()->user()->isAdmin()))
-                                    <div class="col-sm-8">
-                                        <a class="btn ad__buy btn-danger" href="{{ route('ads.chooseBuyer', $ad->getSlug()) }}"
-                                           title="@lang('ad.show.btn_remove_title')">
-                                            <i class="fa fa-trash"></i>
-                                            @lang('ad.show.btn_remove')
-                                        </a>
-                                        <a class="btn ad__buy"
-                                           href="{{ route('items.edit', $ad) }}"
-                                           title="@lang('ad.show.btn_edit_title')">
-                                            <i class="fa fa-pencil"></i>
-                                            @lang('ad.show.btn_edit')
-                                        </a>
-                                    </div>
-                                @endif
-                                @if (auth()->check() && !$ad->isMine())
-                                    <div class="col-sm-5" style="margin-bottom: 2px;">
-                                        <span class="ad__label">Quantity : </span>
-                                        <input type="numeric" class="form-control ad__input" value="1" min="1" max="{{ $ad->remaining_quantity }}" style="width: 60px;display: inline-block;">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <a class="btn ad__buy btn-block"
-                                           @if(auth()->check())
-                                           href="{{ route('payments.create', ['ad' => $ad]) }}"
-                                           @else
-                                           data-toggle="modal"
-                                           data-target="#LoginBefore"
-                                           @endif
-                                           title="">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            @lang('ad.show.btn_pay')
-                                        </a>
-                                    </div>
-                                @endif
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <ul class="ad__social__list">
-                                    @if(!$ad->isMine())
-                                        <li>
-                                            <a class="btn" href="#writeTo" data-toggle="modal"
-                                               data-target="#writeTo"
-                                               title="@lang('ad.show.btn_contact_title', ['name' => $ad->seller->present()->givenName()])">
-                                                <i class="icon fa fa-comments"></i>
-                                                @lang('ad.show.btn_contact')
-                                            </a>
-                                        </li>
-                                    @endif
-                                    <li>
-                                        <a class="btn"  href="{{ route('ads.share', $ad) }}"
-                                           data-toggle="modal" data-remote="false" data-target="#shareModal"
-                                           title="@lang('button.share_title')"><i class="icon fa fa-share-alt"></i> Share</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+
+                        {{-- Title, price and buy buttons --}}
+                        @include ('items.show._heading', ['ad' => $ad])
+
                     </div>
+
                 </div>
 
                 <div class="row">
