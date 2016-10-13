@@ -172,7 +172,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
-    Route::resource('items', 'ItemsController', ['only' => ['show', 'create', 'store', 'edit']]);
+    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
     // Likes
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Messages
@@ -202,6 +202,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
 Route::get('share/ad/{ad}', ['as' => 'ads.share', 'uses' => 'SharesController@shareAd']);
 // Ad display,
 Route::get('ad/{ad}', ['as' => 'ad.show', 'uses' => 'AdController@show', 'middleware' => 'shared']);
+// Items
+Route::resource('items', 'ItemsController', ['only' => ['show']]);
 // Search results
 Route::get('search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
 // Shop display
