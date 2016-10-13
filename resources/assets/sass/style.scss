@@ -689,147 +689,9 @@ time {
 .confirm-pay-form {
   margin-top: 4rem;}
 
-
-/*******************************
-Ad related
-*******************************/
-.item {
-  position: relative;
-}
-
-.item__content {
-  background-color: #fff;
-  border-radius: 3px;
-  box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016), 0px 0px 0px 1px #DBDBDC;
-}
-
-.item--medium {
-  margin-bottom: 2rem;
-}
-
-.item--small {
-  margin-bottom: 2.5rem;
-
-  .item__title {
-    font-size: 1.2rem;
-  }
-
-  .item__image {
-    height: 15rem;
-    border: 1px solid #DDD;
-  }
-
-  .item__description {
-    margin-top: 8px;
-    overflow: visible;
-  }
-
-  .item__author-image {
-    border: none;
-    margin: 0;
-    position: relative;
-    top: -2px;
-  }
-}
-
-.item__title {
-  color: #555;
-  font-size: 1.6rem;
-  margin-bottom: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.item__author-image {
-  border: 2px solid #FFF;
-  margin: 0 1rem -26px 1.5rem;
-  position: relative;
-  top: -26px;
-  z-index: 100;
-}
-
-.item__description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.item__image {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: block;
-  height: 160px;
-  position: relative;
-  width: 100%;
-}
-
-.item__price {
-  background-color: rgba(0, 0, 0, 0.5);
-  bottom: 1.5rem;
-  color: #FFF;
-  font-size: 1.75rem;
-  padding: 0.5rem 1rem;
-  position: absolute;
-  z-index: 100;
-}
-
-
-
-/*******************************
-Profile related
-*******************************/
-
-.profile-small {
-  margin-bottom: 2rem;
-}
-
-.profile-image {
-  border: 2px solid #FFF;
-}
-
-
-.label__condition {
-  &:hover,
-  &:focus {
-    background-color: #337AB7;
-  }
-}
-
-
 /*******************************
 Flow related
 *******************************/
-.action {
-}
-
-.action--sneef {
-  .action__body {margin-top: 2rem;}
-
-  .action__header,
-  .action__body {
-    text-align: center;
-  }
-}
-
-
-.btn-naked {
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-.col-tiny-padding {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.ad__title {
-  color: #565A5C;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
-}
 
 .slider {
   height: 450px!important;
@@ -1199,3 +1061,32 @@ hr {
   margin-right: 2rem;
 }
 
+.btn {
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+.item__buttons { // This should be removed once buttons are all the same
+  .btn {
+    border-radius: 2px;
+  }
+
+  .btn-group > :first-child {
+    border-left: none;
+  }
+
+  .btn-primary {
+    background: #0473c0;
+    border: none;
+    border-left: 1px solid #044285;
+    box-shadow: none;
+
+    &:hover, &:focus {
+      background: #044285;
+    }
+
+    .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+      border-left: none;
+    }
+  }
+}
