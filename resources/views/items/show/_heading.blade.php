@@ -24,12 +24,12 @@
 
     <div class="item__social">
         @unless ($ad->isMine())
-            <a href="#writeTo" class="btn btn-lg btn-link" title="" data-toggle="modal">
+            <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal">
                 <i class="icon fa fa-lg fa-comments"></i> Contact
             </a>
         @endunless
 
-        <a href="{{ route('ads.share', $ad) }}" class="btn btn-lg btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
+        <a href="{{ route('ads.share', $ad) }}" class="btn btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
             <i class="icon fa fa-lg fa-share-alt"></i> Share
         </a>
     </div>
