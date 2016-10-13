@@ -15,7 +15,6 @@ $factory->define(Ad::class, function ($faker) {
     return [
         'user_id'            => factory(User::class)->create()->id,
         'shop_id'            => factory(Shop::class)->create()->id,
-        'initial_quantity'   => $initialQuantity,
         'remaining_quantity' => $faker->numberBetween(1, $initialQuantity),
         'category_id'        => factory(Category::class)->create()->id,
         'title'              => $faker->sentence,
