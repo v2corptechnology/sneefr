@@ -27,9 +27,6 @@ $factory->define(User::class, function ($faker) {
         // 'token' => $faker->regexify('[a-zA-Z0-9]{220,250}'),
         'token'                   => $faker->bothify(str_repeat('?#', 125)),
         'remember_token'          => null,
-        'created_at'              => $faker->dateTimeBetween('1 year ago', '2 weeks ago'),
-        'updated_at'              => $faker->dateTimeBetween('2 weeks ago', '2 hours ago'),
-        'deleted_at'              => null,
     ];
 });
 
