@@ -4,8 +4,8 @@
     <h1 class="seller__heading">{{ $shop->getName() }}</h1>
 
     <div class="seller__evaluations">
-        <i class="fa fa-thumbs-up"></i> {{ $shop->evaluations->positives()->count() }}
-        <i class="fa fa-thumbs-down"></i> {{ $shop->evaluations->negatives()->count() }}
+        <i class="fa fa-thumbs-up"></i> {{ $evaluations->positives()->count() }}
+        <i class="fa fa-thumbs-down"></i> {{ $evaluations->negatives()->count() }}
     </div>
 
     <p class="seller__description">{{ $shop->getDescription() }}</p>

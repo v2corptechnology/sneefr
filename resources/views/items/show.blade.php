@@ -153,7 +153,7 @@
             <div class="col-sm-3">
 
                 {{-- Shop details --}}
-                @include ('items.show._seller', ['shop' => $ad->shop])
+                @include ('items.show._seller', ['shop' => $ad->shop, 'evaluations' => $ad->shop->evaluations])
 
             </div>
         </div>
