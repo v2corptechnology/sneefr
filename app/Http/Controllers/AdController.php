@@ -24,9 +24,7 @@ class AdController extends Controller
     {
         $ad = Ad::withTrashed()->find($id);
 
-dd($ad->toArray());
-
-        return redirect()->route('items.show', $ad, 301);
+        return redirect()->route('items.show', $ad->getSlug(), 301);
     }
 
     /**
