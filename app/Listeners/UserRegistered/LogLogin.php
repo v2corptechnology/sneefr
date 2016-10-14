@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\UserRegistered;
+<?php
+
+namespace Sneefr\Listeners\UserRegistered;
 
 use Sneefr\Events\UserRegistered;
 use Sneefr\Models\ActionLog;

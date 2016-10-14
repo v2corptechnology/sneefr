@@ -43,6 +43,9 @@ $(function () {
 
     TimeagoWidget.init();
 
+    // Enable tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
     // remove FB ugly hash
     if (window.location.hash == '#_=_') {
         history.replaceState

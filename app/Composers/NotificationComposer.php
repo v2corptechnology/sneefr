@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Composers;
+<?php
+
+namespace Sneefr\Composers;
 
 use Illuminate\Http\Request;
 use Sneefr\Models\Message;

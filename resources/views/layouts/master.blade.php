@@ -58,6 +58,9 @@
 
     @if (! Request::is('login') && ! (!auth()->id() && Request::is('/')))
         @yield('modals')
+
+        @stack('modals_2')
+
         {{-- Empty modal content, injected via ajax --}}
         <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
             <div id="shareModalContent">

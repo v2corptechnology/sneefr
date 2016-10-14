@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Policies;
+<?php
+
+namespace Sneefr\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Sneefr\Models\Shop;

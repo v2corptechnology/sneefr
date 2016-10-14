@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Place;
+<?php
+
+namespace Sneefr\Repositories\Place;
 
 use Illuminate\Support\Collection;
 

@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Ad;
+<?php
+
+namespace Sneefr\Repositories\Ad;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

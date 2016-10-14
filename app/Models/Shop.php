@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models;
+<?php
+
+namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -299,5 +301,35 @@ class Shop extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'shop_categorie');
+    }
+
+
+    /**
+     * Get the map URL of this place.
+     *
+     * @param int  $width
+     * @param int  $height
+     * @param bool $retina
+     * @param int  $zoom
+     *
+     * @return string
+     */
+    public function getMapUrl(int $width = 400, int $height = 400, $retina = false, $zoom = 12)
+    {
+        $retina = $retina ? '@2x' : '';
+
+        return vsprintf(
+            "//api.mapbox.com/v4/mapbox.emerald/pin-m-%s+FE7569(%F,%F)/%F,%F,%u/%ux%u%s.jpg?access_token=%s", [
+            strtolower($this->getName()[0]),
+            $this->getLongitude(),
+            $this->getLatitude(),
+            $this->getLongitude(),
+            $this->getLatitude(),
+            $zoom,
+            $width,
+            $height,
+            $retina,
+            config('sneefr.keys.MAPBOX_KEY')
+        ]);
     }
 }

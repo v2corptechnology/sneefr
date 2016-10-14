@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Discussion;
+<?php
+
+namespace Sneefr\Repositories\Discussion;
 
 use Illuminate\Database\Eloquent\Collection;
 use InvalidArgumentException;

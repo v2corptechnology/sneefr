@@ -69,7 +69,6 @@ namespace Sneefr\Http\Requests {
             $input['user_id'] = auth()->id();
             $input['currency'] =  trans('common.currency');
             $input['remaining_quantity'] = $this->get('quantity');
-            $input['initial_quantity'] = $this->get('quantity');
 
             // Ad's cover should not be predicable
             if(isset($input['images'])){

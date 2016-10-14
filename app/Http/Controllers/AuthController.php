@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 use Hashids\Hashids;
 use Illuminate\Contracts\Encryption\Encrypter;

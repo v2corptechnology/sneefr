@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Providers;
+<?php
+
+namespace Sneefr\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Sneefr\Services\Gamificator;

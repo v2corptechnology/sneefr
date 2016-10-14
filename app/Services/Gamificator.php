@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Services;
+<?php
+
+namespace Sneefr\Services;
 
 /**
  * Calculate the rank a user has, based on achieved goals.

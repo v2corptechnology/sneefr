@@ -11,7 +11,6 @@
     <div class="container">
 
         <header class="hero hero--centered">
-            <img src="{{ asset('img/pig.svg') }}" width="100" alt="sneefR" class="hero__img">
             <h1 class="hero__title">@lang('payments.create.heading')</h1>
             <p class="hero__tagline">
                 @lang('payments.create.tagline', ['name' => $ad->seller->present()->givenName()])
@@ -21,10 +20,19 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <main class="box text-center">
-                    <h1 class="box__title">@lang('payments.create.box_heading')</h1>
 
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">
                         {!! csrf_field() !!}
+
+                        <h1 class="box__title">How many of these do you want ?</h1>
+
+                        <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
+
+                        <div class="form-group">
+                            {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
+                        </div>
+
+                        <h1 class="box__title">@lang('payments.create.box_heading')</h1>
 
                         <input type="hidden" name="ad" value="{{ $ad->id }}">
 
@@ -32,12 +40,6 @@
                             <span class="js-final-price" data-amount-with-delivery="{{ $ad->negotiatedPrice() }}">
                                 {!! $ad->present()->negotiatedPrice() !!}
                             </span>
-                            @foreach ($ad->delivery->getFees() as $name => $fee)
-                                <span class="js-final-price js-price-delivery-{{ $name }} hidden"
-                                      data-amount-with-delivery="{{ $ad->negotiatedPrice()->withFee($name) }}">
-                                    {!! $ad->present()->price($ad->negotiatedPrice()->withFee($name)->readable()) !!}
-                                </span>
-                            @endforeach
                         </div>
 
                         @if ($ad->isInShop())
@@ -47,7 +49,7 @@
 
                                 @foreach ($ad->present()->getFees() as $name => $fee)
                                     <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
-                                        <input class="js-delivery-option" type="radio"
+                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee * 100 }}"
                                                name="delivery" value="{{ $name }}" id="delivery-{{ $name }}" required autocomplete="off">
                                         @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
                                     </label>

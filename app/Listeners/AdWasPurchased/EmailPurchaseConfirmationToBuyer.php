@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Listeners\AdWasPurchased;
+<?php
+
+namespace Sneefr\Listeners\AdWasPurchased;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Config\Repository;
@@ -6,6 +8,7 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sneefr\Events\AdWasPurchased;
+use Sneefr\Price;
 
 class EmailPurchaseConfirmationToBuyer implements ShouldQueue
 {
@@ -45,27 +48,26 @@ class EmailPurchaseConfirmationToBuyer implements ShouldQueue
      */
     public function handle(AdWasPurchased $event)
     {
-        // Runtime-change the locale of the application.
-        $this->config->set('app.locale', $event->buyer->getLanguage());
-
-        $vendorName = $event->ad->isInShop()
-            ? $event->ad->shop->getName()
-            : $event->ad->seller->present()->givenName();
+        $recipient = $event->buyer;
+        $request = collect($event->request);
+        $price = new Price($event->charge->amount);
 
         // Data passed to the mail
         $data = [
-            'vendorName'   => $vendorName,
+            'ad'           => $event->ad,
+            'shop'         => $event->ad->shop,
+            'quantity'     => $request->get('quantity', 1),
+            'price'        => $price->readable2(),
             'evaluateLink' => $this->generateProtectedLink($event),
-            'recipient'    => $event->buyer,
         ];
 
-        $this->mailer->send('emails.waiting-evaluation', $data, function ($mail) use ($data) {
+        $this->mailer->send('emails.purchased', $data, function ($mail) use ($data, $recipient) {
 
             $mail->from(trans('mail.sender_email'), trans('mail.sender_name'));
 
-            $mail->to($data['recipient']->getEmail(), $data['recipient']->present()->fullName());
+            $mail->to($recipient->getEmail(), $recipient->present()->fullName());
 
-            $mail->subject(trans('mail.waiting-evaluation.title', ['vendorName' => $data['vendorName']]));
+            $mail->subject(trans('mails.purchased.inbox_title'));
         });
     }
 

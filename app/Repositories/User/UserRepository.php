@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\User;
+<?php
+
+namespace Sneefr\Repositories\User;
 
 use Illuminate\Support\Collection;
 

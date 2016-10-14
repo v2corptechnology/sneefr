@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Models;
+<?php
+
+namespace Sneefr\Models;
 
 use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -65,7 +67,6 @@ class Ad extends Model
         'id',
         'user_id',
         'shop_id',
-        'initial_quantity',
         'remaining_quantity',
         'category_id',
         'title',

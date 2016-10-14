@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Image;
+<?php
+
+namespace Sneefr\Repositories\Image;
 
 /**
  * Value object representing an image related to an ad.

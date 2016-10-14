@@ -1,8 +1,9 @@
-<?php namespace Sneefr\Http\Controllers;
+<?php
+
+namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Sneefr\Events\AdWasPurchased;
-use Sneefr\Events\ChargeWasSuccessful;
 use Sneefr\Http\Requests\BillingRequest;
 use Sneefr\Jobs\Notify;
 use Sneefr\Jobs\SendDealCancelledToSeller;

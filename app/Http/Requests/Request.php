@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Http\Requests;
+<?php
+
+namespace Sneefr\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -3,6 +3,7 @@
 namespace Sneefr\Http\Controllers;
 
 use Sneefr\Events\AdWasPosted;
+use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
@@ -10,6 +11,19 @@ use Sneefr\Models\Stock;
 
 class ItemsController extends Controller
 {
+    public function show(Ad $ad)
+    {
+        $ad->load('shop.evaluations');
+
+        // Verify this ad is viewable
+        // Quickfix : a disconnected user cannot see an ad
+        //$this->authorize($ad);
+
+        event(new ItemWasViewed($ad, auth()->user()));
+
+        return view('items.show', compact('ad'));
+    }
+
     /**
      * Display the form to create a new item.
      */
@@ -46,5 +60,24 @@ class ItemsController extends Controller
         }
 
         return redirect()->route('ad.show', $ad);
+    }
+
+    /**
+     * Edit an item.
+     *
+     * @param \Sneefr\Models\Ad $ad
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Ad $ad)
+    {
+        // Check the rights for this user to edit this ad
+        $this->authorize('update', $ad);
+
+        $categories = Category::getTree();
+
+        $shops = \Auth::user()->shops;
+
+        return view('ad.edit', compact('ad', 'categories', 'shops'));
     }
 }

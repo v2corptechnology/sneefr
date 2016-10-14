@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Contracts;
+<?php
+
+namespace Sneefr\Contracts;
 
 /**
  * Allows something to be searched.

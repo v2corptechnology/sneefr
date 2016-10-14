@@ -171,10 +171,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('discussions', 'DiscussionsController', ['only' => ['index', 'show']]);
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
-    // Follows
-    Route::resource('follows', 'FollowsController', ['only' => ['store', 'destroy']]);
     // Items
-    Route::resource('items', 'ItemsController', ['only' => ['create', 'store']]);
+    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
     // Likes
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Messages
@@ -204,6 +202,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
 Route::get('share/ad/{ad}', ['as' => 'ads.share', 'uses' => 'SharesController@shareAd']);
 // Ad display,
 Route::get('ad/{ad}', ['as' => 'ad.show', 'uses' => 'AdController@show', 'middleware' => 'shared']);
+// Items
+Route::resource('items', 'ItemsController', ['only' => ['show']]);
 // Search results
 Route::get('search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
 // Shop display
@@ -238,6 +238,9 @@ Route::group(['middleware' => ['auth', 'team.developer']], function ($router) {
 /**
  * Route bindings
  */
+Route::bind('item', function ($value) {
+    return \Sneefr\Models\Ad::findOrFail(explode('-', $value)[0]);
+});
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
 });

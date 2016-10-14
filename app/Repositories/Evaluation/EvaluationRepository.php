@@ -1,4 +1,6 @@
-<?php namespace Sneefr\Repositories\Evaluation;
+<?php
+
+namespace Sneefr\Repositories\Evaluation;
 
 interface EvaluationRepository
 {
