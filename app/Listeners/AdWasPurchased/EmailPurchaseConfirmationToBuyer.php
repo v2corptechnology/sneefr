@@ -8,6 +8,7 @@ use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sneefr\Events\AdWasPurchased;
+use Sneefr\Price;
 
 class EmailPurchaseConfirmationToBuyer implements ShouldQueue
 {
@@ -48,11 +49,15 @@ class EmailPurchaseConfirmationToBuyer implements ShouldQueue
     public function handle(AdWasPurchased $event)
     {
         $recipient = $event->buyer;
+        $request = collect($event->request);
+        $price = new Price($event->charge->amount);
 
         // Data passed to the mail
         $data = [
             'ad'           => $event->ad,
             'shop'         => $event->ad->shop,
+            'quantity'     => $request->get('quantity', 1),
+            'price'        => $price->readable2(),
             'evaluateLink' => $this->generateProtectedLink($event),
         ];
 
