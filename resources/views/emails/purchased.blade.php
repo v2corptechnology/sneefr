@@ -1,8 +1,9 @@
 @extends('layouts.email_alert')
 
-@section('title', trans('mails.purchased.title', [
+@section('title', trans_choice('mails.purchased.title', $quantity, [
+    'nb' => $quantity,
     'item' => $ad->present()->title(),
-    'price' => $ad->present()->price()
+    'price' => $price
 ]))
 
 @section('image')
