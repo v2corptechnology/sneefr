@@ -22,8 +22,9 @@ class AdController extends Controller
      */
     public function show($id)
     {
-        dd($id);
-        $ad = Ad::withTrashed()->find($id)->first();
+        $ad = Ad::withTrashed()->find($id);
+
+dd($ad->toArray());
 
         return redirect()->route('items.show', $ad, 301);
     }
