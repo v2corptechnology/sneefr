@@ -158,7 +158,7 @@ class StripeBilling implements BillingInterface
             : 0;
 
         return [
-            'amount'          => (string) $ad->negotiatedPrice() + $deliveryCost,
+            'amount'          => ($request->input('quantity', 1) * (string) $ad->negotiatedPrice()) + $deliveryCost,
             'description'     => 'SneefR : ' . $ad->present()->title() . '(ID: ' . $ad->getId() . ')',
             'token'           => $request->input('stripeToken'),
             'stripeAccountId' => $ad->seller->payment['stripe_user_id'],

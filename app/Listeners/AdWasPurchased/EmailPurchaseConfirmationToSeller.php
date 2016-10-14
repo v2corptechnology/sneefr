@@ -9,6 +9,7 @@ use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Sneefr\Events\AdWasPurchased;
+use Sneefr\Price;
 
 class EmailPurchaseConfirmationToSeller implements ShouldQueue
 {
@@ -48,42 +49,29 @@ class EmailPurchaseConfirmationToSeller implements ShouldQueue
      */
     public function handle(AdWasPurchased $event)
     {
-        // For simplicity
+        $recipient = $event->ad->seller;
         $request = collect($event->request);
-        $seller = $event->ad->seller;
-        $ad = $event->ad;
+        $price = new Price($event->charge->amount);
 
-        // Check we can send emails to the user
-        if (! $seller->getEmail()) {
-            return;
-        }
-
-        $linkInfo = $this->encrypter->encrypt([
-            'ad_id'      => $event->ad->getId(),
-            'expires_at' => Carbon::now()->addDays(10),
-        ]);
-
-        // Runtime-change the locale of the application.
-        $this->config->set('app.locale', $seller->getLanguage());
-
-        // Data used by the view
+        // Data passed to the mail
         $data = [
-            'ad'           => $ad,
-            'seller'       => $seller,
+            'ad'           => $event->ad,
             'buyer'        => $event->buyer,
-            'extraInfo'    => $request->get('extra'),
+            'quantity'     => $request->get('quantity', 1),
+            'price'        => $price->readable2(),
+            'evaluateLink' => $this->generateProtectedLink($event),
             'address'      => $this->buildAddress($request),
-            'recipient'    => $seller,
+            'extraInfo'    => $request->get('extra'),
         ];
 
-        $callback = function ($message) use ($seller, $data) {
-            $message
-                ->from(trans('mail.sender_email'), trans('mail.sender_name'))
-                ->to($seller->getEmail(), $seller->present()->fullName())
-                ->subject(trans('mail.deal_finished_seller.title'));
-        };
+        $this->mailer->send('emails.sold', $data, function ($mail) use ($data, $recipient) {
 
-        $this->mailer->send('emails.deal_finished_seller', $data, $callback);
+            $mail->from(trans('mail.sender_email'), trans('mail.sender_name'));
+
+            $mail->to($recipient->getEmail(), $recipient->present()->fullName());
+
+            $mail->subject(trans('mails.sold.inbox_title'));
+        });
     }
 
     /**
@@ -103,5 +91,22 @@ class EmailPurchaseConfirmationToSeller implements ShouldQueue
 
         //$request->get('shipping_address_state')
         //$request->get('shipping_address_country_code')
+    }
+
+    /**
+     * Generate the protected link to fill the evaluation.
+     *
+     * @param \Sneefr\Events\AdWasPurchased $event
+     *
+     * @return string
+     */
+    protected function generateProtectedLink(AdWasPurchased $event) : string
+    {
+        $linkInfo = $this->encrypter->encrypt([
+            'ad_id'      => $event->ad->getId(),
+            'expires_at' => Carbon::now()->addDays(10),
+        ]);
+
+        return route('evaluations.create', ['key' => $linkInfo]);
     }
 }

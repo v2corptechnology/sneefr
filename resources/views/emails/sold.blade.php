@@ -1,6 +1,6 @@
 @extends('layouts.email_alert')
 
-@section('title', trans_choice('mails.purchased.title', $quantity, [
+@section('title', trans_choice('mails.sold.title', $quantity, [
     'nb' => $quantity,
     'item' => $ad->present()->title(),
     'price' => $price
@@ -15,12 +15,12 @@
 @endsection
 
 @section('content')
-    @lang('mails.purchased.content', ['name' => $shop->getName()])
+    @lang('mails.sold.content', ['name' => $buyer->present()->fullName()])
 @endsection
 
 @section('content.button')
-    <a href="{{ $evaluateLink }}" title="@lang('mails.purchased.btn_evaluate_title', ['vendorName' => $shop->getName()])" itemprop="url" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; background: #ff316e; margin: 0; border-color: #ff316e; border-style: solid; border-width: 10px 20px;">
-        @lang('mails.purchased.btn_evaluate', ['vendorName' => $shop->getName()])
+    <a href="{{ $evaluateLink }}" title="@lang('mails.sold.btn_evaluate_title', ['vendorName' => $buyer->present()->fullName()])" itemprop="url" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; background: #ff316e; margin: 0; border-color: #ff316e; border-style: solid; border-width: 10px 20px;">
+        @lang('mails.sold.btn_evaluate', ['vendorName' => $buyer->present()->fullName()])
     </a>
 @endsection
 
@@ -30,13 +30,13 @@
 ?>
 
 @section('secondary.1')
-    <h1 style="{{ $heading }}">Seller's Address</h1>
-    <p style="{{ $text }}">{{ $shop->getLocation() }}</p>
+    <h1 style="{{ $heading }}">Buyers's Address</h1>
+    <p style="{{ $text }}">{!! $address !!}</p>
 @endsection
 
 @section('secondary.2')
-    <h1 style="{{ $heading }}">Seller's Info</h1>
-    <p style="{{ $text }}">{{ $shop->getDescription() }}</p>
+    <h1 style="{{ $heading }}">Buyers's Info</h1>
+    <p style="{{ $text }}">{{ $extraInfo }}</p>
 @endsection
 
 @section('footer')

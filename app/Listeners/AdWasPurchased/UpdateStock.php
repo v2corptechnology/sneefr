@@ -15,7 +15,10 @@ class UpdateStock
      */
     public function handle(AdWasPurchased $event)
     {
-        $event->ad->decrement('remaining_quantity');
+        // Easy manipulation
+        $request = collect($event->request);
+
+        $event->ad->decrement('remaining_quantity', $request->get('quantity', 1));
 
         // If no remaining stock, remove the ad
         if ($event->ad->remaining_quantity <= 0) {

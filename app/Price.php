@@ -1,5 +1,7 @@
 <?php namespace Sneefr;
 
+use NumberFormatter;
+
 class Price
 {
     /*
@@ -53,7 +55,7 @@ class Price
      * @param string           $currency
      * @param \Sneefr\Delivery $delivery
      */
-    public function __construct(int $amount, string $currency, Delivery $delivery)
+    public function __construct(int $amount, string $currency = 'USD', Delivery $delivery = null)
     {
         $this->amount = $amount;
         $this->currency = $currency;
@@ -95,6 +97,11 @@ class Price
         return $this;
     }
 
+    public function readable2() : string
+    {
+        return $this->format();
+    }
+
     /**
      * Add the fee to the current amount.
      *
@@ -117,5 +124,17 @@ class Price
     public function getCurrency() : string
     {
         return $this->currency;
+    }
+
+    /**
+     * Format the number according to currency rules
+     *
+     * @return string
+     */
+    private function format()
+    {
+        $formatter = new NumberFormatter(trans('common.locale_name'),  NumberFormatter::CURRENCY);
+
+        return $formatter->formatCurrency($this->amount / 100, trans('common.currency'));
     }
 }
