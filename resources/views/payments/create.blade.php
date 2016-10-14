@@ -21,18 +21,18 @@
             <div class="col-md-6 col-md-offset-3">
                 <main class="box text-center">
 
-                    <h1 class="box__title">How many of these do you want ?</h1>
-
-                    <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
-
-                    <div class="form-group">
-                        {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
-                    </div>
-
-                    <h1 class="box__title">@lang('payments.create.box_heading')</h1>
-
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">
                         {!! csrf_field() !!}
+
+                        <h1 class="box__title">How many of these do you want ?</h1>
+
+                        <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
+
+                        <div class="form-group">
+                            {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
+                        </div>
+
+                        <h1 class="box__title">@lang('payments.create.box_heading')</h1>
 
                         <input type="hidden" name="ad" value="{{ $ad->id }}">
 
