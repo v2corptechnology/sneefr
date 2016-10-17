@@ -12,11 +12,6 @@
         <a href="#" data-toggle="modal" data-target="#profilePicture">
             {!! HTML::profilePicture($person->socialNetworkId(), $person->present()->fullName(), 70, ['profile__image']) !!}
         </a>
-        <a class="profile__rank" href="#" title="@lang('rank.'.$person->getRank())">
-            <span class="rank">
-                @lang('rank.'.$person->getRank())
-            </span>
-        </a>
     </div>
 
     <div class="profile-details">

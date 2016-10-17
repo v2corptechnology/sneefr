@@ -189,7 +189,6 @@ return [
         Sneefr\Providers\ComposerServiceProvider::class,
         Sneefr\Providers\DatabaseServiceProvider::class,
         Sneefr\Providers\EventServiceProvider::class,
-        Sneefr\Providers\GamificatorServiceProvider::class,
         Sneefr\Providers\HashidsServiceProvider::class,
         Sneefr\Providers\ImageServiceProvider::class,
         Sneefr\Providers\MacroServiceProvider::class,

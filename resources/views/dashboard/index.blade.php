@@ -41,13 +41,6 @@
                             </div>
                         </div>
                     </li>
-                {{-- Include the gamification progress bar --}}
-                @elseif (auth()->user()->gamification)
-                    <li>
-                        <div class="row">
-                            @include('partials._gamificator_alert', ['gamificator' => auth()->user()->gamification])
-                        </div>
-                    </li>
                 @endif
 
                 {{-- Show the main content of the feed --}}
@@ -74,14 +67,6 @@
 
         <div class="col-md-4 hidden-xs">
 
-            {{-- Include the gamification widget --}}
-            <div class="dashboard-aside-block">
-                @if (auth()->user()->gamification->hasNextRank())
-                    @include('partials._gamificator_block', ['gamificator' => auth()->user()->gamification])
-                @else
-                    @include('partials._gamificator_max_reached')
-                @endif
-            </div>
 
             @if (auth()->user()->showLocationDemand || $followedPlaces->isEmpty() || auth()->user()->payment()->isAsked())
                 <div class="dashboard-aside-block">

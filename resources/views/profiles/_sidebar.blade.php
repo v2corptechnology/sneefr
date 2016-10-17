@@ -75,10 +75,6 @@
             </a>
         </h2>
         <p class="summary__content summary__content--extra">
-            @lang('profile.sidebar.level', [
-                'name' => $person->present()->givenName(),
-                'rank' => trans('rank.'.$person->getRank())
-            ])
         </p>
     </li>
     <li class="summary__item{{ setActive('profiles.networks.index', '--selected') }}">

@@ -13,11 +13,4 @@
             {!! HTML::profilePicture($user->socialNetworkId(), $user->present()->givenName(), $size ?? 60, ['user__image']) !!}
         </a>
     @endunless
-
-    @unless (isset($showRank) && $showRank == false)
-        <div class="user__rank user__rank--{{ $user->getRank() }}"
-              title="@lang('rank.'.$user->getRank())">
-            <span class="user__rank-label">@lang('rank.'.$user->getRank())</span>
-        </div>
-    @endunless
 </div>
