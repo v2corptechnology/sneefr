@@ -113,6 +113,10 @@
                     <li class="{{ setActive('me.index') }}">
                         <a href="{{ route('me.index') }}" title="My profile">My profile</a>
                     </li>
+
+                    <li class="{{ setActive('deals.index') }}">
+                        <a href="{{ route('deals.index') }}" title="My deal history">My history</a>
+                    </li>
                 @endif
 
                 {{-- Shop creation or display --}}

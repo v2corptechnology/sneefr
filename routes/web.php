@@ -167,6 +167,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
     // Ad images
     Route::resource('ads.images', 'ImagesController', ['only' => ['store', 'destroy']]);
+    // Deals history
+    Route::resource('deals', 'DealsController', ['only' => ['index']]);
     // Discussions
     Route::resource('discussions', 'DiscussionsController', ['only' => ['index', 'show']]);
     // Evaluations
