@@ -506,4 +506,18 @@ class User extends Model implements AuthenticatableContract,
     {
         return (is_null($this->given_name) || is_null($this->given_name) );
     }
+
+    /**
+     * All the sales or purchases of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recentDeals()
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id')
+            ->orWhere('seller_id', $this->id)
+            ->whereDate('created_at', '>=', Carbon::now()->subYear(1)->toDateString())
+            ->with('seller', 'buyer', 'ad', 'ad.shop')
+            ->latest();
+    }
 }

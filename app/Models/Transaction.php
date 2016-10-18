@@ -11,12 +11,42 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['ad_id', 'buyer_id', 'seller_id', 'stripe_data', 'details'];
+    protected $fillable = ['ad_id', 'buyer_id', 'seller_id', 'details'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['stripe_data' => 'array', 'details' => 'array'];
+    protected $casts = ['details' => 'array'];
+
+    /**
+     * The ad relationship of the transaction.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ad()
+    {
+        return $this->belongsTo(Ad::class)->withTrashed();
+    }
+
+    /**
+     * The seller relationship of the transaction.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function seller()
+    {
+        return $this->belongsTo(User::class)->withTrashed();
+    }
+
+    /**
+     * The buyer relationship of the transaction.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function buyer()
+    {
+        return $this->belongsTo(User::class)->withTrashed();
+    }
 }
