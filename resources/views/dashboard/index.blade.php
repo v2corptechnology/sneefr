@@ -80,8 +80,6 @@
                                 @lang('dashboard.places_of_interest_head')
                             </a>
                         </h1>
-                        {{-- Show the person an incentive to add one place of interest --}}
-                        @include('partials._place_finder')
                     @endif
                 </div>
             @endif

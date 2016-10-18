@@ -33,13 +33,6 @@
                         count($followedPlaces), ['nb' => count($followedPlaces), 'name' => $person->present()->givenName()])
                 </h1>
 
-                @if ($isMine)
-                    <div class="dashboard-aside-block add-place-of-interest" id="add">
-                        {{-- Create an HTML form for sending changes to places of interest --}}
-                        @include('partials._place_finder')
-                    </div>
-                @endif
-
                 @if ($followedPlaces->isEmpty())
                     @if ($followedPlaces->isEmpty() && !$isMine && auth()->id())
                     @else
