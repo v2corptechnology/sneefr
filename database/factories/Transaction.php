@@ -14,7 +14,6 @@ $factory->define(\Sneefr\Models\Transaction::class, function ($faker) {
         'ad_id'     => factory(Ad::class)->create()->id,
         'buyer_id'  => factory(User::class)->create()->id,
         'seller_id' => factory(User::class)->create()->id,
-        'stripe_data' => ['pop'],
         'details'   => [
             'delivery' => [
                 'method'       => 'c2c',
