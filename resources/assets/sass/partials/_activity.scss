@@ -72,37 +72,4 @@
   .activity__slider {
     margin-bottom: 0.5rem;
   }
-
-  .like-form { display: inline-block; }
-}
-
-.action__like {
-  margin-right: 2rem;
-
-  img {filter: grayscale(1);}
-}
-
-.action__like--active,
-.action__like--active:hover,
-.action__like--active:focus {
-  color: #F4A0AC;
-
-  img {filter: grayscale(0);}
-}
-
-.action__like,
-.action__share {
-  @extend .text-muted;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  padding: 0;
-
-  &:hover,
-  &:focus {
-    @extend .text-muted;
-    text-decoration: underline;
-  }
-
-  .fa { padding-right: 0.25rem; }
 }

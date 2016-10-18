@@ -761,52 +761,6 @@ Flow related
   }
 }
 
-.gamification--alert {
-  margin: 1.5rem 0;
-}
-
-.gamification__counter {
-  margin-right:20px;
-  margin-top: 10px;
-  position: relative;
-  text-align: center;
-}
-
-.gamification__count {
-  color: #40d47e;
-  position: absolute;
-  display: block;
-  height: 100px;
-  width: 100px;
-  left: 50%;
-  top: 50%;
-  margin-top: -52px;
-  margin-left: -50px;
-  border-radius: 100%;
-  line-height: 100px;
-  font-size: 2em;
-}
-
-.gamification__progressbar {
-  background-color: #EEE;
-  border: 0.1rem solid #DCDCDC;
-  border-radius: 0.5rem;
-  clear: both;
-  height: 0.7rem;
-  overflow: hidden;
-  margin: 0.5rem;
-  width: 100%;
-}
-
-.gamification__progress {
-  background-color: #40d47e;
-  height: 100%;
-}
-
-.gamification__objective--lower {
-  text-transform: lowercase;
-}
-
 /* centered columns styles */
 .row-centered {
   text-align:center;

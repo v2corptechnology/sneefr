@@ -14,17 +14,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Arr;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Sneefr\Events\UserEmailChanged;
-use Sneefr\Events\UserRegistered;
-use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\Traits\Likeable;
 use Sneefr\PhoneNumber;
 use Sneefr\Presenters\UserPresenter;
-use Sneefr\Services\Gamificator;
 use Sneefr\Traits\Encryptable;
 use Sneefr\UserEvaluations;
 use Sneefr\UserPayment;
@@ -96,7 +92,6 @@ class User extends Model implements AuthenticatableContract,
         'verified',
         'token',
         'birthdate',
-        'gamification_objectives',
         'preferences',
         'data',
         'payment',
@@ -118,7 +113,6 @@ class User extends Model implements AuthenticatableContract,
         'preferences'             => 'array',
         'data'                    => 'array',
         'payment'                 => 'array',
-        'gamification_objectives' => 'array',
     ];
 
     /**
@@ -126,7 +120,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences', 'gamification_objectives'];
+    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences'];
 
     protected $encryptable = [
     ];
@@ -406,67 +400,6 @@ class User extends Model implements AuthenticatableContract,
     public function getIsTeamAttribute()
     {
         return (bool) in_array($this->facebook_id, config('sneefr.staff_facebook_ids.team'));
-    }
-
-    /**
-     * Get the list of achieved gamification objectives.
-     *
-     * @return array
-     */
-    public function getGamificationObjectives()
-    {
-        return (array) $this->gamification_objectives;
-    }
-
-    /**
-     * Set the gamicitaion objectives of the user.
-     *
-     * @param array $objectives
-     */
-    public function setGamificationObjectives(array $objectives)
-    {
-        $this->gamification_objectives = $objectives;
-    }
-
-    /**
-     * Get the rank name of the user.
-     *
-     * @return string
-     * @deprecated
-     */
-    public function gamificationRank() : string
-    {
-        return $this->getRank();
-    }
-
-    /**
-     * Get the gamification instance for this user.
-     *
-     * @return \Sneefr\Services\Gamificator
-     */
-    public function getGamificationAttribute() : Gamificator
-    {
-        return new Gamificator($this->getGamificationObjectives());
-    }
-
-    /**
-     * Set the rank name of the user.
-     *
-     * @param string $rank
-     */
-    public function setRank(string $rank)
-    {
-        $this->data = array_merge((array) $this->data, ['rank' => $rank]);
-    }
-
-    /**
-     * Get the rank name of the user.
-     *
-     * @return string
-     */
-    public function getRank() : string
-    {
-        return $this->data['rank'] ?? 'default';
     }
 
     /**

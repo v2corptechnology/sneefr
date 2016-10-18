@@ -12,11 +12,6 @@
         <a href="#" data-toggle="modal" data-target="#profilePicture">
             {!! HTML::profilePicture($person->socialNetworkId(), $person->present()->fullName(), 70, ['profile__image']) !!}
         </a>
-        <a class="profile__rank" href="#" title="@lang('rank.'.$person->getRank())">
-            <span class="rank">
-                @lang('rank.'.$person->getRank())
-            </span>
-        </a>
     </div>
 
     <div class="profile-details">
@@ -52,15 +47,9 @@
             </li>
         @else
             <li>
-                @if ($isFollowed)
-                    @include('partials.buttons._unfollow', ['user' => $person, 'btnClasses' => 'btn-link profile-nav__item'])
-                @elseif ($person->id() != auth()->id())
-                    @include('partials.buttons._follow', ['user' => $person, 'btnClasses' => 'btn-link profile-nav__item'])
-                @else
-                    <span class="profile-nav__item--disabled" title="{{ trans('funny.' . array_rand(trans('funny'), 1)) }}">
-                        {{ trans('funny.' . array_rand(trans('funny'), 1)) }}
-                    </span>
-                @endif
+                <span class="profile-nav__item--disabled" title="{{ trans('funny.' . array_rand(trans('funny'), 1)) }}">
+                    {{ trans('funny.' . array_rand(trans('funny'), 1)) }}
+                </span>
             </li>
             <li>
                 <a class="profile-nav__item" href="{{ route('profiles.write.create', $person) }}#message-body"

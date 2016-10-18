@@ -22,9 +22,5 @@
         </a>
         @lang("dashboard.activity.{$item->type}.head", $headData)
     </h2>
-    @if ($item->value instanceof \Sneefr\Models\Place)
-        {!! HTML::time($item->value->pivot->created_at) !!}
-    @else
-        {!! HTML::time($item->value->created_at) !!}
-    @endif
+    {!! HTML::time($item->value->created_at) !!}
 </div>

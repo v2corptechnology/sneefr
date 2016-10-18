@@ -6,7 +6,6 @@ use Crypt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Sneefr\Jobs\Notify;
-use Sneefr\Models\Place;
 
 class LikesController extends Controller
 {
@@ -26,12 +25,8 @@ class LikesController extends Controller
             $model->unlike();
         } else {
             $like = $model->like();
-
-            // Don't trigger notification on a followed place
-            if (! $model instanceof Place) {
-                // Notification only happens on Like creation to avoid spamming
-                $this->dispatch(new Notify($like));
-            }
+            // Notification only happens on Like creation to avoid spamming
+            $this->dispatch(new Notify($like));
         }
 
         return $request->ajax() ? ['success'] : back();

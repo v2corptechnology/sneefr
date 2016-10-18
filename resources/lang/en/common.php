@@ -7,12 +7,6 @@ return [
     'locale_name'      => "en_US.utf8",
     'currency'         => "USD",
     'currency_symbol'  => "$",
-
-    'like' => [
-        'like' => 'sneef',
-        'unlike' => 'unsneef',
-    ],
-
     'pub'       => [
         'title'          => "Shop owner?",
         'description'    => "Sneefr hepls you sell online and attract more customers in your city. No fees on sales."

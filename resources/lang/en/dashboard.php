@@ -36,9 +36,6 @@ return [
             'body'      => "See :link.",
             'body_link' => " :name's ads",
         ],
-        'followed_place' => [
-            'head' => "is now following :place.",
-        ],
         'search'            => [
             'head'      => "is looking for <em>:search</em>.",
             'body'      => "Cool, I have one for sale and :link",

@@ -20,7 +20,6 @@ $headData = ['search' => $item->value->body()];
 </div>
 
 <div class="activity__actions">
-    @include('dashboard.item._actions', ['item' => $item])
 </div>
 
 @include('dashboard.item._footer', ['item' => $item])

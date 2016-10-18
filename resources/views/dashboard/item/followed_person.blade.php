@@ -18,7 +18,6 @@ $headData = ['name' => link_to_route('profiles.show', $relation->present()->full
 </div>
 
 <div class="activity__actions">
-    @include('dashboard.item._actions', ['item' => $item])
 </div>
 
 @include('dashboard.item._footer', ['item' => $item])

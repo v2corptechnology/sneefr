@@ -81,9 +81,6 @@ elixir(mix => {
     // Shops
     mix.scripts(['sneefr.shops.js'], 'public/js/sneefr.shops.js');
 
-    // Like
-    mix.scripts(['sneefr.like.js'], 'public/js/sneefr.like.js');
-
     // Auto-navigate with select dropdown
     mix.scripts(['sneefr.auto-navigate.js'], 'public/js/sneefr.auto-navigate.js');
 
@@ -111,7 +108,6 @@ elixir(mix => {
         'js/sneefr.billing.js',
         'js/sneefr.delivery.js',
         'js/sneefr.shops.js',
-        'js/sneefr.like.js',
         'js/sneefr.auto-navigate.js',
         'js/sneefr.messages.js',
         'js/sneefr.autocomplete.js',
