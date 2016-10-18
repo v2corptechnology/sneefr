@@ -177,8 +177,6 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Messages
     Route::resource('messages', 'MessagesController', ['only' => ['store']]);
-    // Places
-    Route::resource('places', 'PlacesController', ['only' => ['store']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Searches and shared searches
@@ -210,12 +208,6 @@ Route::get('search', ['as' => 'search.index', 'uses' => 'SearchController@index'
 Route::get('shops/{shops}/search', ['as' => 'shops.search', 'uses' => 'ShopsController@search']);
 Route::get('shops/{shops}/evaluations', ['as' => 'shops.evaluations', 'uses' => 'ShopsController@evaluations']);
 Route::resource('shops', 'ShopsController', ['only' => ['show']]);
-// Place display
-Route::resource('places', 'PlacesController', ['only' => ['show']]);
-Route::get('places/{places}/followers', ['as' => 'places.followers', 'uses' => 'PlacesController@followers']);
-Route::get('places/{places}/nearby', ['as' => 'places.nearby', 'uses' => 'PlacesController@nearbyAds']);
-Route::get('places/{places}/search', ['as' => 'places.search', 'uses' => 'PlacesController@search']);
-Route::get('places/{places}/searchAround', ['as' => 'places.searchAround', 'uses' => 'PlacesController@searchAround']);
 
 
 /** Admins only */
@@ -243,9 +235,6 @@ Route::bind('item', function ($value) {
 });
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
-});
-Route::bind('place', function ($value) {
-    return \Sneefr\Models\Place::where('slug', $value)->first();
 });
 Route::bind('profile', function ($value, $route) {
     $hashids = app('Hashids\Hashids');

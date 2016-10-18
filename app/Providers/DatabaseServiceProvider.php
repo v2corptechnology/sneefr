@@ -5,7 +5,6 @@ namespace Sneefr\Providers;
 use Illuminate\Support\ServiceProvider;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Discussion;
-use Sneefr\Models\Place;
 use Sneefr\Models\Search;
 use Sneefr\Models\Shop;
 use Sneefr\Models\User;
@@ -80,10 +79,6 @@ class DatabaseServiceProvider extends ServiceProvider
         $this->app->bind(
             \Sneefr\Repositories\Shop\ShopRepository::class,
             \Sneefr\Repositories\Shop\EloquentShopRepository::class);
-
-        $this->app->bind(
-            \Sneefr\Repositories\Place\PlaceRepository::class,
-            \Sneefr\Repositories\Place\EloquentPlaceRepository::class);
     }
 
     /**
@@ -96,7 +91,6 @@ class DatabaseServiceProvider extends ServiceProvider
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'ad'         => Ad::class,
             'discussion' => Discussion::class,
-            'place'      => Place::class,
             'search'     => Search::class,
             'shop'       => Shop::class,
             'user'       => User::class,

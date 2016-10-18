@@ -28,8 +28,6 @@ return [
     'info_incomplete_warning'            => "You need to complete your info",
     'email_validation_success'           => "Alright captain, we'll use this email address to contact you!",
     'email_validation_error'             => "Captain, we couldn't verify this email address, if this problem persists, please contact us.",
-    'profile_location_adding_success'    => "This place has been successfully added to your places of interest",
-    'profile_location_deletion_success'  => "This place was removed from your places of interest",
     'ad_is_not_locked_for_you'           => "The seller didn't save this ad for you",
     'payment_success'                    => "Payment successful. The seller has been notified. Stay in touch with the seller for the next steps (delivery, in person, pick-up).",
     'payment_success_shop'               => "Payment successful. The seller has been notified. Contact the seller if you have any question.",

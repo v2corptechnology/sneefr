@@ -61,14 +61,6 @@
                     ])
                 </div>
 
-                <div class="col-md-4">
-                    <?php $place = \Sneefr\Models\Place::latest()->first();?>
-                    @include('partials._card', [
-                        'item' => $place,
-                        'gallerySize' => '360x200',
-                        'modifiers' => 'card--no-avatar'
-                    ])
-                </div>
             </div>
 
 
@@ -107,14 +99,6 @@
                 ])
             </div>
 
-            <div class="col-md-4">
-                <?php $place = \Sneefr\Models\Place::latest()->first();?>
-                @include('partials._card', [
-                    'item' => $place,
-                    'gallerySize' => '360x200',
-                    'modifiers' => 'card--no-avatar card--center'
-                ])
-            </div>
         </div>
     </div>
 @stop

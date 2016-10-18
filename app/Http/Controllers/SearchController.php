@@ -5,13 +5,10 @@ namespace Sneefr\Http\Controllers;
 use App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
-use Illuminate\Support\Facades\Storage;
 use Session;
 use Sneefr\Jobs\SaveSearch;
-use Sneefr\Models\PlaceName;
 use Sneefr\Models\Shop;
 use Sneefr\Repositories\Category\CategoryRepository;
-use Sneefr\Repositories\Place\PlaceRepository;
 use Sneefr\Repositories\Search\SearchRepository;
 use Sneefr\Services\SearchService;
 
@@ -22,18 +19,11 @@ class SearchController extends Controller {
     private $categoryRepository;
 
     /**
-     * @var \Sneefr\Repositories\Place\PlaceRepository
-     */
-    protected $placeRepository;
-
-    /**
      * @param \Sneefr\Repositories\Category\CategoryRepository $categoryRepository
-     * @param \Sneefr\Repositories\Place\PlaceRepository       $placeRepository
      */
-    public function __construct(CategoryRepository $categoryRepository, PlaceRepository $placeRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
-        $this->placeRepository = $placeRepository;
     }
 
     /**

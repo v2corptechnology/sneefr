@@ -32,7 +32,6 @@ class ActivityFeedBuilder
         'DiscussionProvider',      // provides 'discussions' items
         'SearchProvider',          // provides ‘search’ items
         'FollowedPersonProvider',  // provides ‘followed-person’ items
-        'FollowedPlaceProvider',   // provides ‘place’ items
     ];
 
     /**
