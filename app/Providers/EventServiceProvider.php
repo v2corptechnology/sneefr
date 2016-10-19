@@ -32,6 +32,10 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\ItemWasViewed\SaveView::class,
         ],
 
+        \Sneefr\Events\MessageWasPosted::class => [
+            \Sneefr\Listeners\MessageWasPosted\EmailMessage::class,
+        ],
+
         \Sneefr\Events\UserRegistered::class => [
             \Sneefr\Listeners\UserRegistered\VerifyEmail::class,
             \Sneefr\Listeners\UserRegistered\LogLogin::class,
