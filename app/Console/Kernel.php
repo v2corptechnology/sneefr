@@ -51,11 +51,6 @@ class Kernel extends ConsoleKernel
                 ->dispatch(app('Sneefr\Jobs\RemoveOutdatedDatabaseDumps'));
         })->dailyAt('04:00');
 
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\ImportProdDatabase'));
-        })->dailyAt('05:00');
-
         // Sporadic calls
 
         $schedule->exec('(composer outdated --outdated && npm outdated)')
