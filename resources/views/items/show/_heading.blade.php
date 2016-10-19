@@ -1,7 +1,3 @@
-@push('modals_2')
-    @include('partials.modals._write', ['recipient' => $ad->shop, 'adId' => $ad->getId()])
-@endpush
-
 <div class="box">
 
     <h1 class="item__heading">{{ $ad->present()->title() }}</h1>
@@ -23,12 +19,6 @@
     <hr class="item__separator">
 
     <div class="item__social">
-        @unless ($ad->isMine())
-            <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal">
-                <i class="icon fa fa-lg fa-comments"></i> Contact
-            </a>
-        @endunless
-
         <a href="{{ route('ads.share', $ad) }}" class="btn btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
             <i class="icon fa fa-lg fa-share-alt"></i> Share
         </a>

@@ -557,10 +557,6 @@ class ProfilesController extends Controller
 
             $user->searches()->delete();
 
-            $user->discussions()->delete();
-
-            \Sneefr\Models\Discussion::where('the_other_id', $user->id)->delete();
-
             $user->notifications()->delete();
 
             $user->delete();

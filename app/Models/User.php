@@ -232,21 +232,6 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany(Notification::class)->unread();
     }
 
-    public function unreadMessages()
-    {
-        return $this->hasMany(Message::class, 'to_user_id')->unread();
-    }
-
-    public function discussions()
-    {
-        return $this->hasMany(Discussion::class);
-    }
-
-    public function discussionsWithMe()
-    {
-        return $this->hasMany(Discussion::class, 'the_other_id', 'id');
-    }
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');

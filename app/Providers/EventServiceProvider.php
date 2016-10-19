@@ -29,16 +29,8 @@ class EventServiceProvider extends ServiceProvider
             //\Sneefr\Listeners\AdWasPurchased\NotifyDealers::class,
         ],
 
-        \Sneefr\Events\AdWasUpdated::class => [
-            \Sneefr\Listeners\SendUpdatedNotification::class,
-        ],
-
         \Sneefr\Events\ItemWasViewed::class => [
             \Sneefr\Listeners\ItemWasViewed\SaveView::class,
-        ],
-
-        \Sneefr\Events\MessageWasSent::class => [
-            \Sneefr\Listeners\UpdateDiscussionStatus::class,
         ],
 
         \Sneefr\Events\UserRegistered::class => [

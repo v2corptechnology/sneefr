@@ -23,19 +23,6 @@
                             'search' => $item->body
                     ]);
                     break;
-
-                case Sneefr\Models\Discussion::class :
-
-                    $author = $item->participants->reject(function($participant) {
-                        return $participant->id() == auth()->id();
-                    })->first();
-
-                    $body = trans('profile.notifications.someone_liked_your_new_sneefer', [
-                            'url' => route('profiles.show', $author),
-                            'title' => $author->present()->fullName(),
-                            'link' => $author->present()->fullName()
-                    ]);
-                    break;
             }
             break;
 

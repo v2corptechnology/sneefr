@@ -10,9 +10,6 @@ return [
     'APP_DEBUGBAR' => env('APP_DEBUGBAR'),
     'APP_ENV'      => env('APP_ENV'),
 
-    'NOTIFY_UNREAD_NOTIFICATION_AFTER' => 60 * 24, // Minutes
-    'NOTIFY_UNREAD_MESSAGE_AFTER'      => 15, // Minutes
-    'NOTIFY_UNREAD_MESSAGE_BEFORE'     => 25, // Minutes
     'NOTIFY_AD_LOCK_AFTER'             => 60 * 8, // Minutes after lock to let pass before the reminder
     'EXPIRE_AD_LOCK_AFTER'             => 60 * 24, // Minutes
 

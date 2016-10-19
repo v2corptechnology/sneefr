@@ -147,10 +147,6 @@ class Notify extends Job implements ShouldQueue
                 return (array) $liked->sellerId();
                 break;
 
-            case \Sneefr\Models\Discussion::class:
-                return $liked->participants->pluck('id')->all();
-                break;
-
             case \Sneefr\Models\User::class:
                 return (array) $liked->getId();
                 break;

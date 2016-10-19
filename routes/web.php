@@ -123,37 +123,7 @@ Route::get('profiles/{profile}/parameters/confirmEmail/{key}', [
 
 Route::group(['middleware' => 'auth'], function ($router) {
 
-    // Mark my messages in this discussion as read
-    Route::put('discussions/{id}',
-        ['as' => 'discussions.markRead', 'uses' => 'DiscussionsController@markRead']);
-    // Choose an ad to sell
-    Route::get('discussions/{id}/ads',
-        ['as' => 'discussions.ads.index', 'uses' => 'DiscussionsController@chooseAd']);
-    // Show a specific ad in a specific discussion
-    Route::get('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.show', 'uses' => 'DiscussionsController@sell']);
-    // Remove an ad from the discussion
-    Route::delete('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.destroy', 'uses' => 'DiscussionsController@removeAd']);
-    // Mark an ad as sold
-    Route::patch('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.update', 'uses' => 'DiscussionsController@sold']);
-    // Shop discussions
-    Route::get('shopDiscussions/{shopSlug}',
-        ['as' => 'shop_discussions.index', 'uses' => 'DiscussionsController@index']);
-    // Show a specific discussion
-    Route::get('shopDiscussions/{id}/{shopSlug}',
-        ['as' => 'shop_discussions.show', 'uses' => 'DiscussionsController@show']);
-
-    // Choose a buyer for this ad
-    Route::get('ads/{ad}/chooseBuyer',
-        ['as' => 'ads.chooseBuyer', 'uses' => 'AdController@chooseBuyer']);
-    // Get an ad fragment
-    Route::get('ads/{ad}/fragment',
-        ['as' => 'ads.show.fragment', 'uses' => 'AdController@getAdFragment']);
-
     /** Out of resources scope */
-
     // Pusher auth for private channels
     Route::post('/pusherAuth', ['uses' => 'AuthController@pusherAuth']);
     Route::get('/pusherAuth', function () {
@@ -169,16 +139,12 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('ads.images', 'ImagesController', ['only' => ['store', 'destroy']]);
     // Deals history
     Route::resource('deals', 'DealsController', ['only' => ['index']]);
-    // Discussions
-    Route::resource('discussions', 'DiscussionsController', ['only' => ['index', 'show']]);
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
     Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
     // Likes
     Route::resource('likes', 'LikesController', ['only' => ['store']]);
-    // Messages
-    Route::resource('messages', 'MessagesController', ['only' => ['store']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Searches and shared searches
@@ -218,7 +184,6 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/ads', ['as' => 'admin.ads', 'uses' => 'AdminController@ads']);
     Route::get('admin/deals', ['as' => 'admin.deals', 'uses' => 'AdminController@deals']);
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
-    Route::get('admin/misc', ['as' => 'admin.misc', 'uses' => 'AdminController@misc']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
     Route::get('kitchensink', 'KitchensinkController@index');
 });

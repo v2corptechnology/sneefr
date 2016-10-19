@@ -15,13 +15,6 @@ return [
         'button_title' => "See my notifications on sneefR",
     ],
 
-    'waiting-message' => [
-        'title'        => ":nb unread message on sneefR|:nb unread messages on sneefR",
-        'lead'         => ":name, you have <strong>one unread message</strong> on sneefR.| :name, you have <strong>:nb unread messages</strong> on sneefR.",
-        'button'       => "Answer",
-        'button_title' => "Answer on sneefR",
-    ],
-
     'activation-email' => [
         'title'        => "sneefR : activate your account",
         'lead'         => "Do you want to activate your account on sneefR?",
@@ -60,22 +53,6 @@ return [
         'text'         => "This item is saved for you for 24h, this period expires soon.",
         'button_title' => "See the ad",
         'button'       => "See the ad",
-    ],
-
-    'deal_recap_buyer' => [
-        'title'        => "Confirm purchase",
-        'lead'         => ":title",
-        'text'         => ":seller saves this item for you and you have 24h to confirm buying it.",
-        'tip'          => "* When this period expires, this item will be put for sale again.",
-        'button_title' => "Confirm my purchase",
-        'button'       => "Confirm my purchase",
-    ],
-
-    'deal_recap_seller' => [
-        'title'        => "Deal confirmation pending",
-        'lead'         => ":title",
-        'text'         => "You indicated selling this item to :buyer. The ad is now locked and the buyer have 24h to confirm buying it",
-        'tip'          => "* When this period expires, this item will be put for sale again.",
     ],
 
     'deal_finished_seller' => [

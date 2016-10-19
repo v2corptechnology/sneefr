@@ -27,11 +27,6 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\SendWaitingMessageEmail'));
-        })->everyTenMinutes();
-
         // Calls made every hour
 
         $schedule->call(function () {

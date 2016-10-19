@@ -4,7 +4,6 @@ namespace Sneefr\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Discussion;
 use Sneefr\Models\Search;
 use Sneefr\Models\Shop;
 use Sneefr\Models\User;
@@ -60,9 +59,6 @@ class DatabaseServiceProvider extends ServiceProvider
             \Sneefr\Repositories\Ad\AdRepository::class,
             \Sneefr\Repositories\Ad\EloquentAdRepository::class);
 
-        $this->app->bind(
-            \Sneefr\Repositories\Discussion\DiscussionRepository::class,
-            \Sneefr\Repositories\Discussion\EloquentDiscussionRepository::class);
 
         $this->app->bind(
             \Sneefr\Repositories\Evaluation\EvaluationRepository::class,
@@ -90,7 +86,6 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         \Illuminate\Database\Eloquent\Relations\Relation::morphMap([
             'ad'         => Ad::class,
-            'discussion' => Discussion::class,
             'search'     => Search::class,
             'shop'       => Shop::class,
             'user'       => User::class,

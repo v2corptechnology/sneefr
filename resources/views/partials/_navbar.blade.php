@@ -129,15 +129,6 @@
                         <a class="navbar__sneefr__item" href="{{ route('pricing') }}" title="Open my shop">Open my shop</a>
                     </li>
                 @endif
-
-                {{-- Discussions --}}
-                @if (auth()->check())
-                    <li class="{{ setActive(['discussions.index', 'discussions.show', 'discussions.ads.index']) }} js-messages js-pushes-target-{{ auth()->user()->getRouteKey() }}">
-                        <a href="{{ route('discussions.index') }}#latest" title="Messages">
-                            <sup class="notification-badge js-notification-badge {{ $unread ? '' : 'hidden' }}">{{ $unread }}</sup> Messages
-                        </a>
-                    </li>
-                @endif
             </ul>
 
             {{-- Display logout when connected --}}
