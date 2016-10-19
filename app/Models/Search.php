@@ -2,15 +2,12 @@
 
 namespace Sneefr\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Sneefr\Models\Traits\Likeable;
 use Sneefr\Models\Traits\StaffFilterable;
 
 class Search extends Model
 {
-    use Likeable;
     use SoftDeletes;
     use StaffFilterable;
 

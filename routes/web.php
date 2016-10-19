@@ -144,8 +144,6 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
     Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
-    // Likes
-    Route::resource('likes', 'LikesController', ['only' => ['store']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Searches and shared searches

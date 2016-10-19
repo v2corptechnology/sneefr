@@ -10,7 +10,6 @@ use Img;
 use Laracodes\Presenter\Traits\Presentable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Sneefr\Delivery;
-use Sneefr\Models\Traits\Likeable;
 use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
 use Sneefr\Price;
@@ -19,7 +18,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Ad extends Model
 {
     use AlgoliaEloquentTrait;
-    use Likeable;
     use LogsActivity;
     use SearchableTrait;
     use SoftDeletes;

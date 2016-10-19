@@ -17,7 +17,6 @@ use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Sneefr\Events\UserEmailChanged;
-use Sneefr\Models\Traits\Likeable;
 use Sneefr\PhoneNumber;
 use Sneefr\Presenters\UserPresenter;
 use Sneefr\UserEvaluations;
@@ -29,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
                                     CanResetPasswordContract
 {
     use AlgoliaEloquentTrait;
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable;
     use LogsActivity;
 
     /**
