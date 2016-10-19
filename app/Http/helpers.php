@@ -28,20 +28,6 @@ if ( ! function_exists('strip_phone')) {
     }
 }
 
-if ( ! function_exists('auto_link')) {
-    /**
-     * Transforms links into html anchor links.
-     *
-     * @param  string $text
-     *
-     * @return string
-     */
-    function auto_link($text)
-    {
-        return preg_replace('/(http|https)\:\/\/sneefr\.[a-zA-Z]{2,3}(\/\S*)?/', '<a href="${0}">${0}</a>', $text);
-    }
-}
-
 if ( ! function_exists('strip_for_display')) {
     /**
      * Perform both email and phone number replacements.

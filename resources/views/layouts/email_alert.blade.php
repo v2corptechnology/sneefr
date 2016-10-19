@@ -52,6 +52,16 @@
 						</td>
 					</tr>
 
+                    @hasSection('pre-title')
+                        <tr style="{{ $sm_font }} margin: 0;">
+                            <td style="{{ $sm_font }} margin: 0; padding: 20px 20px 0 20px; text-align: center" valign="top">
+
+                                @yield('pre-title')
+
+                            </td>
+                        </tr>
+                    @endif
+
 					<tr style="{{ $sm_font }} margin: 0;">
 						<td style="{{ $lg_font }} color: #fff; font-weight: 500; text-align: center; background-color: #ff316e; margin: 0; padding: 20px;" align="center" bgcolor="#FF9F00" valign="top">
 

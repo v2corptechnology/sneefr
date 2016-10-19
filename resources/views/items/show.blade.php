@@ -108,7 +108,7 @@
                     <div class="col-sm-6">
 
                         {{-- Title, price and buy buttons --}}
-                        @include ('items.show._heading', ['ad' => $ad])
+                        @include ('items.show._heading', ['ad' => $ad, 'shop' => $ad->shop])
 
                     </div>
 

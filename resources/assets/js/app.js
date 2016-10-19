@@ -71,114 +71,6 @@ $(function () {
         html: true
     });
 
-    // Allow ad's final amount edition
-    var $changePrice = $('.js-change-price');
-    if ($changePrice.length) {
-        $changePrice.on('click', function (event) {
-            event.preventDefault();
-            $('.js-original-price').addClass('hidden');
-            $('.js-edit-price').removeClass('hidden');
-            $('#final_amount').focus();
-            $('#final_amount').select();
-        });
-    }
-
-    $('.ajax').on('submit', function (event) {
-        var trigger = this.querySelector('button[type="submit"]');
-        var inputs = this.querySelectorAll('input, button');
-        var options = {};
-        var count = trigger.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector('.count'),
-            amount = count.querySelector('.amount'),
-            heart = count.querySelector('.fa'),
-            nb = parseInt(amount.innerHTML),
-            originalText = trigger.innerHTML,
-            originalClass = trigger.classList;
-
-        for (i = 0; i < inputs.length; i++) {
-            var name;
-            if (name = inputs[i].getAttribute('name')) {
-                options[name] = inputs[i].value;
-            }
-        }
-
-        //TODO: clean this up by returning the html fragment
-        $.ajax({
-            url: this.getAttribute('action'),
-            data: options,
-            dataType: 'json',
-            method: 'post',
-            beforeSend: function () {
-                var heartClass = heart.classList.contains('fa-heart') ? 'fa-heart-o' : 'fa-heart';
-                var nbBis = heart.classList.contains('fa-heart') ? --nb : ++nb;
-                var textBis = heart.classList.contains('fa-heart') ? 'J\'aime' : 'Je n\'aime plus';
-                trigger.innerHTML = textBis;
-                heart.classList.remove('fa-heart', 'fa-heart-o');
-                heart.classList.add(heartClass);
-                amount.innerHTML = nbBis;
-                trigger.disabled = true;
-                trigger.blur();
-            },
-            error: function () {
-                trigger.classList = originalClass;
-                trigger.innerHTML = originalText;
-                amount.innerHTML = nb;
-
-            },
-            complete: function () {
-                trigger.disabled = false;
-            }
-        });
-
-        event.preventDefault();
-    });
-
-    $('.ajax-message').on('submit', function (event) {
-        var $form = $(this);
-        var inputs = this.querySelectorAll('input, button, textarea');
-        var options = {};
-        var sendable = true;
-
-        if (sendable) {
-            for (i = 0; i < inputs.length; i++) {
-                var name;
-                if (name = inputs[i].getAttribute('name')) {
-                    options[name] = inputs[i].value;
-                }
-            }
-
-            $.ajax({
-                url: this.getAttribute('action'),
-                data: options,
-                dataType: 'html',
-                method: 'post',
-                beforeSend: function () {
-                    $(inputs).add($form).attr('disabled', true).attr('readonly', true);
-                    $('.autosubmit, .saving', $form).toggleClass('hidden');
-                    sendable = false;
-                },
-                complete: function () {
-                    $(inputs).add($form).attr('disabled', false).attr('readonly', false);
-                    $('textarea', $form).val('');
-                    $('.saving, .autosubmit', $form).toggleClass('hidden')
-                    sendable = true;
-                }
-            });
-        }
-
-        event.preventDefault();
-    });
-
-    $('button.autosend').hide();
-
-    $('textarea.autosend').on('keypress', function (event) {
-        if (event.keyCode == 13 && !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) {
-            var $this = $(this);
-            if ($this.val().trim() != '') {
-                $this.parents('form').submit();
-            }
-        }
-    });
-
     // Fill modal with content from link href
     var modalContent = null;
     $("#shareModal").on("show.bs.modal", function(event) {
@@ -197,10 +89,6 @@ $(function () {
     });
     $("#shareModal").on("hide.bs.modal", function(event) {
         $('#shareModalContent').html(modalContent);
-    });
-
-    $("#writeTo").on("shown.bs.modal", function(event) {
-        $('#body').focus();
     });
 });
 

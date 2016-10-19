@@ -5,7 +5,6 @@ namespace Sneefr\Http\Controllers;
 use Illuminate\Http\Request;
 use Sneefr\Events\AdWasPurchased;
 use Sneefr\Http\Requests\BillingRequest;
-use Sneefr\Jobs\Notify;
 use Sneefr\Jobs\SendDealCancelledToSeller;
 use Sneefr\Jobs\SendFinishedDealToBuyer;
 use Sneefr\Jobs\SendFinishedDealToSeller;
@@ -119,9 +118,6 @@ class PaymentsController extends Controller
 
         // Is the current user authorized to buy this ad
         $this->authorize('buy', $ad);
-
-        // Send a special notification
-        $this->dispatch(new Notify($ad, Notify::SPECIAL));
 
         // Warn the seller the ad is unlocked
         $this->dispatch(new SendDealCancelledToSeller($ad));

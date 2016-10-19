@@ -5,7 +5,6 @@ namespace Sneefr\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Discussion;
 use Sneefr\Models\ActionLog;
 use Sneefr\Models\Search;
 use Sneefr\Models\User;
@@ -47,7 +46,6 @@ class AdminController extends Controller
             'reports'         => count($this->reports['ads']) + count($this->reports['users']),
             'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->get()->count(),
             'shared_searches' => Search::exceptStaff()->get()->count(),
-            'discussions'     => Discussion::latest()->get()->count(),
             'stripe_profiles' => 0,
         ];
     }
@@ -114,26 +112,6 @@ class AdminController extends Controller
             'reports' => $this->reports,
             'lastDay' => $this->lastDay,
             'totals'  => $this->totals,
-        ]);
-    }
-
-    /**
-     *
-     * @return \Illuminate\View\View
-     */
-    public function misc()
-    {
-        $stripeAccounts = [];
-
-        $discussions = Discussion::latest()->take(30)->get();
-        $discussions = $discussions->load('participants');
-
-        return view('admin.misc', [
-            'discussions'    => $discussions,
-            'stripeAccounts' => $stripeAccounts,
-            'reports'        => $this->reports,
-            'lastDay'        => $this->lastDay,
-            'totals'         => $this->totals,
         ]);
     }
 

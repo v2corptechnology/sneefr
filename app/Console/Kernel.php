@@ -27,11 +27,6 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\SendWaitingMessageEmail'));
-        })->everyTenMinutes();
-
         // Calls made every hour
 
         $schedule->call(function () {
@@ -53,18 +48,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\SendWaitingNotificationEmail'));
-        })->dailyAt('18:30');
-
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
                 ->dispatch(app('Sneefr\Jobs\RemoveOutdatedDatabaseDumps'));
         })->dailyAt('04:00');
-
-        $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\ImportProdDatabase'));
-        })->dailyAt('05:00');
 
         // Sporadic calls
 
