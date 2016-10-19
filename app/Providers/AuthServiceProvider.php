@@ -28,12 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('show-discussion', function ($user, $discussion) {
-            $participantsIds = $discussion->participants->pluck('id')->all();
-
-            return in_array($user->id, $participantsIds);
-        });
-
         // A person needs to own a like in order to delete it.
         Gate::define('destroy-like', function ($user, $like) {
             return $like->user_id === $user->id;

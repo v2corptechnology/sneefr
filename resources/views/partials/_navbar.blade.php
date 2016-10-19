@@ -12,7 +12,7 @@
                 <div class="col-sm-6 is-narrow-pr">
                     <input type="search" class="form-control" name="q"
                            placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
-                           value="{{ $query }}">
+                           value="{{ request()->get('q') }}">
                 </div>
                 <div class="col-sm-4 is-narrow-pl is-narrow-pr">
                     <input type="text" class="form-control has-no-mb" name="location"
@@ -75,7 +75,7 @@
                         <div class="col-xs-10 is-narrow-pr is-narrow-pl">
                             <input type="search" class="form-control" name="q"
                                    placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
-                                   value="{{ $query }}">
+                                   value="{{ request()->get('q') }}">
                             <input type="text" class="form-control has-no-mb" name="location"
                                    placeholder="Where? Los Angeles, CA" disabled>
                         </div>
@@ -85,7 +85,7 @@
                                 <span class="sr-only">Search</span>
                             </button>
                         </div>
-                        <input type="hidden" name="type" value="{{ $type }}">
+                        <input type="hidden" name="type" value="{{ request()->get('type', 'ad') }}">
                     </div>
                 </form>
             </div>
@@ -127,15 +127,6 @@
                 @else
                     <li>
                         <a class="navbar__sneefr__item" href="{{ route('pricing') }}" title="Open my shop">Open my shop</a>
-                    </li>
-                @endif
-
-                {{-- Discussions --}}
-                @if (auth()->check())
-                    <li class="{{ setActive(['discussions.index', 'discussions.show', 'discussions.ads.index']) }} js-messages js-pushes-target-{{ auth()->user()->getRouteKey() }}">
-                        <a href="{{ route('discussions.index') }}#latest" title="Messages">
-                            <sup class="notification-badge js-notification-badge {{ $unread ? '' : 'hidden' }}">{{ $unread }}</sup> Messages
-                        </a>
                     </li>
                 @endif
             </ul>

@@ -13,15 +13,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Notifications\Notifiable;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 use Sneefr\Events\UserEmailChanged;
-use Sneefr\Models\Traits\Likeable;
 use Sneefr\PhoneNumber;
 use Sneefr\Presenters\UserPresenter;
-use Sneefr\Traits\Encryptable;
 use Sneefr\UserEvaluations;
 use Sneefr\UserPayment;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -31,9 +28,8 @@ class User extends Model implements AuthenticatableContract,
                                     CanResetPasswordContract
 {
     use AlgoliaEloquentTrait;
-    use Authenticatable, Authorizable, Encryptable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable;
     use LogsActivity;
-    use Notifiable;
 
     /**
      * Searchable rules.
@@ -121,9 +117,6 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences'];
-
-    protected $encryptable = [
-    ];
 
     /**
      * The presenter used by front-end for this model.
@@ -220,31 +213,6 @@ class User extends Model implements AuthenticatableContract,
     public function searches()
     {
         return $this->hasMany(Search::class);
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class);
-    }
-
-    public function unreadNotifications()
-    {
-        return $this->hasMany(Notification::class)->unread();
-    }
-
-    public function unreadMessages()
-    {
-        return $this->hasMany(Message::class, 'to_user_id')->unread();
-    }
-
-    public function discussions()
-    {
-        return $this->hasMany(Discussion::class);
-    }
-
-    public function discussionsWithMe()
-    {
-        return $this->hasMany(Discussion::class, 'the_other_id', 'id');
     }
 
     public function reports()
@@ -394,15 +362,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Accessor checking if this Facebook id is in the team
-     * @return bool
-     */
-    public function getIsTeamAttribute()
-    {
-        return (bool) in_array($this->facebook_id, config('sneefr.staff_facebook_ids.team'));
-    }
-
-    /**
      * Get the language asked by this user.
      *
      * @return string
@@ -494,7 +453,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function isAdmin() : bool
     {
-        return in_array($this->getId(), config('sneefr.staff_user_ids', []));
+        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
     }
 
     public function getPhoneAttribute() : PhoneNumber

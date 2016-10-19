@@ -35,7 +35,6 @@ elixir(mix => {
 
         // Scripts coming from JavaScript components.
         path_to_modules+'jquery/dist/jquery.min.js',
-        path_to_modules+'pusher-js/dist/pusher.min.js',
         path_to_modules+'bootstrap-sass/assets/javascripts/bootstrap.js',
         path_to_modules+'geocomplete/jquery.geocomplete.min.js',
         path_to_modules+'clipboard/dist/clipboard.min.js',
@@ -43,7 +42,6 @@ elixir(mix => {
 
         // Main script of the application.
         'app.js',
-        'sneefr.pushes.js',
         'sneefr.settings.js'
 
     ], 'public/js/all.js');
@@ -81,12 +79,6 @@ elixir(mix => {
     // Shops
     mix.scripts(['sneefr.shops.js'], 'public/js/sneefr.shops.js');
 
-    // Auto-navigate with select dropdown
-    mix.scripts(['sneefr.auto-navigate.js'], 'public/js/sneefr.auto-navigate.js');
-
-    // Messages
-    mix.scripts(['sneefr.messages.js'], 'public/js/sneefr.messages.js');
-
     // Auto Complete
     mix.scripts(['sneefr.autocomplete.js'], 'public/js/sneefr.autocomplete.js');
 
@@ -108,8 +100,6 @@ elixir(mix => {
         'js/sneefr.billing.js',
         'js/sneefr.delivery.js',
         'js/sneefr.shops.js',
-        'js/sneefr.auto-navigate.js',
-        'js/sneefr.messages.js',
         'js/sneefr.autocomplete.js',
         'js/sneefr.slider.js'
     ]);

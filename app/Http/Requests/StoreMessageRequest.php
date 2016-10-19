@@ -2,7 +2,9 @@
 
 namespace Sneefr\Http\Requests;
 
-class StoreMessageRequest extends Request
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreMessageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -11,7 +13,7 @@ class StoreMessageRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -22,11 +24,7 @@ class StoreMessageRequest extends Request
     public function rules()
     {
         return [
-            'body'                 => 'required|string',
-            'recipient_identifier' => 'required|alpha_dash',
-            'ad_id'                => 'sometimes|required|integer',
-            'discussion_id'        => 'sometimes|required|integer',
-            'recipient_is_shop'    => 'sometimes|boolean',
+            'body' => 'required|min:10'
         ];
     }
 }

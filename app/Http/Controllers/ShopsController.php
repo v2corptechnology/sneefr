@@ -10,10 +10,6 @@ use Sneefr\Http\Requests\UpdateShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
-use Sneefr\Models\DiscussedAd;
-use Sneefr\Models\Discussion;
-use Sneefr\Models\DiscussionUser;
-use Sneefr\Models\Message;
 use Sneefr\Models\Shop;
 use Sneefr\Models\ShopUser;
 use Sneefr\Services\Image;
@@ -222,13 +218,6 @@ class ShopsController extends Controller
         Subscription::where('user_id', auth()->id())->forceDelete();
         Ad::where('shop_id', $shop->getId())->withTrashed()->update(['shop_id' => null]);
         auth()->user()->update(['payment' => null, 'stripe_id' => null, 'card_brand' => null, 'card_last_four' => null, 'trial_ends_at' => null]);
-
-        $discussions = Discussion::where('shop_id', $shop->getId())->get();
-        foreach ($discussions as $discussion) {
-            DiscussedAd::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-            DiscussionUser::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-            Message::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-        }
 
         $shop->forceDelete();
 

@@ -2,12 +2,7 @@
 <html lang="fr">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
     <meta charset="UTF-8">
-    <title>
-        @if ($notifications || $unread)
-            ({{ $notifications + $unread }})
-        @endif
-        @yield('title', 'sneefR')
-    </title>
+    <title>@yield('title', 'sneefR')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@lang('common.site_description')" />
 
@@ -36,9 +31,6 @@
     <meta name="theme-color" content="#ffffff">
 
     <meta name="_google_api_key" content="{{ config('sneefr.keys.GOOGLE_API_KEY') }}" />
-    <meta name="_pusher_key" content="{{ config('sneefr.keys.PUSHER_KEY') }}" />
-    <meta name="_pusher_channel" content="{{ Auth::check() ? 'private-'.Auth::user()->getRouteKey() : null }}" />
-    <meta name="_pusher_cluster" content="{{ config('sneefr.keys.PUSHER_CLUSTER') }}" />
     <meta name="_stripe_key" content="{{ config('services.stripe.key') }}" />
     <meta name="_token" content="{{ csrf_token() }}" />
 

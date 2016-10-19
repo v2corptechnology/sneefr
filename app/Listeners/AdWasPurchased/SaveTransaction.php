@@ -4,7 +4,6 @@ namespace Sneefr\Listeners\AdWasPurchased;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sneefr\Events\AdWasPurchased;
-use Sneefr\Events\AdWasUpdated;
 use Sneefr\Models\Transaction;
 use Sneefr\Price;
 
@@ -48,8 +47,5 @@ class SaveTransaction implements ShouldQueue
         $transaction->seller_id = $event->ad->seller->getId();
         $transaction->details = $details;
         $transaction->save();
-
-        // Remove the ad from discussion, the pusher way
-        event(new AdWasUpdated($event->ad));
     }
 }

@@ -26,7 +26,6 @@
         "rap2hpoutre/laravel-log-viewer": "^0.7",
         "spatie/laravel-activitylog": "^1.2",
         "vinkla/algolia": "^2.2",
-        "vinkla/pusher": "^2.2",
         "willdurand/negotiation": "^2.0",
         "spatie/laravel-failed-job-monitor": "^1.0",
         "laravel/scout": "^1.1",
