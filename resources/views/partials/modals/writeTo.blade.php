@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
 
-            <form action="" method="POST">
+            <form action="{{ route('messages.store', $ad) }}" method="POST">
 
                 {!! csrf_field() !!}
 
@@ -19,18 +19,18 @@
 
                 @if (auth()->check())
                     <div class="modal-body">
-                        <label class="control-label sr-only" for="message-body"> 
+                        <label class="control-label sr-only" for="body"> 
                             Write to {{ $shop->getName() }}
                         </label> 
-                        <textarea class="form-control" rows="5" cols="10" id="message-body"
-                                  name="message-body"
+                        <textarea class="form-control" rows="5" cols="10" id="body"
+                                  name="body"
                                   placeholder="Saying Hello is the best way to start a conversation!"
-                                  required></textarea> 
+                                  required minlength="10"></textarea> 
                     </div>
 
                     <div class="modal-footer">
                         <a href="#" class="btn" data-dismiss="modal">Close</a>
-                        <a href="#" class="btn btn-primary">Send</a>
+                        <button class="btn btn-primary" type="submit">Send</button>
                     </div>
                 @else
                     <div class="modal-body">
