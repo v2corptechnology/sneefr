@@ -26,7 +26,6 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\AdWasPurchased\UpdateStock::class,
             \Sneefr\Listeners\AdWasPurchased\StoreSuccessfulDealConnections::class,
             \Sneefr\Listeners\AdWasPurchased\SaveTransaction::class,
-            //\Sneefr\Listeners\AdWasPurchased\NotifyDealers::class,
         ],
 
         \Sneefr\Events\ItemWasViewed::class => [

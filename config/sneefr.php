@@ -10,9 +10,6 @@ return [
     'APP_DEBUGBAR' => env('APP_DEBUGBAR'),
     'APP_ENV'      => env('APP_ENV'),
 
-    'NOTIFY_AD_LOCK_AFTER'             => 60 * 8, // Minutes after lock to let pass before the reminder
-    'EXPIRE_AD_LOCK_AFTER'             => 60 * 24, // Minutes
-
     /*
     |--------------------------------------------------------------------------
     | Keys used across different services
@@ -22,9 +19,6 @@ return [
         'APP_HASH_KEY'           => env('APP_HASH_KEY'),
         // Google services
         'GOOGLE_API_KEY'         => env('GOOGLE_API_KEY'),
-        // Pusher services
-        'PUSHER_KEY'             => env('PUSHER_KEY'),
-        'PUSHER_CLUSTER'         => env('PUSHER_CLUSTER'),
         // Facebook services
         'FACEBOOK_CLIENT_ID'     => env('FACEBOOK_CLIENT_ID'),
         'FACEBOOK_CLIENT_SECRET' => env('FACEBOOK_CLIENT_SECRET'),

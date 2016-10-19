@@ -31,9 +31,6 @@
     <meta name="theme-color" content="#ffffff">
 
     <meta name="_google_api_key" content="{{ config('sneefr.keys.GOOGLE_API_KEY') }}" />
-    <meta name="_pusher_key" content="{{ config('sneefr.keys.PUSHER_KEY') }}" />
-    <meta name="_pusher_channel" content="{{ Auth::check() ? 'private-'.Auth::user()->getRouteKey() : null }}" />
-    <meta name="_pusher_cluster" content="{{ config('sneefr.keys.PUSHER_CLUSTER') }}" />
     <meta name="_stripe_key" content="{{ config('services.stripe.key') }}" />
     <meta name="_token" content="{{ csrf_token() }}" />
 

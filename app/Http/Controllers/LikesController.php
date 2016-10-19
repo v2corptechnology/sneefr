@@ -5,7 +5,6 @@ namespace Sneefr\Http\Controllers;
 use Crypt;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Sneefr\Jobs\Notify;
 
 class LikesController extends Controller
 {
@@ -25,8 +24,6 @@ class LikesController extends Controller
             $model->unlike();
         } else {
             $like = $model->like();
-            // Notification only happens on Like creation to avoid spamming
-            $this->dispatch(new Notify($like));
         }
 
         return $request->ajax() ? ['success'] : back();

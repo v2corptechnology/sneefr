@@ -12,12 +12,9 @@ use Sneefr\Contracts\BillingInterface;
 use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
 use Sneefr\Jobs\VerifyEmail;
-use Sneefr\Models\Notification;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\Evaluation\EvaluationRepository;
-use Sneefr\Repositories\Notification\NotificationRepository;
-use Sneefr\Repositories\Place\PlaceRepository;
 use Sneefr\Repositories\Search\SearchRepository;
 use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\Image;
@@ -41,16 +38,6 @@ class ProfilesController extends Controller
     private $searchRepository;
 
     /**
-     * @var \Sneefr\Repositories\Notification\NotificationRepository
-     */
-    private $notificationRepository;
-
-    /**
-     * @var \Sneefr\Repositories\Place\PlaceRepository
-     */
-    protected $placeRepository;
-
-    /**
      * @var Factory
      */
     protected $disk;
@@ -59,8 +46,6 @@ class ProfilesController extends Controller
      * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
      * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
      * @param \Sneefr\Repositories\Search\SearchRepository             $searchRepository
-     * @param \Sneefr\Repositories\Notification\NotificationRepository $notificationRepository
-     * @param \Sneefr\Repositories\Place\PlaceRepository               $placeRepository
      * @param \Illuminate\Contracts\Filesystem\Factory                 $filesystemFactory
      */
     public function __construct(
@@ -68,8 +53,6 @@ class ProfilesController extends Controller
         AdRepository $adRepository,
         EvaluationRepository $evaluationRepository,
         SearchRepository $searchRepository,
-        NotificationRepository $notificationRepository,
-        PlaceRepository $placeRepository,
         Factory $filesystemFactory
     ) {
         $this->userRepository = $userRepository;
@@ -263,8 +246,7 @@ class ProfilesController extends Controller
         $notifications = $this->notificationRepository->getLatest($person->getId())
             ->slice(0, 30);
 
-        $specialNotifications = Notification::special()->where('user_id', auth()->id())->latest()->get()
-            ->slice(0, 5);
+        $specialNotifications = collect();
 
         if ($this->notificationRepository->countUnreadNotificationsFor($person->getId())) {
             $this->notificationRepository->markAllReadFor($person->getId());

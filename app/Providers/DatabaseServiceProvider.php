@@ -10,9 +10,6 @@ use Sneefr\Models\User;
 use Sneefr\Repositories\Category\CachingCategoryRepository;
 use Sneefr\Repositories\Category\CategoryRepository;
 use Sneefr\Repositories\Category\EloquentCategoryRepository;
-use Sneefr\Repositories\Notification\CachingNotificationRepository;
-use Sneefr\Repositories\Notification\EloquentNotificationRepository;
-use Sneefr\Repositories\Notification\NotificationRepository;
 use Sneefr\Repositories\Search\CachingSearchRepository;
 use Sneefr\Repositories\Search\EloquentSearchRepository;
 use Sneefr\Repositories\Search\SearchRepository;
@@ -45,10 +42,6 @@ class DatabaseServiceProvider extends ServiceProvider
 
         $this->app->singleton(SearchRepository::class, function () {
             return new CachingSearchRepository(new EloquentSearchRepository(), $this->app['cache.store'], $this->app['auth.driver']);
-        });
-
-        $this->app->singleton(NotificationRepository::class, function () {
-            return new CachingNotificationRepository(new EloquentNotificationRepository(), $this->app['cache.store']);
         });
 
         $this->app->bind(

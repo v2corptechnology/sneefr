@@ -281,11 +281,6 @@ class Ad extends Model
         return $this->hasOne(Stock::class);
     }
 
-    public function notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
-    }
-
     public function scopeSold($query)
     {
         return $query->onlyTrashed()->where('remaining_quantity', 0);

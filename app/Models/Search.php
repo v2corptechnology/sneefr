@@ -47,11 +47,6 @@ class Search extends Model
         return $this->morphMany('Action', 'actionable');
     }
 
-    public function notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
-    }
-
     /**
      * Get the searched content.
      *

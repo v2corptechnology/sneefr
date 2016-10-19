@@ -13,7 +13,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Notifications\Notifiable;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -33,7 +32,6 @@ class User extends Model implements AuthenticatableContract,
     use AlgoliaEloquentTrait;
     use Authenticatable, Authorizable, Encryptable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
     use LogsActivity;
-    use Notifiable;
 
     /**
      * Searchable rules.
@@ -220,16 +218,6 @@ class User extends Model implements AuthenticatableContract,
     public function searches()
     {
         return $this->hasMany(Search::class);
-    }
-
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class);
-    }
-
-    public function unreadNotifications()
-    {
-        return $this->hasMany(Notification::class)->unread();
     }
 
     public function reports()

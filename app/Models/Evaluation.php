@@ -62,14 +62,6 @@ class Evaluation extends Model
         return $this->morphTo();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
-    }
-
     public function scopeType($query, $type)
     {
         if($type == "shop")

@@ -35,7 +35,6 @@ elixir(mix => {
 
         // Scripts coming from JavaScript components.
         path_to_modules+'jquery/dist/jquery.min.js',
-        path_to_modules+'pusher-js/dist/pusher.min.js',
         path_to_modules+'bootstrap-sass/assets/javascripts/bootstrap.js',
         path_to_modules+'geocomplete/jquery.geocomplete.min.js',
         path_to_modules+'clipboard/dist/clipboard.min.js',
@@ -43,7 +42,6 @@ elixir(mix => {
 
         // Main script of the application.
         'app.js',
-        'sneefr.pushes.js',
         'sneefr.settings.js'
 
     ], 'public/js/all.js');
