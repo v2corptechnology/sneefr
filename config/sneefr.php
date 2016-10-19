@@ -15,7 +15,7 @@ return [
     | Keys used across different services
     |--------------------------------------------------------------------------
     */
-    'keys'                             => [
+    'keys'         => [
         'APP_HASH_KEY'           => env('APP_HASH_KEY'),
         // Google services
         'GOOGLE_API_KEY'         => env('GOOGLE_API_KEY'),
@@ -30,39 +30,6 @@ return [
         'INTERCOM_APP_ID'        => env('INTERCOM_APP_ID'),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Automatically followed team members
-    |--------------------------------------------------------------------------
-    |
-    | Those identifiers from the users table are automatically added as
-    | connection with "forced.follow_activity" origin when a newly registered
-    | user has no connections
-    |
-    */
-
-    'auto_follow_user_ids' => [
-        2, // Arthur
-        3, // Selma
-        4, // Jeremy
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Staff user ids
-    |--------------------------------------------------------------------------
-    |
-    | These are the staff identifiers used on the users table. We filter results
-    | from the staff mostly in the stats.
-    |
-    */
-
-    'staff_user_ids' => [
-        1, // Romain
-        2, // Arthur
-        3, // Selma
-        4, // Jeremy
-    ],
     /*
     |--------------------------------------------------------------------------
     | Staff facebook ids
@@ -81,18 +48,9 @@ return [
             10152937772934901, // Arthur
             10152914548827090, // Romain
         ],
-        // Those who have the `team` badge and are added by default for each new user
-        'team'           => [
-            603204913117901, // Selma
-            10152391232875356, // Jeremy
-            10152937772934901, // Arthur
-            10152914548827090, // Romain
-        ],
         // Those who can access the logs
         'developers'     => [
             10152914548827090,  // Romain
-            1211978335509141,   // Bilel
         ],
     ],
-
 ];

@@ -367,15 +367,6 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Accessor checking if this Facebook id is in the team
-     * @return bool
-     */
-    public function getIsTeamAttribute()
-    {
-        return (bool) in_array($this->facebook_id, config('sneefr.staff_facebook_ids.team'));
-    }
-
-    /**
      * Get the language asked by this user.
      *
      * @return string
@@ -467,7 +458,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function isAdmin() : bool
     {
-        return in_array($this->getId(), config('sneefr.staff_user_ids', []));
+        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
     }
 
     public function getPhoneAttribute() : PhoneNumber
