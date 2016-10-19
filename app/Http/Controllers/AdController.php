@@ -3,7 +3,6 @@
 namespace Sneefr\Http\Controllers;
 
 use Sneefr\Http\Requests\CreateAdRequest;
-use Sneefr\Jobs\DeleteAd;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shares;
 
@@ -59,8 +58,6 @@ class AdController extends Controller
 
         // Check the rights for this user to remove this ad
         $this->authorize('destroy', $ad);
-
-        $this->dispatch(new DeleteAd($adId));
 
         return redirect()->home()
             ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
