@@ -124,12 +124,6 @@ Route::get('profiles/{profile}/parameters/confirmEmail/{key}', [
 Route::group(['middleware' => 'auth'], function ($router) {
 
     /** Out of resources scope */
-    // Pusher auth for private channels
-    Route::post('/pusherAuth', ['uses' => 'AuthController@pusherAuth']);
-    Route::get('/pusherAuth', function () {
-        return redirect()->route('welcome');
-    });
-
     // User's settings
     Route::resource('me', 'SettingsController@show');
 
