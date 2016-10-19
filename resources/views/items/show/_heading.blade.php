@@ -1,3 +1,7 @@
+@push('modals_2')
+    @include('partials.modals.writeTo', ['shop' => $shop])
+@endpush
+
 <div class="box">
 
     <h1 class="item__heading">{{ $ad->present()->title() }}</h1>
@@ -21,6 +25,9 @@
     <div class="item__social">
         <a href="{{ route('ads.share', $ad) }}" class="btn btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
             <i class="icon fa fa-lg fa-share-alt"></i> Share
+        </a>
+        <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal" data-remote="false">
+            <i class="icon fa fa-lg fa-comment-o"></i> Contact
         </a>
     </div>
 </div>
