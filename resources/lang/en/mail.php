@@ -31,30 +31,6 @@ return [
         'button_title' => "Commplete email update procedure",
     ],
 
-    'expired_lock_seller' => [
-        'title'        => "Unlocked ad : :title",
-        'lead'         => "The buyer didn't confirm buying this item",
-        'text'         => "This item was saved for the buyer for 24h, this period has expired.",
-        'button_title' => "See the ad",
-        'button'       => "See the ad",
-    ],
-
-    'expired_lock_buyer' => [
-        'title'        => "Purchase missed : :title",
-        'lead'         => "This item is no longer saved for you",
-        'text'         => "This item was saved for you for 24h, this period has expired.",
-        'button_title' => "See the ad",
-        'button'       => "See the ad",
-    ],
-
-    'expiring_lock' => [
-        'title'        => "You're going to miss :title",
-        'lead'         => "You only have 8 hours left to confirm the purchase of this item",
-        'text'         => "This item is saved for you for 24h, this period expires soon.",
-        'button_title' => "See the ad",
-        'button'       => "See the ad",
-    ],
-
     'deal_finished_seller' => [
         'title'        => "Congratulations",
         'lead'         => "You've just sold :title for :finalPrice to :buyer",
