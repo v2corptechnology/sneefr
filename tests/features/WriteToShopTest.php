@@ -20,11 +20,11 @@ class WriteToShopTest extends TestCase
         $item = factory(\Sneefr\Models\Ad::class)->create();
 
         $this->visit(route('items.show', $item))
-            ->dontSee('name="message-body"');
+            ->dontSee('name="body"');
 
         $this->actingAs($user);
 
         $this->visit(route('items.show', $item))
-            ->see('name="message-body"');
+            ->see('name="body"');
     }
 }
