@@ -23,26 +23,6 @@ use Sneefr\Services\Image;
 class ProfilesController extends Controller
 {
     /**
-     * @var \Sneefr\Repositories\User\UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * @var \Sneefr\Repositories\Ad\AdRepository
-     */
-    private $adRepository;
-
-    /**
-     * @var \Sneefr\Repositories\Search\SearchRepository
-     */
-    private $searchRepository;
-
-    /**
-     * @var Factory
-     */
-    protected $disk;
-
-    /**
      * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
      * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
      * @param \Sneefr\Repositories\Search\SearchRepository             $searchRepository
@@ -58,8 +38,6 @@ class ProfilesController extends Controller
         $this->userRepository = $userRepository;
         $this->adRepository = $adRepository;
         $this->searchRepository = $searchRepository;
-        $this->notificationRepository = $notificationRepository;
-        $this->placeRepository = $placeRepository;
         $this->disk = $filesystemFactory->disk('avatars');
     }
 

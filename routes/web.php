@@ -129,6 +129,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::get('/pusherAuth', function () {
         return redirect()->route('welcome');
     });
+
     // User's settings
     Route::resource('me', 'SettingsController@show');
 
