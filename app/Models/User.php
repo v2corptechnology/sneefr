@@ -20,7 +20,6 @@ use Sneefr\Events\UserEmailChanged;
 use Sneefr\Models\Traits\Likeable;
 use Sneefr\PhoneNumber;
 use Sneefr\Presenters\UserPresenter;
-use Sneefr\Traits\Encryptable;
 use Sneefr\UserEvaluations;
 use Sneefr\UserPayment;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -30,7 +29,7 @@ class User extends Model implements AuthenticatableContract,
                                     CanResetPasswordContract
 {
     use AlgoliaEloquentTrait;
-    use Authenticatable, Authorizable, Encryptable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable, Likeable;
     use LogsActivity;
 
     /**
@@ -119,9 +118,6 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences'];
-
-    protected $encryptable = [
-    ];
 
     /**
      * The presenter used by front-end for this model.
