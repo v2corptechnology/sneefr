@@ -7,14 +7,6 @@ return [
     'footer'               => "<a href=\":url\" title=\"To the site sneefR.com\">sneefR</a>, buy and sell to people you can trust.",
     'subscriptions'        => " | <a href=\":url\" title=\"Manage my email preferences\">Unsubscribe</a>",
 
-    'waiting-notification' => [
-        'title'        => ":nb unread notification|:nb unread notifications",
-        'lead'         => ":name, you have <strong>one unread notification</strong>.| :name, you have <strong>:nb unread notifications</strong>.",
-        'text'         => "We send you this reminder to make sure you don't miss a sale, the answer of a seller or a notification.",
-        'button'       => "See my notifications",
-        'button_title' => "See my notifications on sneefR",
-    ],
-
     'activation-email' => [
         'title'        => "sneefR : activate your account",
         'lead'         => "Do you want to activate your account on sneefR?",
@@ -29,24 +21,6 @@ return [
         'text'         => "It's easy :name, simply click on the huge button below to complete the procedure!",
         'button'       => "Confirm this address",
         'button_title' => "Commplete email update procedure",
-    ],
-
-    'deal_finished_seller' => [
-        'title'        => "Congratulations",
-        'lead'         => "You've just sold :title for :finalPrice to :buyer",
-        'text'         => "If you asked for a secure payment, this e-mail means that :buyer has paid :finalPrice and is waiting to receive the item. Please check your balance directly on your Stripe dashboard. If you did not ask for a secure payment, you must see directly with :buyer how to seal the deal. In both cases, and in order to help the sneefR community, please be kind and leave a review to :buyer",
-        'info'         => "extra info :info",
-        'address'      => ":address",
-        'button_title' => "Leave a review",
-        'button'       => "Leave a review",
-    ],
-
-    'deal_finished_buyer' => [
-        'title'        => "Congratulations",
-        'lead'         => "You've jut bought :title for :finalPrice to :seller!",
-        'text'         => "If you paid with your credit card directly on sneefR, this email means that :seller received the payment. We invite you to get in touch directly with :seller regarding shipping details. If you haven't paid yet, you must see directly with :seller how to seal the deal. In both cases, and in order to help the sneefR community, please be kind and leave a review to :seller",
-        'button_title' => "Leave a review",
-        'button'       => "Leave a review",
     ],
 
     'deal_refused_seller' => [
