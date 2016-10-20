@@ -55,7 +55,7 @@ class AuthController extends Controller
             event(new UserRegistered($user));
         }
 
-        auth()->login($user);
+        auth()->login($user, true);
         return redirect()->intended();
     }
 
