@@ -58,7 +58,6 @@
                 <div class="box" style="margin-bottom: 1rem;">
                     @include('items.form', [
                         'buttonText'    => trans('ad_form.create.button_save'),
-                        'shops'         => auth()->user()->shops,
                         'name'          => auth()->user()->present()->fullName(),
                         'title'         => old('title', request()->get('title')),
                         'amount'        => old('amount'),
