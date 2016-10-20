@@ -122,8 +122,14 @@ class ShopsController extends Controller
         // Store the images
         $images = $this->moveImages($shop, $request);
 
+        // Default colors
+        $colors = [
+            'background_color' => '#FFFFFF',
+            'font_color'       => '#000000',
+        ];
+
         // Update shop data with real images names
-        $shop->data = array_merge($request->all(), $images);
+        $shop->data = array_merge($request->all(), $images, $colors);
 
         // Save new shop
         $shop->save();
