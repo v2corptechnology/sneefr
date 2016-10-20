@@ -26,8 +26,11 @@
         <a href="{{ route('ads.share', $ad) }}" class="btn btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
             <i class="icon fa fa-lg fa-share-alt"></i> Share
         </a>
-        <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal" data-remote="false">
-            <i class="icon fa fa-lg fa-comment-o"></i> Contact
-        </a>
+        
+        @unless ($ad->isMine())
+            <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal" data-remote="false">
+                <i class="icon fa fa-lg fa-comment-o"></i> Contact
+            </a>
+        @endunless
     </div>
 </div>
