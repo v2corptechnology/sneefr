@@ -49,8 +49,8 @@
             @choice('profile.sidebar.sold', count($soldAds), ['nb' => count($soldAds)])
         </p>
     </li>
-    @if (!$person->shops->isEmpty())
-        <?php $shop = $person->shops->first(); ?>
+    @if ($person->hasShop())
+        <?php $shop = $person->shop; ?>
         <li class="summary__item">
             <h2 class="summary__head">
                 <i class="fa fa-shopping-bag summary__icon"></i>

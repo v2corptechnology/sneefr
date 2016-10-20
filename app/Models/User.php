@@ -168,21 +168,21 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * User's shops relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function shops()
-    {
-        return $this->belongsToMany(Shop::class)->latest();
-    }
-
-    /**
      * @return mixed
      */
     public function shop()
     {
         return $this->hasOne(Shop::class)->withTrashed();
+    }
+
+    /**
+     * Check if this user has at least one shop.
+     *
+     * @return bool
+     */
+    public function hasShop() : bool
+    {
+        return (bool) $this->shop->count();
     }
 
     /**

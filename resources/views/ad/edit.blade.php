@@ -67,7 +67,6 @@
                 <div class="box" style="margin-bottom: 1rem;">
                     @include('items.form', [
                         'buttonText'    => trans('ad_form.edit.apply_button'),
-                        'shops'         => $shops,
                         'name'          => auth()->user()->present()->fullName(),
                         'title'         => old('title', $ad->getTitle()),
                         'amount'        => old('amount', $ad->price()->readable()),

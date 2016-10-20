@@ -11,7 +11,6 @@ use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
 use Sneefr\Models\Shop;
-use Sneefr\Models\ShopUser;
 use Sneefr\Services\Image;
 
 /**
@@ -90,7 +89,7 @@ class ShopsController extends Controller
     public function create()
     {
         // Check if the user has no shop
-        if (auth()->user()->shops->count()) {
+        if (auth()->user()->hasShop()) {
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
@@ -109,7 +108,7 @@ class ShopsController extends Controller
     public function store(CreateShopRequest $request)
     {
         // Check if the user has no shop
-        if (auth()->user()->shops->count()) {
+        if (auth()->user()->hasShop()) {
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
@@ -214,7 +213,6 @@ class ShopsController extends Controller
             abort(403);
         }
 
-        ShopUser::where('shop_id', $shop->getId())->forceDelete();
         Subscription::where('user_id', auth()->id())->forceDelete();
         Ad::where('shop_id', $shop->getId())->withTrashed()->update(['shop_id' => null]);
         auth()->user()->update(['payment' => null, 'stripe_id' => null, 'card_brand' => null, 'card_last_four' => null, 'trial_ends_at' => null]);
