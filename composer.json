@@ -19,7 +19,6 @@
         "laravelcollective/html": "^5.2",
         "league/color-extractor": "^0.3.0",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "nicolaslopezj/searchable": "^1.7",
         "pda/pheanstalk": "^3.0",
         "php": ">=5.6.4",
         "propaganistas/laravel-phone": "~2.0",
