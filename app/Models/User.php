@@ -23,13 +23,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $dates = ['birthdate', 'trial_ends_at', 'deleted_at'];
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
      * The attributes we can mass assign.
      *
      * @var array
