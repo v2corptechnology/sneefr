@@ -2,7 +2,6 @@
 
 namespace Sneefr\Models;
 
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -19,7 +18,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use AlgoliaEloquentTrait, Authenticatable, Authorizable, CanResetPassword, LogsActivity, SoftDeletes, Billable, Presentable;
+    use Authenticatable, Authorizable, CanResetPassword, LogsActivity, SoftDeletes, Billable, Presentable;
 
     protected $dates = ['birthdate', 'trial_ends_at', 'deleted_at'];
 
@@ -29,20 +28,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'plain',
-        'token',
-        'email',
-        'facebook_email',
-    ];
 
     /**
      * The attributes we can mass assign.
@@ -102,38 +87,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var \Laracodes\Presenter\Presenter
      */
     protected $presenter = \Sneefr\Presenters\UserPresenter::class;
-
-    /*
-     * Algolia related config
-     */
-
-    /**
-     * Set whether or not Algolia has to auto-index
-     * models when they are saved.
-     *
-     * @var bool
-     */
-    public static $autoIndex = true;
-
-    public static $perEnvironment = true;
-
-    public $algoliaSettings = [
-        'attributesToIndex' => [
-            'surname',
-            'given_name',
-        ],
-    ];
-
-    public function getAlgoliaRecord()
-    {
-        return [
-            'id'          => $this->id,
-            'given_name'  => $this->given_name,
-            'surname'     => $this->surname,
-            'facebook_id' => $this->facebook_id,
-            'user_hash'   => $this->getRouteKey(),
-        ];
-    }
 
     public function ads()
     {

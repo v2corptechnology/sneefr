@@ -12,7 +12,7 @@ class ClearAlgoliaIndex extends Command
      *
      * @var array
      */
-    public $models = ['Ad', 'Shop', 'User'];
+    public $models = ['Ad', 'Shop'];
 
     /**
      * The name and signature of the console command.
