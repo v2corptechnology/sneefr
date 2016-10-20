@@ -12,7 +12,7 @@
 
 <a class="activity__author" title="{{ $author->present()->fullName() }}"
    href="{{ route('profiles.show', $author) }}">
-    {!! HTML::profilePicture($author->socialNetworkId(), $author->present()->fullName(), 40) !!}
+    {!! HTML::profilePicture($author->getSocialNetworkId(), $author->present()->fullName(), 40) !!}
 </a>
 
 <div class="activity__title">

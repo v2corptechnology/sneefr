@@ -183,7 +183,7 @@
                             @foreach ($shop->employees as $employee)
                                 <a class="user__picture" data-toggle="tooltip"
                                    title="@lang('ad.show_profile_title', ['name' => $employee->present()->givenName()])">
-                                    {!! HTML::profilePicture($employee->socialNetworkId(), $employee->present()->fullName(), 20) !!}
+                                    {!! HTML::profilePicture($employee->getSocialNetworkId(), $employee->present()->fullName(), 20) !!}
                                 </a>
                             @endforeach
                         </p>

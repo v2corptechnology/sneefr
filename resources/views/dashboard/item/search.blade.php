@@ -9,7 +9,7 @@ $headData = ['search' => $item->value->body()];
 
 <div class="activity__body">
     <p>
-        @if ($item->value->user->id() == auth()->id())
+        @if ($item->value->user->getId() == auth()->id())
             @lang('dashboard.activity.search.body_alt')
         @else
             @lang('dashboard.activity.search.body', [

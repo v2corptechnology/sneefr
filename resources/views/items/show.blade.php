@@ -23,7 +23,7 @@
           content="{{ $ad->getConditionId() == 5 ? 'new' : 'used'}}"/>
     <meta property="og:locale" content="fr_FR">
     <meta property="article:author"
-          content="https://www.facebook.com/{{ $ad->seller->socialNetworkId() }}">
+          content="https://www.facebook.com/{{ $ad->seller->getSocialNetworkId() }}">
 @endsection
 
 @push('script')
