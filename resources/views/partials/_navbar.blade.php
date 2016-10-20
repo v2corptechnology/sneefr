@@ -131,14 +131,21 @@
                 @endif
             </ul>
 
-            {{-- Display logout when connected --}}
-            @if (auth()->check())
-                <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
+                {{-- Display login or logout --}}
+                @if (auth()->check())
                     <li>
                         <a href="{{ route('logout') }}" title="Log me out">Log out</a>
                     </li>
-                </ul>
-            @endif
+                @else
+                    <li class="visible-xs">
+                        <a href="{{ url('login') }}" title="Login">Login</a>
+                    </li>
+                    <li class="visible-xs">
+                        <a href="{{ url('register') }}" title="Register">Register</a>
+                    </li>
+                @endif
+            </ul>
         </div>
     </div>
 </nav>
