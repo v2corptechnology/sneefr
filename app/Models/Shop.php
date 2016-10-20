@@ -71,26 +71,6 @@ class Shop extends Model
     }
 
     /**
-     * Relationship to the owner of the shop.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function owners()
-    {
-        return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    /**
-     * Relationship to the administrators of the shop.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function admins()
-    {
-        return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    /**
      * Relationship from the shop to its ads.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -98,26 +78,6 @@ class Shop extends Model
     public function ads()
     {
         return $this->hasMany(Ad::class, 'shop_id')->latest();
-    }
-
-    /**
-     * Relationship to the employees of the shop.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function employees()
-    {
-        return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    /**
-     * Relationship from the shop to its discussions.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function discussions()
-    {
-        return $this->hasMany(Discussion::class, 'shop_id')->latest();
     }
 
     /**

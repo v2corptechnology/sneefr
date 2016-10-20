@@ -136,9 +136,6 @@ class ShopsController extends Controller
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
 
-        // Set the current user as the admin.
-        $shop->owners()->attach(auth()->id());
-
         // Disable the shop if no subscription is running
         if (!auth()->user()->subscribed('main')) {
             $shop->delete();
