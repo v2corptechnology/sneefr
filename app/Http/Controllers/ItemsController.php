@@ -76,8 +76,6 @@ class ItemsController extends Controller
 
         $categories = Category::getTree();
 
-        $shops = \Auth::user()->shops;
-
-        return view('ad.edit', compact('ad', 'categories', 'shops'));
+        return view('ad.edit', compact('ad', 'categories'));
     }
 }
