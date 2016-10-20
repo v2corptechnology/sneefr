@@ -18,31 +18,45 @@
 
                 <!-- Table -->
                 <table class="table table-striped table-hover">
-                    <thead></thead>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Item</th>
+                            <th><abbr title="Quantity">Qty</abbr>.</th>
+                            <th></th>
+                            <th>Price</th>
+                            <th>Contact</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         @forelse($deals as $deal)
 
                             <?php $isSale = $deal->seller->id == auth()->id();?>
 
-                            <tr class=" {{ $isSale ? 'success' : null }}">
+                            <tr>
                                 <td>{!! HTML::time($deal->created_at) !!}</td>
                                 <td>
                                     <a href="{{ route('items.show', $deal->ad) }}"
                                        title="{{ $deal->ad->present()->title() }}">{{ $deal->ad->present()->title() }}</a>
                                 </td>
-                                <td>{{ $deal->details['charge']['price'] }}</td>
                                 <td>{{ $deal->details['details']['quantity'] }}</td>
-                                <td>
+                                <td class="text-center">
                                     @if ($isSale)
-                                        {{ $deal->buyer->present()->fullName() }}
+                                        <span class="label label-success">Received</span>
                                     @else
-                                        <a href="{{ route('shops.show', $deal->ad->shop) }}" title="{{ $deal->ad->shop->getName() }}">{{ $deal->ad->shop->getName() }}</a>
+                                        <span class="label label-info">Paid</span>
                                     @endif
                                 </td>
                                 <td>
+                                    {{ $deal->details['charge']['price'] }}
+                                </td>
+                                <td>
                                     @if ($isSale)
+                                        {{ $deal->buyer->present()->fullName() }} :
                                         {{ $deal->buyer->getEmail() }}
                                     @else
+                                        <a href="{{ route('shops.show', $deal->ad->shop) }}" title="{{ $deal->ad->shop->getName() }}">{{ $deal->ad->shop->getName() }}</a>
+                                        :
                                         {{ $deal->seller->getEmail() }}
                                     @endif
                                 </td>
