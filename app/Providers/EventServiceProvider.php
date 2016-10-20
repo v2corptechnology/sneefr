@@ -22,7 +22,6 @@ class EventServiceProvider extends ServiceProvider
         \Sneefr\Events\AdWasPurchased::class => [
             \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToSeller::class,
             \Sneefr\Listeners\AdWasPurchased\EmailPurchaseConfirmationToBuyer::class,
-            \Sneefr\Listeners\AdWasPurchased\RemoveFromDiscussion::class,
             \Sneefr\Listeners\AdWasPurchased\UpdateStock::class,
             \Sneefr\Listeners\AdWasPurchased\StoreSuccessfulDealConnections::class,
             \Sneefr\Listeners\AdWasPurchased\SaveTransaction::class,
