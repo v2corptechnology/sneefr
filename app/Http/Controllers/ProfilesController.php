@@ -45,9 +45,6 @@ class ProfilesController extends Controller
                 case 'application':
                     $this->saveApplicationSettings($request->all());
                     break;
-                case 'notifications':
-                    $this->saveNotificationSettings($request->all());
-                    break;
                 case 'phoneConfirm':
                     $this->confirm($request);
                     break;
@@ -192,23 +189,6 @@ class ProfilesController extends Controller
 
             session()->flash('success', trans('feedback.profile_edit_success'));
         }
-    }
-
-    /**
-     * Save the notification settings of the authenticated person.
-     *
-     * @param  array  $data
-     *
-     * @return void
-     */
-    protected function saveNotificationSettings(array $data)
-    {
-        User::find(auth()->id())
-            ->update(['preferences' => [
-                'daily_digest' => isset($data['daily_digest'])
-            ]]);
-
-        session()->flash('success', trans('feedback.profile_edit_success'));
     }
 
     /**

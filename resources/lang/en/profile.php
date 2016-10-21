@@ -16,9 +16,6 @@ return [
         'location_error'            => "Are you a ninja ? Impossible to geolocate you.",
         'location_timeout_warning'  => "Make sure you accept the location request in the <a href=\"https://www.google.fr/search?q=comment+activer+la+localisation\">zone of your browser</a>",
         'button_save_parameters'    => "Save",
-        'your_notifications'        => "Notification settings",
-        'daily_digest_label'        => "Get a daily alert if I have unread notifications",
-        'button_save_notifications' => "Save",
         'button_danger_zone'        => "Delete my account",
         // Phone panel
         'phone_title'               => 'Phone verification',
