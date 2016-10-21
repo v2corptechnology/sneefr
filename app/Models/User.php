@@ -115,11 +115,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphMany(Report::class, 'reportable');
     }
 
-    public function referrals()
-    {
-        return $this->hasMany(Referral::class, 'referent_user_id');
-    }
-
     /**
      * Relationship to the evaluations of this user.
      *
