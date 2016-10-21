@@ -1,13 +1,6 @@
 <?php
 
 return [
-    'header'  => [
-        'not_verified'           => "Careful, this profile is not verified",
-        'geolocation_fill'       => "Fill in my location",
-        'geolocation_fill_title' => "Fill in my location to see the closest ads",
-        'geolocation_missing'    => "We don't know where this user is sneefing from :(",
-    ],
-
     'parameters' => [
         'page_title'                => "My settings",
         'your_info'                 => "Your information",
