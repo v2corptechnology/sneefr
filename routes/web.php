@@ -168,8 +168,8 @@ Route::resource('items', 'ItemsController', ['only' => ['show']]);
 // Search results
 Route::get('search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
 // Shop display
-Route::get('shops/{shops}/search', ['as' => 'shops.search', 'uses' => 'ShopsController@search']);
-Route::get('shops/{shops}/evaluations', ['as' => 'shops.evaluations', 'uses' => 'ShopsController@evaluations']);
+Route::get('shops/{shop}/search', ['as' => 'shops.search', 'uses' => 'ShopsController@search']);
+Route::get('shops/{shop}/evaluations', ['as' => 'shops.evaluations', 'uses' => 'ShopsController@evaluations']);
 Route::resource('shops', 'ShopsController', ['only' => ['show']]);
 
 

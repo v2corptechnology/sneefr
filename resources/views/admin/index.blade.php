@@ -14,7 +14,7 @@
                             <li class="media">
                                 <div class="media-left">
                                     <a href="{{ route('profiles.show', $person) }}">
-                                        {!! HTML::profilePicture($person->socialNetworkId(), 'pop', 50, ['media-object']) !!}
+                                        {!! HTML::profilePicture($person->getSocialNetworkId(), 'pop', 50, ['media-object']) !!}
                                     </a>
                                 </div>
                                 <div class="media-body">

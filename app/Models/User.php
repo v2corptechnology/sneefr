@@ -2,12 +2,8 @@
 
 namespace Sneefr\Models;
 
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
-use Carbon\Carbon;
-use Crypt;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
@@ -15,56 +11,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
-use Nicolaslopezj\Searchable\SearchableTrait;
-use Sneefr\Events\UserEmailChanged;
 use Sneefr\PhoneNumber;
-use Sneefr\Presenters\UserPresenter;
 use Sneefr\UserEvaluations;
 use Sneefr\UserPayment;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use AlgoliaEloquentTrait;
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, SearchableTrait, Billable, Presentable;
-    use LogsActivity;
-
-    /**
-     * Searchable rules.
-     *
-     * @var array
-     */
-    protected $searchable = [
-        'columns' => [
-            'given_name' => 10,
-            'surname'    => 2
-        ],
-    ];
+    use Authenticatable, Authorizable, CanResetPassword, LogsActivity, SoftDeletes, Billable, Presentable;
 
     protected $dates = ['birthdate', 'trial_ends_at', 'deleted_at'];
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'plain',
-        'token',
-        'email',
-        'facebook_email'
-    ];
 
     /**
      * The attributes we can mass assign.
@@ -104,11 +60,11 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $casts = [
-        'verified'                => 'bool',
-        'email_verified'          => 'bool',
-        'preferences'             => 'array',
-        'data'                    => 'array',
-        'payment'                 => 'array',
+        'verified'       => 'bool',
+        'email_verified' => 'bool',
+        'preferences'    => 'array',
+        'data'           => 'array',
+        'payment'        => 'array',
     ];
 
     /**
@@ -123,44 +79,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var \Laracodes\Presenter\Presenter
      */
-    protected $presenter = UserPresenter::class;
-
-    /*
-     * Algolia related config
-     */
-
-    /**
-     * Set whether or not Algolia has to auto-index
-     * models when they are saved.
-     *
-     * @var bool
-     */
-    public static $autoIndex = true;
-
-    public static $perEnvironment = true;
-
-    public $algoliaSettings = [
-        'attributesToIndex' => [
-            'surname',
-            'given_name'
-        ]
-    ];
-
-    public function getAlgoliaRecord()
-    {
-       return  [
-        'id'          => $this->id,
-        'given_name'  => $this->given_name,
-        'surname'     => $this->surname,
-        'facebook_id' => $this->facebook_id,
-        'user_hash'    => $this->getRouteKey()
-       ];
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
+    protected $presenter = \Sneefr\Presenters\UserPresenter::class;
 
     public function ads()
     {
@@ -185,41 +104,17 @@ class User extends Model implements AuthenticatableContract,
         return (bool) $this->shop->count();
     }
 
-    /**
-     * User's shops relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function administrableShops()
-    {
-        return $this->belongsToMany(Shop::class)->latest()->withTrashed();
-    }
-
-    public function scopeGeolocated($query)
-    {
-        return $query->whereNotNull('location');
-    }
 
     public function scopeExceptStaff($query)
     {
         return $query->where('id', '>', 4);
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-
-    public function searches()
-    {
-        return $this->hasMany(Search::class);
-    }
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
     }
-    
+
     public function referrals()
     {
         return $this->hasMany(Referral::class, 'referent_user_id');
@@ -233,6 +128,20 @@ class User extends Model implements AuthenticatableContract,
     public function evaluations()
     {
         return $this->morphMany(Evaluation::class, 'evaluated');
+    }
+
+    /**
+     * All the sales or purchases of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recentDeals()
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id')
+            ->orWhere('seller_id', $this->id)
+            ->whereDate('created_at', '>=', \Carbon\Carbon::now()->subYear(1)->toDateString())
+            ->with('seller', 'buyer', 'ad', 'ad.shop')
+            ->latest();
     }
 
     /**
@@ -258,35 +167,13 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Get id of the user.
-     *
-     * @return int
-     * @deprecated
-     */
-    public function id()
-    {
-        return $this->getId();
-    }
-
-    /**
      * Get social network identifier of the user.
      *
      * @return int
      */
-    public function getSocialNetworkId()
+    public function getSocialNetworkId() : int
     {
         return (int) $this->facebook_id;
-    }
-
-    /**
-     * Get social network identifier of the user.
-     *
-     * @return int
-     * @deprecated
-     */
-    public function socialNetworkId()
-    {
-        return $this->getSocialNetworkId();
     }
 
     /**
@@ -294,71 +181,29 @@ class User extends Model implements AuthenticatableContract,
      *
      * @return bool
      */
-    public function isVerified()
+    public function isVerified() : bool
     {
-        return $this->verified;
-    }
-
-    public function getPlainAttribute($value)
-    {
-        return unserialize($value);
-    }
-
-    public function setPlainAttribute($value)
-    {
-        $this->attributes['plain'] = serialize($value);
-    }
-
-    public function getIsVerifiedAttribute()
-    {
-        return $this->verified;
-    }
-
-    public function getFormatedBirthdateAttribute()
-    {
-        if ($this->attributes['birthdate']) {
-            return Carbon::createFromFormat('Y-m-d', $this->attributes['birthdate'])->format('d/m/Y');
-        }
+        return (bool) $this->verified;
     }
 
     /**
-     * If user is not geolocalized
-     * and registered for more than 12 hours
+     * Get the user's email.
+     *
+     * @return string
+     */
+    public function getEmail() : string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * Check if the current email is already verified.
      *
      * @return bool
      */
-    public function getShowLocationDemandAttribute()
-    {
-        return ! $this->location &&
-            Carbon::parse($this->created_at)->diffInHours(Carbon::now(), false) > 12;
-    }
-
-    /**
-     * Accessor checking if this Facebook id is allowed to see the stats
-     * @return bool
-     */
-    public function getCanSeeStatsAttribute()
-    {
-        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
-    }
-
-    /**
-     * Accessor checking if this Facebook id is allowed to see logs section
-     * @return bool
-     */
-    public function getCanSeeLogsAttribute()
-    {
-        return (bool) in_array($this->facebook_id, config('sneefr.staff_facebook_ids.developers'));
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     public function hasVerifiedEmail() : bool
     {
-        return $this->email_verified;
+        return (bool) $this->email_verified;
     }
 
     /**
@@ -404,46 +249,11 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Accessor reflecting if this profile
-     * wants to receive daily digest.
-     *
-     * @return bool
-     */
-    protected function getIsSubscribedToDailyDigestAttribute()
-    {
-        return (bool) isset($this->preferences['daily_digest']) && $this->preferences['daily_digest'];
-    }
-
-    /**
      * @return \Sneefr\UserPayment
      */
     public function payment() : UserPayment
     {
         return new UserPayment($this);
-    }
-
-    /**
-     * Normalize data input to User fields.
-     * 
-     * @param array $data
-     *
-     * @return array
-     */
-    public static function normalize(array $data) : array
-    {
-        return [
-            'facebook_id'         => $data['id'],
-            'surname'             => $data['last_name'],
-            'given_name'          => $data['first_name'],
-            'verified'            => $data['verified'],
-            'token'               => $data['access_token'],
-            'locale'              => session()->get('lang'),
-            'preferences'         => ['daily_digest' => true],
-            'email'               => $data['email'] ?? null,
-            'facebook_email'      => $data['email'] ?? null,
-            'gender'              => $data['gender'] ?? null,
-            'birthdate'           => isset($data['birthday']) ? Carbon::parse($data['birthday'])->toDateString() : null,
-        ];
     }
 
     /**
@@ -456,27 +266,13 @@ class User extends Model implements AuthenticatableContract,
         return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
     }
 
+    /**
+     * Get user's phone number
+     *
+     * @return \Sneefr\PhoneNumber
+     */
     public function getPhoneAttribute() : PhoneNumber
     {
         return new PhoneNumber($this->attributes['phone']);
-    }
-
-    public function inCompleteInfo() : bool
-    {
-        return (is_null($this->given_name) || is_null($this->given_name) );
-    }
-
-    /**
-     * All the sales or purchases of the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function recentDeals()
-    {
-        return $this->hasMany(Transaction::class, 'buyer_id')
-            ->orWhere('seller_id', $this->id)
-            ->whereDate('created_at', '>=', Carbon::now()->subYear(1)->toDateString())
-            ->with('seller', 'buyer', 'ad', 'ad.shop')
-            ->latest();
     }
 }

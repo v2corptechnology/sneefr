@@ -58,14 +58,10 @@ namespace Sneefr\Http\Requests {
             $input['location'] = trim($this->get('location'));
 
             if (isset($input['shop_slug'])) {
-                $slug = $input['shop_slug'];
-                $userShops = auth()->user()->administrableShops;
-
-                // count where
-                if (in_array($slug, $userShops->pluck('slug')->all())) {
+                if ($input['shop_slug'] == auth()->user()->shop->slug) {
                     unset($input['shop_slug']);
 
-                    $input['shop_id'] = $userShops->where('slug', $slug)->first()->id;
+                    $input['shop_id'] = auth()->user()->shop->id;
                 }
             }
 

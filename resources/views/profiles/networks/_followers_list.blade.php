@@ -19,7 +19,7 @@
 						<a href="{{ route('profiles.show', $follow) }}"
 							title="@lang('profile.networks.profile_title', ['name' => $follow->present()->givenName()])" >
 
-							{!! HTML::profilePicture($follow->socialNetworkId(), $follow->present()->fullName(), 70, ['followers__img img-responsive']) !!}
+							{!! HTML::profilePicture($follow->getSocialNetworkId(), $follow->present()->fullName(), 70, ['followers__img img-responsive']) !!}
 
 						</a>
 					</div>

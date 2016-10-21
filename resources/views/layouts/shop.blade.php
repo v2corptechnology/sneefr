@@ -170,24 +170,6 @@
                             </a>
                         </h2>
                     </li>
-
-                    <li class="summary__item{{ setActive('xxx', '--selected') }}">
-                        <h2 class="summary__head">
-                            <i class="fa fa-smile-o summary__icon"></i>
-                            {{--<a href="#"
-                               title="">--}}
-                            {{ $shop->employees->count() }} people in team
-                            {{--</a>--}}
-                        </h2>
-                        <p class="summary__content summary__content--extra">
-                            @foreach ($shop->employees as $employee)
-                                <a class="user__picture" data-toggle="tooltip"
-                                   title="@lang('ad.show_profile_title', ['name' => $employee->present()->givenName()])">
-                                    {!! HTML::profilePicture($employee->socialNetworkId(), $employee->present()->fullName(), 20) !!}
-                                </a>
-                            @endforeach
-                        </p>
-                    </li>
                     <li>
                         @if ($shop->isOwner())
                             <a class="btn btn-block btn-primary btn-primary2"

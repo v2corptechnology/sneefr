@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
-use Nicolaslopezj\Searchable\SearchableTrait;
+use Laravel\Scout\Searchable;
 use Sneefr\Delivery;
 use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
@@ -19,24 +19,12 @@ class Ad extends Model
 {
     use AlgoliaEloquentTrait;
     use LogsActivity;
-    use SearchableTrait;
     use SoftDeletes;
     use StaffFilterable;
     use Presentable;
+    use Searchable;
 
     public $sellerEvaluationRatio;
-
-    /**
-     * Searchable rules.
-     *
-     * @var array
-     */
-    protected $searchable = [
-        'columns' => [
-            'title' => 10,
-            'description' => 5
-        ],
-    ];
 
     protected $dates = ['deleted_at'];
 

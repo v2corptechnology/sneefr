@@ -2,7 +2,7 @@
     @parent
     @include('partials.modals._profile_picture', [
         'name' => $person->present()->fullName(),
-        'socialNetworkId' => $person->socialNetworkId(),
+        'socialNetworkId' => $person->getSocialNetworkId(),
         'alt' => $person->present()->fullName()
     ])
 @stop
@@ -10,7 +10,7 @@
 <div class="profile">
     <div class="profile__summary">
         <a href="#" data-toggle="modal" data-target="#profilePicture">
-            {!! HTML::profilePicture($person->socialNetworkId(), $person->present()->fullName(), 70, ['profile__image']) !!}
+            {!! HTML::profilePicture($person->getSocialNetworkId(), $person->present()->fullName(), 70, ['profile__image']) !!}
         </a>
     </div>
 

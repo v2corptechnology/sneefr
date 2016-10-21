@@ -76,7 +76,9 @@ class ShopsController extends Controller
 
         $q = $request->get('q');
 
-        $displayedAds = Ad::where('shop_id', $shop->getId())->latest()->search($q)->get();
+        $displayedAds = Ad::where('shop_id', $shop->getId())->latest()->get()->filter(function ($ad) use ($q) {
+            return stripos($ad->title, $q) !== false;
+        });
 
         return view('shops.show', compact('shop', 'displayedAds', 'q'));
     }
@@ -139,9 +141,6 @@ class ShopsController extends Controller
 
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
-
-        // Set the current user as the admin.
-        $shop->owners()->attach(auth()->id());
 
         // Disable the shop if no subscription is running
         if (!auth()->user()->subscribed('main')) {

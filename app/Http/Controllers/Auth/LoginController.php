@@ -84,7 +84,8 @@ class LoginController extends Controller
             return $this->sendFailedNotActiveAccountResponse($request);
         }
 
-        if(auth()->user()->inCompleteInfo()) {
+
+        if(is_null(auth()->user()->surname) || is_null(auth()->user()->given_name)) {
             return redirect('/me')
                     ->with('warning', trans('feedback.info_incomplete_warning'));
         };

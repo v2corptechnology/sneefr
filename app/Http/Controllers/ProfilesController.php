@@ -515,8 +515,6 @@ class ProfilesController extends Controller
 
             $user->sneefs()->delete();
 
-            $user->searches()->delete();
-
             $user->notifications()->delete();
 
             $user->delete();
