@@ -37,10 +37,7 @@ Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@
 /**
  * Routes related to person display
  */
-// Profile, since Ads are the main entry point, redirect permanent to it
-Route::get('profiles/{hash}', ['as' => 'profiles.show', function ($hash) {
-    return redirect('/me', 301);
-}]);
+
 Route::delete('profile/{profile}', [
     'as'         => 'profiles.destroy',
     'uses'       => 'ProfilesController@destroy',

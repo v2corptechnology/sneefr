@@ -30,15 +30,12 @@
                             @endif
 
                             <div class="evaluation__content">
-                                <a class="evaluation__profile"
-                                   href="{{ route('profiles.show', [$evaluation->user->getRouteKey()]) }}"
-                                   title="@lang('profile.evaluations.profile_title', ['name' => $evaluation->user->present()->givenName()])">
-                                    {!! HTML::profilePicture(
-                                        $evaluation->user->facebook_id,
-                                        $evaluation->user->present()->givenName(),
-                                        17,['evaluation__profile-image']) !!}
-                                    {{ $evaluation->user->present()->givenName() }}
-                                </a>
+
+                                {!! HTML::profilePicture(
+                                    $evaluation->user->facebook_id,
+                                    $evaluation->user->present()->givenName(),
+                                    17,['evaluation__profile-image']) !!}
+                                {{ $evaluation->user->present()->givenName() }}
 
                                 @if ($evaluation->body)
                                     <p class="evaluation__body">{{ $evaluation->body }}</p>

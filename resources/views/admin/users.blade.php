@@ -22,15 +22,11 @@
                             @foreach ($users as $user)
                                 <tr class="{{ $user->trashed() ? 'warning' : '' }}">
                                     <td>
-                                        <a href="{{ route('profiles.show', $user) }}" title="{{ $user->getEmail() }}">
-                                            {!! HTML::profilePicture($user->facebook_id, $user->present()->surname(), 20, ['img-circle']) !!}
-                                            {{ $user->present()->fullName() }}
-                                        </a>
+                                        {!! HTML::profilePicture($user->facebook_id, $user->present()->surname(), 20, ['img-circle']) !!}
+                                        {{ $user->present()->fullName() }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('profiles.show', $user) }}">
-                                            {{ $user->total_ads.'-'.$user->sold_ads.'-'.$user->deleted_ads }}
-                                        </a>
+                                        {{ $user->total_ads.'-'.$user->sold_ads.'-'.$user->deleted_ads }}
                                     </td>
                                     <td>{!! HTML::time($user->created_at) !!}</td>
                                 </tr>
