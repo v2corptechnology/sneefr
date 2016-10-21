@@ -44,7 +44,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'verified',
         'token',
         'birthdate',
-        'preferences',
         'data',
         'payment',
         'stripe_id',
@@ -62,7 +61,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $casts = [
         'verified'       => 'bool',
         'email_verified' => 'bool',
-        'preferences'    => 'array',
         'data'           => 'array',
         'payment'        => 'array',
     ];
@@ -72,7 +70,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences'];
+    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long'];
 
     /**
      * The presenter used by front-end for this model.
