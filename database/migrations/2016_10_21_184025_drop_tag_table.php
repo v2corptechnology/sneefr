@@ -23,7 +23,7 @@ class DropTagTable extends Migration
      */
     public function down()
     {
-        Schema::table('tagged', function (Blueprint $table) {
+        Schema::create('tagged', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
             $table->integer('by_user_id')->unsigned();

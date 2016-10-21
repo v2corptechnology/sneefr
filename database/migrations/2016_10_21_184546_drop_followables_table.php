@@ -23,7 +23,7 @@ class DropFollowablesTable extends Migration
      */
     public function down()
     {
-        Schema::table('followables', function (Blueprint $table) {
+        Schema::create('followables', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
             $table->morphs('followable');

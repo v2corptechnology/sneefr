@@ -23,7 +23,7 @@ class DropLikesTable extends Migration
      */
     public function down()
     {
-        Schema::table('likes', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
 
             // Set an auto-incrementing primary key.
             $table->increments('id');

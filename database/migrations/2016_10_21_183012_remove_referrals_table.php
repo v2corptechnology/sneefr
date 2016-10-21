@@ -23,7 +23,7 @@ class RemoveReferralsTable extends Migration
      */
     public function down()
     {
-        Schema::table('referrals', function (Blueprint $table) {
+        Schema::create('referrals', function (Blueprint $table) {
             $table->unsignedInteger('referent_user_id');
             $table->unsignedInteger('referred_user_id');
 
