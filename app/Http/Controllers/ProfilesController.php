@@ -8,124 +8,24 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-use Sneefr\Contracts\BillingInterface;
 use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
 use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\User;
-use Sneefr\Repositories\Ad\AdRepository;
-use Sneefr\Repositories\Evaluation\EvaluationRepository;
 use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\Image;
 
 
 class ProfilesController extends Controller
 {
+    public $disk;
+
     /**
-     * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
-     * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
-     * @param \Illuminate\Contracts\Filesystem\Factory                 $filesystemFactory
+     * @param \Illuminate\Contracts\Filesystem\Factory $filesystemFactory
      */
-    public function __construct(
-        UserRepository $userRepository,
-        AdRepository $adRepository,
-        EvaluationRepository $evaluationRepository,
-        Factory $filesystemFactory
-    ) {
-        $this->userRepository = $userRepository;
-        $this->adRepository = $adRepository;
+    public function __construct(Factory $filesystemFactory)
+    {
         $this->disk = $filesystemFactory->disk('avatars');
-    }
-
-    /**
-     * Displays the places of this person.
-     *
-     * @param int                                $userId
-     * @param \Sneefr\Contracts\BillingInterface $billing
-     *
-     * @return \Illuminate\View\View
-     */
-    public function settings($userId, BillingInterface $billing)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $content = ['authorizeUrl' => $billing->getAuthorizeUrl()];
-
-        return view('profiles.settings', array_merge($common, $content));
-    }
-
-    /**
-     * Generate the data shared between the header/sidebar and body.
-     *
-     * @param User $person
-     *
-     * @return array
-     */
-    protected function getCommonData(User $person)
-    {
-        $isMine = auth()->id() === $person->getId();
-
-        $ads = $this->adRepository->of($person->getId());
-
-        $followedPlaces = User::find($person->getId())->places;
-
-        $searches = $this->searchRepository->getSearchesFor($person->getId());
-
-        // Users following this user
-        $followingPersons = collec();
-
-        // Users followed by this user
-        $followedPersons = $person->following()->users();
-
-        $referrals = $person->referrals()->with('user')->get()->pluck('user');
-
-        $isFollowed = !$isMine && $followingPersons->where('id', auth()->id())->first();
-
-        $evaluationRatio = (int) round($person->evaluations->ratio(), 0);
-  
-        $soldAds = $this->adRepository->soldOf($person->getId());
-
-        $unreadNotificationsCount = $isMine
-            ? $this->notificationRepository->countUnreadNotificationsFor($person->getId())
-            : null;
-
-        // Todo: change this shit
-        $loggedPersonFollowedIds = auth()->check()
-            ? auth()->user()->following()->users()->identifiers()
-            : collect();
-
-        return [
-            'person'                   => $person,
-            'loggedPersonFollowedIds'  => $loggedPersonFollowedIds,
-            'ads'                      => $ads,
-            'isMine'                   => $isMine,
-            'followedPlaces'           => $followedPlaces,
-            'searches'                 => $searches,
-            'followingPersons'         => $followingPersons,
-            'followedPersons'          => $followedPersons,
-            'commonPersons'            => collect(),
-            'referrals'                => $referrals,
-            'isFollowed'               => $isFollowed,
-            'evaluationRatio'          => $evaluationRatio,
-            'soldAds'                  => $soldAds,
-            'unreadNotificationsCount' => $unreadNotificationsCount,
-        ];
-    }
-
-    /**
-     * Try to get the pro's profile or redirect to not existing.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\Http\RedirectResponse|User
-     */
-    protected function retrieveOrRedirect($userId)
-    {
-        try {
-            return User::findOrFail($userId);
-        } catch (\Exception $e) {
-            return abort(404)->with('error', trans('feedback.person_not_exists_error'));
-        }
     }
 
     /**
