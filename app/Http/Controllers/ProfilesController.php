@@ -159,31 +159,6 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Displays the notifications of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function notifications($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $notifications = $this->notificationRepository->getLatest($person->getId())
-            ->slice(0, 30);
-
-        $specialNotifications = collect();
-
-        if ($this->notificationRepository->countUnreadNotificationsFor($person->getId())) {
-            $this->notificationRepository->markAllReadFor($person->getId());
-        }
-
-        $content = compact('notifications', 'specialNotifications');
-
-        return view('profiles.notifications', array_merge($common, $content));
-    }
-
-    /**
      * Generate the data shared between the header/sidebar and body.
      *
      * @param User $person

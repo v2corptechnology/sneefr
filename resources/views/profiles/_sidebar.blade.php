@@ -5,18 +5,6 @@
 
 @if ($isMine)
     <ul class="summary">
-        <li class="summary__item{{ setActive('profiles.notifications.index', '--selected') }}">
-            <h2 class="summary__head">
-                <i class="fa fa-bell summary__icon"></i>
-                <a href="{{ route('profiles.notifications.index', $person) }}"
-                   title="@lang('profile.sidebar.me.notifications_title')">
-                    @choice('profile.sidebar.me.notifications', $unreadNotificationsCount, ['nb' => $unreadNotificationsCount])
-                </a>
-            </h2>
-            <p class="summary__content summary__content--extra">
-                @choice('profile.sidebar.me.notifications_text', $unreadNotificationsCount, ['nb' => $unreadNotificationsCount])
-            </p>
-        </li>
 
         <li class="summary__item{{ setActive('profiles.settings.edit', '--selected') }}">
             <h2 class="summary__head">

@@ -31,9 +31,6 @@ return [
             'parameters'          => "My settings",
             'parameters_title'    => "Manage my account settings",
             'parameters_details'  => "Manage <a href=\":urlEmail\" title=\"Edit my e-mail\">my e-mail address</a>, <a href=\":urlNotifications\" title=\"Activate/deactivate notifications\">my notifications</a>,…",
-            'notifications_title' => "All your notifications",
-            'notifications'       => "{0} No notification |[0,1] :nb notification |[2,Inf] :nb notifications",
-            'notifications_text'  => "{0} Good job, you've read all your notifications |[0,1] :nb unread notification |[2,Inf] :nb unread notifications",
         ],
     ],
 
