@@ -13,9 +13,6 @@
 @stop
 
 @section('content')
-    <header class="cover">
-        @include('profiles._header', ['person' => $person])
-    </header>
 
     <div class="timeline">
         <div class="row">

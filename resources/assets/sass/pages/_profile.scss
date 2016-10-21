@@ -45,10 +45,6 @@ body > .timeline {
   }
 }
 
-.profile__summary {
-  position: relative;
-}
-
 .profile__rank {
   bottom: 0;
   left: 50%;
@@ -109,19 +105,6 @@ body > .timeline {
   padding: 10px 15px;
   position: relative;
   width: 100%;
-}
-
-.profile-nav__item--disabled {
-  @extend .profile-nav__item;
-  @extend .text-muted;
-  &:hover,
-  &:focus {
-    background: #FFF !important;
-  }
-}
-
-.profile-nav__item--quote {
-  @extend .profile-nav__item--disabled;
 }
 
 .summary {

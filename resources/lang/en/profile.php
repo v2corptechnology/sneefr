@@ -7,31 +7,6 @@ return [
         'geolocation_fill_title' => "Fill in my location to see the closest ads",
         'geolocation_missing'    => "We don't know where this user is sneefing from :(",
     ],
-    'sidebar' => [
-        'evaluations'             => "[-1,0] No review |[0,Inf] :ratio% of positive reviews",
-        'evaluations_title'       => "[-1,0] :name has no review yet|[0,Inf] :name has :ratio% positive reviews",
-        'level'                   => ":name is at the level :rank",
-        'search_fulfill'          => "I've got it",
-        'search_fulfill_title'    => "Publish an ad for this item",
-        'report'                  => "Report :name's behavior",
-        'report_title'            => "Warn the team about a bad behavior of this user",
-        'shop'                    => "{0} Nothing to sell yet |[0,1] :nb ad to sell |[2,Inf] :nb ads to sell",
-        'me'                      => [
-            'parameters'          => "My settings",
-            'parameters_title'    => "Manage my account settings",
-            'parameters_details'  => "Manage <a href=\":urlEmail\" title=\"Edit my e-mail\">my e-mail address</a>, <a href=\":urlNotifications\" title=\"Activate/deactivate notifications\">my notifications</a>,…",
-        ],
-    ],
-
-    'places' => [
-        'page_title'                                 => ":name's places of interest",
-        'head'                                       => ":name's places of interest",
-        'empty_text'                                 => ":name has no place of interest",
-        'add_place_of_interest_label'                => "Follow activity in a new place of interest",
-        'add_place_of_interest_disabled_placeholder' => "Activate javascript to use this field",
-        'add_place_of_interest_placeholder'          => "High school, college, office, district...",
-        'button_save_place_of_interest'              => "Add",
-    ],
 
     'parameters' => [
         'page_title'                => "My settings",
