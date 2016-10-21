@@ -142,8 +142,6 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
-    // Searches and shared searches
-    Route::resource('search', 'SearchController', ['only' => ['store', 'destroy']]);
     // Shops
     Route::resource('shops', 'ShopsController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     // Subscriptions

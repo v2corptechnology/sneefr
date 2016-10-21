@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Sneefr\Models\Ad;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\Search;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\User\UserRepository;
@@ -45,7 +44,7 @@ class AdminController extends Controller
             'ads.amount'      => Ad::exceptStaff()->sold()->onlyTrashed()->get()->sum('amount'),
             'reports'         => count($this->reports['ads']) + count($this->reports['users']),
             'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->get()->count(),
-            'shared_searches' => Search::exceptStaff()->get()->count(),
+            'shared_searches' => 0,
             'stripe_profiles' => 0,
         ];
     }
@@ -121,8 +120,7 @@ class AdminController extends Controller
      */
     public function searches()
     {
-        $shared = Search::exceptStaff()->take(100)->get();
-        $shared = $shared->load(['user']);
+        $shared = collect();
 
         $searched = ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->take(5000)->get();
         $searched = $searched->load(['user']);

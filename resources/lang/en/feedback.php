@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'search_shared'                      => "Your followers now know that you're looking for \":search\"",
-    'search_deleted_success'             => "You've deleted this public search.",
     'ad_shared'                          => "This ad is now shared, thanks!",
     'ad_not_found'                       => "This ad can't be found",
     'ad_edit_success'                    => "Changes saved, captain!",
