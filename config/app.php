@@ -178,7 +178,6 @@ return [
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Spatie\FailedJobMonitor\FailedJobMonitorServiceProvider::class,
         Vinkla\Algolia\AlgoliaServiceProvider::class,
-        Vinkla\Pusher\PusherServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -186,10 +185,9 @@ return [
         Sneefr\Providers\AppServiceProvider::class,
         // Sneefr\Providers\BroadcastServiceProvider::class,
         Sneefr\Providers\AuthServiceProvider::class,
-        Sneefr\Providers\ComposerServiceProvider::class,
+        // Sneefr\Providers\ComposerServiceProvider::class,
         Sneefr\Providers\DatabaseServiceProvider::class,
         Sneefr\Providers\EventServiceProvider::class,
-        Sneefr\Providers\GamificatorServiceProvider::class,
         Sneefr\Providers\HashidsServiceProvider::class,
         Sneefr\Providers\ImageServiceProvider::class,
         Sneefr\Providers\MacroServiceProvider::class,
@@ -254,7 +252,6 @@ return [
         'HTML'          => Collective\Html\HtmlFacade::class,
         'Image'         => Intervention\Image\Facades\Image::class,
         'Img'           => Sneefr\Facades\Image::class,
-        'LaravelPusher' => Vinkla\Pusher\Facades\Pusher::class,
     ],
 
 ];

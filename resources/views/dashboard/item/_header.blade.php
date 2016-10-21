@@ -12,7 +12,7 @@
 
 <a class="activity__author" title="{{ $author->present()->fullName() }}"
    href="{{ route('profiles.show', $author) }}">
-    {!! HTML::profilePicture($author->socialNetworkId(), $author->present()->fullName(), 40) !!}
+    {!! HTML::profilePicture($author->getSocialNetworkId(), $author->present()->fullName(), 40) !!}
 </a>
 
 <div class="activity__title">
@@ -22,9 +22,5 @@
         </a>
         @lang("dashboard.activity.{$item->type}.head", $headData)
     </h2>
-    @if ($item->value instanceof \Sneefr\Models\Place)
-        {!! HTML::time($item->value->pivot->created_at) !!}
-    @else
-        {!! HTML::time($item->value->created_at) !!}
-    @endif
+    {!! HTML::time($item->value->created_at) !!}
 </div>

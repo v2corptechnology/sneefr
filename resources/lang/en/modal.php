@@ -7,21 +7,6 @@ return [
         'btn_facebook'       => "Facebook",
         'btn_facebook_title' => "Share on Facebook",
     ],
-    'write' => [
-        'header'            => "Write to :name",
-        'body_label'        => "Body of the message",
-        'body_placeholder'  => "Saying Hello is the best way to start a conversation!",
-        'connect_first'     => "How will the user answer you if you are not logged in ;-) ?",
-        'btn_connect'       => "log in",
-        'btn_connect_title' => "Log me in to contact the user",
-        'btn_send'          => "Send",
-        'btn_send_title'    => "Send the message",
-        'btn_cancel'        => "Cancel",
-        'btn_cancel_title'  => "Do not send the message",
-        'complete_info_first' => "you need to complete your info before doing this ;-)",
-        'btn_settings_title' => "Complete my info to contact the user",
-        'btn_settings'      => "Settings"
-    ],
     'login' => [
         'header'            => "Log in",
         'connect_first'     => "you need to log in before doing this ;-)",

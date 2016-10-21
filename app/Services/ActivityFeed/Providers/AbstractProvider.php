@@ -5,7 +5,6 @@ namespace Sneefr\Services\ActivityFeed\Providers;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Sneefr\Models\Place;
 use Sneefr\Services\ActivityFeed\ActivityFeedItem;
 
 /**
@@ -183,18 +182,6 @@ abstract class AbstractProvider
     {
         if ($data instanceof Model && isset($data->user_id)) {
             return $data->user;
-        }
-
-        if ($data instanceof Place) {
-
-            $userIds = array_merge(
-                (array) $this->data('followedIds'),
-                (array) $this->data('person')
-            );
-
-            return $data->followers->filter(function ($follower) use ($userIds) {
-                return in_array($follower->id, $userIds);
-            })->first();
         }
 
         throw new Exception('Cannot identify owner of activity feed item');

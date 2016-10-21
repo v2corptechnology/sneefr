@@ -55,36 +55,8 @@ class AuthController extends Controller
             event(new UserRegistered($user));
         }
 
-        auth()->login($user);
+        auth()->login($user, true);
         return redirect()->intended();
-    }
-
-    /**
-     * Generate a token to use a private channel with this user identifier.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Hashids\Hashids         $hashids
-     *
-     * @return string
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
-     */
-    public function pusherAuth(Request $request, Hashids $hashids)
-    {
-        $socket = $request->input('socket_id');
-        $channel = $request->input('channel_name');
-
-        $userHash = explode('-', $channel);
-        $userId = $hashids->decode(array_pop($userHash))[0];
-
-        if ($userId == $request->user()->id()) {
-
-            $auth = \LaravelPusher::socket_auth($channel, $socket);
-
-            return $auth;
-        }
-
-        abort(401);
     }
 
     /**

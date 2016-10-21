@@ -49,8 +49,8 @@
             @choice('profile.sidebar.sold', count($soldAds), ['nb' => count($soldAds)])
         </p>
     </li>
-    @if (!$person->shops->isEmpty())
-        <?php $shop = $person->shops->first(); ?>
+    @if ($person->hasShop())
+        <?php $shop = $person->shop; ?>
         <li class="summary__item">
             <h2 class="summary__head">
                 <i class="fa fa-shopping-bag summary__icon"></i>
@@ -75,10 +75,6 @@
             </a>
         </h2>
         <p class="summary__content summary__content--extra">
-            @lang('profile.sidebar.level', [
-                'name' => $person->present()->givenName(),
-                'rank' => trans('rank.'.$person->getRank())
-            ])
         </p>
     </li>
     <li class="summary__item{{ setActive('profiles.networks.index', '--selected') }}">

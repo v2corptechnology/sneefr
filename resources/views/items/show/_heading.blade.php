@@ -1,5 +1,5 @@
 @push('modals_2')
-    @include('partials.modals._write', ['recipient' => $ad->shop, 'adId' => $ad->getId()])
+    @include('partials.modals.writeTo', ['shop' => $shop])
 @endpush
 
 <div class="box">
@@ -23,14 +23,14 @@
     <hr class="item__separator">
 
     <div class="item__social">
-        @unless ($ad->isMine())
-            <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal">
-                <i class="icon fa fa-lg fa-comments"></i> Contact
-            </a>
-        @endunless
-
         <a href="{{ route('ads.share', $ad) }}" class="btn btn-link" title="" data-toggle="modal" data-remote="false" data-target="#shareModal">
             <i class="icon fa fa-lg fa-share-alt"></i> Share
         </a>
+        
+        @unless ($ad->isMine())
+            <a href="#writeTo" class="btn btn-link" title="" data-toggle="modal" data-remote="false">
+                <i class="icon fa fa-lg fa-comment-o"></i> Contact
+            </a>
+        @endunless
     </div>
 </div>

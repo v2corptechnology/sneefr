@@ -40,7 +40,7 @@
                         <div class="content">
                             <a href="{{ route('profiles.show', $follow) }}" class="person--small"
                                title="@lang('profile.networks.profile_title', ['name' => $follow->present()->givenName()])">
-                                {!! HTML::profilePicture($follow->socialNetworkId(), $follow->present()->fullName(), 30, ['person__image']) !!}
+                                {!! HTML::profilePicture($follow->getSocialNetworkId(), $follow->present()->fullName(), 30, ['person__image']) !!}
                                 {{ $follow->present()->fullName() }}
                             </a>
                         </div>

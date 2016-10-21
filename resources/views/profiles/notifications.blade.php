@@ -31,17 +31,6 @@
                     <p class="text-muted">@lang('profile.notifications.empty_text')</p>
                 @endif
 
-                @if (! $specialNotifications->isEmpty())
-                    <ol class="list-unstyled dashboard-aside-block--list">
-                        @each('profiles._notification', $specialNotifications, 'notification')
-                    </ol>
-                @endif
-
-                @if (! $notifications->isEmpty())
-                    <ol class="list-unstyled dashboard-aside-block--list">
-                        @each('profiles._notification', $notifications, 'notification')
-                    </ol>
-                @endif
             </div>
         </div>
     </div>

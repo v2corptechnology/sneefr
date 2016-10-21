@@ -391,27 +391,6 @@ body > .timeline {
 
 
 ///
-.write__body {
-  @extend .form-control;
-}
-
-.write__connect-text {
-  @extend .text-muted;
-}
-
-.write__send,
-.write__connect {
-  @extend .btn;
-  @extend .btn-success;
-}
-
-
-
-///
-
-.add-place-of-interest .form-group {
-  margin-bottom: 0;
-}
 
 .places {
   @extend .list-unstyled;

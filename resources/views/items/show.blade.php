@@ -23,7 +23,7 @@
           content="{{ $ad->getConditionId() == 5 ? 'new' : 'used'}}"/>
     <meta property="og:locale" content="fr_FR">
     <meta property="article:author"
-          content="https://www.facebook.com/{{ $ad->seller->socialNetworkId() }}">
+          content="https://www.facebook.com/{{ $ad->seller->getSocialNetworkId() }}">
 @endsection
 
 @push('script')
@@ -108,7 +108,7 @@
                     <div class="col-sm-6">
 
                         {{-- Title, price and buy buttons --}}
-                        @include ('items.show._heading', ['ad' => $ad])
+                        @include ('items.show._heading', ['ad' => $ad, 'shop' => $ad->shop])
 
                     </div>
 

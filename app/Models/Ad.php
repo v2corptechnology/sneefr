@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
-use Nicolaslopezj\Searchable\SearchableTrait;
+use Laravel\Scout\Searchable;
 use Sneefr\Delivery;
-use Sneefr\Models\Traits\Likeable;
 use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
 use Sneefr\Price;
@@ -19,26 +18,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Ad extends Model
 {
     use AlgoliaEloquentTrait;
-    use Likeable;
     use LogsActivity;
-    use SearchableTrait;
     use SoftDeletes;
     use StaffFilterable;
     use Presentable;
+    use Searchable;
 
     public $sellerEvaluationRatio;
-
-    /**
-     * Searchable rules.
-     *
-     * @var array
-     */
-    protected $searchable = [
-        'columns' => [
-            'title' => 10,
-            'description' => 5
-        ],
-    ];
 
     protected $dates = ['deleted_at'];
 
@@ -279,11 +265,6 @@ class Ad extends Model
     public function stock()
     {
         return $this->hasOne(Stock::class);
-    }
-
-    public function notifications()
-    {
-        return $this->morphMany(Notification::class, 'notifiable');
     }
 
     public function scopeSold($query)

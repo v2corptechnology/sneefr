@@ -10,12 +10,7 @@ use Sneefr\Http\Requests\UpdateShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Category;
-use Sneefr\Models\DiscussedAd;
-use Sneefr\Models\Discussion;
-use Sneefr\Models\DiscussionUser;
-use Sneefr\Models\Message;
 use Sneefr\Models\Shop;
-use Sneefr\Models\ShopUser;
 use Sneefr\Services\Image;
 
 /**
@@ -81,7 +76,9 @@ class ShopsController extends Controller
 
         $q = $request->get('q');
 
-        $displayedAds = Ad::where('shop_id', $shop->getId())->latest()->search($q)->get();
+        $displayedAds = Ad::where('shop_id', $shop->getId())->latest()->get()->filter(function ($ad) use ($q) {
+            return stripos($ad->title, $q) !== false;
+        });
 
         return view('shops.show', compact('shop', 'displayedAds', 'q'));
     }
@@ -94,7 +91,7 @@ class ShopsController extends Controller
     public function create()
     {
         // Check if the user has no shop
-        if (auth()->user()->shops->count()) {
+        if (auth()->user()->hasShop()) {
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
@@ -113,7 +110,7 @@ class ShopsController extends Controller
     public function store(CreateShopRequest $request)
     {
         // Check if the user has no shop
-        if (auth()->user()->shops->count()) {
+        if (auth()->user()->hasShop()) {
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
@@ -127,8 +124,14 @@ class ShopsController extends Controller
         // Store the images
         $images = $this->moveImages($shop, $request);
 
+        // Default colors
+        $colors = [
+            'background_color' => '#FFFFFF',
+            'font_color'       => '#000000',
+        ];
+
         // Update shop data with real images names
-        $shop->data = array_merge($request->all(), $images);
+        $shop->data = array_merge($request->all(), $images, $colors);
 
         // Save new shop
         $shop->save();
@@ -138,9 +141,6 @@ class ShopsController extends Controller
 
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
-
-        // Set the current user as the admin.
-        $shop->owners()->attach(auth()->id());
 
         // Disable the shop if no subscription is running
         if (!auth()->user()->subscribed('main')) {
@@ -218,17 +218,9 @@ class ShopsController extends Controller
             abort(403);
         }
 
-        ShopUser::where('shop_id', $shop->getId())->forceDelete();
         Subscription::where('user_id', auth()->id())->forceDelete();
         Ad::where('shop_id', $shop->getId())->withTrashed()->update(['shop_id' => null]);
         auth()->user()->update(['payment' => null, 'stripe_id' => null, 'card_brand' => null, 'card_last_four' => null, 'trial_ends_at' => null]);
-
-        $discussions = Discussion::where('shop_id', $shop->getId())->get();
-        foreach ($discussions as $discussion) {
-            DiscussedAd::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-            DiscussionUser::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-            Message::where('discussion_id', $discussion->getId())->withTrashed()->forceDelete();
-        }
 
         $shop->forceDelete();
 

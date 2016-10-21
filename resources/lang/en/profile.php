@@ -77,23 +77,6 @@ return [
         'followed'             => "following",
     ],
 
-    'notifications' => [
-        'page_title'                      => "Your notifications",
-        'empty_text'                      => "No notification yet :-(",
-        'someone_liked_your_ad'           => "Liked your ad <a href=\":url\" title=\":title\">:link</a>.",
-        'someone_bought_your_ad'          => "indicated buying <a href=\":url\" title=\":title\">:link</a>.",
-        'evaluation_auto_validated_title' => "Default review",
-        'evaluation_auto_validated'       => "Review has been automatically sent to the seller.",
-        'someone_liked_your_search'       => "likes that you're looking for \":search\".",
-        'someone_liked_your_new_sneefer'  => "likes your new follower <a href=\":url\" title=\":title\">:link</a>.",
-        'someone_sold_you'                => "indicated selling you \":title\".",
-        'someone_tagged_you'              => "Tagged you on <a href=\":url\" title=\":title\">:link</a>.",
-        'someone_followed_you'            => "<a href=\":url\" title=\":title\">:link</a> is now following you.",
-        'you_might_be_interested_in'      => "thinks you might be interested in one of <a href=\":url\" title=\":title\">:link</a>'s ads.",
-        'sold_ad'                       => "Just bought <a href=\":url\" title=\":title\">:link</a>.",
-        'bought_ad'                         => "You just bought <a href=\":url\" title=\":title\">:link</a>.",
-    ],
-
     'places' => [
         'page_title'                                 => ":name's places of interest",
         'head'                                       => ":name's places of interest",
@@ -131,14 +114,6 @@ return [
         'retry'                     => 'retry',
         'sms_code'                  => 'Enter code here',
         'sms_msg'                   => 'Your verification code for sneefR is::code',
-    ],
-
-    'write' => [
-        'page_title'                       => "Write to :name",
-        'head'                             => "Write to :name",
-        'connect_for_writing'              => "Please, log in before writing to this person",
-        'button_connect_for_writing'       => "Login",
-        'button_connect_for_writing_title' => "Login to discuss with :name",
     ],
 
     'settings' => [

@@ -123,62 +123,23 @@ Route::get('profiles/{profile}/parameters/confirmEmail/{key}', [
 
 Route::group(['middleware' => 'auth'], function ($router) {
 
-    // Mark my messages in this discussion as read
-    Route::put('discussions/{id}',
-        ['as' => 'discussions.markRead', 'uses' => 'DiscussionsController@markRead']);
-    // Choose an ad to sell
-    Route::get('discussions/{id}/ads',
-        ['as' => 'discussions.ads.index', 'uses' => 'DiscussionsController@chooseAd']);
-    // Show a specific ad in a specific discussion
-    Route::get('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.show', 'uses' => 'DiscussionsController@sell']);
-    // Remove an ad from the discussion
-    Route::delete('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.destroy', 'uses' => 'DiscussionsController@removeAd']);
-    // Mark an ad as sold
-    Route::patch('discussions/{id}/ads/{ad}',
-        ['as' => 'discussions.ads.update', 'uses' => 'DiscussionsController@sold']);
-    // Shop discussions
-    Route::get('shopDiscussions/{shopSlug}',
-        ['as' => 'shop_discussions.index', 'uses' => 'DiscussionsController@index']);
-    // Show a specific discussion
-    Route::get('shopDiscussions/{id}/{shopSlug}',
-        ['as' => 'shop_discussions.show', 'uses' => 'DiscussionsController@show']);
-
-    // Choose a buyer for this ad
-    Route::get('ads/{ad}/chooseBuyer',
-        ['as' => 'ads.chooseBuyer', 'uses' => 'AdController@chooseBuyer']);
-    // Get an ad fragment
-    Route::get('ads/{ad}/fragment',
-        ['as' => 'ads.show.fragment', 'uses' => 'AdController@getAdFragment']);
-
     /** Out of resources scope */
-
-    // Pusher auth for private channels
-    Route::post('/pusherAuth', ['uses' => 'AuthController@pusherAuth']);
-    Route::get('/pusherAuth', function () {
-        return redirect()->route('welcome');
-    });
     // User's settings
     Route::resource('me', 'SettingsController@show');
+    // Messages
+    Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
 
     /** Resources */
     // Ads
     Route::resource('ad', 'AdController', ['except' => ['show', 'index']]);
     // Ad images
     Route::resource('ads.images', 'ImagesController', ['only' => ['store', 'destroy']]);
-    // Discussions
-    Route::resource('discussions', 'DiscussionsController', ['only' => ['index', 'show']]);
+    // Deals history
+    Route::resource('deals', 'DealsController', ['only' => ['index']]);
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
     Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
-    // Likes
-    Route::resource('likes', 'LikesController', ['only' => ['store']]);
-    // Messages
-    Route::resource('messages', 'MessagesController', ['only' => ['store']]);
-    // Places
-    Route::resource('places', 'PlacesController', ['only' => ['store']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Searches and shared searches
@@ -207,15 +168,9 @@ Route::resource('items', 'ItemsController', ['only' => ['show']]);
 // Search results
 Route::get('search', ['as' => 'search.index', 'uses' => 'SearchController@index']);
 // Shop display
-Route::get('shops/{shops}/search', ['as' => 'shops.search', 'uses' => 'ShopsController@search']);
-Route::get('shops/{shops}/evaluations', ['as' => 'shops.evaluations', 'uses' => 'ShopsController@evaluations']);
+Route::get('shops/{shop}/search', ['as' => 'shops.search', 'uses' => 'ShopsController@search']);
+Route::get('shops/{shop}/evaluations', ['as' => 'shops.evaluations', 'uses' => 'ShopsController@evaluations']);
 Route::resource('shops', 'ShopsController', ['only' => ['show']]);
-// Place display
-Route::resource('places', 'PlacesController', ['only' => ['show']]);
-Route::get('places/{places}/followers', ['as' => 'places.followers', 'uses' => 'PlacesController@followers']);
-Route::get('places/{places}/nearby', ['as' => 'places.nearby', 'uses' => 'PlacesController@nearbyAds']);
-Route::get('places/{places}/search', ['as' => 'places.search', 'uses' => 'PlacesController@search']);
-Route::get('places/{places}/searchAround', ['as' => 'places.searchAround', 'uses' => 'PlacesController@searchAround']);
 
 
 /** Admins only */
@@ -224,7 +179,6 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/ads', ['as' => 'admin.ads', 'uses' => 'AdminController@ads']);
     Route::get('admin/deals', ['as' => 'admin.deals', 'uses' => 'AdminController@deals']);
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
-    Route::get('admin/misc', ['as' => 'admin.misc', 'uses' => 'AdminController@misc']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
     Route::get('kitchensink', 'KitchensinkController@index');
 });
@@ -243,9 +197,6 @@ Route::bind('item', function ($value) {
 });
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
-});
-Route::bind('place', function ($value) {
-    return \Sneefr\Models\Place::where('slug', $value)->first();
 });
 Route::bind('profile', function ($value, $route) {
     $hashids = app('Hashids\Hashids');

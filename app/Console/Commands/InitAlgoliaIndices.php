@@ -4,9 +4,7 @@ namespace Sneefr\Console\Commands;
 
 use Illuminate\Console\Command;
 use Sneefr\Models\Ad;
-use Sneefr\Models\PlaceName;
 use Sneefr\Models\Shop;
-use Sneefr\Models\User;
 
 class InitAlgoliaIndices extends Command
 {
@@ -33,9 +31,7 @@ class InitAlgoliaIndices extends Command
         Ad::class        => [
             'attributesForFacetting' => ["categories"],
         ],
-        PlaceName::class => [],
         Shop::class      => [],
-        User::class      => [],
     ];
 
     /**

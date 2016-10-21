@@ -22,7 +22,6 @@
     <ul class="dropdown-menu">
         @if (auth()->check() && (auth()->user()->isAdmin() || $ad->isMine()))
             <li><a href="{{ route('items.edit', $ad) }}" title=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
-            <li><a href="{{ route('ads.chooseBuyer', $ad) }}" title=""><i class="fa fa-fw fa-trash"></i> Remove</a></li>
         @endif
 
         @if (auth()->check() && $ad->isReported())
