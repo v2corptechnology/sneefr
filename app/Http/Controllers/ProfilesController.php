@@ -15,7 +15,6 @@ use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\Evaluation\EvaluationRepository;
-use Sneefr\Repositories\Search\SearchRepository;
 use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\Image;
 
@@ -25,19 +24,16 @@ class ProfilesController extends Controller
     /**
      * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
      * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
-     * @param \Sneefr\Repositories\Search\SearchRepository             $searchRepository
      * @param \Illuminate\Contracts\Filesystem\Factory                 $filesystemFactory
      */
     public function __construct(
         UserRepository $userRepository,
         AdRepository $adRepository,
         EvaluationRepository $evaluationRepository,
-        SearchRepository $searchRepository,
         Factory $filesystemFactory
     ) {
         $this->userRepository = $userRepository;
         $this->adRepository = $adRepository;
-        $this->searchRepository = $searchRepository;
         $this->disk = $filesystemFactory->disk('avatars');
     }
 
