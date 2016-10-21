@@ -29,16 +29,4 @@ class UserPayment
     {
         return ! is_null($this->user->payment);
     }
-
-    /**
-     * Check if we ask for a payment method.
-     *
-     * @return bool
-     */
-    public function isAsked() : bool
-    {
-        $isOldEnough = Carbon::parse($this->user->created_at)->diffInDays() > 15;
-
-        return (!$this->hasOne() && $isOldEnough);
-    }
 }

@@ -1,11 +1,6 @@
 <?php
 
 return [
-    'prepare' => [
-        'create_title'      => "Create an ad",
-        'create_button'     => "Sell",
-        'title_placeholder' => "What are you selling? (ex: iPhone 6S)",
-    ],
     'edit'    => [
         'page_title'    => "Edit my ad",
         'images_header' => "Images",
