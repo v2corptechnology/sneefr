@@ -64,26 +64,6 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Displays the evaluations of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function evaluations($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $evaluations = $person->evaluations->latest();
-
-        $content = [
-            'evaluations'     => $evaluations,
-        ];
-
-        return view('profiles.evaluations', array_merge($common, $content));
-    }
-
-    /**
      * Displays the places of this person.
      *
      * @param int                                $userId

@@ -36,16 +36,6 @@ return [
         'no_results'    => "No ads with <strong>:filter</strong>, <a href=\":url\" title=\"Remove the filter\">clear the filter</a>.",
     ],
 
-    'evaluations' => [
-        'page_title'     => "Reviews of :name",
-        'head'           => "{0} :name has no review yet |[0,1] :name's review |[2,Inf] :name's :nb reviews",
-        'empty_text'     => ":name has no review yet",
-        'positive_title' => "Positive review",
-        'negative_title' => "Negative review",
-        'profile_title'  => "See :name's profile",
-        'forced_text'    => "This review was automatically sent because the buyer did not respond to our evaluation request.",
-    ],
-
     'places' => [
         'page_title'                                 => ":name's places of interest",
         'head'                                       => ":name's places of interest",

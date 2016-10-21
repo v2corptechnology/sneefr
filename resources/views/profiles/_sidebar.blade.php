@@ -52,19 +52,6 @@
             </p>
         </li>
     @endif
-    <li class="summary__item{{ setActive('profiles.evaluations.index', '--selected') }}">
-        <h2 class="summary__head">
-            <i class="fa fa-trophy summary__icon"></i>
-            <a href="{{ route('profiles.evaluations.index', $person) }}"
-               title="@choice('profile.sidebar.evaluations_title', $evaluationRatio, [
-                                'ratio' => $evaluationRatio,
-                                'name' => $person->present()->givenName()])">
-                @choice('profile.sidebar.evaluations', $evaluationRatio, ['ratio' => $evaluationRatio])
-            </a>
-        </h2>
-        <p class="summary__content summary__content--extra">
-        </p>
-    </li>
 </ul>
 
 @if (!$searches->isEmpty())
