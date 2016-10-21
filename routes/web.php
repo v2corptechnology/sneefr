@@ -82,12 +82,6 @@ Route::get('profiles/{profile}/networks/followed', [
         return redirect('/me', 301);
     },
 ]);
-Route::get('profiles/{profile}/places', [
-    'as' => 'profiles.places.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
 Route::get('profiles/{profile}/notifications', [
     'as' => 'profiles.notifications.index',
     function ($hash) {

@@ -107,26 +107,6 @@
             @endif
         </p>
     </li>
-    <li class="summary__item{{ setActive('profiles.places.index', '--selected') }}">
-        <h2 class="summary__head">
-            <i class="fa fa-map-marker summary__icon"></i>
-            <a href="{{ route('profiles.places.index', $person) }}"
-               title="@lang('profile.sidebar.locations_title', ['name' => $person->present()->givenName()])">
-                @choice('profile.sidebar.locations', count($followedPlaces), ['nb' => count($followedPlaces)])
-            </a>
-        </h2>
-        <p class="summary__content summary__content--extra">
-            @if ($followedPlaces)
-                {!!
-                    $followedPlaces->take(3)->map(function ($item, $key) {
-                        return link_to_route('places.show', $item->getName(), $item->getId(), ['title' => trans('person.sidebar.location_title', ['place' => $item->getLongName()])]);
-                    })->implode(' &bull; ')
-                !!}
-            @else
-                @lang('profile.sidebar.locations_empty', ['name' => $person->present()->givenName()])
-            @endif
-        </p>
-    </li>
 </ul>
 
 @if (!$searches->isEmpty())

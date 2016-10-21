@@ -144,20 +144,6 @@ class ProfilesController extends Controller
     /**
      * Displays the places of this person.
      *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function places($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        return view('profiles.places', $common);
-    }
-
-    /**
-     * Displays the places of this person.
-     *
      * @param int                                $userId
      * @param \Sneefr\Contracts\BillingInterface $billing
      *

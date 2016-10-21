@@ -74,20 +74,8 @@
                         {{-- Show the person an incentive to specify her location --}}
                         @include('dashboard.blocks.geolocation')
                     @elseif ($followedPlaces->isEmpty())
-                        <h1 class="block-title">
-                            <a class="block-title__main" href="{{ route('profiles.places.index', auth()->user()) }}#settings"
-                               title="@lang('dashboard.places_of_interest_head_title')">
-                                @lang('dashboard.places_of_interest_head')
-                            </a>
-                        </h1>
-                    @endif
-                </div>
-            @endif
 
-            {{-- Show the places of interest of the person --}}
-            @if (!$followedPlaces->isEmpty())
-                <div class="dashboard-aside-block">
-                    @include('dashboard.blocks.points_of_interest', ['places' => $followedPlaces])
+                    @endif
                 </div>
             @endif
 

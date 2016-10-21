@@ -14,10 +14,6 @@ return [
     'latest_all'                    => "See more",
     'latest_all_title'              => "See all latest ads",
     'too_much_activity'             => "You will soon be able to scroll down to infinity and beyond!",
-    'places_of_interest_head'       => "Places of interest",
-    'places_of_interest_head_title' => "View your places of interest",
-    'place_of_interest_add'         => "Add",
-    'place_of_interest_add_title'   => "Add a place of interest",
     'empty_text'                    => "Looks like your feed is fairly empty, please choose <a href=\":user_link\" title=\"Search for users\">some users</a> to follow, <a href=\":place_link\" title=\"Search for places\">some places</a> or even <a href=\":shop_link\" title=\"Search for a shop\">a shop</a>.",
 
     'activity' => [
