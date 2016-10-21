@@ -14,7 +14,7 @@ if($item->value->isShopDiscussion() && !$item->value->shop->owners->pluck('id')-
         $recipient = $item->value->participants->first();
     }
 
-    $link = link_to_route('profiles.ads.index', $recipient->present()->fullName(), $recipient, ['title' => $recipient->present()->fullName()]);
+    $link = $recipient->present()->fullName();
 }
 
 $headData = ['name' => $link];

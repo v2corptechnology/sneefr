@@ -46,12 +46,6 @@ Route::delete('profile/{profile}', [
     'uses'       => 'ProfilesController@destroy',
     'middleware' => 'auth',
 ]);
-Route::get('profiles/{profile}/ads', [
-    'as' => 'profiles.ads.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
 Route::get('profiles/{profile}/settings', [
     'as' => 'profiles.settings.edit',
     function ($hash) {

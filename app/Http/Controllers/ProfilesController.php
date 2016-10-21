@@ -38,32 +38,6 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Displays the ads of this person.
-     *
-     * @param int $userId
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\View\View
-     */
-    public function ads($userId, Request $request)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $filter = $request->get('filter');
-
-        $displayedAds = $this->adRepository->of($person->getId(), $filter);
-
-        $content = [
-            'contentPartial' => 'profiles.ads',
-            'isFiltered'     => (bool) $filter,
-            'displayedAds'   => $displayedAds,
-            'filter'         => $filter,
-        ];
-
-        return view('profiles.ads', array_merge($common, $content));
-    }
-
-    /**
      * Displays the places of this person.
      *
      * @param int                                $userId

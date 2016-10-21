@@ -5,7 +5,7 @@
             $hashIds = app('hashids');
         ?>
         @foreach ($friendLikes as $like)
-            @lang('dashboard.activity.liked_by_friend', ['name' => link_to_route('profiles.ads.index', $like['givenName'] . ' ' . $like['surname'], $hashIds->encode($like['personId']))])
+            @lang('dashboard.activity.liked_by_friend', ['name' => $like['givenName'] . ' ' . $like['surname']])
         @endforeach
     </div>
 @endif

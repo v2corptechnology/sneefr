@@ -8,9 +8,6 @@ return [
         'geolocation_missing'    => "We don't know where this user is sneefing from :(",
     ],
     'sidebar' => [
-        'ads'                     => "{0} :name is not selling anything |[0,1] :nb ad |[2,Inf] :nb ads",
-        'ads_title'               => "{0} :name is not selling anything |[0,1] :name has one ad |[2,Inf] :name has :nb ads",
-        'sold'                    => "{0} No sale yet |[0,1] :nb item sold |[2,Inf] :nb items sold",
         'evaluations'             => "[-1,0] No review |[0,Inf] :ratio% of positive reviews",
         'evaluations_title'       => "[-1,0] :name has no review yet|[0,Inf] :name has :ratio% positive reviews",
         'level'                   => ":name is at the level :rank",
@@ -24,16 +21,6 @@ return [
             'parameters_title'    => "Manage my account settings",
             'parameters_details'  => "Manage <a href=\":urlEmail\" title=\"Edit my e-mail\">my e-mail address</a>, <a href=\":urlNotifications\" title=\"Activate/deactivate notifications\">my notifications</a>,…",
         ],
-    ],
-
-    'ads' => [
-        'page_title'    => ":name's ads",
-        'head'          => "{0} :name isn't selling anything |[0,1] :name is selling :nb item |[2,Inf] :name is selling :nb items",
-        'head_filtered' => "{0} No results |[0,1] :nb result |[2,Inf] :nb results",
-        'filtering'     => "You see ads filtered with <strong>:filter</strong>, <a href=\":url\" title=\"Remove the filter\">clear the filter</a>.",
-        'empty_text'    => ":name is not selling anything",
-        'filtering'     => "You see ads filtered with <strong>:filter</strong>, <a href=\":url\" title=\"Remove the filter\">clear the filter</a>.",
-        'no_results'    => "No ads with <strong>:filter</strong>, <a href=\":url\" title=\"Remove the filter\">clear the filter</a>.",
     ],
 
     'places' => [

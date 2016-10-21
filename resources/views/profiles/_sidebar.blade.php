@@ -23,20 +23,6 @@
 @endif
 
 <ul class="summary">
-    <li class="summary__item{{ setActive('profiles.ads.index', '--selected') }}">
-        <h2 class="summary__head">
-            <i class="fa fa-globe summary__icon"></i>
-            <a href="{{ route('profiles.ads.index', $person) }}"
-               title="@choice('profile.sidebar.ads_title', count($ads), [
-                                'nb' => count($ads),
-                                'name' => $person->present()->givenName()])">
-                @choice('profile.sidebar.ads', count($ads), ['nb' => count($ads), 'name' => $person->present()->givenName()])
-            </a>
-        </h2>
-        <p class="summary__content summary__content--extra">
-            @choice('profile.sidebar.sold', count($soldAds), ['nb' => count($soldAds)])
-        </p>
-    </li>
     @if ($person->hasShop())
         <?php $shop = $person->shop; ?>
         <li class="summary__item">
