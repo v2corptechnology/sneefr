@@ -51,13 +51,6 @@
                     {{ trans('funny.' . array_rand(trans('funny'), 1)) }}
                 </span>
             </li>
-            <li>
-                <a class="profile-nav__item" href="{{ route('profiles.write.create', $person) }}#message-body"
-                   title="@lang('profile.header.write_title', ['name' => $person->present()->givenName()])">
-                    <i class="fa fa-envelope"></i>
-                    @lang('profile.header.write')
-                </a>
-            </li>
         @endif
     </ul>
 </div>

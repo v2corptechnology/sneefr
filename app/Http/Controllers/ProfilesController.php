@@ -51,8 +51,6 @@ class ProfilesController extends Controller
 
         $filter = $request->get('filter');
 
-        $common = $this->getCommonData($person);
-
         $displayedAds = $this->adRepository->of($person->getId(), $filter);
 
         $content = [
@@ -76,8 +74,6 @@ class ProfilesController extends Controller
     {
         $person = $this->retrieveOrRedirect($userId);
 
-        $common = $this->getCommonData($person);
-
         $evaluations = $person->evaluations->latest();
 
         $content = [
@@ -98,8 +94,6 @@ class ProfilesController extends Controller
     {
         $person = $this->retrieveOrRedirect($userId);
 
-        $common = $this->getCommonData($person);
-
         $content = [];
 
         return view('profiles.networks', array_merge($common, $content));
@@ -116,8 +110,6 @@ class ProfilesController extends Controller
     {
         $person = $this->retrieveOrRedirect($userId);
 
-        $common = $this->getCommonData($person);
-
         return view('profiles.networks.referrals', $common);
     }
 
@@ -131,8 +123,6 @@ class ProfilesController extends Controller
     public function followers($userId)
     {
         $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
 
         return view('profiles.networks.followers', $common);
     }
@@ -148,8 +138,6 @@ class ProfilesController extends Controller
     {
         $person = $this->retrieveOrRedirect($userId);
 
-        $common = $this->getCommonData($person);
-
         return view('profiles.networks.followed', $common);
     }
 
@@ -164,25 +152,7 @@ class ProfilesController extends Controller
     {
         $person = $this->retrieveOrRedirect($userId);
 
-        $common = $this->getCommonData($person);
-
         return view('profiles.places', $common);
-    }
-
-    /**
-     * Display the screen to write to this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function write($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.write', $common);
     }
 
     /**
@@ -196,8 +166,6 @@ class ProfilesController extends Controller
     public function settings($userId, BillingInterface $billing)
     {
         $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
 
         $content = ['authorizeUrl' => $billing->getAuthorizeUrl()];
 
@@ -214,8 +182,6 @@ class ProfilesController extends Controller
     public function notifications($userId)
     {
         $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
 
         $notifications = $this->notificationRepository->getLatest($person->getId())
             ->slice(0, 30);
