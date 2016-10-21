@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
-use Laravel\Scout\Searchable;
 use Sneefr\Delivery;
 use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
@@ -22,7 +21,6 @@ class Ad extends Model
     use SoftDeletes;
     use StaffFilterable;
     use Presentable;
-    use Searchable;
 
     public $sellerEvaluationRatio;
 
