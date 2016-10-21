@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
 
     /** Out of resources scope */
     // User's settings
-    Route::resource('me', 'SettingsController@show');
+    Route::get('me', ['as' => 'me.show', 'uses' =>'SettingsController@show']);
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
 
