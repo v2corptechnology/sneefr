@@ -65,36 +65,6 @@
         <p class="summary__content summary__content--extra">
         </p>
     </li>
-    <li class="summary__item{{ setActive('profiles.networks.index', '--selected') }}">
-        <h2 class="summary__head">
-            <i class="fa fa-users summary__icon"></i>
-            <a href="{{ route('profiles.networks.index', $person) }}"
-               title="@lang('profile.sidebar.networks_title', ['name' => $person->present()->givenName()])">
-                @lang('profile.sidebar.networks')
-            </a>
-            @if (!$isMine && count($commonPersons))
-                <small class="pull-right visible-xs">
-                    @choice('profile.sidebar.network_common', count($commonPersons), ['nb' => count($commonPersons)])
-                </small>
-            @endif
-        </h2>
-        <p class="summary__content summary__content--extra">
-            <a href="{{ route('profiles.networks.index', $person) }}#following"
-               title="@lang('profile.sidebar.network_following_title', ['name' => $person->present()->givenName()])">
-                @choice('profile.sidebar.network_following', count($followingPersons), ['nb' => count($followingPersons)])
-            </a> &bull;
-            <a href="{{ route('profiles.networks.index', $person) }}#followed"
-               title="@lang('profile.sidebar.network_followed_title', ['name' => $person->present()->givenName()])">
-                @choice('profile.sidebar.network_followed', count($followedPersons), ['nb' => count($followedPersons)])
-            </a>
-            @if (!$isMine && count($commonPersons))
-                &bull; <a href="{{ route('profiles.networks.index', $person) }}#common"
-                   title="@lang('profile.sidebar.network_common_title', ['name' => $person->present()->givenName()])">
-                    @choice('profile.sidebar.network_common', count($commonPersons), ['nb' => count($commonPersons)])
-                </a>
-            @endif
-        </p>
-    </li>
 </ul>
 
 @if (!$searches->isEmpty())

@@ -79,11 +79,6 @@
                 </div>
             @endif
 
-            {{-- Show the list of people who are connected to the authenticated person --}}
-            <div class="dashboard-aside-block">
-                @include('dashboard.blocks.friends', ['connections' => auth()->user()->followedUsers->shuffle()])
-            </div>
-
         </div>
 
     </div>

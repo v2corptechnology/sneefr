@@ -84,64 +84,6 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Displays the network of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function networks($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $content = [];
-
-        return view('profiles.networks', array_merge($common, $content));
-    }
-
-        /**
-     * Displays the referrals of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function referrals($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        return view('profiles.networks.referrals', $common);
-    }
-
-    /**
-     * Displays the followers of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function followers($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        return view('profiles.networks.followers', $common);
-    }
-
-    /**
-     * Displays the followed of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function followed($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        return view('profiles.networks.followed', $common);
-    }
-
-    /**
      * Displays the places of this person.
      *
      * @param int                                $userId

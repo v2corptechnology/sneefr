@@ -2,12 +2,6 @@
 
 return [
     'page_title'                    => "sneefR",
-    'sneefers_head'                 => "My followers",
-    'sneefers_head_title'           => "View all my followers",
-    'no_sneefers'                   => "No Facebook friends on sneefR?",
-    'sneefr_tooltip'                => ":name&nbsp;has&nbsp;an&nbsp;item&nbsp;for&nbsp;sale|:name&nbsp;has&nbsp;:num&nbsp;items&nbsp;for&nbsp;sale",
-    'sneefers_count'                => ":num",
-    'sneefers_count_title'          => "See my follower|See my :num followers",
     'ask_location_header'           => "Where are you sneefing from?",
     'ask_location_text'             => "<a href=\":url\" title=\"We're not spying on you ;)\">Add your location</a> so we can show you the ads around you",
     'latest_header'                 => "Latest",

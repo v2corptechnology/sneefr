@@ -58,30 +58,6 @@ Route::get('profiles/{profile}/evaluations', [
         return redirect('/me', 301);
     },
 ]);
-Route::get('profiles/{profile}/networks', [
-    'as' => 'profiles.networks.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/referrals', [
-    'as' => 'profiles.networks.referrals',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followers', [
-    'as' => 'profiles.networks.followers',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followed', [
-    'as' => 'profiles.networks.followed',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
 Route::get('profiles/{profile}/settings', [
     'as' => 'profiles.settings.edit',
     function ($hash) {
