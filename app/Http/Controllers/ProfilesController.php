@@ -42,9 +42,6 @@ class ProfilesController extends Controller
                 case 'info':
                     $this->saveGeneralSettings($request->all());
                     break;
-                case 'application':
-                    $this->saveApplicationSettings($request->all());
-                    break;
                 case 'phoneConfirm':
                     $this->confirm($request);
                     break;
@@ -160,34 +157,6 @@ class ProfilesController extends Controller
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
-        }
-    }
-
-    /**
-     * Save the application settings of the authenticated person.
-     *
-     * @param  array  $data
-     *
-     * @return void
-     */
-    protected function saveApplicationSettings(array $data)
-    {
-        // Save the language locale.
-
-        $config = app('Illuminate\Contracts\Config\Repository');
-        $supportedLocales = $config->get('app.supported_locales');
-
-        if (!empty($data['locale']) && in_array($data['locale'], $supportedLocales)) {
-
-            // Updating the value that is currently present in the session.
-            $sessionManager = app('Illuminate\Session\SessionManager');
-            $sessionManager->set('lang', $data['locale']);
-
-            // Persisting the new data.
-            // TODO: remove dependency on Eloquent.
-            User::find(auth()->id())->update(['locale' => $data['locale']]);
-
-            session()->flash('success', trans('feedback.profile_edit_success'));
         }
     }
 
