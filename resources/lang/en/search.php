@@ -15,10 +15,6 @@ return [
     'type_person_label'      => "{0} Users|[0,1] :nb User |[2,50] :nb Users|[50,Inf] 50+ Users",
     'type_place_label'       => "{0} Places|[0,1] :nb Place|[2,Inf] :nb Places",
     'type_shop_label'        => "{0} Shops|[0,1] :nb Shop|[2,Inf] :nb Shops",
-    'not_connected_warning'  => "If you log in, you can tell your friends you're looking for <strong>\":term\"</strong>.",
-    'not_connected_button'   => "Log in",
     'no_results'             => "We're sorry, no result matches your search. Maybe you can try a less specific search.",
     'linked_categories'      => "[0,1] Find what you're looking for in the category : |[1,Inf] Find what you're looking for in the categories :",
-    'share_text'             => "Publish on your profile that you're looking for <strong>\":term\"</strong> to find it even faster.",
-    'ask_my_sneefers_button' => "Publish my public search",
 ];

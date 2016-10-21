@@ -619,16 +619,6 @@ Flow related
   padding-top: 5rem;
 }
 
-.publish-search,
-.ask-for-connect {
-  @extend .text-center;
-  margin-bottom: 1.5rem;
-
-  .form-group {
-    margin-bottom: 0;
-  }
-}
-
 .sort {
   @extend .clearfix;
   background: linear-gradient(to bottom, #FFF 0%, #E0E0E0 100%) repeat-x;

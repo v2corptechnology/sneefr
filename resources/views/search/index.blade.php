@@ -81,29 +81,5 @@
 
         @endif
     </div>
-
-    @if (false && $type == 'ad' )
-        {{-- If the person is authenticated, show a button to publish the search --}}
-        @if ($query && auth()->id())
-            <form action="{{ route('search.store') }}" method="POST" class="publish-search">
-                {!! csrf_field() !!}
-                <p><small>@lang('search.share_text', ['term' => $query])</small></p>
-                <div class="form-group">
-                        <input type="hidden" name="query" value="{{ $query }}">
-                        <button class="btn btn-success btn-sm" type="submit">
-                            @lang('search.ask_my_sneefers_button')
-                        </button>
-                </div>
-            </form>
-            {{-- Otherwise, show an incentive message and a button to log in --}}
-        @elseif ($query)
-            <div class="ask-for-connect">
-                <p><small>@lang('search.not_connected_warning', ['term' => $query])</small></p>
-                <a class="btn btn-success btn-sm" href="{{ route('home') }}">
-                    @lang('search.not_connected_button')
-                </a>
-            </div>
-        @endif
-    @endif
 </div>
 @stop
