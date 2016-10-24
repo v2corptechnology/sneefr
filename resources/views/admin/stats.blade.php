@@ -147,11 +147,7 @@
                             @foreach ($searchesSubset as $search)
                                 <tr>
                                     <td>
-                                        @if (isset($search->hash))
-                                            <a href="{{ route('profiles.show', $search->hash) }}">{{ $search->term }}</a>
-                                        @else
-                                            {{ $search->term }}
-                                        @endif
+                                        {{ $search->term }}
                                     </td>
                                 </tr>
                             @endforeach

@@ -159,8 +159,6 @@ class AdminController extends Controller
     {
         $searchesSubset = [];
 
-        $hashIds = app('Hashids\Hashids');
-
         foreach ($searches as $k => $search) {
 
             $context = json_decode($search->context);
@@ -180,9 +178,6 @@ class AdminController extends Controller
                 $key = $slug . '_' . $search->user_id . '_' . $timeSpan;
 
                 if (!array_key_exists($key, $searchesSubset)) {
-                    if ($search->user_id) {
-                        $search->hash = $hashIds->encode($search->user_id);
-                    }
                     $search->term = isset($context->filters[0]) ? $context->filters[0]->q : null;
                     $searchesSubset[$key] = $search;
                 }
