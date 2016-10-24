@@ -11,7 +11,7 @@
                 <p class="text-center">
                     @lang('modal.stripe.message')
                     <br><br>
-                    <a href="{{ route('me.index') }}"
+                    <a href="{{ route('me.show') }}"
                        title="@lang('modal.stripe.btn_action')"
                        class="btn btn-lg btn-primary btn-primary2">
                         @lang('modal.stripe.btn_action')

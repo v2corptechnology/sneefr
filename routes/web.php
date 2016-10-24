@@ -37,68 +37,11 @@ Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@
 /**
  * Routes related to person display
  */
-// Profile, since Ads are the main entry point, redirect permanent to it
-Route::get('profiles/{hash}', ['as' => 'profiles.show', function ($hash) {
-    return redirect('/me', 301);
-}]);
+
 Route::delete('profile/{profile}', [
     'as'         => 'profiles.destroy',
     'uses'       => 'ProfilesController@destroy',
     'middleware' => 'auth',
-]);
-Route::get('profiles/{profile}/ads', [
-    'as' => 'profiles.ads.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/evaluations', [
-    'as' => 'profiles.evaluations.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks', [
-    'as' => 'profiles.networks.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/referrals', [
-    'as' => 'profiles.networks.referrals',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followers', [
-    'as' => 'profiles.networks.followers',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followed', [
-    'as' => 'profiles.networks.followed',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/write', [
-    'as' => 'profiles.write.create',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/places', [
-    'as' => 'profiles.places.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/notifications', [
-    'as' => 'profiles.notifications.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
 ]);
 Route::get('profiles/{profile}/settings', [
     'as' => 'profiles.settings.edit',
@@ -125,7 +68,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
 
     /** Out of resources scope */
     // User's settings
-    Route::resource('me', 'SettingsController@show');
+    Route::get('me', ['as' => 'me.show', 'uses' =>'SettingsController@show']);
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
 

@@ -110,8 +110,8 @@
 
                 {{-- Settings --}}
                 @if (auth()->check())
-                    <li class="{{ setActive('me.index') }}">
-                        <a href="{{ route('me.index') }}" title="My profile">My profile</a>
+                    <li class="{{ setActive('me.show') }}">
+                        <a href="{{ route('me.show') }}" title="My profile">My profile</a>
                     </li>
 
                     <li class="{{ setActive('deals.index') }}">

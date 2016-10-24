@@ -13,9 +13,7 @@
                         @foreach ($reports['users'] as $person)
                             <li class="media">
                                 <div class="media-left">
-                                    <a href="{{ route('profiles.show', $person) }}">
-                                        {!! HTML::profilePicture($person->getSocialNetworkId(), 'pop', 50, ['media-object']) !!}
-                                    </a>
+                                    {!! HTML::profilePicture($person->getSocialNetworkId(), 'pop', 50, ['media-object']) !!}
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading h5">
@@ -39,7 +37,7 @@
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading h5">
-                                        <a href="{{ route('profiles.show', [$ad->user->getRouteKey()]) }}">{{ $ad->getTitle() }}</a>
+                                        {{ $ad->getTitle() }}
                                     </h4>
                                     A été signalé le... par ...
                                 </div>

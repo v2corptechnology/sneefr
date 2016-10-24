@@ -8,301 +8,24 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
-use Sneefr\Contracts\BillingInterface;
 use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
 use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\User;
-use Sneefr\Repositories\Ad\AdRepository;
-use Sneefr\Repositories\Evaluation\EvaluationRepository;
 use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\Image;
 
 
 class ProfilesController extends Controller
 {
+    public $disk;
+
     /**
-     * @param \Sneefr\Repositories\User\UserRepository                 $userRepository
-     * @param \Sneefr\Repositories\Ad\AdRepository                     $adRepository
-     * @param \Illuminate\Contracts\Filesystem\Factory                 $filesystemFactory
+     * @param \Illuminate\Contracts\Filesystem\Factory $filesystemFactory
      */
-    public function __construct(
-        UserRepository $userRepository,
-        AdRepository $adRepository,
-        EvaluationRepository $evaluationRepository,
-        Factory $filesystemFactory
-    ) {
-        $this->userRepository = $userRepository;
-        $this->adRepository = $adRepository;
+    public function __construct(Factory $filesystemFactory)
+    {
         $this->disk = $filesystemFactory->disk('avatars');
-    }
-
-    /**
-     * Displays the ads of this person.
-     *
-     * @param int $userId
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\View\View
-     */
-    public function ads($userId, Request $request)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $filter = $request->get('filter');
-
-        $common = $this->getCommonData($person);
-
-        $displayedAds = $this->adRepository->of($person->getId(), $filter);
-
-        $content = [
-            'contentPartial' => 'profiles.ads',
-            'isFiltered'     => (bool) $filter,
-            'displayedAds'   => $displayedAds,
-            'filter'         => $filter,
-        ];
-
-        return view('profiles.ads', array_merge($common, $content));
-    }
-
-    /**
-     * Displays the evaluations of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function evaluations($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        $evaluations = $person->evaluations->latest();
-
-        $content = [
-            'evaluations'     => $evaluations,
-        ];
-
-        return view('profiles.evaluations', array_merge($common, $content));
-    }
-
-    /**
-     * Displays the network of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function networks($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        $content = [];
-
-        return view('profiles.networks', array_merge($common, $content));
-    }
-
-        /**
-     * Displays the referrals of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function referrals($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.networks.referrals', $common);
-    }
-
-    /**
-     * Displays the followers of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function followers($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.networks.followers', $common);
-    }
-
-    /**
-     * Displays the followed of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function followed($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.networks.followed', $common);
-    }
-
-    /**
-     * Displays the places of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function places($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.places', $common);
-    }
-
-    /**
-     * Display the screen to write to this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function write($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        return view('profiles.write', $common);
-    }
-
-    /**
-     * Displays the places of this person.
-     *
-     * @param int                                $userId
-     * @param \Sneefr\Contracts\BillingInterface $billing
-     *
-     * @return \Illuminate\View\View
-     */
-    public function settings($userId, BillingInterface $billing)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        $content = ['authorizeUrl' => $billing->getAuthorizeUrl()];
-
-        return view('profiles.settings', array_merge($common, $content));
-    }
-
-    /**
-     * Displays the notifications of this person.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\View\View
-     */
-    public function notifications($userId)
-    {
-        $person = $this->retrieveOrRedirect($userId);
-
-        $common = $this->getCommonData($person);
-
-        $notifications = $this->notificationRepository->getLatest($person->getId())
-            ->slice(0, 30);
-
-        $specialNotifications = collect();
-
-        if ($this->notificationRepository->countUnreadNotificationsFor($person->getId())) {
-            $this->notificationRepository->markAllReadFor($person->getId());
-        }
-
-        $content = compact('notifications', 'specialNotifications');
-
-        return view('profiles.notifications', array_merge($common, $content));
-    }
-
-    /**
-     * Generate the data shared between the header/sidebar and body.
-     *
-     * @param User $person
-     *
-     * @return array
-     */
-    protected function getCommonData(User $person)
-    {
-        $isMine = auth()->id() === $person->getId();
-
-        $ads = $this->adRepository->of($person->getId());
-
-        $followedPlaces = User::find($person->getId())->places;
-
-        $searches = $this->searchRepository->getSearchesFor($person->getId());
-
-        // Users following this user
-        $followingPersons = collec();
-
-        // Users followed by this user
-        $followedPersons = $person->following()->users();
-
-        $referrals = $person->referrals()->with('user')->get()->pluck('user');
-
-        $isFollowed = !$isMine && $followingPersons->where('id', auth()->id())->first();
-
-        $evaluationRatio = (int) round($person->evaluations->ratio(), 0);
-  
-        $soldAds = $this->adRepository->soldOf($person->getId());
-
-        $unreadNotificationsCount = $isMine
-            ? $this->notificationRepository->countUnreadNotificationsFor($person->getId())
-            : null;
-
-        // Todo: change this shit
-        $loggedPersonFollowedIds = auth()->check()
-            ? auth()->user()->following()->users()->identifiers()
-            : collect();
-
-        return [
-            'person'                   => $person,
-            'loggedPersonFollowedIds'  => $loggedPersonFollowedIds,
-            'ads'                      => $ads,
-            'isMine'                   => $isMine,
-            'followedPlaces'           => $followedPlaces,
-            'searches'                 => $searches,
-            'followingPersons'         => $followingPersons,
-            'followedPersons'          => $followedPersons,
-            'commonPersons'            => collect(),
-            'referrals'                => $referrals,
-            'isFollowed'               => $isFollowed,
-            'evaluationRatio'          => $evaluationRatio,
-            'soldAds'                  => $soldAds,
-            'unreadNotificationsCount' => $unreadNotificationsCount,
-        ];
-    }
-
-    /**
-     * Try to get the pro's profile or redirect to not existing.
-     *
-     * @param int $userId
-     *
-     * @return \Illuminate\Http\RedirectResponse|User
-     */
-    protected function retrieveOrRedirect($userId)
-    {
-        try {
-            return User::findOrFail($userId);
-        } catch (\Exception $e) {
-            return abort(404)->with('error', trans('feedback.person_not_exists_error'));
-        }
     }
 
     /**
@@ -318,12 +41,6 @@ class ProfilesController extends Controller
             switch ($request->get('settings_category')) {
                 case 'info':
                     $this->saveGeneralSettings($request->all());
-                    break;
-                case 'application':
-                    $this->saveApplicationSettings($request->all());
-                    break;
-                case 'notifications':
-                    $this->saveNotificationSettings($request->all());
                     break;
                 case 'phoneConfirm':
                     $this->confirm($request);
@@ -441,51 +158,6 @@ class ProfilesController extends Controller
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
-    }
-
-    /**
-     * Save the application settings of the authenticated person.
-     *
-     * @param  array  $data
-     *
-     * @return void
-     */
-    protected function saveApplicationSettings(array $data)
-    {
-        // Save the language locale.
-
-        $config = app('Illuminate\Contracts\Config\Repository');
-        $supportedLocales = $config->get('app.supported_locales');
-
-        if (!empty($data['locale']) && in_array($data['locale'], $supportedLocales)) {
-
-            // Updating the value that is currently present in the session.
-            $sessionManager = app('Illuminate\Session\SessionManager');
-            $sessionManager->set('lang', $data['locale']);
-
-            // Persisting the new data.
-            // TODO: remove dependency on Eloquent.
-            User::find(auth()->id())->update(['locale' => $data['locale']]);
-
-            session()->flash('success', trans('feedback.profile_edit_success'));
-        }
-    }
-
-    /**
-     * Save the notification settings of the authenticated person.
-     *
-     * @param  array  $data
-     *
-     * @return void
-     */
-    protected function saveNotificationSettings(array $data)
-    {
-        User::find(auth()->id())
-            ->update(['preferences' => [
-                'daily_digest' => isset($data['daily_digest'])
-            ]]);
-
-        session()->flash('success', trans('feedback.profile_edit_success'));
     }
 
     /**

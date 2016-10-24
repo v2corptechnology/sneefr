@@ -122,7 +122,7 @@ class StripeBilling implements BillingInterface
             'redirect_uri'  => route('payments.connect'),
             'stripe_user'   => [
                 'email'               => $user->getEmail(),
-                'url'                 => route('profiles.show', $user),
+                'url'                 => route('me.show', $user),
                 'country'             => 'usa',
                 'phone'               => $user->phone->getNumber(),
                 'business_name'       => 'sneefR Seller',

@@ -53,7 +53,7 @@ class CopyAdLocationToProfile
 
         $this->session->flash('success', trans(
             'feedback.copied_ad_location_to_your_profile',
-            ['url' => route('profiles.show', $event->ad->seller) . '#settings']
+            ['url' => route('me.show', $event->ad->seller) . '#settings']
         ));
     }
 }
