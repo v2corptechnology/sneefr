@@ -138,18 +138,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Get the value of the model's route key.
-     *
-     * @return string
-     */
-    public function getRouteKey()
-    {
-        $hashids = app('Hashids\Hashids');
-
-        return $hashids->encode($this->getKey());
-    }
-
-    /**
      * Get id of the user.
      *
      * @return int

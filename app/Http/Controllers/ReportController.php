@@ -20,11 +20,7 @@ class ReportController extends Controller
     {
         $type = $request->get('type', 'ad');
 
-        if ($type == 'ad') {
-            $id = $request->get('id');
-        } else {
-            $id = app('Hashids\Hashids')->decode($request->get('id'))[0];
-        }
+        $id = $request->get('id');
 
         $reportRepository->report($type, $id, auth()->id());
 

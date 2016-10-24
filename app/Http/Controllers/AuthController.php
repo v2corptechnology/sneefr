@@ -2,9 +2,7 @@
 
 namespace Sneefr\Http\Controllers;
 
-use Hashids\Hashids;
 use Illuminate\Contracts\Encryption\Encrypter;
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Sneefr\Events\UserRegistered;
 use Sneefr\Models\ActionLog;
