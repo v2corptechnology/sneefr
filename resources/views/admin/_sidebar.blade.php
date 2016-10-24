@@ -36,16 +36,6 @@
             <a href="{{ route('admin.reported') }}#users">{{ count($reports['users']) }} Personnes</a>
         </p>
     </li>
-    <li class="summary__item{{ setActive('admin.misc', '--selected') }}">
-        <h2 class="summary__head">
-            <i class="fa fa-bar-chart summary__icon"></i>
-            <a href="{{ route('admin.misc') }}">Divers</a>
-
-        </h2>
-        <p class="summary__content summary__content--extra">
-            {{ $totals['discussions'] }} Discussions, {{ $totals['stripe_profiles'] }} comptes Stripe
-        </p>
-    </li>
     <li class="summary__item{{ setActive('admin.searches', '--selected') }}">
         <h2 class="summary__head">
             <i class="fa fa-search summary__icon"></i>
