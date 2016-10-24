@@ -41,8 +41,5 @@
             <i class="fa fa-search summary__icon"></i>
             <a href="{{ route('admin.searches') }}">{{ $totals['searches'] }} Recherches</a>
         </h2>
-        <p class="summary__content summary__content--extra">
-            {{ $totals['shared_searches'] }} recherches partagées
-        </p>
     </li>
 </ul>

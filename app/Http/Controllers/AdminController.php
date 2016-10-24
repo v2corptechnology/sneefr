@@ -44,7 +44,6 @@ class AdminController extends Controller
             'ads.amount'      => Ad::exceptStaff()->sold()->onlyTrashed()->get()->sum('amount'),
             'reports'         => count($this->reports['ads']) + count($this->reports['users']),
             'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->get()->count(),
-            'shared_searches' => 0,
             'stripe_profiles' => 0,
         ];
     }
