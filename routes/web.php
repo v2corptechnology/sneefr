@@ -139,17 +139,6 @@ Route::bind('item', function ($value) {
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
 });
-Route::bind('profile', function ($value, $route) {
-    $hashids = app('Hashids\Hashids');
-
-    $decoded = $hashids->decode($value);
-
-    if (! isset($decoded[0])) {
-        abort(404);
-    }
-
-    return $decoded[0];
-});
 Route::bind('ad', function ($value, $route) {
     return explode('-', $value)[0];
 });

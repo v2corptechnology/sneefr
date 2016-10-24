@@ -9,7 +9,7 @@
 
 @section('modals')
     @parent
-    @include('partials.modals._delete_account', ['hash' => auth()->user()->getRouteKey()])
+    @include('partials.modals._delete_account')
 @stop
 
 @section('content')
