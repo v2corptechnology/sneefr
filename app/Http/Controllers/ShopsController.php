@@ -5,8 +5,7 @@ namespace Sneefr\Http\Controllers;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Subscription;
-use Sneefr\Http\Requests\CreateShopRequest;
-use Sneefr\Http\Requests\UpdateShopRequest;
+use Sneefr\Http\Requests\StoreShop;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shop;
@@ -103,11 +102,12 @@ class ShopsController extends Controller
     /**
      * Store a new shop entry in the database.
      *
-     * @param  \Sneefr\Http\Requests\CreateShopRequest  $request
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function store(CreateShopRequest $request)
+    public function store(StoreShop $request)
     {
         // Check if the user has no shop
         if (auth()->user()->hasShop()) {
@@ -118,7 +118,7 @@ class ShopsController extends Controller
         $shop = new Shop([
             'slug'    => $request->input('slug'),
             'user_id' => auth()->id(),
-            'data'    => $request->except('cover', 'logo', 'category'),
+            'data'    => $request->except('_token', '_method', 'cover', 'logo'),
         ]);
 
         // Store the images
@@ -168,12 +168,12 @@ class ShopsController extends Controller
     /**
      * Persist changes made on the shop.
      *
-     * @param \Sneefr\Models\Shop                      $shop
-     * @param  \Sneefr\Http\Requests\UpdateShopRequest $request
+     * @param \Sneefr\Models\Shop             $shop
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Shop $shop, UpdateShopRequest $request)
+    public function update(Shop $shop, StoreShop $request)
     {
         $this->authorize($shop);
 
@@ -188,7 +188,7 @@ class ShopsController extends Controller
         // Start by using the existing data then overwrite it
         // with any new piece of data that may come from the request.
         $updatedData = collect($shop->data)
-            ->merge($request->except('slug', 'terms', 'category'))
+            ->merge($request->except('_token', '_method', 'slug', 'terms'))
             ->merge($images);
 
         // Persist the changes
@@ -246,11 +246,11 @@ class ShopsController extends Controller
     /**
      * Check the request has at least one image.
      *
-     * @param \Sneefr\Http\Requests\UpdateShopRequest $request
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return bool
      */
-    private function imagesHasBeenChanged(UpdateShopRequest $request) : bool
+    private function imagesHasBeenChanged(StoreShop $request) : bool
     {
         return $request->hasFile('cover') || $request->hasFile('logo');
     }
