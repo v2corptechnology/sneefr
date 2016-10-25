@@ -16,7 +16,6 @@ class CreateShopTagTable extends Migration
         Schema::create('shop_tag', function (Blueprint $table) {
             $table->unsignedInteger('shop_id')->references('id')->on('shops');
             $table->unsignedInteger('tag_id')->references('id')->on('tags');
-            $table->timestamps();
 
             $table->unique(['shop_id', 'tag_id']);
         });
