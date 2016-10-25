@@ -10,6 +10,7 @@ use Sneefr\Http\Requests\UpdateShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shop;
+use Sneefr\Models\Tag;
 use Sneefr\Services\Image;
 
 /**
@@ -94,7 +95,9 @@ class ShopsController extends Controller
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
-        return view('shops.create');
+        $tags = Tag::all()->pluck('title', 'id');
+
+        return view('shops.create', compact('tags'));
     }
 
     /**
@@ -155,7 +158,9 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
-        return view('shops.edit', compact('shop'));
+        $tags = Tag::all()->pluck('title', 'id');
+
+        return view('shops.edit', compact('shop', 'tags'));
     }
 
     /**

@@ -47,6 +47,18 @@
     {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group">
+    <label for="tags" class="control-label">Tags</label>
+    {!! Form::select('tags[]', $tags, $shop->tags->pluck('id')->toArray(), [
+        'class' => 'form-control',
+        'id' => 'js-tags',
+        'size' => 5,
+        'autocomplete' => 'off',
+        'multiple',
+        'required',
+    ]) !!}
+</div>
+
 <div class="form-group {{ $errors->has('logo') ? ' has-error' : '' }}">
     <label class="control-label" for="logo">@lang('shop.create.logo_label')</label>
     <input class="input-file" id="logo" name="logo" type="file" accept="image/*"
