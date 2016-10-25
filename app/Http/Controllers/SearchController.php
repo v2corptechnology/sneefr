@@ -8,23 +8,10 @@ use Illuminate\Support\Facades\Queue;
 use Session;
 use Sneefr\Jobs\SaveSearch;
 use Sneefr\Models\Shop;
-use Sneefr\Repositories\Category\CategoryRepository;
 use Sneefr\Services\SearchService;
 
-class SearchController extends Controller {
-    /**
-     * @var \Sneefr\Repositories\Category\CategoryRepository
-     */
-    private $categoryRepository;
-
-    /**
-     * @param \Sneefr\Repositories\Category\CategoryRepository $categoryRepository
-     */
-    public function __construct(CategoryRepository $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
+class SearchController extends Controller
+{
     /**
      * @param \Illuminate\Http\Request       $request
      * @param \Sneefr\Services\SearchService $search
