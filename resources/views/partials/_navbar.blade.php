@@ -145,6 +145,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="adminMenu">
                                     <li><a href="{{ route('admin.users') }}">Stats</a></li>
+                                    <li><a href="{{ route('admin.tools') }}">Tools</a></li>
                                     <li><a href="{{ url('logs') }}">Logs</a></li>
                                 </ul>
                             </div>

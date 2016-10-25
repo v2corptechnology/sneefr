@@ -4,8 +4,10 @@ namespace Sneefr\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Sneefr\Models\Ad;
 use Sneefr\Models\ActionLog;
+use Sneefr\Models\Tag;
 use Sneefr\Models\User;
 use Sneefr\Repositories\Ad\AdRepository;
 use Sneefr\Repositories\User\UserRepository;
@@ -64,6 +66,26 @@ class AdminController extends Controller
             'lastDay' => $this->lastDay,
             'totals'  => $this->totals,
         ]);
+    }
+
+    /**
+     *
+     * @return \Illuminate\View\View
+     */
+    public function tools()
+    {
+        $tags = Tag::orderBy('title', 'asc')->get();
+
+        return view('admin.tools', compact('tags'));
+    }
+
+    public function toolsUpdate($tagId, Request $request)
+    {
+        $tag = Tag::find($tagId);
+        $tag->title = trim($request->input('title'));
+        $tag->save();
+
+        return redirect()->route('admin.tools');
     }
 
     /**
