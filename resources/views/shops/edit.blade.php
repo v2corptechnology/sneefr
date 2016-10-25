@@ -52,6 +52,7 @@
                         'location' => $shop->getLocation(),
                         'latitude' => $shop->getLatitude(),
                         'longitude' => $shop->getLongitude(),
+                        'selectedTags' => $shop->tags->pluck('id')->toArray(),
                         'isEditMode' => true,
                     ])
 

@@ -49,7 +49,7 @@
 
 <div class="form-group">
     <label for="tags" class="control-label">Tags</label>
-    {!! Form::select('tags[]', $tags, $shop->tags->pluck('id')->toArray(), [
+    {!! Form::select('tags[]', $tags, $selectedTags, [
         'class' => 'form-control',
         'id' => 'js-tags',
         'size' => 5,
@@ -57,6 +57,7 @@
         'multiple',
         'required',
     ]) !!}
+    {!! $errors->first('tags', '<p class="help-block">:message</p>') !!}
 </div>
 
 <div class="form-group {{ $errors->has('logo') ? ' has-error' : '' }}">
@@ -72,3 +73,14 @@
            accept="image/*" autocomplete="off" @if(!$isEditMode) required @endif>
     {!! $errors->first('cover', '<p class="help-block">:message</p>') !!}
 </div>
+
+@push('footer-js')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+    $('#js-tags').select2({
+        maximumSelectionLength: 4,
+        placeholder: 'Choose tags',
+    });
+</script>
+@endpush

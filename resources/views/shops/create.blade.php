@@ -51,6 +51,7 @@
                         'location' => old('location', auth()->user()->getLocation()),
                         'latitude' => old('latitude', auth()->user()->getLatitude()),
                         'longitude' => old('longitude', auth()->user()->getLongitude()),
+                        'selectedTags' => [],
                         'isEditMode' => false,
                     ])
 
