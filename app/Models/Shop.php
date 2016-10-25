@@ -81,6 +81,16 @@ class Shop extends Model
     }
 
     /**
+     * Tags applied to this shop.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * Relationship to the evaluations of this shop.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
