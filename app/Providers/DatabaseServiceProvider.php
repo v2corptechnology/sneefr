@@ -28,11 +28,6 @@ class DatabaseServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerMorphMap();
-
-
-        $this->app->bind(
-            \Sneefr\Repositories\Evaluation\EvaluationRepository::class,
-            \Sneefr\Repositories\Evaluation\EloquentEvaluationRepository::class);
     }
 
     /**
