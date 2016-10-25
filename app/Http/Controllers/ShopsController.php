@@ -9,7 +9,6 @@ use Sneefr\Http\Requests\CreateShopRequest;
 use Sneefr\Http\Requests\UpdateShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Category;
 use Sneefr\Models\Shop;
 use Sneefr\Services\Image;
 
@@ -95,9 +94,7 @@ class ShopsController extends Controller
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
-        $categories = Category::parent()->with('childrens')->get();
-
-        return view('shops.create', compact('categories'));
+        return view('shops.create');
     }
 
     /**
@@ -136,9 +133,6 @@ class ShopsController extends Controller
         // Save new shop
         $shop->save();
 
-        // Save categories for this shop
-        $shop->categories()->sync($request->get('category'));
-
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
 
@@ -161,9 +155,7 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
-        $categories = Category::parent()->with('childrens')->get();
-
-        return view('shops.edit', compact('shop', 'categories'));
+        return view('shops.edit', compact('shop'));
     }
 
     /**

@@ -258,12 +258,6 @@ class Shop extends Model
         return $this->owner->getId() === $userId;
     }
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'shop_categorie');
-    }
-
-
     /**
      * Get the map URL of this place.
      *
