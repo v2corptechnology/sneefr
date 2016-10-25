@@ -12,7 +12,6 @@ use Sneefr\Exceptions\ValidationException;
 use Sneefr\Jobs\SendPhoneNumberVerificationCode;
 use Sneefr\Jobs\VerifyEmail;
 use Sneefr\Models\User;
-use Sneefr\Repositories\User\UserRepository;
 use Sneefr\Services\Image;
 
 
@@ -164,12 +163,10 @@ class ProfilesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @param UserRepository $user
-     * @param DiscussionRepository $discussion
      *
      * @return Response
      */
-    public function destroy($id, UserRepository $user, DiscussionRepository $discussion)
+    public function destroy($id)
     {
         if (auth()->id() == $id) {
             $user = User::findOrFail(auth()->id());

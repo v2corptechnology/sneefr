@@ -29,10 +29,6 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         $this->registerMorphMap();
 
-        $this->app->bind(
-            \Sneefr\Repositories\User\UserRepository::class,
-            \Sneefr\Repositories\User\EloquentUserRepository::class);
-
 
         $this->app->bind(
             \Sneefr\Repositories\Evaluation\EvaluationRepository::class,

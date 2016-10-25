@@ -9,7 +9,6 @@ use Sneefr\Models\Ad;
 use Sneefr\Models\ActionLog;
 use Sneefr\Models\Tag;
 use Sneefr\Models\User;
-use Sneefr\Repositories\User\UserRepository;
 
 class AdminController extends Controller
 {
@@ -17,10 +16,7 @@ class AdminController extends Controller
     public $lastDay;
     public $yesterday;
 
-    /**
-     * @param \Sneefr\Repositories\User\UserRepository $userRepository
-     */
-    public function __construct(UserRepository $userRepository)
+    public function __construct()
     {
         $this->yesterday = Carbon::now()->subDay();
 
