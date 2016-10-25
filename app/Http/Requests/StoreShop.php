@@ -2,7 +2,7 @@
 
 namespace Sneefr\Http\Requests;
 
-class UpdateShopRequest extends Request
+class StoreShop extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,16 @@ class UpdateShopRequest extends Request
     public function rules()
     {
         return [
-            'name'        => 'required|between:3,100',
+            'name'        => 'sometimes|required|between:3,100',
+            'slug'        => 'required_if:terms,1|alpha_dash|between:3,120|unique:shops|not_in:demo,admin,stats,blog,shop,shops,forum,help,faq',
             'description' => 'required',
             'location'    => 'required',
             'latitude'    => 'required|numeric',
             'longitude'   => 'required|numeric',
-            'logo'        => 'image',
-            'cover'       => 'image',
-            'category'    => 'required|exists:categories,id',
+            'logo'        => 'required_if:terms,1|image',
+            'cover'       => 'required_if:terms,1|image',
+            'terms'       => 'sometimes|required',
+            'tags'        => 'required|array',
         ];
     }
 
@@ -40,14 +42,10 @@ class UpdateShopRequest extends Request
      */
     public function sanitize()
     {
-        $this->offsetUnset('_token');
-        $this->offsetUnset('_method');
-        $input = $this->all();
-
-        $input['latitude'] = (float) $input['latitude'];
-        $input['longitude'] = (float) $input['longitude'];
-
-        $this->replace($input);
+        $this->merge([
+            'latitude'  => (float) $this->input('latitude'),
+            'longitude' => (float) $this->input('longitude'),
+        ]);
 
         return $this->all();
     }

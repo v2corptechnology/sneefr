@@ -89,7 +89,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function shop()
     {
-        return $this->hasOne(Shop::class)->withTrashed();
+        return $this->belongsTo(Shop::class)->withTrashed();
     }
 
     /**
@@ -99,7 +99,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function hasShop() : bool
     {
-        return (bool) $this->shop->count();
+        return (bool) $this->shop()->count();
     }
 
 

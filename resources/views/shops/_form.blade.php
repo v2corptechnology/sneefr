@@ -47,6 +47,19 @@
     {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group">
+    <label for="tags" class="control-label">Tags</label>
+    {!! Form::select('tags[]', $tags, $selectedTags, [
+        'class' => 'form-control',
+        'id' => 'js-tags',
+        'size' => 5,
+        'autocomplete' => 'off',
+        'multiple',
+        'required',
+    ]) !!}
+    {!! $errors->first('tags', '<p class="help-block">:message</p>') !!}
+</div>
+
 <div class="form-group {{ $errors->has('logo') ? ' has-error' : '' }}">
     <label class="control-label" for="logo">@lang('shop.create.logo_label')</label>
     <input class="input-file" id="logo" name="logo" type="file" accept="image/*"
@@ -61,24 +74,13 @@
     {!! $errors->first('cover', '<p class="help-block">:message</p>') !!}
 </div>
 
-<div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
-    <label class="control-label" for="cover">@lang('shop.create.category_label')</label>
-   <div class="row">
-       @foreach($categories as $category)
-           <div class="col-sm-4">
-               <label>
-                   <input class="margin-right" type="checkbox" name="category[]" value="{{ $category->id }}" {{ in_array($category->id, $shop_categories) ? 'checked' : '' }}>{{ trans("category.{$category->id}") }}
-               </label>
-           </div>
-           @foreach($category->childrens as $child)
-               <div class="col-sm-4">
-                   <label class="gray-light">
-                       <input class="margin-right" type="checkbox" name="category[]" value="{{ $child->id }}" {{ in_array($category->id, $shop_categories) ? 'checked' : '' }}>{{ trans("category.{$child->id}") }}
-                   </label>
-               </div>
-           @endforeach
-
-       @endforeach
-   </div>
-    {!! $errors->first('category', '<p class="help-block">:message</p>') !!}
-</div>
+@push('footer-js')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+    $('#js-tags').select2({
+        maximumSelectionLength: 4,
+        placeholder: 'Choose tags',
+    });
+</script>
+@endpush
