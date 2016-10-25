@@ -29,7 +29,6 @@ class UpdateShopRequest extends Request
             'longitude'   => 'required|numeric',
             'logo'        => 'image',
             'cover'       => 'image',
-            'category'    => 'required|exists:categories,id',
         ];
     }
 

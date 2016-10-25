@@ -176,9 +176,6 @@ class ShopsController extends Controller
             $images = $this->moveImages($shop, $request);
         }
 
-        // Update categories of this shop
-        $shop->categories()->sync($request->get('category'));
-
         // Start by using the existing data then overwrite it
         // with any new piece of data that may come from the request.
         $updatedData = collect($shop->data)
