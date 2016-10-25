@@ -136,6 +136,8 @@ class ShopsController extends Controller
         // Save new shop
         $shop->save();
 
+        $shop->tags()->sync($request->input('tags'));
+
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
 
@@ -174,6 +176,8 @@ class ShopsController extends Controller
     public function update(Shop $shop, UpdateShopRequest $request)
     {
         $this->authorize($shop);
+
+        $shop->tags()->sync($request->input('tags'));
 
         $images = [];
         // Update the images only if necessary
