@@ -48,10 +48,6 @@ class DatabaseServiceProvider extends ServiceProvider
         $this->app->bind(
             \Sneefr\Repositories\Evaluation\EvaluationRepository::class,
             \Sneefr\Repositories\Evaluation\EloquentEvaluationRepository::class);
-
-        $this->app->bind(
-            \Sneefr\Repositories\Shop\ShopRepository::class,
-            \Sneefr\Repositories\Shop\EloquentShopRepository::class);
     }
 
     /**
