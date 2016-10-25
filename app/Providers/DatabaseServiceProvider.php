@@ -33,10 +33,6 @@ class DatabaseServiceProvider extends ServiceProvider
             \Sneefr\Repositories\User\UserRepository::class,
             \Sneefr\Repositories\User\EloquentUserRepository::class);
 
-        $this->app->bind(
-            \Sneefr\Repositories\Ad\AdRepository::class,
-            \Sneefr\Repositories\Ad\EloquentAdRepository::class);
-
 
         $this->app->bind(
             \Sneefr\Repositories\Evaluation\EvaluationRepository::class,

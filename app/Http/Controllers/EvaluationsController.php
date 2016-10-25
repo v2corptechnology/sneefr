@@ -6,8 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Evaluation;
-use Sneefr\Models\User;
 use Sneefr\Repositories\Evaluation\EvaluationRepository;
 
 class EvaluationsController extends Controller
@@ -16,16 +14,6 @@ class EvaluationsController extends Controller
      * @var \Illuminate\Contracts\Encryption\Encrypter
      */
     protected $encrypter;
-
-    /**
-     * @var \Sneefr\Repositories\Ad\AdRepository
-     */
-    protected $adRepository;
-
-    /**
-     * @var \Sneefr\Models\Ad
-     */
-    protected $ad;
 
     /**
      * @var \Sneefr\Repositories\Evaluation\EvaluationRepository
