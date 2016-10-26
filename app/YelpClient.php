@@ -13,6 +13,11 @@ class YelpClient
     private $client;
 
     /**
+     * @var Array
+     */
+    private $defaultOptions = ['radius' => 40000, 'limit' => 50, 'offset' => 1, 'categories' => 'shopping'];
+
+    /**
      * YelpClient constructor.
      *
      * @param \GuzzleHttp\ClientInterface $client
@@ -33,8 +38,8 @@ class YelpClient
      */
     public function getBusinessesAround(float $latitude, float $longitude, array $options = []) : Collection
     {
-        $defaults = ['radius' => 40000, 'limit' => 50, 'offset' => 1, 'categories' => 'shopping'];
-        $options = array_merge($defaults, $options);
+        $options = array_merge($this->defaultOptions, $options);
+
         $client = $this->client;
 
         $url = "businesses/search?latitude={$latitude}&longitude={$longitude}&radius={$options['radius']}&limit={$options['limit']}&offset={$options['offset']}&categories={$options['categories']}";
