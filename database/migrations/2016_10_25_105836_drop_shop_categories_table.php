@@ -23,7 +23,7 @@ class DropShopCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('shop_categorie', function (Blueprint $table) {
+        Schema::create('shop_categorie', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('shop_id');
             $table->unsignedInteger('category_id');

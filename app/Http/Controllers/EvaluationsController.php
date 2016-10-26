@@ -6,9 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Http\Request;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Evaluation;
-use Sneefr\Models\User;
-use Sneefr\Repositories\Evaluation\EvaluationRepository;
 
 class EvaluationsController extends Controller
 {
@@ -18,29 +15,13 @@ class EvaluationsController extends Controller
     protected $encrypter;
 
     /**
-     * @var \Sneefr\Repositories\Ad\AdRepository
-     */
-    protected $adRepository;
-
-    /**
-     * @var \Sneefr\Models\Ad
-     */
-    protected $ad;
-
-    /**
-     * @var \Sneefr\Repositories\Evaluation\EvaluationRepository
-     */
-    protected $EvaluationRepository;
-
-    /**
      * EvaluationsController constructor.
      *
      * @param \Illuminate\Contracts\Encryption\Encrypter $encrypter
      */
-    public function __construct(Encrypter $encrypter, EvaluationRepository $EvaluationRepository)
+    public function __construct(Encrypter $encrypter)
     {
         $this->encrypter = $encrypter;
-        $this->EvaluationRepository = $EvaluationRepository;
     }
 
     /**
@@ -72,14 +53,22 @@ class EvaluationsController extends Controller
 
         $this->authorize('review', $this->ad);
 
-        $this->EvaluationRepository->evaluate(
-            auth()->id(),
-            $this->getAssessedId($this->ad),
-            $this->ad,
-            $request->get('evaluation'),
-            $request->get('body'),
-            'valid'
-        );
+        $data = [
+            'user_id'      => auth()->id(),
+            'ad_id'        => $this->ad->getId(),
+            'value'        => $request->get('evaluation'),
+            'body'         => $request->get('body'),
+            'status'       => 'valid',
+        ];
+
+
+        if($this->ad->isInShop()){
+            $shop = Shop::find($this->ad->getShopId());
+            return $shop->evaluations()->create($data);
+        }
+
+        $user = User::find($this->getAssessedId($this->ad));
+        $user->evaluations()->create($data);
 
         return redirect()
             ->route('home')

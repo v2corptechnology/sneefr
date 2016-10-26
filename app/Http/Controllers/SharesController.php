@@ -4,7 +4,6 @@ namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Sneefr\Models\Ad;
-use Sneefr\Repositories\Ad\AdRepository;
 
 class SharesController extends Controller
 {
@@ -13,13 +12,12 @@ class SharesController extends Controller
      *
      * @param int                                  $adId
      * @param \Illuminate\Http\Request             $request
-     * @param \Sneefr\Repositories\Ad\AdRepository $adRepository
      *
      * @return string
      */
-    public function shareAd(int $adId, Request $request, AdRepository $adRepository)
+    public function shareAd(int $adId, Request $request)
     {
-        $ad = $adRepository->find($adId);
+        $ad = Ad::find($adId);
 
         $shareUrl = $this->getSharingUrl($ad, $request->get('redirect_uri'));
 
