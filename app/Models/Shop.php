@@ -97,7 +97,7 @@ class Shop extends Model
      */
     public function evaluations()
     {
-        return $this->morphMany(Evaluation::class, 'evaluated');
+        return $this->hasMany(Evaluation::class)->valid();
     }
 
     /**
