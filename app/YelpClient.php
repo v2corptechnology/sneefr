@@ -39,9 +39,18 @@ class YelpClient
 
         $url = "businesses/search?latitude={$latitude}&longitude={$longitude}&radius={$options['radius']}&limit={$options['limit']}&offset={$options['offset']}&categories={$options['categories']}";
 
-        return cache()->remember($url, 24 * 60 * 60, function () use ($client, $url) {
-            return collect(json_decode((string) $client->get($url)->getBody(), true)['businesses']);
+        cache()->rememberForever('yelp_shops_results_for_la', function() use ($client, $url) {
+            $result = json_decode((string) $client->get($url)->getBody(), true);
+
+            return $result['total'];
         });
+
+        // If offset overlaps results, skip the call
+        if ($options['offset'] > cache()->get('yelp_shops_results_for_la')) {
+            return collect();
+        }
+
+        return collect(json_decode((string) $client->get($url)->getBody(), true)['businesses']);
     }
 
 }
