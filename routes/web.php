@@ -123,7 +123,6 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/deals', ['as' => 'admin.deals', 'uses' => 'AdminController@deals']);
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
-    Route::get('kitchensink', 'KitchensinkController@index');
 });
 
 /** Devs only */
