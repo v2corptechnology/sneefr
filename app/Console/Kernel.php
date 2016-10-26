@@ -4,6 +4,7 @@ namespace Sneefr\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Sneefr\Models\Evaluation;
 
 class Kernel extends ConsoleKernel
 {
@@ -40,9 +41,9 @@ class Kernel extends ConsoleKernel
         })->hourly();
 
         $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\ForceOutdatedEvaluations'));
-        })->hourly();
+            // Force outdated evaluations
+            Evaluation::pending()->daysOld(10)->update(['status' => Evaluation::STATUS_FORCED]);
+        })->daily();
 
         // Daily calls
 
