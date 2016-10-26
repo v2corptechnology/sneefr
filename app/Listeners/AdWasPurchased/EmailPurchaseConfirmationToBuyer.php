@@ -2,9 +2,6 @@
 
 namespace Sneefr\Listeners\AdWasPurchased;
 
-use Carbon\Carbon;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Sneefr\Events\AdWasPurchased;
@@ -13,32 +10,18 @@ use Sneefr\Price;
 class EmailPurchaseConfirmationToBuyer implements ShouldQueue
 {
     /**
-     * @var \Illuminate\Contracts\Encryption\Encrypter
-     */
-    private $encrypter;
-
-    /**
      * @var \Illuminate\Contracts\Mail\Mailer
      */
     private $mailer;
 
     /**
-     * @var \Illuminate\Contracts\Config\Repository
-     */
-    private $config;
-
-    /**
      * Create the event listener.
      *
-     * @param \Illuminate\Contracts\Mail\Mailer          $mailer
-     * @param \Illuminate\Contracts\Encryption\Encrypter $encrypter
-     * @param \Illuminate\Contracts\Config\Repository    $config
+     * @param \Illuminate\Contracts\Mail\Mailer $mailer
      */
-    public function __construct(Mailer $mailer, Encrypter $encrypter, Repository $config)
+    public function __construct(Mailer $mailer)
     {
-        $this->encrypter = $encrypter;
         $this->mailer = $mailer;
-        $this->config = $config;
     }
 
     /**
@@ -58,7 +41,7 @@ class EmailPurchaseConfirmationToBuyer implements ShouldQueue
             'shop'         => $event->ad->shop,
             'quantity'     => $request->get('quantity', 1),
             'price'        => $price->readable2(),
-            'evaluateLink' => $this->generateProtectedLink($event),
+            'evaluateLink' => route('evaluations.create', ['ad' => $event->ad->getId()]),
         ];
 
         $this->mailer->send('emails.purchased', $data, function ($mail) use ($data, $recipient) {
@@ -69,22 +52,5 @@ class EmailPurchaseConfirmationToBuyer implements ShouldQueue
 
             $mail->subject(trans('mails.purchased.inbox_title'));
         });
-    }
-
-    /**
-     * Generate the protected link to fill the evaluation.
-     *
-     * @param \Sneefr\Events\AdWasPurchased $event
-     *
-     * @return string
-     */
-    protected function generateProtectedLink(AdWasPurchased $event) : string
-    {
-        $linkInfo = $this->encrypter->encrypt([
-            'ad_id'      => $event->ad->getId(),
-            'expires_at' => Carbon::now()->addDays(10),
-        ]);
-
-        return route('evaluations.create', ['key' => $linkInfo]);
     }
 }

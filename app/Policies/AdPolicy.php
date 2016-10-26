@@ -79,19 +79,4 @@ class AdPolicy
         // If none of that, the user is not allowed to remove the ad
         abort(403, "You are not authorized to remove this ad");
     }
-
-    /**
-     * Check this user if he is the buyer
-     *
-     * @param User $user
-     * @param Ad $ad
-     * @return bool
-     */
-    public function review(User $user, Ad $ad)
-    {
-        if (!$ad->buyer || $ad->buyer->getId() != $user->getId()) {
-            abort(403, "You are not authorized to review this ad");
-        }
-        return true;
-    }
 }

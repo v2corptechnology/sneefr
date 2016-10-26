@@ -40,15 +40,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="body">Commentaire <small>(facultatif)</small></label>
-                        <textarea class="form-control" id="body" name="body" placeholder="Laissez votre commentaire..." cols="10" rows="3"></textarea>
+                        <label class="control-label" for="body">Comment <small>(optional)</small></label>
+                        <textarea class="form-control" id="body" name="body" placeholder="Leave your comment..." cols="10" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <button class="btn btn-lg btn-primary btn-primary2 pull-right">@lang('evaluations.create.save_label')</button>
                     </div>
 
-                    <input type="hidden" name="key" value="{{ $key }}">
+                    <input type="hidden" name="ad" value="{{ $ad->getId() }}">
                 </form>
             </div>
         </div>

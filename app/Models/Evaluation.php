@@ -2,111 +2,72 @@
 
 namespace Sneefr\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Sneefr\Support\EvaluationCollection;
 
 class Evaluation extends Model
 {
-
-    use SoftDeletes;
-
-    protected $dates = ['deleted_at'];
-
+    const STATUS_FORCED = 'forced';
+    const STATUS_PENDING = 'pending';
+    const STATUS_GIVEN = 'given';
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'evaluations';
-
-    /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $fillable = ['shop_id', 'evaluator_id', 'ad_id', 'status', 'is_positive', 'body'];
 
     /**
-     * The attributes we can mass assign.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id',
-        'evaluated_id',
-        'evaluated_type',
-        'ad_id',
-        'status',
-        'value',
-        'body',
-    ];
+    protected $casts = ['is_positive' => 'boolean'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-
-    public function ad()
-    {
-        return $this->belongsTo(Ad::class);
-    }
 
     /**
-     * evaluated Shop or User relation
-     * @return Object
-     */
-    public function evaluated()
-    {
-        return $this->morphTo();
-    }
-
-    public function scopeType($query, $type)
-    {
-        if($type == "shop")
-        {
-            return $query->where('evaluated_type', Shop::class);
-        }
-        return $query->where('evaluated_type', User::class);
-    }
-
-    public function scopeValid($query)
-    {
-        return $query->where(function ($q) {
-            $q->where('status', 'valid')->orWhere('status', 'forced');
-        });
-    }
-
-    public function scopeNegative($query)
-    {
-        return $query->where('value', 0);
-    }
-
-    public function scopePositive($query)
-    {
-        return $query->where('value', 1);
-    }
-
-    public function getIsForcedAttribute()
-    {
-        return $this->status == 'forced';
-    }
-
-    public function getIsWaitingAttribute()
-    {
-        return $this->status == 'waiting';
-    }
-
-    public function getIsValidatedAttribute()
-    {
-        return $this->status == 'valid';
-    }
-
-    /**
-     * Create a new Eloquent Collection instance.
+     * Evaluations older than x days.
      *
-     * @param  array  $models
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param int                                   $days
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDaysOld(Builder $query, int $days = 1) : Builder
+    {
+        return $query->whereDate('created_at', '<', Carbon::now()->subDays($days)->toDateTimeString());
+    }
+
+    /**
+     * Filter only pending evaluations.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePending(Builder $query) : Builder
+    {
+        return $query->where('status', self::STATUS_PENDING);
+    }
+
+    /**
+     * Filter only valid evaluations (evaluations that can be displayed).
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeValid(Builder $query) : Builder
+    {
+        return $query->whereIn('status', [self::STATUS_FORCED, self::STATUS_GIVEN]);
+    }
+
+    /**
+     * Create a new Evaluation Collection instance.
+     *
+     * @param  array $models
      *
      * @return \Sneefr\Support\EvaluationCollection
      */
