@@ -5,6 +5,7 @@ namespace Sneefr\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Sneefr\Support\EvaluationCollection;
 
 class Evaluation extends Model
 {
@@ -61,5 +62,17 @@ class Evaluation extends Model
     public function scopeValid(Builder $query) : Builder
     {
         return $query->whereIn('status', [self::STATUS_FORCED, self::STATUS_GIVEN]);
+    }
+
+    /**
+     * Create a new Evaluation Collection instance.
+     *
+     * @param  array $models
+     *
+     * @return \Sneefr\Support\EvaluationCollection
+     */
+    public function newCollection(array $models = []) : EvaluationCollection
+    {
+        return new EvaluationCollection($models);
     }
 }

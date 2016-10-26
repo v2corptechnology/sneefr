@@ -9,9 +9,9 @@ class EvaluationCollection extends Collection
     /**
      * Get latest evaluations.
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Sneefr\Support\EvaluationCollection
      */
-    public function latest() : Collection
+    public function latest() : self
     {
          return $this->sortByDesc('created_at');
     }
@@ -32,21 +32,21 @@ class EvaluationCollection extends Collection
     /**
      * Get positive evaluations.
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Sneefr\Support\EvaluationCollection
      */
-    public function positives() : Collection
+    public function positives() : self
     {
-        return $this->where('value', '1');
+        return $this->where('is_positive', true);
     }
 
     /**
      * Get negative evaluations.
      *
-     * @return \Illuminate\Support\Collection
+     *
+     * @return \Sneefr\Support\EvaluationCollection
      */
-    public function negatives() : Collection
+    public function negatives() : self
     {
-        return $this->where('value', '0');
+        return $this->where('is_positive', false);
     }
-
 }
