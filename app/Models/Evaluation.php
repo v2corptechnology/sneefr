@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation extends Model
 {
+    const STATUS_PENDING = 'pending';
     /**
      * The attributes that are mass assignable.
      *
