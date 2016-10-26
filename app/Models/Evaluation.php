@@ -16,7 +16,7 @@ class Evaluation extends Model
      *
      * @var array
      */
-    protected $fillable = ['shop_id', 'user_id', 'ad_id', 'status', 'is_positive', 'body'];
+    protected $fillable = ['shop_id', 'evaluator_id', 'ad_id', 'status', 'is_positive', 'body'];
 
     /**
      * The attributes that should be cast to native types.

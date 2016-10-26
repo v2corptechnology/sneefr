@@ -16,7 +16,7 @@ class CreateEvaluationsTable extends Migration
         Schema::create('evaluations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('shop_id')->references('id')->on('shops');
-            $table->unsignedInteger('user_id')->references('id')->on('users');
+            $table->unsignedInteger('evaluator_id')->references('id')->on('users');
             $table->unsignedInteger('ad_id')->references('id')->on('ads');
             $table->enum('status', ['given', 'pending', 'forced']);
             $table->boolean('is_positive');

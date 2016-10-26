@@ -18,12 +18,12 @@ class CreatePendingEvaluation implements ShouldQueue
     public function handle(AdWasPurchased $event)
     {
         Evaluation::create([
-            'shop_id'     => $event->ad->shop->id,
-            'user_id'     => $event->buyer->id,
-            'ad_id'       => $event->ad->id,
-            'status'      => Evaluation::STATUS_PENDING,
-            'is_positive' => 1,
-            'body'        => null,
+            'shop_id'           => $event->ad->shop->id,
+            'evaluator_id' => $event->buyer->id,
+            'ad_id'             => $event->ad->id,
+            'status'            => Evaluation::STATUS_PENDING,
+            'is_positive'       => 1,
+            'body'              => null,
         ]);
     }
 }
