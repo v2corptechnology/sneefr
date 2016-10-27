@@ -18,6 +18,7 @@
     @endpush
 
     <div class="form-group">
+        <label for="shop_id" class="control-label">Create as...</label>
         {!! Form::select('shop_id', \Sneefr\Models\Shop::where('user_id', auth()->id())->get()->each(function($shop){
             $shop['title'] = $shop->getName();
         })->pluck('title', 'id'), null, [
