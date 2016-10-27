@@ -26,7 +26,7 @@
 
         <div class="row" id="shop-categories">
 
-            @include('pages.home.shops-by-category', ['categories' => $categories, 'shops' => $shopsByCategory])
+            @include('pages.home.shops-by-category', ['tags' => $tags, 'shops' => $shopsInTag])
 
         </div>
 

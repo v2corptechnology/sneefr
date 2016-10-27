@@ -19,4 +19,9 @@ class Tag extends Model
      * @var array
      */
     protected $casts = ['yelp_data' => 'array'];
+
+    public function shops()
+    {
+        return $this->belongsToMany(Shop::class);
+    }
 }

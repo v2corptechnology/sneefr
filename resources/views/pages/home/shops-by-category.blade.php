@@ -12,22 +12,10 @@
                 <li>
                     <a href="{{ route('home') }}#shop-categories">All</a>
                 </li>
-                @foreach($categories as $category)
-                    <li class="home__categories__item{{ $categories->parent == $category->id ? '--active' : '' }}">
-                        <a href="{{ route('home', "category={$category->id}#shop-categories") }}">{{ trans("category.{$category->id}") }}</a>
+                @foreach($tags as $tag)
+                    <li class="home__categories__item">
+                        <a href="{{ route('home', "tag={$tag->alias}#shop-categories") }}">{{ $tag->title }}</a>
                     </li>
-                    @if( $categories->parent == $category->id && $category->childrens)
-                        <ul class="home__categories home__categories--child">
-                            @foreach($category->childrens as $child)
-                                <li class="home__categories__item{{ $categories->child == $child->id ? '--active' : '' }}">
-                                    @if($categories->child == $child->id)
-                                        <i class="fa fa-check color-pink home__categories__item--checked"></i>
-                                    @endif
-                                    <a href="{{ route('home', "category={$child->id}") }}#shop-categories">{{ trans("category.{$child->id}") }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
                 @endforeach
             </ul>
         </div>
