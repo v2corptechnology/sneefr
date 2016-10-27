@@ -21,6 +21,8 @@ class SearchController extends Controller
     {
         $query = $request->get('q');
         $type = $request->get('type', 'ad');
+        //$sort = $request->get('sort');
+        //$order = $request->get('order', 'desc');
 
         $ads = Ad::search($query)->get()->take(20);
         $shops = Shop::search($query)->get()->take(20);

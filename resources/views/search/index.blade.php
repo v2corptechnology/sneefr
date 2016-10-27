@@ -30,6 +30,7 @@
                     If we are searching for ads,
                     display a menu providing ways to order the search results.
                 --}}
+                {{--
                 @if ($type == 'ad' && $ads->count())
                     @include('partials._sort_menu', [
                         'urlParams' => $request->all(),
@@ -37,6 +38,7 @@
                         'order' => $request->get('order')
                     ])
                 @endif
+                --}}
             </nav>
         </div>
 
