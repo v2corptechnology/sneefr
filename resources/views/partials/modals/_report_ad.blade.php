@@ -9,12 +9,13 @@
                 <p>@lang('modal.report_ad_body')</p>
             </div>
             <div class="modal-footer">
-                {!! Form::open(['route' => ['report.store']]) !!}
-                <input type="hidden" name="id" value="{{ $id }}">
-                <input type="hidden" name="type" value="ad">
-                <button class="btn btn-danger" type="submit">@lang('modal.report_ad_confirm')</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('modal.report_ad_cancel')</button>
-                {!! Form::close() !!}
+                <form action="{{ route('report.store') }}" method="post">
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="id" value="{{ $id }}">
+                    <input type="hidden" name="type" value="ad">
+                    <button class="btn btn-danger" type="submit">@lang('modal.report_ad_confirm')</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('modal.report_ad_cancel')</button>
+                </form>
             </div>
         </div>
     </div>
