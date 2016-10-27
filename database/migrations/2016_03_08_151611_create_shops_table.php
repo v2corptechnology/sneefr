@@ -31,10 +31,6 @@ class CreateShopsTable extends Migration
         Schema::table('ads', function (Blueprint $table) {
             $table->foreign('shop_id', 'ads_shop_id_foreign')->references('id')->on('shops');
         });
-
-        Schema::table('discussions', function (Blueprint $table) {
-            $table->foreign('shop_id', 'discussions_shop_id_foreign')->references('id')->on('shops');
-        });
     }
 
     /**
@@ -46,10 +42,6 @@ class CreateShopsTable extends Migration
     {
         Schema::table('ads', function (Blueprint $table) {
             $table->dropForeign('ads_shop_id_foreign');
-        });
-
-        Schema::table('discussions', function (Blueprint $table) {
-            $table->dropForeign('discussions_shop_id_foreign');
         });
 
         Schema::drop('shops');

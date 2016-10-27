@@ -31,8 +31,6 @@ class CreateUsersTable extends Migration
             $table->text('location')->nullable();
             $table->float('lat', 10, 6)->nullable();
             $table->float('long', 10, 6)->nullable();
-            $table->json('gamification_objectives')->nullable();
-            $table->json('preferences')->nullable();
             $table->json('data')->nullable();
             $table->json('payment')->nullable()->default(null);
             $table->string('stripe_id')->nullable();
