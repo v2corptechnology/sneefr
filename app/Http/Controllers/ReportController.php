@@ -3,30 +3,25 @@
 namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Sneefr\Repositories\Report\ReportRepository;
 
 class ReportController extends Controller
 {
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request                                      $request
-     * @param \Sneefr\Repositories\Report\ReportRepository $reportRepository
+     * @param Request $request
      *
      * @return \Sneefr\Http\Controllers\Response
      */
-    public function store(Request $request, ReportRepository $reportRepository)
+    public function store(Request $request)
     {
         $type = $request->get('type', 'ad');
 
-        if ($type == 'ad') {
-            $id = $request->get('id');
-        } else {
-            $id = app('Hashids\Hashids')->decode($request->get('id'))[0];
-        }
-
-        $reportRepository->report($type, $id, auth()->id());
+        Report::create([
+            'user_id'         => auth()->id(),
+            'reportable_id'   => $request->get('id'),
+            'reportable_type' => $type == 'profile' ? 'Sneefr\Models\User' : 'Sneefr\Models\Ad',
+        ]);
 
         return back()->with('success', trans('feedback.report_success'));
     }

@@ -8,24 +8,10 @@ use Illuminate\Support\Facades\Queue;
 use Session;
 use Sneefr\Jobs\SaveSearch;
 use Sneefr\Models\Shop;
-use Sneefr\Repositories\Category\CategoryRepository;
-use Sneefr\Repositories\Search\SearchRepository;
 use Sneefr\Services\SearchService;
 
-class SearchController extends Controller {
-    /**
-     * @var \Sneefr\Repositories\Category\CategoryRepository
-     */
-    private $categoryRepository;
-
-    /**
-     * @param \Sneefr\Repositories\Category\CategoryRepository $categoryRepository
-     */
-    public function __construct(CategoryRepository $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
+class SearchController extends Controller
+{
     /**
      * @param \Illuminate\Http\Request       $request
      * @param \Sneefr\Services\SearchService $search
@@ -49,39 +35,6 @@ class SearchController extends Controller {
         Queue::push(new SaveSearch($query, auth()->id(), $request));
 
         return view('search.index', compact('ads', 'shops', 'linkedCategories', 'query', 'type', 'request'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * TODO: Use formRequest
-     *
-     * @param                                              $searchId
-     * @param \Sneefr\Repositories\Search\SearchRepository $searchRepository
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($searchId, SearchRepository $searchRepository)
-    {
-        $searchRepository->delete($searchId);
-
-        return back()->with('success', trans('feedback.search_deleted_success'));
-    }
-
-    /**
-     * Publish a search on the person's profile
-     * TODO: Use formRequest
-     *
-     * @param Request                                      $request
-     * @param \Sneefr\Repositories\Search\SearchRepository $searchRepository
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request, SearchRepository $searchRepository)
-    {
-        $searchRepository->create(auth()->id(), $request->get('query'));
-
-        return redirect()->route('home')
-            ->with('success', trans('feedback.search_shared', ['search' => $request->get('query')]));
     }
 
     /**

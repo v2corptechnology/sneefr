@@ -44,7 +44,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'verified',
         'token',
         'birthdate',
-        'preferences',
         'data',
         'payment',
         'stripe_id',
@@ -62,7 +61,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $casts = [
         'verified'       => 'bool',
         'email_verified' => 'bool',
-        'preferences'    => 'array',
         'data'           => 'array',
         'payment'        => 'array',
     ];
@@ -72,7 +70,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long', 'preferences'];
+    protected static $logAttributes = ['surname', 'given_name', 'email', 'email_verified', 'gender', 'verified', 'birthdate', 'phone', 'location', 'lat', 'long'];
 
     /**
      * The presenter used by front-end for this model.
@@ -101,7 +99,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function hasShop() : bool
     {
-        return (bool) $this->shop->count();
+        return (bool) $this->shop()->count();
     }
 
 
@@ -113,11 +111,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
-    }
-
-    public function referrals()
-    {
-        return $this->hasMany(Referral::class, 'referent_user_id');
     }
 
     /**
@@ -142,18 +135,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->whereDate('created_at', '>=', \Carbon\Carbon::now()->subYear(1)->toDateString())
             ->with('seller', 'buyer', 'ad', 'ad.shop')
             ->latest();
-    }
-
-    /**
-     * Get the value of the model's route key.
-     *
-     * @return string
-     */
-    public function getRouteKey()
-    {
-        $hashids = app('Hashids\Hashids');
-
-        return $hashids->encode($this->getKey());
     }
 
     /**

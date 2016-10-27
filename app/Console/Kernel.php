@@ -4,6 +4,7 @@ namespace Sneefr\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Sneefr\Models\Evaluation;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Sneefr\Console\Commands\ClearAlgoliaIndex::class,
+        \Sneefr\Console\Commands\ImportYelpShop::class,
         \Sneefr\Console\Commands\InitAlgoliaIndices::class,
     ];
 
@@ -26,6 +28,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Very frequent calls
+
+        if (false) {
+            $schedule->command('yelp:import')->everyMinute();
+        }
 
         // Calls made every hour
 
@@ -40,9 +46,9 @@ class Kernel extends ConsoleKernel
         })->hourly();
 
         $schedule->call(function () {
-            app('Illuminate\Contracts\Bus\Dispatcher')
-                ->dispatch(app('Sneefr\Jobs\ForceOutdatedEvaluations'));
-        })->hourly();
+            // Force outdated evaluations
+            Evaluation::pending()->daysOld(10)->update(['status' => Evaluation::STATUS_FORCED]);
+        })->daily();
 
         // Daily calls
 

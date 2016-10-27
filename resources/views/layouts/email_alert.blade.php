@@ -162,7 +162,7 @@
     <tr style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
         <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">
             @lang('mail.footer', ['url' => route('home')])
-            @lang('mail.subscriptions', ['url' => route('me.index')])
+            @lang('mail.subscriptions', ['url' => route('me.show')])
         </td>
     </tr>
 </table>

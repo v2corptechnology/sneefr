@@ -5,7 +5,7 @@ namespace Sneefr\Listeners\AdWasPosted;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Session\Store as Session;
 use Sneefr\Events\AdWasPosted;
-use Sneefr\Repositories\User\UserRepository;
+use Sneefr\Models\User;
 
 class CopyAdLocationToProfile
 {
@@ -17,20 +17,13 @@ class CopyAdLocationToProfile
     protected $session;
 
     /**
-     * @var \Sneefr\Repositories\User\UserRepository
-     */
-    private $userRepository;
-
-    /**
      * Create new instance of event
      *
-     * @param \Illuminate\Session\Store                $session
-     * @param \Sneefr\Repositories\User\UserRepository $userRepository
+     * @param \Illuminate\Session\Store $session
      */
-    public function __construct(Session $session, UserRepository $userRepository)
+    public function __construct(Session $session)
     {
         $this->session = $session;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -44,8 +37,7 @@ class CopyAdLocationToProfile
             return;
         }
 
-        $this->userRepository->update([
-            'id'       => $event->ad->seller->getId(),
+        User::find($event->ad->seller->getId())->update([
             'location' => $event->ad->location(),
             'lat'      => $event->ad->latitude(),
             'long'     => $event->ad->longitude(),
@@ -53,7 +45,7 @@ class CopyAdLocationToProfile
 
         $this->session->flash('success', trans(
             'feedback.copied_ad_location_to_your_profile',
-            ['url' => route('profiles.show', $event->ad->seller) . '#settings']
+            ['url' => route('me.show', $event->ad->seller) . '#settings']
         ));
     }
 }

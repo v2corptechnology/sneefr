@@ -45,10 +45,6 @@ body > .timeline {
   }
 }
 
-.profile__summary {
-  position: relative;
-}
-
 .profile__rank {
   bottom: 0;
   left: 50%;
@@ -109,19 +105,6 @@ body > .timeline {
   padding: 10px 15px;
   position: relative;
   width: 100%;
-}
-
-.profile-nav__item--disabled {
-  @extend .profile-nav__item;
-  @extend .text-muted;
-  &:hover,
-  &:focus {
-    background: #FFF !important;
-  }
-}
-
-.profile-nav__item--quote {
-  @extend .profile-nav__item--disabled;
 }
 
 .summary {
@@ -430,101 +413,11 @@ body > .timeline {
   margin-bottom: 1.5rem;
 }
 
-.person--small {
-}
-
 .person__image {
   @extend .img-circle;
   display: block;
   margin: 0 auto;
 }
-.person--small .person__image {
-  display: inline;
-  margin: auto;
-}
-
-
-///
-.profile-list {
-  @extend .list-unstyled;
-}
-
-.profile-list__item {
-  margin-bottom: 1rem;
-
-  .follow .btn,
-  .unfollow .btn {
-    margin-top: 4px;
-  }
-}
-
-/***********************/
-/*  Network followers  */
-/***********************/
-.followers{
-  display: inline-block;
-  padding: 1.5rem;
-}
-
-.followers__title{
-  position: relative;
-  width: 150px;
-  display: inline-block;
-  vertical-align:text-bottom; 
-
-  .followers__title__item {
-    display: block;
-    text-transform: uppercase;
-    line-height: 25px;
-  }
-
-  .followers__title__item--botom{
-    font-weight: bold;
-  }
-}
-
-@media all and (max-device-width: 480px)
-{
-  .followers__title .followers__title__item {
-      display: inline-block;
-  }
-}
-
-.followers__list{
-  display: inline-block;
-}
-
-@media all and (max-device-width: 480px)
-{
-  .followers {
-    display: block;
-  }
-  .followers__list {
-      display: block;
-  }
-}
-
-.followers__item{
-  display: inline-block;
-  width: 50px;  
-  height: 50px;
-  vertical-align:text-bottom;
-}
-
-.followers__img{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 4px;
-
-}
-
-.followers__img--plus{
-  text-align: center;
-  line-height: 50px;
-  font-weight: bold;
-}
-
 
 /***********************/
 /*       Payment       */

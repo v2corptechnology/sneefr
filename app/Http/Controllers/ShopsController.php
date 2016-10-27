@@ -5,12 +5,11 @@ namespace Sneefr\Http\Controllers;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Subscription;
-use Sneefr\Http\Requests\CreateShopRequest;
-use Sneefr\Http\Requests\UpdateShopRequest;
+use Sneefr\Http\Requests\StoreShop;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Category;
 use Sneefr\Models\Shop;
+use Sneefr\Models\Tag;
 use Sneefr\Services\Image;
 
 /**
@@ -95,19 +94,20 @@ class ShopsController extends Controller
             return redirect()->route('home')->with('error', 'You can own only one shop');
         }
 
-        $categories = Category::parent()->with('childrens')->get();
+        $tags = Tag::all()->pluck('title', 'id');
 
-        return view('shops.create', compact('categories'));
+        return view('shops.create', compact('tags'));
     }
 
     /**
      * Store a new shop entry in the database.
      *
-     * @param  \Sneefr\Http\Requests\CreateShopRequest  $request
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function store(CreateShopRequest $request)
+    public function store(StoreShop $request)
     {
         // Check if the user has no shop
         if (auth()->user()->hasShop()) {
@@ -118,7 +118,7 @@ class ShopsController extends Controller
         $shop = new Shop([
             'slug'    => $request->input('slug'),
             'user_id' => auth()->id(),
-            'data'    => $request->except('cover', 'logo', 'category'),
+            'data'    => $request->except('_token', '_method', 'cover', 'logo'),
         ]);
 
         // Store the images
@@ -136,8 +136,7 @@ class ShopsController extends Controller
         // Save new shop
         $shop->save();
 
-        // Save categories for this shop
-        $shop->categories()->sync($request->get('category'));
+        $shop->tags()->sync($request->input('tags'));
 
         // Update shop's colors later on
         $this->dispatch(new UpdateShopColors($shop));
@@ -161,22 +160,24 @@ class ShopsController extends Controller
     {
         $this->authorize($shop);
 
-        $categories = Category::parent()->with('childrens')->get();
+        $tags = Tag::all()->pluck('title', 'id');
 
-        return view('shops.edit', compact('shop', 'categories'));
+        return view('shops.edit', compact('shop', 'tags'));
     }
 
     /**
      * Persist changes made on the shop.
      *
-     * @param \Sneefr\Models\Shop                      $shop
-     * @param  \Sneefr\Http\Requests\UpdateShopRequest $request
+     * @param \Sneefr\Models\Shop             $shop
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Shop $shop, UpdateShopRequest $request)
+    public function update(Shop $shop, StoreShop $request)
     {
         $this->authorize($shop);
+
+        $shop->tags()->sync($request->input('tags'));
 
         $images = [];
         // Update the images only if necessary
@@ -184,13 +185,10 @@ class ShopsController extends Controller
             $images = $this->moveImages($shop, $request);
         }
 
-        // Update categories of this shop
-        $shop->categories()->sync($request->get('category'));
-
         // Start by using the existing data then overwrite it
         // with any new piece of data that may come from the request.
         $updatedData = collect($shop->data)
-            ->merge($request->except('slug', 'terms', 'category'))
+            ->merge($request->except('_token', '_method', 'slug', 'terms'))
             ->merge($images);
 
         // Persist the changes
@@ -248,11 +246,11 @@ class ShopsController extends Controller
     /**
      * Check the request has at least one image.
      *
-     * @param \Sneefr\Http\Requests\UpdateShopRequest $request
+     * @param \Sneefr\Http\Requests\StoreShop $request
      *
      * @return bool
      */
-    private function imagesHasBeenChanged(UpdateShopRequest $request) : bool
+    private function imagesHasBeenChanged(StoreShop $request) : bool
     {
         return $request->hasFile('cover') || $request->hasFile('logo');
     }

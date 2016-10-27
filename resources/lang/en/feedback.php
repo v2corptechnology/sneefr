@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'search_shared'                      => "Your followers now know that you're looking for \":search\"",
-    'search_deleted_success'             => "You've deleted this public search.",
     'ad_shared'                          => "This ad is now shared, thanks!",
     'ad_not_found'                       => "This ad can't be found",
     'ad_edit_success'                    => "Changes saved, captain!",
@@ -17,7 +15,6 @@ return [
     'profile_edit_avatar_error'          => "Captain, we couldn't process your request, if this problem persists, please contact us.",
     'profile_email_validation_sent'      => "Click on the link we've sent you to verify your email address",
     'profile_deleted_success'            => "Account deleted, we hope to see you again soon.",
-    'profile_not_exists_error'           => "This user doesn't exist anymore.",
     'report_success'                     => "Thanks for reporting this, our team will review it.",
     'follow_activity_success'            => "You are now following this user",
     'unfollow_activity_success'          => "It's sad to say but you're no longer following this user",

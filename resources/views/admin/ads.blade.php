@@ -23,9 +23,7 @@
                                 </h4>
                                 <h6 class="text-muted">
                                     {!! $ad->present()->price() !!} par
-                                    <a href="{{ route('profiles.show', $ad->user->getRouteKey()) }}">
-                                        {{ $ad->user->present()->fullName() }}
-                                    </a>
+                                    {{ $ad->user->present()->fullName() }}
                                 </h6>
                                 {!! $ad->description !!}
                             </div>

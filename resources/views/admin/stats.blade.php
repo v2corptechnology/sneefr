@@ -87,8 +87,8 @@
                                 @else
                                     <tr>
                                         <td style="width:20%">{!! HTML::time($user->created_at) !!}</td>
-                                        <td style="width:15%"><a href="{{ route('profiles.show', $user) }}">{{ $user->present()->fullName() }}</a></td>
-                                        <td style="width:15%"><a href="{{ route('profiles.show', $user) }}">{{ $user->total_ads.'-'.$user->sold_ads.'-'.$user->deleted_ads }}</a></td>
+                                        <td style="width:15%">{{ $user->present()->fullName() }}</td>
+                                        <td style="width:15%">{{ $user->total_ads.'-'.$user->sold_ads.'-'.$user->deleted_ads }}</td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -123,7 +123,7 @@
                                     <i class="fa fa-exchange text-muted"></i>
                                 </td>
                                 <td>
-                                    <a href="{{ route('profiles.show', $discussion->theOther) }}">{{ $discussion->theOther->present()->fullName() }}</a>
+                                   {{ $discussion->theOther->present()->fullName() }}
                                 </td>
                             </tr>
                         @endforeach
@@ -147,11 +147,7 @@
                             @foreach ($searchesSubset as $search)
                                 <tr>
                                     <td>
-                                        @if (isset($search->hash))
-                                            <a href="{{ route('profiles.show', $search->hash) }}">{{ $search->term }}</a>
-                                        @else
-                                            {{ $search->term }}
-                                        @endif
+                                        {{ $search->term }}
                                     </td>
                                 </tr>
                             @endforeach

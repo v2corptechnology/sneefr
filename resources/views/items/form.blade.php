@@ -8,7 +8,29 @@
     <script src="{{ elixir('js/sneefr.ad_edition.js') }}"></script>
 @endpush
 
-<input type="hidden" name="shop_id" value="{{ auth()->user()->shop->getId() }}">
+@if (auth()->user()->isAdmin())
+    @push('footer-js')
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script type="text/javascript">
+            $('#js-shop').select2();
+        </script>
+    @endpush
+
+    <div class="form-group">
+        <label for="shop_id" class="control-label">Create as...</label>
+        {!! Form::select('shop_id', \Sneefr\Models\Shop::where('user_id', auth()->id())->get()->each(function($shop){
+            $shop['title'] = $shop->getName();
+        })->pluck('title', 'id'), null, [
+            'class' => 'form-control',
+            'id' => 'js-shop',
+            'autocomplete' => 'off',
+            'required',
+        ]) !!}
+    </div>
+@else
+    <input type="hidden" name="shop_id" value="{{ auth()->user()->shop->getId() }}">
+@endif
 
 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
     <label class="control-label" for="title">

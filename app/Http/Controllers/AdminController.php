@@ -4,12 +4,11 @@ namespace Sneefr\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Sneefr\Models\Ad;
 use Sneefr\Models\ActionLog;
-use Sneefr\Models\Search;
+use Sneefr\Models\Tag;
 use Sneefr\Models\User;
-use Sneefr\Repositories\Ad\AdRepository;
-use Sneefr\Repositories\User\UserRepository;
 
 class AdminController extends Controller
 {
@@ -17,11 +16,7 @@ class AdminController extends Controller
     public $lastDay;
     public $yesterday;
 
-    /**
-     * @param \Sneefr\Repositories\User\UserRepository $userRepository
-     * @param \Sneefr\Repositories\Ad\AdRepository $adRepository
-     */
-    public function __construct(UserRepository $userRepository, AdRepository $adRepository)
+    public function __construct()
     {
         $this->yesterday = Carbon::now()->subDay();
 
@@ -45,7 +40,6 @@ class AdminController extends Controller
             'ads.amount'      => Ad::exceptStaff()->sold()->onlyTrashed()->get()->sum('amount'),
             'reports'         => count($this->reports['ads']) + count($this->reports['users']),
             'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->get()->count(),
-            'shared_searches' => Search::exceptStaff()->get()->count(),
             'stripe_profiles' => 0,
         ];
     }
@@ -66,6 +60,26 @@ class AdminController extends Controller
             'lastDay' => $this->lastDay,
             'totals'  => $this->totals,
         ]);
+    }
+
+    /**
+     *
+     * @return \Illuminate\View\View
+     */
+    public function tools()
+    {
+        $tags = Tag::orderBy('title', 'asc')->get();
+
+        return view('admin.tools', compact('tags'));
+    }
+
+    public function toolsUpdate($tagId, Request $request)
+    {
+        $tag = Tag::find($tagId);
+        $tag->title = trim($request->input('title'));
+        $tag->save();
+
+        return redirect()->route('admin.tools');
     }
 
     /**
@@ -121,8 +135,7 @@ class AdminController extends Controller
      */
     public function searches()
     {
-        $shared = Search::exceptStaff()->take(100)->get();
-        $shared = $shared->load(['user']);
+        $shared = collect();
 
         $searched = ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->take(5000)->get();
         $searched = $searched->load(['user']);
@@ -161,8 +174,6 @@ class AdminController extends Controller
     {
         $searchesSubset = [];
 
-        $hashIds = app('Hashids\Hashids');
-
         foreach ($searches as $k => $search) {
 
             $context = json_decode($search->context);
@@ -182,9 +193,6 @@ class AdminController extends Controller
                 $key = $slug . '_' . $search->user_id . '_' . $timeSpan;
 
                 if (!array_key_exists($key, $searchesSubset)) {
-                    if ($search->user_id) {
-                        $search->hash = $hashIds->encode($search->user_id);
-                    }
                     $search->term = isset($context->filters[0]) ? $context->filters[0]->q : null;
                     $searchesSubset[$key] = $search;
                 }

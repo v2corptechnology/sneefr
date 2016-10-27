@@ -37,68 +37,11 @@ Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@
 /**
  * Routes related to person display
  */
-// Profile, since Ads are the main entry point, redirect permanent to it
-Route::get('profiles/{hash}', ['as' => 'profiles.show', function ($hash) {
-    return redirect('/me', 301);
-}]);
+
 Route::delete('profile/{profile}', [
     'as'         => 'profiles.destroy',
     'uses'       => 'ProfilesController@destroy',
     'middleware' => 'auth',
-]);
-Route::get('profiles/{profile}/ads', [
-    'as' => 'profiles.ads.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/evaluations', [
-    'as' => 'profiles.evaluations.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks', [
-    'as' => 'profiles.networks.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/referrals', [
-    'as' => 'profiles.networks.referrals',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followers', [
-    'as' => 'profiles.networks.followers',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/networks/followed', [
-    'as' => 'profiles.networks.followed',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/write', [
-    'as' => 'profiles.write.create',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/places', [
-    'as' => 'profiles.places.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
-]);
-Route::get('profiles/{profile}/notifications', [
-    'as' => 'profiles.notifications.index',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
 ]);
 Route::get('profiles/{profile}/settings', [
     'as' => 'profiles.settings.edit',
@@ -125,7 +68,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
 
     /** Out of resources scope */
     // User's settings
-    Route::resource('me', 'SettingsController@show');
+    Route::get('me', ['as' => 'me.show', 'uses' =>'SettingsController@show']);
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
 
@@ -142,8 +85,6 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
-    // Searches and shared searches
-    Route::resource('search', 'SearchController', ['only' => ['store', 'destroy']]);
     // Shops
     Route::resource('shops', 'ShopsController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     // Subscriptions
@@ -175,12 +116,13 @@ Route::resource('shops', 'ShopsController', ['only' => ['show']]);
 
 /** Admins only */
 Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
+    Route::get('admin/tools', ['as' => 'admin.tools', 'uses' => 'AdminController@tools']);
+    Route::put('admin/tools/{id}', ['as' => 'admin.tools.update', 'uses' => 'AdminController@toolsUpdate']);
     Route::get('admin/users', ['as' => 'admin.users', 'uses' => 'AdminController@users']);
     Route::get('admin/ads', ['as' => 'admin.ads', 'uses' => 'AdminController@ads']);
     Route::get('admin/deals', ['as' => 'admin.deals', 'uses' => 'AdminController@deals']);
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
-    Route::get('kitchensink', 'KitchensinkController@index');
 });
 
 /** Devs only */
@@ -197,17 +139,6 @@ Route::bind('item', function ($value) {
 });
 Route::bind('shop', function ($value) {
     return \Sneefr\Models\Shop::where('slug', $value)->withTrashed()->first();
-});
-Route::bind('profile', function ($value, $route) {
-    $hashids = app('Hashids\Hashids');
-
-    $decoded = $hashids->decode($value);
-
-    if (! isset($decoded[0])) {
-        abort(404);
-    }
-
-    return $decoded[0];
 });
 Route::bind('ad', function ($value, $route) {
     return explode('-', $value)[0];

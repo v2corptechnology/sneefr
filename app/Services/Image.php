@@ -31,6 +31,8 @@ class Image
         'avatar'     => 'crop/{dimensions}/q75/http://s3.amazonaws.com/sneefr.prod.ad-images/avatar/{name}',
         'cover'      => 'crop/{dimensions}/q75.tjpg/_shops_/{name}',
         'logo'       => 'crop/{dimensions}/q75/_shops_/{name}',
+        'cover_yelp' => 'crop/{dimensions}/q75.tjpg/{name}',
+        'logo_yelp'  => 'crop/{dimensions}/q75/{name}',
     ];
 
     /**
@@ -150,6 +152,10 @@ class Image
      */
     public function cover(Shop $shop, $dimensions = 120) : string
     {
+        if (stripos($shop->getCoverName(), '://') !== false) {
+            return $this->getImageUrl('cover_yelp', $shop->getCoverName(), $dimensions);
+        }
+
         $name = $shop->getRouteKey().'/'.$shop->getCoverName();
 
         return $this->getImageUrl('cover', $name, $dimensions);
@@ -165,6 +171,10 @@ class Image
      */
     public function logo(Shop $shop, $dimensions = 120) : string
     {
+        if (stripos($shop->getLogoName(), '://') !== false) {
+            return $this->getImageUrl('logo_yelp', $shop->getLogoName(), $dimensions);
+        }
+
         $name = $shop->getRouteKey().'/'.$shop->getLogoName();
 
         return $this->getImageUrl('logo', $name, $dimensions);

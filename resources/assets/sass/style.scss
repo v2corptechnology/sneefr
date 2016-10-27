@@ -454,48 +454,17 @@ time {
   z-index: 10;
 }
 
-.h5.dashboard-news {
-  margin-top: 0;}
-
-.dashboard-flow {
-  .form-prepare {margin-bottom: 0;}
-}
-
 .slider {
   height: 400px;
 }
 
-.interlocutor {
-  margin-bottom: 1.5rem;
-}
-
 .slider img[src=""] {display: none;}
 
-.btn-circle {
-  width: 2em;
-  height: 2em;
-  text-align: center;
-  padding: 0.4em 0;
-  border-radius: 1em;
-}
-
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-}
-.row.no-gutters > [class^="col-"],
-.row.no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0;
-}
 
 #payment-form {
   .submit {
     margin-top: 2rem;}
 }
-
-.confirm-pay-form {
-  margin-top: 4rem;}
 
 /*******************************
 Flow related
@@ -509,10 +478,6 @@ Flow related
 .slider a {
   background-size: contain!important;
   outline: none;
-}
-
-.dashboard-flow .slider a {
-  background-size: cover!important;
 }
 
 .slider .img-responsive {
@@ -617,16 +582,6 @@ Flow related
 .sold-ad__header {
   margin-bottom: 2rem;
   padding-top: 5rem;
-}
-
-.publish-search,
-.ask-for-connect {
-  @extend .text-center;
-  margin-bottom: 1.5rem;
-
-  .form-group {
-    margin-bottom: 0;
-  }
 }
 
 .sort {

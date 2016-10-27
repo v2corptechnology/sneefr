@@ -22,7 +22,6 @@ $factory->define(User::class, function ($faker) {
         'phone'                   => null,
         'lat'                     => null,
         'long'                    => null,
-        'preferences'             => '{"daily_digest":false}',
         // 'token' => $faker->regexify('[a-zA-Z0-9]{220,250}'),
         'token'                   => $faker->bothify(str_repeat('?#', 125)),
         'remember_token'          => null,

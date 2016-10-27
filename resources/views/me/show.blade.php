@@ -9,7 +9,7 @@
 
 @section('modals')
     @parent
-    @include('partials.modals._delete_account', ['hash' => auth()->user()->getRouteKey()])
+    @include('partials.modals._delete_account')
 @stop
 
 @section('content')
@@ -33,45 +33,6 @@
 
                 {{-- Profile avatar panel --}}
                 @include('profiles.settings.avatar')
-
-                {{--
-                    Settings panel for notifications.
-                --}}
-                <div class="panel panel-default" id="notifs">
-                    <div class="panel-heading">
-                        <i class="fa fa-bell"></i>
-                        @lang('profile.parameters.your_notifications')
-                    </div>
-                    <div class="panel-body">
-
-                        {{-- Create an HTML form for sending changes to notification settings --}}
-                        {!! Form::open(['route'=>['profiles.settings.update', auth()->user()], 'method'=>'put']) !!}
-
-                        <input type="hidden" name="settings_category" value="notifications">
-
-                        <div class="form-group row">
-                            <div class="col-md-12 location">
-                                <div class="checkbox">
-                                    <label>
-                                        {{-- Control to enable or disable daily notifications for unread messages --}}
-                                        <input name="daily_digest" type="checkbox"
-                                                {{ isset(auth()->user()->preferences['daily_digest'])
-                                                    && auth()->user()->preferences['daily_digest']
-                                                    ? 'checked="checked"'
-                                                    : '' }}>
-                                        @lang('profile.parameters.daily_digest_label')
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-success" type="submit">
-                            @lang('profile.parameters.button_save_notifications')
-                        </button>
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-
 
                 {{--
                     Link to delete account.

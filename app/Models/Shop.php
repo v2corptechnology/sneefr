@@ -81,13 +81,23 @@ class Shop extends Model
     }
 
     /**
+     * Tags applied to this shop.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
      * Relationship to the evaluations of this shop.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function evaluations()
     {
-        return $this->morphMany(Evaluation::class, 'evaluated');
+        return $this->hasMany(Evaluation::class)->valid();
     }
 
     /**
@@ -257,12 +267,6 @@ class Shop extends Model
 
         return $this->owner->getId() === $userId;
     }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'shop_categorie');
-    }
-
 
     /**
      * Get the map URL of this place.

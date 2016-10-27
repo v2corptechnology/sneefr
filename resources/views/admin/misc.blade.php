@@ -22,16 +22,12 @@
                             @foreach ($discussions as $discussion)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('profiles.show', $discussion->participants->first()) }}">
-                                            {!! HTML::profilePicture($discussion->participants->first()->facebook_id, $discussion->participants->first()->present()->surname(), 20) !!}
-                                            {{ $discussion->participants->first()->present()->fullName() }}
-                                        </a>
+                                        {!! HTML::profilePicture($discussion->participants->first()->facebook_id, $discussion->participants->first()->present()->surname(), 20) !!}
+                                        {{ $discussion->participants->first()->present()->fullName() }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('profiles.show', $discussion->participants->last()) }}">
-                                            {!! HTML::profilePicture($discussion->participants->last()->facebook_id, $discussion->participants->last()->present()->surname(), 20) !!}
-                                            {{ $discussion->participants->last()->present()->fullName() }}
-                                        </a>
+                                        {!! HTML::profilePicture($discussion->participants->last()->facebook_id, $discussion->participants->last()->present()->surname(), 20) !!}
+                                        {{ $discussion->participants->last()->present()->fullName() }}
                                     </td>
                                     <td>{!! HTML::time($discussion->created_at) !!}</td>
                                 </tr>

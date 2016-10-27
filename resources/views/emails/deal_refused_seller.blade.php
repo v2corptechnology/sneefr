@@ -20,7 +20,7 @@
             <div style="font-weight: bold; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; margin: 0; padding: 0;">
                  @lang('mail.deal_refused_seller.lead', [
                     'title' => $ad->getTitle(),
-                    'buyer' => link_to_route('profiles.ads.index', $buyer->present()->fullName(), $buyer)
+                    'buyer' => $buyer->present()->fullName()
                 ])
             </div>
             <div style="padding: 10px 0 20px;">

@@ -110,8 +110,8 @@
 
                 {{-- Settings --}}
                 @if (auth()->check())
-                    <li class="{{ setActive('me.index') }}">
-                        <a href="{{ route('me.index') }}" title="My profile">My profile</a>
+                    <li class="{{ setActive('me.show') }}">
+                        <a href="{{ route('me.show') }}" title="My profile">My profile</a>
                     </li>
 
                     <li class="{{ setActive('deals.index') }}">
@@ -137,6 +137,20 @@
                     <li>
                         <a href="{{ route('logout') }}" title="Log me out">Log out</a>
                     </li>
+                    @if (auth()->user()->isAdmin())
+                        <li>
+                            <div class="dropdown">
+                                <a class="btn navbar-btn dropdown-toggle" type="button" id="adminMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminMenu">
+                                    <li><a href="{{ route('admin.users') }}">Stats</a></li>
+                                    <li><a href="{{ route('admin.tools') }}">Tools</a></li>
+                                    <li><a href="{{ url('logs') }}">Logs</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                 @else
                     <li class="visible-xs">
                         <a href="{{ url('login') }}" title="Login">Login</a>

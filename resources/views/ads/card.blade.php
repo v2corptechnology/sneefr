@@ -43,8 +43,7 @@ switch ($detail ?? 'date') {
         @endforeach
     </figure>
 
-    @include('partials.avatar', [
-        'of' => $ad->shop ?? $ad->seller, 'size' => $avatar ?? null])
+    @include('partials.avatar', ['of' => $ad->shop, 'size' => $avatar ?? null])
 
     <div class="card__content">
         <h1 class="card__title" itemprop="name">
