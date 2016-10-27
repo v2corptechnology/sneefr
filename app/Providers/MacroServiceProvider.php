@@ -40,22 +40,5 @@ class MacroServiceProvider extends HtmlServiceProvider
                    $date->format('d/m/Y H:i') .
                    '">' . $date->formatLocalized('%d %B %Y') . '</time>';
         });
-
-        \HTML::macro('profilePicture', function ($facebookId, $alt, $dimensions = 40, array $classes = []) {
-            if (is_array($dimensions)) {
-                $width = $dimensions[0];
-                $height = isset($dimensions[1]) ? $dimensions[1] : $width;
-            } else {
-                $width = $dimensions;
-                $height = $dimensions;
-            }
-
-            $normal = \Img::avatar($facebookId, [$width, $height]);
-            $double = \Img::avatar($facebookId, [$width, $height, 2]);
-
-            $classes = implode(' ', $classes);
-
-            return '<img class="'.$classes.'" src="'.$normal.'" srcset="'.$double.' 2x" width="'.$width.'" height="'.$height.'" alt="'.$alt.'">';
-        });
     }
 }

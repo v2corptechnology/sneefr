@@ -256,4 +256,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return new PhoneNumber($this->attributes['phone']);
     }
+
+    /**
+     * Get the url for the logo, given the dimensions.
+     *
+     * @param mixed $dimensions
+     *
+     * @return string
+     */
+    public function getPicture($dimensions = '80x80') : string
+    {
+        return \Img::avatar($this->getSocialNetworkId(), $dimensions);
+    }
 }

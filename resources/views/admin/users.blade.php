@@ -22,7 +22,6 @@
                             @foreach ($users as $user)
                                 <tr class="{{ $user->trashed() ? 'warning' : '' }}">
                                     <td>
-                                        {!! HTML::profilePicture($user->facebook_id, $user->present()->surname(), 20, ['img-circle']) !!}
                                         {{ $user->present()->fullName() }}
                                     </td>
                                     <td>
