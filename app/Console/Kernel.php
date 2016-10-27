@@ -14,9 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Sneefr\Console\Commands\ClearAlgoliaIndex::class,
         \Sneefr\Console\Commands\ImportYelpShop::class,
-        \Sneefr\Console\Commands\InitAlgoliaIndices::class,
     ];
 
     /**
