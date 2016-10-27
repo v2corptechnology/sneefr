@@ -2,12 +2,12 @@
 
 namespace Sneefr\Models;
 
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
+use Laravel\Scout\Searchable;
 use Sneefr\Delivery;
 use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
@@ -16,11 +16,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Ad extends Model
 {
-    use AlgoliaEloquentTrait;
     use LogsActivity;
     use SoftDeletes;
     use StaffFilterable;
     use Presentable;
+    use Searchable;
 
     public $sellerEvaluationRatio;
 
@@ -29,46 +29,11 @@ class Ad extends Model
     protected $presenter = AdPresenter::class;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'ads';
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['latitude', 'longitude'];
-
-    /**
      * The attributes we can mass assign.
      *
      * @var array
      */
-    protected $fillable = [
-        'id',
-        'user_id',
-        'shop_id',
-        'remaining_quantity',
-        'category_id',
-        'title',
-        'description',
-        'amount',
-        'currency',
-        'delivery',
-        'transaction',
-        'location',
-        'latitude',
-        'longitude',
-        'images',
-        'locked_for',
-        'final_amount',
-        'condition_id',
-        'created_at',
-        'updated_at',
-    ];
+    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'category_id', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images', 'condition_id',];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
