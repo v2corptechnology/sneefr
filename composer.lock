@@ -1754,36 +1754,36 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v1.1.4",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "a1ee788a62699145078d3e8aae10f374acadee15"
+                "reference": "31e07d8734d0b0c9d7311d762cef9b9f39840251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/a1ee788a62699145078d3e8aae10f374acadee15",
-                "reference": "a1ee788a62699145078d3e8aae10f374acadee15",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/31e07d8734d0b0c9d7311d762cef9b9f39840251",
+                "reference": "31e07d8734d0b0c9d7311d762cef9b9f39840251",
                 "shasum": ""
             },
             "require": {
+                "illuminate/bus": "~5.3",
                 "illuminate/contracts": "~5.3",
                 "illuminate/database": "~5.3",
+                "illuminate/pagination": "~5.3",
+                "illuminate/queue": "~5.3",
                 "illuminate/support": "~5.3",
                 "php": ">=5.6.4"
             },
             "require-dev": {
                 "algolia/algoliasearch-client-php": "^1.10",
                 "elasticsearch/elasticsearch": "^2.2",
-                "illuminate/bus": "~5.3",
-                "illuminate/pagination": "~5.3",
-                "illuminate/queue": "~5.3",
                 "mockery/mockery": "~0.9",
                 "phpunit/phpunit": "~5.0"
             },
             "suggest": {
-                "algolia/algoliasearch-client-php": "Required to use the Algolia engine.",
-                "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine."
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^1.10).",
+                "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine (^2.2)."
             },
             "type": "library",
             "extra": {
@@ -1809,10 +1809,11 @@
             "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
             "keywords": [
                 "algolia",
+                "elasticsearch",
                 "laravel",
                 "search"
             ],
-            "time": "2016-09-02 14:52:17"
+            "time": "2016-10-17 21:22:21"
         },
         {
             "name": "laravel/socialite",
