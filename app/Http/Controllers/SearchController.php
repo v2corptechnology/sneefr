@@ -24,8 +24,8 @@ class SearchController extends Controller
         //$sort = $request->get('sort');
         //$order = $request->get('order', 'desc');
 
-        $ads = Ad::search($query)->get()->take(20);
-        $shops = Shop::search($query)->get()->take(20);
+        $ads = Ad::search($query)->paginate(16);
+        $shops = Shop::search($query)->paginate(16);
 
         // When displaying ads, detect commonly linked categories to query terms
         if ($type === 'ad') {

@@ -71,6 +71,12 @@
                 </div>
             @endforeach
 
+            <div class="col-sm-12 text-center">
+
+                {{ $ads->links() }}
+
+            </div>
+
         @elseif ($type == 'shop')
 
             @foreach ($shops as $shop)
@@ -80,6 +86,12 @@
 
                 </div>
             @endforeach
+
+            <div class="col-sm-12 text-center">
+
+                {{ $shops->links() }}
+
+            </div>
 
         @endif
     </div>
