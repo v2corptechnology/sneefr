@@ -61,7 +61,7 @@
             @endif
 
             {{-- Display the found ads using a partial --}}
-            @foreach ($ads->get() as $ad)
+            @foreach ($ads as $ad)
                 <div class="col-sm-4 col-md-3">
 
                     @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200', 'detail' => request('sort', 'relevance')])
