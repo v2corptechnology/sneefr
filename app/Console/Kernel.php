@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
-        $schedule->command('yelp:import')->everyFiveMinutes();
+        //$schedule->command('yelp:import')->everyFiveMinutes();
 
         // Calls made every hour
 
