@@ -18,10 +18,10 @@
                 <ul class="menu">
                     <li class="menu__item @if ($type == 'ad') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'q' => $query])
-                        }}">@choice('search.type_ad_label', 0, ['nb' => $ads->count()])</a></li>
+                        }}">@choice('search.type_ad_label', $ads->count(), ['nb' => $ads->count()])</a></li>
                     <li class="menu__item @if ($type == 'shop') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'q' => $query])
-                        }}">@choice('search.type_shop_label', 0, ['nb' => $shops->count()])</a>
+                        }}">@choice('search.type_shop_label', $shops->count(), ['nb' => $shops->count()])</a>
                     </li>
 
                 </ul>
