@@ -57,6 +57,23 @@ class Ad extends Model
         'condition_id'      => 'int',
     ];
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $record = $this->toArray();
+        $record['_geoloc'] = [
+            'lat' => $this->getLatitude(),
+            'lng' => $this->getLongitude(),
+        ];
+        $record['evaluationRatio'] = $this->shop->evaluations->ratio();
+
+        return $record;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
