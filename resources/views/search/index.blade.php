@@ -18,10 +18,10 @@
                 <ul class="menu">
                     <li class="menu__item @if ($type == 'ad') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'q' => $query])
-                        }}">@choice('search.type_ad_label', $ads->count(), ['nb' => $ads->count()])</a></li>
+                        }}">@choice('search.type_ad_label', $ads->total(), ['nb' => $ads->total()])</a></li>
                     <li class="menu__item @if ($type == 'shop') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'q' => $query])
-                        }}">@choice('search.type_shop_label', $shops->count(), ['nb' => $shops->count()])</a>
+                        }}">@choice('search.type_shop_label', $shops->total(), ['nb' => $shops->total()])</a>
                     </li>
 
                 </ul>
@@ -73,7 +73,7 @@
 
             <div class="col-sm-12 text-center">
 
-                {{ $ads->links() }}
+                {{ $ads->appends(['type' => 'ad'])->links() }}
 
             </div>
 
@@ -89,7 +89,7 @@
 
             <div class="col-sm-12 text-center">
 
-                {{ $shops->links() }}
+                {{ $shops->appends(['type' => 'shop'])->links() }}
 
             </div>
 
