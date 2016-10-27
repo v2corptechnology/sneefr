@@ -17,7 +17,6 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('ad_id');
             $table->unsignedInteger('buyer_id');
             $table->unsignedInteger('seller_id');
-            $table->json('stripe_data');
             $table->json('details');
 
             // Define timestamps to record dates and times of changes.
