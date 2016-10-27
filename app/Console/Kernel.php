@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         // Very frequent calls
 
         //if ($this->app->environment('production')) {
-            $schedule->command(Commands\ImportYelpShop::class)->everyMinute();
+            $schedule->command('yelp:import')->everyMinute();
         //}
 
         // Calls made every hour
