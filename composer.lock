@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "68d0467b75381788ebf6605db4f04472",
-    "content-hash": "493c521633daf8458c7f2fc12cc834e9",
+    "hash": "6c4e007971d7f9caafadbc57de79614e",
+    "content-hash": "5f4ca36ee02103498babee92817e89d3",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "1.10.2",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "66c15d546bf0cbf86b192704f161da17c93d3b15"
+                "reference": "d4f29a1fe82f3d6361a516276849bd98dd014cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/66c15d546bf0cbf86b192704f161da17c93d3b15",
-                "reference": "66c15d546bf0cbf86b192704f161da17c93d3b15",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/d4f29a1fe82f3d6361a516276849bd98dd014cc0",
+                "reference": "d4f29a1fe82f3d6361a516276849bd98dd014cc0",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
             ],
             "description": "Algolia Search API Client for PHP",
             "homepage": "https://github.com/algolia/algoliasearch-client-php",
-            "time": "2016-08-05 13:06:14"
+            "time": "2016-10-20 11:25:18"
         },
         {
             "name": "algolia/algoliasearch-laravel",
@@ -1627,16 +1627,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.3.6",
+            "version": "v5.3.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c63a7fb7066fea2bce91ace5c830c01d503abe6c"
+                "reference": "140ad823863d5cc6f4580f1cdf9b18b9a6a457f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c63a7fb7066fea2bce91ace5c830c01d503abe6c",
-                "reference": "c63a7fb7066fea2bce91ace5c830c01d503abe6c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/140ad823863d5cc6f4580f1cdf9b18b9a6a457f4",
+                "reference": "140ad823863d5cc6f4580f1cdf9b18b9a6a457f4",
                 "shasum": ""
             },
             "require": {
@@ -1684,6 +1684,7 @@
                 "illuminate/http": "self.version",
                 "illuminate/log": "self.version",
                 "illuminate/mail": "self.version",
+                "illuminate/notifications": "self.version",
                 "illuminate/pagination": "self.version",
                 "illuminate/pipeline": "self.version",
                 "illuminate/queue": "self.version",
@@ -1717,7 +1718,7 @@
                 "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0).",
                 "symfony/css-selector": "Required to use some of the crawler integration testing tools (3.1.*).",
                 "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (3.1.*).",
-                "symfony/psr-http-message-bridge": "Required to psr7 bridging features (0.2.*)."
+                "symfony/psr-http-message-bridge": "Required to use psr7 bridging features (0.2.*)."
             },
             "type": "library",
             "extra": {
@@ -1750,40 +1751,40 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-09-01 14:06:47"
+            "time": "2016-10-26 13:27:05"
         },
         {
             "name": "laravel/scout",
-            "version": "v1.1.4",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "a1ee788a62699145078d3e8aae10f374acadee15"
+                "reference": "31e07d8734d0b0c9d7311d762cef9b9f39840251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/a1ee788a62699145078d3e8aae10f374acadee15",
-                "reference": "a1ee788a62699145078d3e8aae10f374acadee15",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/31e07d8734d0b0c9d7311d762cef9b9f39840251",
+                "reference": "31e07d8734d0b0c9d7311d762cef9b9f39840251",
                 "shasum": ""
             },
             "require": {
+                "illuminate/bus": "~5.3",
                 "illuminate/contracts": "~5.3",
                 "illuminate/database": "~5.3",
+                "illuminate/pagination": "~5.3",
+                "illuminate/queue": "~5.3",
                 "illuminate/support": "~5.3",
                 "php": ">=5.6.4"
             },
             "require-dev": {
                 "algolia/algoliasearch-client-php": "^1.10",
                 "elasticsearch/elasticsearch": "^2.2",
-                "illuminate/bus": "~5.3",
-                "illuminate/pagination": "~5.3",
-                "illuminate/queue": "~5.3",
                 "mockery/mockery": "~0.9",
                 "phpunit/phpunit": "~5.0"
             },
             "suggest": {
-                "algolia/algoliasearch-client-php": "Required to use the Algolia engine.",
-                "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine."
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^1.10).",
+                "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine (^2.2)."
             },
             "type": "library",
             "extra": {
@@ -1809,10 +1810,11 @@
             "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
             "keywords": [
                 "algolia",
+                "elasticsearch",
                 "laravel",
                 "search"
             ],
-            "time": "2016-09-02 14:52:17"
+            "time": "2016-10-17 21:22:21"
         },
         {
             "name": "laravel/socialite",

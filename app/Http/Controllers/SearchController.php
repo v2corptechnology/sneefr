@@ -7,24 +7,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
 use Session;
 use Sneefr\Jobs\SaveSearch;
+use Sneefr\Models\Ad;
 use Sneefr\Models\Shop;
-use Sneefr\Services\SearchService;
 
 class SearchController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request       $request
-     * @param \Sneefr\Services\SearchService $search
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request, SearchService $search)
+    public function index(Request $request)
     {
         $query = $request->get('q');
         $type = $request->get('type', 'ad');
+        //$sort = $request->get('sort');
+        //$order = $request->get('order', 'desc');
 
-        $ads = $search->for('ad')->with($request->all());
-        $shops = Shop::search($query)->get()->take(20);
+        $ads = Ad::search($query)->paginate(16);
+        $shops = Shop::search($query)->paginate(16);
 
         // When displaying ads, detect commonly linked categories to query terms
         if ($type === 'ad') {

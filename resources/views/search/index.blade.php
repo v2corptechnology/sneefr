@@ -18,10 +18,10 @@
                 <ul class="menu">
                     <li class="menu__item @if ($type == 'ad') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'q' => $query])
-                        }}">@choice('search.type_ad_label', 0, ['nb' => $ads->count()])</a></li>
+                        }}">@choice('search.type_ad_label', $ads->total(), ['nb' => $ads->total()])</a></li>
                     <li class="menu__item @if ($type == 'shop') active @endif">
                         <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'q' => $query])
-                        }}">@choice('search.type_shop_label', 0, ['nb' => $shops->count()])</a>
+                        }}">@choice('search.type_shop_label', $shops->total(), ['nb' => $shops->total()])</a>
                     </li>
 
                 </ul>
@@ -30,6 +30,7 @@
                     If we are searching for ads,
                     display a menu providing ways to order the search results.
                 --}}
+                {{--
                 @if ($type == 'ad' && $ads->count())
                     @include('partials._sort_menu', [
                         'urlParams' => $request->all(),
@@ -37,6 +38,7 @@
                         'order' => $request->get('order')
                     ])
                 @endif
+                --}}
             </nav>
         </div>
 
@@ -61,13 +63,19 @@
             @endif
 
             {{-- Display the found ads using a partial --}}
-            @foreach ($ads->get() as $ad)
+            @foreach ($ads as $ad)
                 <div class="col-sm-4 col-md-3">
 
                     @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200', 'detail' => request('sort', 'relevance')])
 
                 </div>
             @endforeach
+
+            <div class="col-sm-12 text-center">
+
+                {{ $ads->appends(['type' => 'ad'])->links() }}
+
+            </div>
 
         @elseif ($type == 'shop')
 
@@ -78,6 +86,12 @@
 
                 </div>
             @endforeach
+
+            <div class="col-sm-12 text-center">
+
+                {{ $shops->appends(['type' => 'shop'])->links() }}
+
+            </div>
 
         @endif
     </div>
