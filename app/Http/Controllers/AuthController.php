@@ -11,24 +11,25 @@ use Sneefr\Models\User;
 class AuthController extends Controller
 {
     /**
-     * Redirect user to authentication provider
+     * Redirect the user to the Facebook authentication page.
      *
-     * @return mixed
+     * @return Response
      */
-    public function login()
+    public function redirectToProvider()
     {
         return Socialite::driver('facebook')->redirect();
     }
 
     /**
-     * Log the user in via a third-party authentication provider.
+     * Obtain the user information from Facebook.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return Response
      */
     public function callback()
     {
+        dd(Socialite::driver('facebook')->stateless()->user());
         // add required fields not provided by default
-        $providerUser = Socialite::driver('facebook')->fields(['email', 'first_name', 'last_name'])->stateless()->user();
+        $providerUser = Socialite::driver('facebook')->fields(['email', 'first_name', 'last_name'])->user();
 
         $user = User::where('facebook_id', $providerUser->getId())->first();
 

@@ -242,7 +242,7 @@ return [
          * Package aliases...
          */
         'Twilio'        => Aloha\Twilio\Support\Laravel\Facade::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
 
         /*
          * Sneefr Aliases...

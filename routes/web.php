@@ -30,7 +30,7 @@ Route::get('register/activation/{key}', ['as' => 'account_activation', 'uses' =>
 // Disconnect the user
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 // Redirection to connection provider
-Route::get('auth', ['as' => 'login', 'uses' => 'AuthController@login']);
+Route::get('auth', ['as' => 'login', 'uses' => 'AuthController@redirectToProvider']);
 // Handle callback from FB
 Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@callback']);
 
