@@ -78,4 +78,22 @@ class ItemsController extends Controller
 
         return view('ad.edit', compact('ad', 'categories'));
     }
+
+    /**
+     * Remove the ad from storage.
+     *
+     * @param \Sneefr\Models\Ad $ad
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Ad $ad)
+    {
+        // Check the rights for this user to edit this ad
+        $this->authorize('destroy', $ad);
+
+        $ad->delete();
+
+        return redirect()->home()
+            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
+    }
 }

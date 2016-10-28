@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
-    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
+    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Shops
