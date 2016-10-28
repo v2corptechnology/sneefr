@@ -32,8 +32,6 @@ class AuthController extends Controller
 
         $user = User::where('facebook_email', $providerUser->email)->first();
 
-        dd($user);
-
         if (!$user) {
             $user = User::where('email',$providerUser->getEmail())->OrWhere('facebook_email', $providerUser->getEmail())->get()->first();
 
@@ -56,6 +54,9 @@ class AuthController extends Controller
         }
 
         auth()->login($user, true);
+
+        dd(auth()->id());
+        dd('pop');
         return redirect()->intended();
     }
 
