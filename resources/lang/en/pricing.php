@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'page_title'          => "SneefR for Pro Sellers",
+    'page_title'          => "Sidewalks for Pro Sellers",
     'shop_monthly_amount' => '119',
     'shop_monthly_price'  => '$119',
     'shop_yearly_amount'  => '999',
     'shop_yearly_price'   => '$999',
     'header'              => [
-        'heading'        => "SneefR for Pro Sellers",
+        'heading'        => "Sidewalks for Pro Sellers",
         'sub_heading'    => "Your shop in 2 minutes",
         'bullets'        => [
             'unlimited_ads' => "Unlimited ads",
@@ -62,7 +62,7 @@ return [
                 'enabled_yearly'  => true,
             ],
             'messaging'        => [
-                'heading'         => "SneefR IM for pros",
+                'heading'         => "Sidewalks IM for pros",
                 'description'     => "An easy-to-use instant messaging to talk with your customers.",
                 'enabled_monthly' => true,
                 'enabled_yearly'  => true,
@@ -75,7 +75,7 @@ return [
             ],
             'professional_url' => [
                 'heading'         => "A direct URL to your shop",
-                'description'     => "SneefR allows you to customize your shop's URL for easy sharing.",
+                'description'     => "Sidewalks allows you to customize your shop's URL for easy sharing.",
                 'enabled_monthly' => true,
                 'enabled_yearly'  => true,
             ],

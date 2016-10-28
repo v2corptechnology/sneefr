@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'page_title' => "sneefR prohibited items",
-    'heading'    => "sneefR prohibited items",
-    'intro' => "sneefR is a social marketplace for buying and selling goods with people you trust. Although we are very permissive about what items you may buy and sell at our marketplace, we do have some restrictions. Advertisements for the following are forbidden on sneefR:",
+    'page_title' => "Sidewalks prohibited items",
+    'heading'    => "Sidewalks prohibited items",
+    'intro' => "Sidewalks is a social marketplace for buying and selling goods with people you trust. Although we are very permissive about what items you may buy and sell at our marketplace, we do have some restrictions. Advertisements for the following are forbidden on Sidewalks:",
     'items'   => [
         1 => "Liquor licenses, tobacco, tobacco or nicotine-containing products, controlled substances, illegal drugs, things used primarily to manufacture controlled substances and drugs, drug paraphernalia, nonprescription drugs, drugs with false or misleading claims, or drugs or devices that require FDA approval",
         // Think about incrementing the number here

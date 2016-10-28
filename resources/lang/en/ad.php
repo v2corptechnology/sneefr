@@ -51,7 +51,7 @@ return [
     'sold'                         => [
         'page_title'               => "Confirm the sale of :title",
         'head'                     => "Congrats, who did you sell this item to?",
-        'head_nobody'              => "You sold this ad outside of sneefR?",
+        'head_nobody'              => "You sold this ad outside of Sidewalks?",
         'head_nobody_text'         => "Congrats. Here is the button to remove it.",
         'discussed_label'          => "People you discussed with about this ad&nbsp;:",
         'other_discussions_label'  => "People you're discussing with&nbsp;:",

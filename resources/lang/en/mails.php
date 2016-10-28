@@ -9,7 +9,7 @@ return [
     ],
 
     'purchased' => [
-        'inbox_title'        => "You just bought something on Sneefr",
+        'inbox_title'        => "You just bought something on Sidewalks",
         'title'              => "You just bought \":item\" :price | You just bought :nb \":item\" :price",
         'content'            => "Don't forget to leave a review to <strong>:name</strong>, it will help other users know if this is a good seller.",
         'btn_evaluate'       => "Leave an evaluation",
@@ -17,7 +17,7 @@ return [
     ],
 
     'sold' => [
-        'inbox_title'        => "You just sold something on Sneefr",
+        'inbox_title'        => "You just sold something on Sidewalks",
         'title'              => "You just sold \":item\" :price | You just sold :nb \":item\" :price",
         'content'            => "Don't forget to leave a review to <strong>:name</strong>, it will help other users know if this is a good buyer.",
     ],

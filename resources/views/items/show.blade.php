@@ -5,7 +5,7 @@
 @section('social_media')
     <meta property="fb:app_id"
           content="{{ config('sneefr.keys.FACEBOOK_CLIENT_ID') }}">
-    <meta property="og:site_name" content="sneefR"/>
+    <meta property="og:site_name" content="Sidewalks"/>
     <meta property="og:type" content="product.item"/>
     <meta property="og:url" content="{{ Request::url() }} ">
     <meta property="og:updated_time"

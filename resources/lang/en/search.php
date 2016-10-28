@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'page_title'             => "Search sneefR",
-    'page_title_for_latest'  => "Latest ads on sneefR",
+    'page_title'             => "Search Sidewalks",
+    'page_title_for_latest'  => "Latest ads on Sidewalks",
     'sort'                   => 'Sort',
     'sort_by_relevance'      => "Relevance",
     'sort_by_date'           => "Date",

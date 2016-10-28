@@ -28,7 +28,7 @@ return [
     'ad_is_not_locked_for_you'           => "The seller didn't save this ad for you",
     'payment_success'                    => "Payment successful. The seller has been notified. Stay in touch with the seller for the next steps (delivery, in person, pick-up).",
     'payment_success_shop'               => "Payment successful. The seller has been notified. Contact the seller if you have any question.",
-    'subscription_success'               => "Payment successful. You can start doing business with sneefR!",
+    'subscription_success'               => "Payment successful. You can start doing business with Sidewalks!",
     'connect_first'                      => "Please log in first, it only takes 1 click",
     'phone_verification_waiting'         => "You will receive an SMS with your verification code",
     'phone_verification_error'           => "You already validated this phone or have reached the maximum number of verifications, please contact us to sort it out.",

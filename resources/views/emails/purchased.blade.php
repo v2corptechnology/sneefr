@@ -40,5 +40,5 @@
 @endsection
 
 @section('footer')
-    This email was sent automatically, if you have any question, please contact the vendor Sneefr.
+    This email was sent automatically, if you have any question, please contact the vendor.
 @endsection
