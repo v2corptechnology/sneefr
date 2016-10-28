@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c4e007971d7f9caafadbc57de79614e",
-    "content-hash": "5f4ca36ee02103498babee92817e89d3",
+    "hash": "7cff1208285a2ccee5c420f63c8acf4e",
+    "content-hash": "2bee13f59b1a0bd959a534b9c2555f5f",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -60,16 +60,16 @@
         },
         {
             "name": "algolia/algoliasearch-laravel",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-laravel.git",
-                "reference": "144e0bf59bef74d16a5e4c6f99d4cf6c128c887a"
+                "reference": "ac92755b4959e1dc18d1b7dbd70ba059119e88f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-laravel/zipball/144e0bf59bef74d16a5e4c6f99d4cf6c128c887a",
-                "reference": "144e0bf59bef74d16a5e4c6f99d4cf6c128c887a",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-laravel/zipball/ac92755b4959e1dc18d1b7dbd70ba059119e88f4",
+                "reference": "ac92755b4959e1dc18d1b7dbd70ba059119e88f4",
                 "shasum": ""
             },
             "require": {
@@ -103,7 +103,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2016-08-22 11:32:54"
+            "time": "2016-10-17 08:51:38"
         },
         {
             "name": "aloha/twilio",

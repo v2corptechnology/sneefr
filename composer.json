@@ -28,7 +28,8 @@
         "spatie/laravel-failed-job-monitor": "^1.0",
         "laravel/scout": "^1.1",
         "laravel/socialite": "^2.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "algolia/algoliasearch-client-php": "^1.11"
 
     },
     "require-dev": {
