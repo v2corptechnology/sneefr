@@ -102,12 +102,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return (bool) $this->shop()->count();
     }
 
-
-    public function scopeExceptStaff($query)
-    {
-        return $query->where('id', '>', 4);
-    }
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
@@ -244,7 +238,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isAdmin() : bool
     {
-        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
+        return (bool) $this->is_admin;
     }
 
     /**
