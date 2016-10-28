@@ -52,6 +52,5 @@ class Kernel extends HttpKernel
         'throttle'       => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'shared'         => \Sneefr\Http\Middleware\VerifyShare::class,
         'team.admin'     => \Sneefr\Http\Middleware\AdminMiddleware::class,
-        'team.developer' => \Sneefr\Http\Middleware\DeveloperMiddleware::class,
     ];
 }
