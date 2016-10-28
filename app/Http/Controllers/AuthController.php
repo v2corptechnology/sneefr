@@ -55,8 +55,6 @@ class AuthController extends Controller
 
         auth()->login($user, true);
 
-        dd(auth()->id());
-        dd('pop');
         return redirect()->intended();
     }
 
