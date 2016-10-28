@@ -157,7 +157,7 @@ class Shop extends Model
      */
     public function getDescription() : string
     {
-        return $this->getData('description');
+        return (string) $this->getData('description');
     }
 
     /**
