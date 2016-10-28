@@ -102,12 +102,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return (bool) $this->shop()->count();
     }
 
-
-    public function scopeExceptStaff($query)
-    {
-        return $query->where('id', '>', 4);
-    }
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');

@@ -27,19 +27,19 @@ class AdminController extends Controller
 
         $this->lastDay = [
             'users.created' => User::whereDate('created_at', '>=', $this->yesterday)->get()->count(),
-            'users.viewed'  => ActionLog::exceptStaff()->where('type', ActionLog::PROFILE_VIEW)->whereDate('created_at', '>=', $this->yesterday)->get()->count(),
+            'users.viewed'  => ActionLog::where('type', ActionLog::PROFILE_VIEW)->whereDate('created_at', '>=', $this->yesterday)->get()->count(),
             'ads.created'   => Ad::whereDate('created_at', '>=', $this->yesterday)->get()->count(),
-            'ads.viewed'    => ActionLog::exceptStaff()->where('type', ActionLog::AD_VIEW)->whereDate('created_at', '>=', $this->yesterday)->get()->count(),
+            'ads.viewed'    => ActionLog::where('type', ActionLog::AD_VIEW)->whereDate('created_at', '>=', $this->yesterday)->get()->count(),
             'ads.sold'      => Ad::whereDate('created_at', '>=', $this->yesterday)->sold()->count(),
         ];
 
         $this->totals = [
-            'users'           => User::exceptStaff()->withTrashed()->latest()->get()->count(),
-            'ads'             => Ad::exceptStaff()->get()->count(),
-            'ads.sold'        => Ad::exceptStaff()->sold()->onlyTrashed()->get()->count(),
-            'ads.amount'      => Ad::exceptStaff()->sold()->onlyTrashed()->get()->sum('amount'),
+            'users'           => User::withTrashed()->latest()->get()->count(),
+            'ads'             => Ad::get()->count(),
+            'ads.sold'        => Ad::sold()->onlyTrashed()->get()->count(),
+            'ads.amount'      => Ad::sold()->onlyTrashed()->get()->sum('amount'),
             'reports'         => count($this->reports['ads']) + count($this->reports['users']),
-            'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->get()->count(),
+            'searches'        => ActionLog::where('type', ActionLog::USER_SEARCH)->latest()->get()->count(),
             'stripe_profiles' => 0,
         ];
     }
@@ -50,7 +50,7 @@ class AdminController extends Controller
      */
     public function users()
     {
-        $users = User::exceptStaff()->withTrashed()->take(50)->latest()->get();
+        $users = User::withTrashed()->take(50)->latest()->get();
 
         $users = $this->retrieveAdCounts($users);
 
@@ -101,7 +101,7 @@ class AdminController extends Controller
      */
     public function ads()
     {
-        $ads = Ad::exceptStaff()->take(30)->latest()->get();
+        $ads = Ad::take(30)->latest()->get();
         $ads = $ads->load(['user']);
 
         return view('admin.ads', [
@@ -118,7 +118,7 @@ class AdminController extends Controller
      */
     public function deals()
     {
-        $ads = Ad::exceptStaff()->latest()->sold()->onlyTrashed()->take(30)->get();
+        $ads = Ad::latest()->sold()->onlyTrashed()->take(30)->get();
         $ads = $ads->load(['user']);
 
         return view('admin.ads', [
@@ -137,7 +137,7 @@ class AdminController extends Controller
     {
         $shared = collect();
 
-        $searched = ActionLog::where('type', ActionLog::USER_SEARCH)->exceptStaff()->latest()->take(5000)->get();
+        $searched = ActionLog::where('type', ActionLog::USER_SEARCH)->latest()->take(5000)->get();
         $searched = $searched->load(['user']);
         $searched = $this->unduplicateSearches($searched, 100);
 

@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
 use Sneefr\Delivery;
-use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
 use Sneefr\Price;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -19,7 +18,6 @@ class Ad extends Model
     use AlgoliaEloquentTrait;
     use LogsActivity;
     use SoftDeletes;
-    use StaffFilterable;
     use Presentable;
 
     public $sellerEvaluationRatio;
@@ -268,6 +266,14 @@ class Ad extends Model
     public function scopeSold($query)
     {
         return $query->onlyTrashed()->where('remaining_quantity', 0);
+    }
+
+    public function scopeExceptAdmin($query)
+    {
+        return $query->where(function ($q) {
+            $q->where('is_admin', true)->orWhereNull('user_id');
+        });
+
     }
 
     /**
