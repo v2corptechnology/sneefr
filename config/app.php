@@ -176,7 +176,6 @@ return [
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
-        Spatie\FailedJobMonitor\FailedJobMonitorServiceProvider::class,
         Vinkla\Algolia\AlgoliaServiceProvider::class,
 
         /*

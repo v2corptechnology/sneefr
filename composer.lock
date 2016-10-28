@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cff1208285a2ccee5c420f63c8acf4e",
-    "content-hash": "2bee13f59b1a0bd959a534b9c2555f5f",
+    "hash": "cc97bd6efd0244a95e26d34ee9b7e248",
+    "content-hash": "d49bbf7f116294c2366991199724e9a2",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3209,69 +3209,6 @@
                 "user"
             ],
             "time": "2016-10-11 21:59:00"
-        },
-        {
-            "name": "spatie/laravel-failed-job-monitor",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-failed-job-monitor.git",
-                "reference": "c83ac93c386933973a22ce54078df97992e4f208"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-failed-job-monitor/zipball/c83ac93c386933973a22ce54078df97992e4f208",
-                "reference": "c83ac93c386933973a22ce54078df97992e4f208",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/queue": "~5.3.0",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "maknz/slack": "^1.5",
-                "orchestra/testbench": "^3.3",
-                "phpunit/phpunit": "^5.0"
-            },
-            "suggest": {
-                "maknz/slack": "Allows notifications to be sent via Slack"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\FailedJobMonitor\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Jolita Grazyte",
-                    "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Get notified when a queued job fails",
-            "homepage": "https://github.com/spatie/laravel-failed-job-monitor",
-            "keywords": [
-                "job",
-                "laravel-failed-job-monitor",
-                "monitor",
-                "notify",
-                "queue",
-                "slack",
-                "spatie"
-            ],
-            "time": "2016-09-11 13:49:27"
         },
         {
             "name": "spatie/string",
