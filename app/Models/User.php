@@ -244,7 +244,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isAdmin() : bool
     {
-        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
+        return (bool) $this->is_admin;
     }
 
     /**
