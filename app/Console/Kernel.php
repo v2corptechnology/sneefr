@@ -27,6 +27,10 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
+        $schedule->call(function() {
+            \Log::warning('hello, run from queue');
+        })->everyMinute();
+
         //$schedule->command('yelp:import')->everyFiveMinutes();
 
         // Calls made every hour
