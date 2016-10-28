@@ -29,28 +29,4 @@ return [
         // Intercom chat service
         'INTERCOM_APP_ID'        => env('INTERCOM_APP_ID'),
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Staff facebook ids
-    |--------------------------------------------------------------------------
-    |
-    | These are the staff facebook identifiers mostly used to display special
-    | menus, access stats or debug tools.
-    |
-    */
-
-    'staff_facebook_ids' => [
-        // Those who can see the stats
-        'administrators' => [
-            603204913117901, // Selma
-            10152391232875356, // Jeremy
-            10152937772934901, // Arthur
-            10152914548827090, // Romain
-        ],
-        // Those who can access the logs
-        'developers'     => [
-            10152914548827090,  // Romain
-        ],
-    ],
 ];

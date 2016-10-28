@@ -42,7 +42,7 @@ class AdPolicy
         }
 
         // Is ot one of the site admins ?
-        if (in_array(auth()->user()->facebook_id, config('sneefr.staff_facebook_ids.administrators'))) {
+        if (auth()->user()->isAdmin()) {
             return true;
         }
 

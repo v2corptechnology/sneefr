@@ -10,7 +10,7 @@ trait StaffFilterable
     public function scopeExceptStaff($query)
     {
         return $query->where(function ($q) {
-            $q->whereNotIn('user_id', config('sneefr.staff_facebook_ids.administrators'))->orWhereNull('user_id');
+            $q->where('is_admin', true)->orWhereNull('user_id');
         });
     }
 }

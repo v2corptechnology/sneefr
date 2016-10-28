@@ -17,10 +17,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $allowed = in_array(\Auth::user()
-            ->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
-
-        if (!$allowed) {
+        if (! auth()->user()->isAdmin()) {
             return redirect()->route('home');
         }
 
