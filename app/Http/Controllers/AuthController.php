@@ -27,7 +27,7 @@ class AuthController extends Controller
      */
     public function callback()
     {
-        dd(Socialite::driver('facebook')->user());
+        dd(Socialite::driver('facebook')->stateless()->user());
         // add required fields not provided by default
         $providerUser = Socialite::driver('facebook')->fields(['email', 'first_name', 'last_name'])->user();
 
