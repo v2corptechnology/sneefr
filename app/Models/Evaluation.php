@@ -26,6 +26,15 @@ class Evaluation extends Model
      */
     protected $casts = ['is_positive' => 'boolean'];
 
+    /**
+     * Relationship to the user who gave the evaluation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function evaluator()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     /**
      * Evaluations older than x days.

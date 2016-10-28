@@ -31,13 +31,11 @@
 
                             <div class="evaluation__content">
 
-                                {!! HTML::profilePicture(
-                                    $evaluation->user->facebook_id,
-                                    $evaluation->user->present()->givenName(),
-                                    17,['evaluation__profile-image']) !!}
-                                {{ $evaluation->user->present()->givenName() }}
+                                <img class="evaluation__profile-image" src="{{ $evaluation->evaluator->getPicture('17x17') }}"
+                                     srcset="{{ $evaluation->evaluator->getPicture('34x34') }} 2x"
+                                     width="17" height="17" alt="{{ $evaluation->evaluator->present()->givenName() }}">
 
-                                @if ($evaluation->body)
+                            @if ($evaluation->body)
                                     <p class="evaluation__body">{{ $evaluation->body }}</p>
                                 @elseif ($evaluation->status == 'forced')
                                     <p class="evaluation__body">@lang('profile.evaluations.forced_text')</p>
