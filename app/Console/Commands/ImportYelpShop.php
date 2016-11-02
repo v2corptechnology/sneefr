@@ -44,6 +44,8 @@ class ImportYelpShop extends Command
 
         $shops = $yelpClient->getBusinessesAround(34.052235, -118.243683, ['limit' => 50, 'offset' => cache()->get('yelp_import_offset', '1')]);
 
+        \Log::debug('Doing offset', [cache()->get('yelp_import_offset', '1')]);
+
         foreach($shops as $yelp) {
 
             // Increment offset
