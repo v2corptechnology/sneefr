@@ -44,6 +44,8 @@ class ImportYelpShop extends Command
 
         $shops = $yelpClient->getBusinessesAround(34.052235, -118.243683, ['limit' => 50, 'offset' => cache()->get('yelp_import_offset', '1')]);
 
+        dd($shops);
+
         foreach($shops as $yelp) {
 
             // Increment offset
@@ -79,7 +81,7 @@ class ImportYelpShop extends Command
 
     private function getClient()
     {
-        $token = cache()->remember('yelp-api-auth-token', 100 * 24 * 60 * 60, function () {
+        //$token = cache()->remember('yelp-api-auth-token', 100 * 24 * 60 * 60, function () {
 
             $client = new \GuzzleHttp\Client();
 
@@ -98,8 +100,8 @@ class ImportYelpShop extends Command
                 return;
             }
 
-            return json_decode((string) $response->getBody())->access_token;
-        });
+            $token= json_decode((string) $response->getBody())->access_token;
+        //});
 
         return new \GuzzleHttp\Client([
             'base_uri' => 'https://api.yelp.com/v3/',
