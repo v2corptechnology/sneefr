@@ -79,7 +79,7 @@ class ImportYelpShop extends Command
 
     private function getClient()
     {
-        $token = cache()->remember('yelp-api-auth-token', 100 * 24 * 60 * 60, function () {
+        $token = cache()->remember('yelp-api-auth-token', 30, function () {
 
             $client = new \GuzzleHttp\Client();
 
