@@ -31,14 +31,14 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'category_id', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images', 'condition_id',];
+    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images', 'condition_id',];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'category_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -46,13 +46,12 @@ class Ad extends Model
      * @var array
      */
     protected $casts = [
-        'images'            => 'array',
-        'transaction'       => 'array',
-        'amount'            => 'float',
-        'latitude'          => 'float',
-        'longitude'         => 'float',
-        'category_id'       => 'int',
-        'condition_id'      => 'int',
+        'images'       => 'array',
+        'transaction'  => 'array',
+        'amount'       => 'float',
+        'latitude'     => 'float',
+        'longitude'    => 'float',
+        'condition_id' => 'int',
     ];
 
     /**
@@ -108,6 +107,16 @@ class Ad extends Model
     }
 
     /**
+     * Tags applied to this shop.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'item_tag', 'item_id');
+    }
+
+    /**
      * Relation to the shop of this ad.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -135,11 +144,6 @@ class Ad extends Model
     public function actions()
     {
         return $this->morphMany('Action', 'actionable');
-    }
-
-    public function tags()
-    {
-        return $this->hasMany(Tag::class, 'taggable_id')->where('taggable_type', Ad::class);
     }
 
     public function reports()
@@ -353,16 +357,6 @@ class Ad extends Model
     public function slug() : string
     {
         return str_slug($this->id . ' ' . $this->title);
-    }
-
-    /**
-     * Get the category identifier.
-     *
-     * @return int
-     */
-    public function categoryId() : int
-    {
-        return (int) $this->category_id;
     }
 
     /**

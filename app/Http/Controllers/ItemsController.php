@@ -6,8 +6,8 @@ use Sneefr\Events\AdWasPosted;
 use Sneefr\Events\ItemWasViewed;
 use Sneefr\Http\Requests\CreateAdRequest;
 use Sneefr\Models\Ad;
-use Sneefr\Models\Category;
 use Sneefr\Models\Stock;
+use Sneefr\Models\Tag;
 
 class ItemsController extends Controller
 {
@@ -34,9 +34,9 @@ class ItemsController extends Controller
                 ->with('stripe_modal', true);
         }
 
-        $categories = Category::getTree();
+        $tags = Tag::all()->pluck('title', 'id');
 
-        return view('items.create', compact('categories'));
+        return view('items.create', compact('tags'));
     }
 
     /**
@@ -50,6 +50,8 @@ class ItemsController extends Controller
     {
         // Store the ad
         $ad = Ad::create($request->all());
+
+        $ad->tags()->sync($request->input('tags'));
 
         // Notify the ad has been created
         event(new AdWasPosted($ad));
@@ -74,9 +76,9 @@ class ItemsController extends Controller
         // Check the rights for this user to edit this ad
         $this->authorize('update', $ad);
 
-        $categories = Category::getTree();
+        $tags = Tag::all()->pluck('title', 'id');
 
-        return view('ad.edit', compact('ad', 'categories'));
+        return view('ad.edit', compact('ad', 'tags'));
     }
 
     /**

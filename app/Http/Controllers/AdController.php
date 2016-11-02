@@ -41,6 +41,8 @@ class AdController extends Controller
         // Update the data
         $ad->update($request->except(['images']));
 
+        $ad->tags()->sync($request->input('tags'));
+
         return redirect()->route('ad.show', $ad)
             ->with('success', trans('feedback.ad_edit_success'));
     }
