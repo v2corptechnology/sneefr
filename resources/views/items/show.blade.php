@@ -140,7 +140,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <p>Developed by the Intel Corporation, HDCP stands for high-bandwidth digital content protection. As the descriptive name implies.</p>
                                 </div>
                             </div>
 
