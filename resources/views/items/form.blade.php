@@ -6,12 +6,18 @@
 @push('footer-js')
     <script src="{{ elixir('js/sneefr.autovalidate.js') }}"></script>
     <script src="{{ elixir('js/sneefr.ad_edition.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+        $('#js-tags').select2({
+            maximumSelectionLength: 2,
+            placeholder: 'Choose tags',
+        });
+    </script>
 @endpush
 
 @if (auth()->user()->isAdmin())
     @push('footer-js')
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script type="text/javascript">
             $('#js-shop').select2();
         </script>
@@ -62,16 +68,17 @@
     </div>
 
     <div class="col-md-8">
-        <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-            <label class="control-label" for="category_id">
-                @lang('ad_form.create.category_label')
-            </label>
-            {!! Form::select('category_id', $categories, $category_id, [
+        <div class="form-group">
+            <label for="tags" class="control-label">Tags</label>
+            {!! Form::select('tags[]', $tags, $selectedTags, [
                 'class' => 'form-control',
+                'id' => 'js-tags',
+                'size' => 2,
                 'autocomplete' => 'off',
-                'required'
+                'multiple',
+                'required',
             ]) !!}
-            {!! $errors->first('category_id', '<p class="help-block">:message</p>') !!}
+            {!! $errors->first('tags', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
 </div>

@@ -13,12 +13,12 @@ namespace Sneefr\Http\Requests {
         {
             return [
                 'title'        => 'required|between:3,255',
-                'category_id'  => 'required|min:1',
                 'condition_id' => 'required',
                 'location'     => 'required',
                 'lat'          => 'required|regex:/^[+-]?\d+\.\d+$/',
                 'long'         => 'required|regex:/^[+-]?\d+\.\d+$/',
                 'shop_id'      => 'integer',
+                'tags'        => 'required|array',
                 'amount'       => [
                     'required',
                     'min:0.1',
