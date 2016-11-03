@@ -2,9 +2,9 @@
 
 namespace Sneefr\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Sneefr\Models\Ad;
 
-class StoreItemRequest extends FormRequest
+class StoreItemRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
