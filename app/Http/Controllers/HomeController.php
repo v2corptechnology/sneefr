@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $bestSellers = Ad::take(6)->get();
 
-        $topShops = Shop::highlighted()->with('evaluations')->take(4)->get();
+        $topShops = cache()->get('highlighted_shops', Shop::highlighted()->with('evaluations')->take(4)->get());
 
         return view('pages.home', compact('tags', 'topShops', 'bestSellers', 'shopsInTag'));
     }
