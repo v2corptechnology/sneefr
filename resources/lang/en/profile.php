@@ -7,7 +7,7 @@ return [
         'given_name_label'          => "First name",
         'surname_name_label'        => "Last name",
         'email_label'               => "Your email address",
-        'email_placeholder'         => "Ex: hello@sneefr.com",
+        'email_placeholder'         => "Ex: shop@sidewalks.city",
         'email_not_yet_validated'   => "You have not confirmed your email <strong>:email</strong> yet",
         'email_text'                => "(it is confidential and will never be seen by other users)",
         'location_label'            => "Location",

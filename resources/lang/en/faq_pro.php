@@ -51,8 +51,8 @@ return [
                 ],
                 3 => [
                     'question' => "I want to cancel my subscription",
-                    'answer'   => "We’re very sorry to hear that you want to leave us! Maybe there is something we can do to improve your experience on Sidewalks? Please do not hesitate to contact us at proseller@sneefr.com and we’ll do our best to help you.
-                                    <br> If you do want to cancel your subscription, please contact us at proseller@sneefr.com
+                    'answer'   => "We’re very sorry to hear that you want to leave us! Maybe there is something we can do to improve your experience on Sidewalks? Please do not hesitate to contact us at shop@sidewalks.city and we’ll do our best to help you.
+                                    <br> If you do want to cancel your subscription, please contact us at shop@sidewalks.city
                                     <br> Whether you chose yearly or monthly billing, your subscription will not be renewed and you will be able to use your Pro Seller account until the end of the period you paid for.",
                 ],
             ],
@@ -74,7 +74,7 @@ return [
             'questions' => [
                 1 => [
                     'question' => "What I am not allowed to sell on Sidewalks?",
-                    'answer'   => "Although Sidewalks allows you to sell many different types of items, there are some restrictions you must be aware of. Before listing an item for sale, please check our list of Prohibited Items. Profiles that repeatedly violate the list will be permanently closed. If you are unsure whether an item is prohibited or not, please email us at hello@sneefr.com",
+                    'answer'   => "Although Sidewalks allows you to sell many different types of items, there are some restrictions you must be aware of. Before listing an item for sale, please check our list of Prohibited Items. Profiles that repeatedly violate the list will be permanently closed. If you are unsure whether an item is prohibited or not, please email us at shop@sidewalks.city",
                     //Is it possible to include a link to the Prohibited Items list
                 ],
                 2 => [
@@ -91,7 +91,7 @@ return [
                 4 => [
                     'question' => "How do I add details about quantity, size and color?",
                     'answer'   => "We’re working hard on developing a powerful tool to ease your logistics. For now, the best options are either to include details about quantity, available sizes and colors in the title or description of the item or to create one ad per quantity, size or color.
-                                    <br> We’re really sorry for the inconvenience this may cause. If you have any suggestion or remark, please email us at hello@sneefr.com and we’ll get in touch shortly.",
+                                    <br> We’re really sorry for the inconvenience this may cause. If you have any suggestion or remark, please email us at shop@sidewalks.city and we’ll get in touch shortly.",
                 ],
             ],
         ],
@@ -124,7 +124,7 @@ return [
                 ],
                 4 => [
                     'question' => "How quickly will I get my money with SneefPay?",
-                    'answer'   => "If you requested a payment through SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email with the transaction information at hello@sneefr.com and we’ll look into this.",
+                    'answer'   => "If you requested a payment through SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email with the transaction information at shop@sidewalks.city and we’ll look into this.",
                 ],
             ],
         ],

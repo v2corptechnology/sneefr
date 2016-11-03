@@ -90,7 +90,7 @@ return [
                 1 => "Sidewalks,",
                 2 => "Attn: Legal Department,",
                 3 => "113 N. San Vicente Blvd, Beverly Hills, California 90211.",
-                4 => "hello@sneefr.com",
+                4 => "shop@sidewalks.city",
                 //I'm not sure this is the right way to write it, or if break lines would be better here
             ],
         ],

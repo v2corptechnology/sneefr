@@ -129,7 +129,7 @@ return [
                     'questions' => [
                         1 => [
                             'question' => "What am I not allowed to sell on Sidewalks?",
-                            'answer'   => "Although Sidewalks allows you to sell many different types of items, there are some restrictions you must be aware of. Before listing an item for sale, please check our Prohibited and Restricted Items list (link). Profiles that repeatedly violate the list will be permanently closed. If you are unsure whether an item is prohibited or not, please email us at hello@sneefr.com",
+                            'answer'   => "Although Sidewalks allows you to sell many different types of items, there are some restrictions you must be aware of. Before listing an item for sale, please check our Prohibited and Restricted Items list (link). Profiles that repeatedly violate the list will be permanently closed. If you are unsure whether an item is prohibited or not, please email us at shop@sidewalks.city",
                         ],
                         2 => [
                             'question' => "How do I list an item for sale?",
@@ -172,7 +172,7 @@ return [
                         ],
                         4 => [
                             'question' => "How quickly will I get my money with SneefPay?",
-                            'answer'   => "If you requested a payment through SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email at hello@sneefr.com and we’ll look into this.",
+                            'answer'   => "If you requested a payment through SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email at shop@sidewalks.city and we’ll look into this.",
                         ],
                     ],
                 ],
@@ -181,7 +181,7 @@ return [
                     'questions' => [
                         1 => [
                             'question' => "I haven’t received my payment",
-                            'answer'   => "We recommend requesting payment from the buyer before shipping the item you sold. If you use SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email at hello@sneefr.com and we’ll look into this. If you shipped the item and did not use SneefPay, ask the buyer if they did send your payment. We recommend asking for proof of payment before shipping the item. If the buyer confirms your payment has been sent, it may take a few business days before it appears on your bank account.
+                            'answer'   => "We recommend requesting payment from the buyer before shipping the item you sold. If you use SneefPay, you will get your money within 3 to 5 business days. If not, please send us an email at shop@sidewalks.city and we’ll look into this. If you shipped the item and did not use SneefPay, ask the buyer if they did send your payment. We recommend asking for proof of payment before shipping the item. If the buyer confirms your payment has been sent, it may take a few business days before it appears on your bank account.
                                         <br>Please keep in mind that Sidewalks cannot be held liable if you didn’t use SneefPay to get paid and haven’t received your payment.",
                         ],
                         2 => [
@@ -231,7 +231,7 @@ return [
                         ],
                         3 => [
                             'question' => "The money has left my account but the seller hasn’t received it",
-                            'answer'   => "We recommend using SneefPay when buying and selling on Sidewalks. If you used SneefPay, the seller should receive the payment within 3 to 5 business days. If not, please contact us at hello@sneefr.com and we’ll look into this.
+                            'answer'   => "We recommend using SneefPay when buying and selling on Sidewalks. If you used SneefPay, the seller should receive the payment within 3 to 5 business days. If not, please contact us at shop@sidewalks.city and we’ll look into this.
                                         <br>If you did not use SneefPay, it may take a few days before the payment appears on the seller’s bank account.",
                         ],
                     ],

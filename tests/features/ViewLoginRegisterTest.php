@@ -10,22 +10,22 @@ class ViewLoginRegisterTest extends TestCase
         factory(\Sneefr\Models\Ad::class, 3)->create();
 
         $this->visit('/register')
-             ->type('email@sneefr.com', 'email')
+             ->type('shop@sidewalks.city', 'email')
              ->type('password', 'password')
              ->type('password', 'password_confirmation')
              ->press(trans('button.register'));
 
         $this->see(trans('auth.activation'))
-            ->seeInDatabase('users', ["email" => "email@sneefr.com", "verified" => 0]);
+            ->seeInDatabase('users', ["email" => "shop@sidewalks.city", "verified" => 0]);
 
-        $user = \Sneefr\Models\User::whereEmail('email@sneefr.com')->firstOrFail();
+        $user = \Sneefr\Models\User::whereEmail('shop@sidewalks.city')->firstOrFail();
 
         $key = encrypt(['id' => $user->getId(), 'email' => $user->getEmail()]);
 
         $this->visit("/register/activation/" . $key);
 
         $this->see(trans('feedback.email_activation_success'))
-            ->seeInDatabase('users', ["email" => "email@sneefr.com", "verified" => 1]);
+            ->seeInDatabase('users', ["email" => "shop@sidewalks.city", "verified" => 1]);
     }
 
     public function test_login_user_with_not_activated_account()

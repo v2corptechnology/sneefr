@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sender_email'         => "hello@sneefr.com",
+    'sender_email'         => "shop@sidewalks.city",
     'sender_name'          => "Sidewalks",
     'signature'            => "The Sidewalks Team",
     'footer'               => "<a href=\":url\" title=\"To the site Sidewalks.com\">Sidewalks</a>, buy and sell to people you can trust.",
