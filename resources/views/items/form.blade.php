@@ -59,7 +59,7 @@
             <div class="input-group">
                 <span class="input-group-addon">@lang('ad_form.create.price_currency')</span>
                 <input class="form-control" type="number" value="{{ $amount }}"
-                       name="amount" id="amount"
+                       name="amount" id="amount" min="1" max="100"
                        placeholder="@lang('ad_form.create.price_placeholder')"
                        title="@lang('ad_form.create.price_title')"
                        pattern="\d+(,\d{2})?" required>
