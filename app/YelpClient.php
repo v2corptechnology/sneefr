@@ -84,6 +84,10 @@ class YelpClient
 
         $randItem = array_rand($tokens);
 
+        $i = array_search($randItem, array_keys($tokens));
+
+        \Log::debug("Using key n° {$i}");
+
         return [
             'grant_type'    => 'client_credentials',
             'client_id'     => $randItem,
