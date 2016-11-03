@@ -117,6 +117,7 @@ Route::resource('shops', 'ShopsController', ['only' => ['show']]);
 /** Admins only */
 Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/tools', ['as' => 'admin.tools', 'uses' => 'AdminController@tools']);
+    Route::post('admin/tools', ['as' => 'admin.tools.create', 'uses' => 'AdminController@toolsCreate']);
     Route::put('admin/tools/{id}', ['as' => 'admin.tools.update', 'uses' => 'AdminController@toolsUpdate']);
     Route::get('admin/users', ['as' => 'admin.users', 'uses' => 'AdminController@users']);
     Route::get('admin/ads', ['as' => 'admin.ads', 'uses' => 'AdminController@ads']);
