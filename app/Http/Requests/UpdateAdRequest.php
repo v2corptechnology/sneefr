@@ -13,7 +13,6 @@ namespace Sneefr\Http\Requests {
         {
             return [
                 'title'        => 'required|between:3,255',
-                'condition_id' => 'required',
                 'location'     => 'required',
                 'lat'          => 'required|regex:/^[+-]?\d+\.\d+$/',
                 'long'         => 'required|regex:/^[+-]?\d+\.\d+$/',

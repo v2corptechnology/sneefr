@@ -14,7 +14,6 @@ namespace Sneefr\Http\Requests {
         {
             return [
                 'title'        => 'required|between:3,255',
-                'condition_id' => 'required',
                 'location'     => 'required',
                 'latitude'     => 'required|numeric',
                 'longitude'    => 'required|numeric',
