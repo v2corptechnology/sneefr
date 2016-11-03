@@ -2,29 +2,28 @@
 
 namespace Sneefr;
 
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 
 class YelpClient
 {
     /**
-     * @var \GuzzleHttp\ClientInterface
-     */
-    private $client;
-
-    /**
      * @var Array
      */
-    private $defaultOptions = ['radius' => 40000, 'limit' => 50, 'offset' => 1, 'categories' => 'shopping'];
+    private static $defaultOptions = ['radius' => 40000, 'limit' => 50, 'offset' => 1, 'categories' => 'shopping'];
 
     /**
-     * YelpClient constructor.
+     * @return \GuzzleHttp\Client
      *
-     * @param \GuzzleHttp\ClientInterface $client
+     * @throws \Exception
      */
-    public function __construct(ClientInterface $client)
+    public static function getClient()
     {
-        $this->client = $client;
+        // Get auth key
+        $token = self::getToken();
+
+        // Prepare base instance
+        return self::getBaseInstance($token);
     }
 
     /**
@@ -36,26 +35,60 @@ class YelpClient
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getBusinessesAround(float $latitude, float $longitude, array $options = []) : Collection
+    public static function getBusinessesAround(float $latitude, float $longitude, array $options = []) : Collection
     {
-        $options = array_merge($this->defaultOptions, $options);
-
-        $client = $this->client;
+        $options = array_merge(self::$defaultOptions, $options);
 
         $url = "businesses/search?latitude={$latitude}&longitude={$longitude}&radius={$options['radius']}&limit={$options['limit']}&offset={$options['offset']}&categories={$options['categories']}";
 
-        cache()->rememberForever('yelp_shops_results_for_la', function() use ($client, $url) {
-            $result = json_decode((string) $client->get($url)->getBody(), true);
+        return collect(json_decode((string) self::getClient()->get($url)->getBody(), true)['businesses']);
+    }
 
-            return $result['total'];
-        });
+    /**
+     * @return string
+     *
+     * @throws \Exception
+     */
+    public static function getToken() : string
+    {
+        $client = new \GuzzleHttp\Client();
 
-        // If offset overlaps results, skip the call
-        if ($options['offset'] > cache()->get('yelp_shops_results_for_la')) {
-            return collect();
+        $credentials = $client->post('https://api.yelp.com/oauth2/token', ['form_params' => self::getRandomToken()]);
+
+        if (200 !== $credentials->getStatusCode()) {
+            throw new \Exception('Unable to retrieve yelp credentials');
         }
 
-        return collect(json_decode((string) $client->get($url)->getBody(), true)['businesses']);
+        return json_decode((string) $credentials->getBody())->access_token;
+    }
+
+    public static function getBaseInstance(string $token) : Client
+    {
+        return new \GuzzleHttp\Client([
+            'base_uri' => 'https://api.yelp.com/v3/',
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+    }
+
+    public static function getRandomToken() : array
+    {
+        $tokens = [
+            '_DiM2JrJeEWvGwE1s6Vtgw' => 't8RPgKGCTEcxJc9nZ1DCfEShrhaH5TNCra5DkBvbqcuZQdj9R7R5cVa3ZW00Xo2J',
+            'QVy97YZU-rScX81-DRimQw' => 'KQ81elGyFzemmlO2P2s6apPkBhNYD1KfEwsrcVs6MEYlFYdFo5FxoC55K9SfhFOz',
+            'j3bUhrAc67xYXPZhW8GNSA' => 'e9072yQRyiZPkb0GaC04E4Pk3RZQHoB55MfbfT1O2Zy6PPQwBACMnC7DeGZ5DKi0',
+            '8g3MCLSQs7yn5VqdZIeInA' => 'xPu1IowGpKCx6VHTgsenqmGNAR3kuvq22DnmWV0EuuoOZpkFzRIqPC2UpsRH4L2K',
+            '-sUL_n1AWVV_N6dnbY4TJQ' => 'VG4fZMYvQCeUUs6NbKbqjie0zvscSN7gRqM5gKKR8JUNOCXGAeC8PbRNsqNEPy8R',
+        ];
+
+        $randItem = array_rand($tokens);
+
+        return [
+            'grant_type'    => 'client_credentials',
+            'client_id'     => $randItem,
+            'client_secret' => $tokens[$randItem],
+        ];
     }
 
 }
