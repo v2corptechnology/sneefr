@@ -12,20 +12,6 @@ class Shop extends Model
     use LogsActivity, Searchable, SoftDeletes;
 
     /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'shops';
-
-    /**
      * The attributes we can mass assign.
      *
      * @var array
