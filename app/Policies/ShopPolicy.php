@@ -51,7 +51,7 @@ class ShopPolicy
 
     public function destroy(User $user, Shop $shop)
     {
-        return $this->isShopOwner($user, $shop) && $user->isAdmin() && ! app()->environment('local', 'staging');
+        return $this->isShopOwner($user, $shop);
     }
 
     /**
@@ -82,6 +82,6 @@ class ShopPolicy
 
     private function isShopOwner(User $user, Shop $shop) : bool
     {
-        return $shop->isOwner($user->getId());
+        return $user->isAdmin() || $shop->isOwner($user->getId());
     }
 }
