@@ -24,20 +24,20 @@ class StoreItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'        => 'required|between:3,255',
-            'location'     => 'required',
-            'latitude'          => 'required|regex:/^[+-]?\d+\.\d+$/',
-            'longitude'         => 'required|regex:/^[+-]?\d+\.\d+$/',
+            'title'     => 'required|between:3,255',
+            'location'  => 'required',
+            'latitude'  => 'required|regex:/^[+-]?\d+\.\d+$/',
+            'longitude' => 'required|regex:/^[+-]?\d+\.\d+$/',
 
-            'shop_id'      => 'required|integer|exists:shops,id,deleted_at,NULL',
-            'quantity'     => 'required|numeric|between:1,100',
-            'tags'        => 'required|array|min:1|max:2',
-            'amount'       => [
+            'shop_id'  => 'required|integer|exists:shops,id,deleted_at,NULL',
+            'quantity' => 'required|numeric|between:1,100',
+            'tags'     => 'required|array|min:1|max:2',
+            'amount'   => [
                 'required',
                 'min:1',
                 'regex:#^\d+(.|,)?\d{0,2}$#isU',
             ],
-            'images'       => 'required|array|min:1'
+            'images'   => 'required|array|min:1',
         ];
     }
 
@@ -58,16 +58,16 @@ class StoreItemRequest extends FormRequest
 
         // Fill in missing attributes for the ad
         $input['user_id'] = auth()->id();
-        $input['currency'] =  trans('common.currency');
+        $input['currency'] = trans('common.currency');
         $input['remaining_quantity'] = $this->get('quantity');
 
         // Ad's cover should not be predicable
-        if(isset($input['images'])){
+        if (isset($input['images'])) {
             shuffle($input['images']);
         }
 
         // Trim fields
-        array_walk_recursive($input, function(&$in) {
+        array_walk_recursive($input, function (&$in) {
             $in = is_string($in) ? trim($in) : $in;
         });
 
