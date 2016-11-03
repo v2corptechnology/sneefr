@@ -4,6 +4,7 @@ namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -86,7 +87,7 @@ class Shop extends Model
         return $this->hasMany(Evaluation::class)->valid();
     }
 
-    public function scopeHighlighted($query)
+    public static function scopeHighlighted($query)
     {
         return $query->withCount('ads')->orderBy('ads_count', 'desc');
     }
