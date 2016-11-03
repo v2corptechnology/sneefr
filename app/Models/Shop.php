@@ -86,6 +86,11 @@ class Shop extends Model
         return $this->hasMany(Evaluation::class)->valid();
     }
 
+    public function scopeHighlighted($query)
+    {
+        return $query->withCount('ads')->orderBy('ads_count', 'desc');
+    }
+
     /**
      * Get the value of the model's route key.
      *
