@@ -40,7 +40,7 @@ class ImportYelpShop extends Command
     {
         $offset = cache()->get('yelp_import_offset', '1');
 
-        \Log::debug('Doing offset', $offset);
+        \Log::debug('Doing offset', [$offset]);
 
         $shops = YelpClient::getBusinessesAround(34.052235, -118.243683, ['offset' => $offset]);
 
