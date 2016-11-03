@@ -9,7 +9,7 @@ list($width, $height) = explode('x', $gallerySize);
 $images = $ad->images($gallerySize, true);
 $images2x = $ad->images($gallerySize . '@2x', true);
 
-switch ($detail ?? 'date') {
+switch ($detail ?? null) {
     case 'proximity':
         $footer = '<i class="fa fa-map-marker"></i> ' . $ad->present()->distance() . ' &mdash; ' . $ad->location();
         break;
@@ -20,7 +20,6 @@ switch ($detail ?? 'date') {
         $footer = trans_choice('ad.show.evaluations_ratio', $ad->present()->evaluationRatio(), ['ratio' => $ad->present()->evaluationRatio()]);
         break;
     case 'date':
-    default:
         $footer = HTML::time($ad->created_at);
         break;
 }
@@ -64,8 +63,10 @@ switch ($detail ?? 'date') {
             </div>
         @endif
 
-        <footer class="card__footer">
-            <p>{!! $footer !!}</p>
-        </footer>
+        @if (isset($footer))
+            <footer class="card__footer">
+                <p>{!! $footer !!}</p>
+            </footer>
+        @endif
     </div>
 </article>
