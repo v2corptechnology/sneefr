@@ -31,14 +31,14 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images', 'condition_id',];
+    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -51,7 +51,6 @@ class Ad extends Model
         'amount'       => 'float',
         'latitude'     => 'float',
         'longitude'    => 'float',
-        'condition_id' => 'int',
     ];
 
     /**
@@ -357,16 +356,6 @@ class Ad extends Model
     public function slug() : string
     {
         return str_slug($this->id . ' ' . $this->title);
-    }
-
-    /**
-     * Get the condition identifier of the ad.
-     *
-     * @return int
-     */
-    public function getConditionId() : int
-    {
-        return $this->condition_id;
     }
 
     /**

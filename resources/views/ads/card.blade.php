@@ -13,9 +13,6 @@ switch ($detail ?? null) {
     case 'proximity':
         $footer = '<i class="fa fa-map-marker"></i> ' . $ad->present()->distance() . ' &mdash; ' . $ad->location();
         break;
-    case 'condition':
-        $footer = trans('condition.' . $ad->getConditionId() . '_alt');
-        break;
     case 'evaluation':
         $footer = trans_choice('ad.show.evaluations_ratio', $ad->present()->evaluationRatio(), ['ratio' => $ad->present()->evaluationRatio()]);
         break;
