@@ -125,6 +125,8 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+    Route::resource('highlightedShops', 'HighlightedShopsController');
 });
 
 

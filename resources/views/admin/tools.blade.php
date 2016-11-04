@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-md-4">
-            Edit the tags
+            @include('admin._tools_sidebar')
         </div>
         <div class="col-md-8">
             <div class="content">
