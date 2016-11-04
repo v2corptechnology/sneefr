@@ -33,10 +33,14 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         if ($this->shouldReport($exception)) {
-            \Log::error($exception, [
-                'url'  => request()->fullUrl(),
-                'user' => auth()->user(),
-            ]);
+            if (auth()->check()) {
+                \Log::error($exception, [
+                    'url'  => request()->fullUrl(),
+                    'person' => ['id' => auth()->id(), 'username' => auth()->user()->present()->fullName(), 'email' => auth()->user()->email()]
+                ]);
+            } else {
+                \Log::error($exception, ['url'  => request()->fullUrl()]);
+            }
         }
         parent::report($exception);
     }
