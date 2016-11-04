@@ -15,6 +15,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Create tag</td>
+                            <td>
+                                <form action="{{ route('admin.tools.create') }}" method="POST">
+                                    {!! csrf_field() !!}
+                                    <div class="row">
+                                        <div class="col-md-9"><input type="text" name="title" class="form-control" autocomplete="off"></div>
+                                        <div class="col-md-3"><button class="btn btn-primary btn-block" type="submit">Add</button></div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
                         @foreach ($tags as $tag)
                             <tr>
                                 <td>/{{ $tag->alias }}</td>
@@ -32,6 +44,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <a name="bottom" id="bottom"></a>
             </div>
         </div>
     </div>

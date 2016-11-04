@@ -14,6 +14,13 @@ class Tag extends Model
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['alias', 'title'];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

@@ -82,6 +82,13 @@ class AdminController extends Controller
         return redirect()->route('admin.tools');
     }
 
+    public function toolsCreate(Request $request)
+    {
+        Tag::create(['alias' => str_slug($request->title, '-'), 'title' => $request->title]);
+
+        return redirect()->route('admin.tools');
+    }
+
     /**
      *
      * @return \Illuminate\View\View
