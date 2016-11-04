@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'sneefR',
+    'name' => 'Sidewalks',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,7 +176,6 @@ return [
         Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
-        Spatie\FailedJobMonitor\FailedJobMonitorServiceProvider::class,
         Vinkla\Algolia\AlgoliaServiceProvider::class,
 
         /*
@@ -242,7 +241,7 @@ return [
          * Package aliases...
          */
         'Twilio'        => Aloha\Twilio\Support\Laravel\Facade::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
 
         /*
          * Sneefr Aliases...

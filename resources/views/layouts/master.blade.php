@@ -2,7 +2,7 @@
 <html lang="fr">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
     <meta charset="UTF-8">
-    <title>@yield('title', 'sneefR')</title>
+    <title>@yield('title', 'Sidewalks')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@lang('common.site_description')" />
 

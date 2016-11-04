@@ -62,12 +62,12 @@
                         'title'         => old('title', request()->get('title')),
                         'amount'        => old('amount'),
                         'description'   => old('description'),
-                        'category_id'   => old('category_id'),
                         'condition_id'  => old('condition_id', 3),
                         'location'      => old('location', auth()->user()->getLocation()),
                         'latitude'      => old('latitude', auth()->user()->getLatitude()),
                         'longitude'     => old('longitude', auth()->user()->getLongitude()),
                         'lock_quantity' => false,
+                        'selectedTags' => [],
                         'quantity' => old('quantity', 1),
                         'shop_id'     => old('shop_id', null),
                         // Todo: refactor please

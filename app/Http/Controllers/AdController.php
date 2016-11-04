@@ -41,25 +41,9 @@ class AdController extends Controller
         // Update the data
         $ad->update($request->except(['images']));
 
+        $ad->tags()->sync($request->input('tags'));
+
         return redirect()->route('ad.show', $ad)
             ->with('success', trans('feedback.ad_edit_success'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $adId
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($adId)
-    {
-        $ad = Ad::findOrFail($adId);
-
-        // Check the rights for this user to remove this ad
-        $this->authorize('destroy', $ad);
-
-        return redirect()->home()
-            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
     }
 }

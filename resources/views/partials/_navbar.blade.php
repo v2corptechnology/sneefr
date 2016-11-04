@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}"
+                <img src="{{ asset('img/logo-sidewalks.png') }}" height="50"
                      alt="Buy from great local trusted shops in your city, all in one place">
             </a>
         </div>
@@ -61,7 +61,7 @@
             </button>
 
             <a class="navbar-brand visible-xs" href="{{ route('home') }}">
-                <img class="img-responsive" src="{{ asset('img/logo-sneefr.svg') }}"
+                <img src="{{ asset('img/logo-sidewalks.png') }}" height="50"
                      alt="Buy from great local trusted shops in your city, all in one place">
             </a>
         </div>

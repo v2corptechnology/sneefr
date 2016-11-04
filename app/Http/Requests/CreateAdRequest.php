@@ -14,13 +14,13 @@ namespace Sneefr\Http\Requests {
         {
             return [
                 'title'        => 'required|between:3,255',
-                'category_id'  => 'required|min:1|exists:categories,id',
                 'condition_id' => 'required',
                 'location'     => 'required',
                 'latitude'     => 'required|numeric',
                 'longitude'    => 'required|numeric',
                 'shop_id'      => 'sometimes|required|numeric|exists:shops,id,deleted_at,NULL',
                 'quantity'     => 'required|numeric|between:1,100',
+                'tags'        => 'required|array',
                 'amount'       => [
                     'required',
                     'min:0.1',

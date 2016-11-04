@@ -108,16 +108,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Relationship to the evaluations of this user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function evaluations()
-    {
-        return $this->morphMany(Evaluation::class, 'evaluated');
-    }
-
-    /**
      * All the sales or purchases of the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

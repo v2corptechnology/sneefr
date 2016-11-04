@@ -5,7 +5,7 @@
 @section('social_media')
     <meta property="fb:app_id"
           content="{{ config('sneefr.keys.FACEBOOK_CLIENT_ID') }}">
-    <meta property="og:site_name" content="sneefR"/>
+    <meta property="og:site_name" content="Sidewalks"/>
     <meta property="og:type" content="product.item"/>
     <meta property="og:url" content="{{ Request::url() }} ">
     <meta property="og:updated_time"
@@ -140,7 +140,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <p>Developed by the Intel Corporation, HDCP stands for high-bandwidth digital content protection. As the descriptive name implies.</p>
                                 </div>
                             </div>
 

@@ -22,6 +22,15 @@
     <ul class="dropdown-menu">
         @if (auth()->check() && (auth()->user()->isAdmin() || $ad->isMine()))
             <li><a href="{{ route('items.edit', $ad) }}" title=""><i class="fa fa-fw fa-pencil"></i> Edit</a></li>
+            <li>
+                <form action="{{ route('items.destroy', $ad) }}" method="post">
+                    {!! csrf_field() !!}
+                    {!! method_field('delete') !!}
+
+                    <button class="btn btn-link" type="submit"><i class="fa fa-fw fa-trash"></i> Remove</button>
+
+                </form>
+            </li>
         @endif
 
         @if (auth()->check() && $ad->isReported())

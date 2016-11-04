@@ -87,7 +87,7 @@
                                         data-shipping-address="true"
                                         data-billing-address="true"
                                         data-email="{{ auth()->user()->getEmail() }}"
-                                        data-currency="USD" data-name="sneefR"
+                                        data-currency="USD" data-name="Sidewalks"
                                         data-description="{{ $ad->present()->title() }}"
                                         data-amount="{{ $ad->negotiatedPrice() }}"
                                         @if ($ad->isInShop()) disabled @endif

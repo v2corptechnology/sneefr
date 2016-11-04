@@ -16,7 +16,6 @@ class EventServiceProvider extends ServiceProvider
         \Sneefr\Events\AdWasPosted::class => [
             \Sneefr\Listeners\AdWasPosted\MoveTemporaryImages::class,
             \Sneefr\Listeners\AdWasPosted\CopyAdLocationToProfile::class,
-            \Sneefr\Listeners\AdWasPosted\AddCategoryToShop::class,
         ],
 
         \Sneefr\Events\AdWasPurchased::class => [

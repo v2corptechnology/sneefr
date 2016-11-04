@@ -40,7 +40,7 @@ return [
         'coupon_label'             => "I have a coupon code",
         'coupon_placeholder'       => "ex: GREATDEAL",
         'btn_subscribe'            => "Subscribe",
-        'subscription_name'        => "sneefR",
-        'subscription_description' => "sneefR's subscription for a shop",
+        'subscription_name'        => "Sidewalks",
+        'subscription_description' => "Sidewalks's subscription for a shop",
     ],
 ];

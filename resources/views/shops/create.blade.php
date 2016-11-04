@@ -32,7 +32,7 @@
 <div class="container">
 
     <header class="hero hero--centered">
-        <img src="{{ asset('img/pig.svg') }}" width="100" alt="sneefR" class="hero__img">
+        <img src="{{ asset('img/pig.svg') }}" width="100" alt="Sidewalks" class="hero__img">
         <h1 class="hero__title">@lang('shop.create.heading')</h1>
         <p class="hero__tagline">@lang('shop.create.tagline')</p>
     </header>
