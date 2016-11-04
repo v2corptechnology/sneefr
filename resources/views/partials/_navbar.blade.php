@@ -95,10 +95,6 @@
         <div class="collapse navbar-collapse" id="js-nav-menu">
             <ul class="nav navbar-nav">
 
-                <li class="{{ setActive('home') }}">
-                    <a href="{{ route('home') }}" title="Home">Home</a>
-                </li>
-
                 {{-- Item creation --}}
                 @if (auth()->check() && auth()->user()->shop )
                     <li class="{{ setActive('items.create') }}">
