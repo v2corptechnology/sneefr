@@ -4,7 +4,7 @@ namespace Sneefr\Http\Controllers;
 
 use Sneefr\Events\AdWasPosted;
 use Sneefr\Events\ItemWasViewed;
-use Sneefr\Http\Requests\CreateAdRequest;
+use Sneefr\Http\Requests\StoreItemRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Stock;
 use Sneefr\Models\Tag;
@@ -42,11 +42,11 @@ class ItemsController extends Controller
     /**
      * Store the new item.
      *
-     * @param \Sneefr\Http\Requests\CreateAdRequest $request
+     * @param \Sneefr\Http\Requests\StoreItemRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateAdRequest $request)
+    public function store(StoreItemRequest $request)
     {
         // Store the ad
         $ad = Ad::create($request->all());

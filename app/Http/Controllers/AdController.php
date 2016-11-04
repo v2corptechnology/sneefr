@@ -2,7 +2,7 @@
 
 namespace Sneefr\Http\Controllers;
 
-use Sneefr\Http\Requests\CreateAdRequest;
+use Sneefr\Http\Requests\StoreItemRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shares;
 
@@ -26,11 +26,11 @@ class AdController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int                                  $id
-     * @param \Sneefr\Http\Requests\CreateAdRequest $request
+     * @param \Sneefr\Http\Requests\StoreItemRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id, CreateAdRequest $request)
+    public function update($id, StoreItemRequest $request)
     {
         // Get the ad to edit
         $ad = Ad::findOrFail($id);

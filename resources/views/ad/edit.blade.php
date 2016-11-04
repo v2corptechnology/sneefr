@@ -71,7 +71,6 @@
                         'title'         => old('title', $ad->getTitle()),
                         'amount'        => old('amount', $ad->price()->readable()),
                         'description'   => old('description', $ad->rawDescription()),
-                        'condition_id'  => old('condition_id', $ad->getConditionId()),
                         'location'      => old('location', $ad->location()),
                         'latitude'      => old('latitude', $ad->latitude()),
                         'longitude'     => old('longitude', $ad->longitude()),

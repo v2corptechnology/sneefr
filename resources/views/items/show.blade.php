@@ -19,8 +19,6 @@
     <meta property="product:price:amount" content="{{ $ad->price()->readable() }}"/>
     <meta property="product:price:currency" content="EUR"/>
     <meta property="product:availability" content="in stock"/>
-    <meta property="product:condition"
-          content="{{ $ad->getConditionId() == 5 ? 'new' : 'used'}}"/>
     <meta property="og:locale" content="fr_FR">
     <meta property="article:author"
           content="https://www.facebook.com/{{ $ad->seller->getSocialNetworkId() }}">

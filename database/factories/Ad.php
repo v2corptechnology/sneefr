@@ -25,7 +25,6 @@ $factory->define(Ad::class, function ($faker) {
         'latitude'           => $faker->latitude,
         'longitude'          => $faker->longitude,
         'images'             => '["0.jpg"]',
-        'condition_id'       => $faker->numberBetween(1, 5),
     ];
 });
 

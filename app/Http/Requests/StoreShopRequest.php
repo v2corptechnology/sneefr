@@ -2,7 +2,7 @@
 
 namespace Sneefr\Http\Requests;
 
-class StoreShop extends Request
+class StoreShopRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
