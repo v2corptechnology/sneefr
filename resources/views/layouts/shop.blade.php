@@ -189,7 +189,7 @@
                 @elseif (! $shop->owner->payment()->hasOne() && $shop->isOwner())
                     <p class="text-warning bg-warning">
                         @lang('shops.show.link_payment', [
-                            'link' => link_to_route('profiles.settings.edit',
+                            'link' => link_to_route('me.show',
                                 trans('shops.show.link_payment_action'),
                                 auth()->user(),
                                 ['title' => trans('shops.show.link_payment_action_title')]
