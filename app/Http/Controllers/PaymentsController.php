@@ -95,7 +95,7 @@ class PaymentsController extends Controller
             auth()->user()->payment = $resp;
             auth()->user()->save();
 
-            return redirect()->route('profiles.settings.edit', auth()->user())
+            return redirect()->route('me.show', auth()->user())
                 ->with('success', 'feedback.payment_connected');
         } elseif ($request->has('error')) { // Error
             \Log::emergency('Unable to connect a stripe account', $request->all());

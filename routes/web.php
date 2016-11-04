@@ -5,21 +5,13 @@
 // Homepage
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 // Display FAQ
-Route::get('help', ['as' => 'help', function () {
-    return view('pages.help');
-}]);
+Route::get('help', ['as' => 'help', 'uses' => 'PagesController@help']);
 // Terms of use
-Route::get('terms', ['as' => 'terms', function () {
-    return view('pages.terms');
-}]);
+Route::get('terms', ['as' => 'terms', 'uses' => 'PagesController@terms']);
 // Privacy policy
-Route::get('privacy', ['as' => 'privacy', function () {
-    return view('pages.privacy');
-}]);
+Route::get('privacy', ['as' => 'privacy', 'uses' => 'PagesController@privacy']);
 // Pricing screen
-Route::get('pricing', ['as' => 'pricing', function () {
-    return view('pages.pricing');
-}]);
+Route::get('pricing', ['as' => 'pricing', 'uses' => 'PagesController@pricing']);
 
 
 /** Auth mechanisms */
@@ -42,12 +34,6 @@ Route::delete('profile/{profile}', [
     'as'         => 'profiles.destroy',
     'uses'       => 'ProfilesController@destroy',
     'middleware' => 'auth',
-]);
-Route::get('profiles/{profile}/settings', [
-    'as' => 'profiles.settings.edit',
-    function ($hash) {
-        return redirect('/me', 301);
-    },
 ]);
 Route::put('profiles/{profile}/settings', [
     'as'   => 'profiles.settings.update',
