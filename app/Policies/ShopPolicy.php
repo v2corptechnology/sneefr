@@ -80,32 +80,6 @@ class ShopPolicy
         return true;
     }
 
-    /**
-     * Check if the current user can evaluate this shop
-     * for a specific item
-     *
-     * @param \Sneefr\Models\User $user
-     * @param \Sneefr\Models\Shop $shop
-     * @param \Sneefr\Models\Ad $ad
-     *
-     * @return bool
-     */
-    public function evaluate(User $user, Shop $shop, Ad $ad)
-    {
-        // Is there a pending evaluation for this shop ?
-        $evaluation = Evaluation::pending()
-            ->where('evaluator_id', $user->getId())
-            ->where('shop_id', $shop->getId())
-            ->where('ad_id', $ad->getId())
-            ->first();
-
-        if (! $evaluation) {
-            abort(403, "Either this evaluation expired either you are not authorized to review this shop");
-        }
-
-        return true;
-    }
-
     private function isShopOwner(User $user, Shop $shop) : bool
     {
         return $user->isAdmin() || $shop->isOwner($user->getId());
