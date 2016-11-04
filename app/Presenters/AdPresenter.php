@@ -7,11 +7,6 @@ use NumberFormatter;
 
 class AdPresenter extends Presenter
 {
-    public function condition() : string
-    {
-        return trans('condition.alt_names.' . $this->model->getConditionId());
-    }
-
     public function title()
     {
         return $this->model->getTitle();

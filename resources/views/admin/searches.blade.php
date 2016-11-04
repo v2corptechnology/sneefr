@@ -27,7 +27,6 @@
                                         </td>
                                         <td>
                                             @if ($search->user)
-                                                {!! HTML::profilePicture($search->user->facebook_id, $search->user->present()->surname(), 20) !!}
                                                 {{ $search->user->present()->fullName() }}.
                                             @else
                                                 Visiteur

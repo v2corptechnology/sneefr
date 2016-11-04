@@ -2,7 +2,7 @@
 
 namespace Sneefr\Http\Controllers;
 
-use Sneefr\Http\Requests\CreateAdRequest;
+use Sneefr\Http\Requests\StoreItemRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shares;
 
@@ -26,11 +26,11 @@ class AdController extends Controller
      * Update the specified resource in storage.
      *
      * @param  int                                  $id
-     * @param \Sneefr\Http\Requests\CreateAdRequest $request
+     * @param \Sneefr\Http\Requests\StoreItemRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function update($id, CreateAdRequest $request)
+    public function update($id, StoreItemRequest $request)
     {
         // Get the ad to edit
         $ad = Ad::findOrFail($id);
@@ -45,23 +45,5 @@ class AdController extends Controller
 
         return redirect()->route('ad.show', $ad)
             ->with('success', trans('feedback.ad_edit_success'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $adId
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($adId)
-    {
-        $ad = Ad::findOrFail($adId);
-
-        // Check the rights for this user to remove this ad
-        $this->authorize('destroy', $ad);
-
-        return redirect()->home()
-            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
     }
 }

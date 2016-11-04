@@ -8,7 +8,7 @@
             <div class="page-header">
                 <h1>@lang('help.header_big')</h1>
                 <p class="lead">@lang('help.we_are_transparent')</p>
-                <p><a class="btn btn-facebook btn-lg" href="https://www.facebook.com/SneefRusa" role="button" title="@lang('help.ask_button_title')"><i class="fa fa-facebook"></i> @lang('help.ask_button')</a></p>
+                <p><a class="btn btn-facebook btn-lg" href="https://www.facebook.com/Sidewalksusa" role="button" title="@lang('help.ask_button_title')"><i class="fa fa-facebook"></i> @lang('help.ask_button')</a></p>
             </div>
         </div>
 

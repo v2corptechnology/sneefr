@@ -30,7 +30,7 @@ Route::get('register/activation/{key}', ['as' => 'account_activation', 'uses' =>
 // Disconnect the user
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 // Redirection to connection provider
-Route::get('auth', ['as' => 'login', 'uses' => 'AuthController@login']);
+Route::get('auth', ['as' => 'login', 'uses' => 'AuthController@redirectToProvider']);
 // Handle callback from FB
 Route::get('auth/callback', ['as' => 'auth.callback', 'uses' => 'AuthController@callback']);
 
@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Evaluations
     Route::resource('evaluations', 'EvaluationsController', ['only' => ['create', 'store']]);
     // Items
-    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update', 'destroy']]);
+    Route::resource('items', 'ItemsController', ['except' => ['index', 'show', 'update']]);
     // Flag users or ads
     Route::resource('report', 'ReportController', ['only' => ['store']]);
     // Shops
@@ -117,17 +117,16 @@ Route::resource('shops', 'ShopsController', ['only' => ['show']]);
 /** Admins only */
 Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('admin/tools', ['as' => 'admin.tools', 'uses' => 'AdminController@tools']);
+    Route::post('admin/tools', ['as' => 'admin.tools.create', 'uses' => 'AdminController@toolsCreate']);
     Route::put('admin/tools/{id}', ['as' => 'admin.tools.update', 'uses' => 'AdminController@toolsUpdate']);
     Route::get('admin/users', ['as' => 'admin.users', 'uses' => 'AdminController@users']);
     Route::get('admin/ads', ['as' => 'admin.ads', 'uses' => 'AdminController@ads']);
     Route::get('admin/deals', ['as' => 'admin.deals', 'uses' => 'AdminController@deals']);
     Route::get('admin/reported', ['as' => 'admin.reported', 'uses' => 'AdminController@reported']);
     Route::get('admin/searches', ['as' => 'admin.searches', 'uses' => 'AdminController@searches']);
-});
-
-/** Devs only */
-Route::group(['middleware' => ['auth', 'team.developer']], function ($router) {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
+    Route::resource('highlightedShops', 'HighlightedShopsController');
 });
 
 

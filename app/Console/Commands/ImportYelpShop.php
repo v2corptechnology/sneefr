@@ -25,8 +25,6 @@ class ImportYelpShop extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -40,9 +38,11 @@ class ImportYelpShop extends Command
      */
     public function handle()
     {
-        $yelpClient = new YelpClient($this->getClient());
+        $offset = cache()->get('yelp_import_offset', '1');
 
-        $shops = $yelpClient->getBusinessesAround(34.052235, -118.243683, ['limit' => 50, 'offset' => cache()->get('yelp_import_offset', '1')]);
+        $shops = YelpClient::getBusinessesAround(34.052235, -118.243683, ['offset' => $offset]);
+
+        \Log::debug('Doing offset', [$offset]);
 
         foreach($shops as $yelp) {
 
@@ -74,39 +74,6 @@ class ImportYelpShop extends Command
 
             $shop->tags()->attach(Tag::whereIn('alias', $yelp['categories'])->pluck('id')->toArray());
         }
-    }
-
-
-    private function getClient()
-    {
-        $token = cache()->remember('yelp-api-auth-token', 100 * 24 * 60 * 60, function () {
-
-            $client = new \GuzzleHttp\Client();
-
-            $response = $client->post('https://api.yelp.com/oauth2/token', [
-                'form_params' => [
-                    'grant_type'    => 'client_credentials',
-                    'client_id'     => '_DiM2JrJeEWvGwE1s6Vtgw',
-                    'client_secret' => 't8RPgKGCTEcxJc9nZ1DCfEShrhaH5TNCra5DkBvbqcuZQdj9R7R5cVa3ZW00Xo2J',
-                ],
-            ]);
-
-            if (200 !== $response->getStatusCode()) {
-                cache()->forget('yelp-api-auth-token');
-                cache()->forget('yelp-api-base');
-
-                return;
-            }
-
-            return json_decode((string) $response->getBody())->access_token;
-        });
-
-        return new \GuzzleHttp\Client([
-            'base_uri' => 'https://api.yelp.com/v3/',
-            'headers'  => [
-                'Authorization' => 'Bearer ' . $token,
-            ],
-        ]);
     }
 
     /**

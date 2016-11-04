@@ -4,7 +4,7 @@ namespace Sneefr\Http\Controllers;
 
 use Sneefr\Events\AdWasPosted;
 use Sneefr\Events\ItemWasViewed;
-use Sneefr\Http\Requests\CreateAdRequest;
+use Sneefr\Http\Requests\StoreItemRequest;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Stock;
 use Sneefr\Models\Tag;
@@ -42,11 +42,11 @@ class ItemsController extends Controller
     /**
      * Store the new item.
      *
-     * @param \Sneefr\Http\Requests\CreateAdRequest $request
+     * @param \Sneefr\Http\Requests\StoreItemRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateAdRequest $request)
+    public function store(StoreItemRequest $request)
     {
         // Store the ad
         $ad = Ad::create($request->all());
@@ -79,5 +79,23 @@ class ItemsController extends Controller
         $tags = Tag::all()->pluck('title', 'id');
 
         return view('ad.edit', compact('ad', 'tags'));
+    }
+
+    /**
+     * Remove the ad from storage.
+     *
+     * @param \Sneefr\Models\Ad $ad
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Ad $ad)
+    {
+        // Check the rights for this user to edit this ad
+        $this->authorize('destroy', $ad);
+
+        $ad->delete();
+
+        return redirect()->home()
+            ->with('success', trans('feedback.ad_delete_success', ['url' => route('items.create')]));
     }
 }

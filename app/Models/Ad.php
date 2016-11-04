@@ -2,25 +2,23 @@
 
 namespace Sneefr\Models;
 
-use AlgoliaSearch\Laravel\AlgoliaEloquentTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Img;
 use Laracodes\Presenter\Traits\Presentable;
+use Laravel\Scout\Searchable;
 use Sneefr\Delivery;
-use Sneefr\Models\Traits\StaffFilterable;
 use Sneefr\Presenters\AdPresenter;
 use Sneefr\Price;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Ad extends Model
 {
-    use AlgoliaEloquentTrait;
     use LogsActivity;
     use SoftDeletes;
-    use StaffFilterable;
     use Presentable;
+    use Searchable;
 
     public $sellerEvaluationRatio;
 
@@ -29,32 +27,18 @@ class Ad extends Model
     protected $presenter = AdPresenter::class;
 
     /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'ads';
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = ['latitude', 'longitude'];
-
-    /**
      * The attributes we can mass assign.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images', 'condition_id',];
+    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'condition_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -67,100 +51,23 @@ class Ad extends Model
         'amount'       => 'float',
         'latitude'     => 'float',
         'longitude'    => 'float',
-        'condition_id' => 'int',
     ];
-
-    /*
-     * Algolia related config
-     */
 
     /**
-     * Set whether or not Algolia has to auto-index
-     * models when they are saved.
+     * Get the indexable data array for the model.
      *
-     * @var bool
+     * @return array
      */
-    public static $autoIndex = true;
-
-    public static $perEnvironment = true; // ads_{\App::environnement()}';
-
-    public $algoliaSettings = [
-        'attributesToIndex' => [
-            'title',
-            'description'
-        ],
-        'customRanking' => [
-            'desc(condition_id)'
-        ],
-        'attributesForFaceting' => [
-            'category_id'
-        ],
-        'slaves' => [
-            'ads_by_price_desc',
-            'ads_by_price_asc',
-            'ads_by_date_desc',
-            'ads_by_date_asc',
-            'ads_by_condition_desc',
-            'ads_by_condition_asc',
-            'ads_by_evaluation_desc',
-            'ads_by_evaluation_asc',
-        ],
-    ];
-
-    public $slavesSettings = [
-        'ads_by_price_desc' => [
-            'customRanking' => [
-                'desc(amount)'
-            ]
-        ],
-        'ads_by_price_asc' => [
-            'customRanking' => [
-                'asc(amount)'
-            ]
-        ],
-        'ads_by_date_desc' => [
-            'customRanking' => [
-                'desc(created_at_timestamp)'
-            ]
-        ],
-        'ads_by_date_asc' => [
-            'customRanking' => [
-                'asc(created_at_timestamp)'
-            ]
-        ],
-        'ads_by_condition_desc' => [
-            'customRanking' => [
-                'desc(condition_id)'
-            ]
-        ],
-        'ads_by_condition_asc' => [
-            'customRanking' => [
-                'asc(condition_id)'
-            ]
-        ],
-        'ads_by_evaluation_desc' => [
-            'customRanking' => [
-                'desc(evaluationRatio)'
-            ]
-        ],
-        'ads_by_evaluation_asc' => [
-            'customRanking' => [
-                'asc(evaluationRatio)'
-            ]
-        ]
-    ];
-
-    public function getAlgoliaRecord()
+    public function toSearchableArray()
     {
-        return array_merge($this->toArray(), [
-            'evaluationRatio' => $this->seller->evaluations->ratio(),
-            '_geoloc' => [
-                "lat" => $this->getLatitude(),
-                "lng" => $this->getLongitude()
-            ],
-            'created_at' => $this->created_at->timestamp,
-            'updated_at' => $this->updated_at->timestamp,
-        ]);
+        $record = $this->toArray();
+        $record['_geoloc'] = [
+            'lat' => $this->getLatitude(),
+            'lng' => $this->getLongitude(),
+        ];
+        $record['evaluationRatio'] = $this->shop->evaluations->ratio();
+
+        return $record;
     }
 
     public function user()
@@ -251,6 +158,14 @@ class Ad extends Model
     public function scopeSold($query)
     {
         return $query->onlyTrashed()->where('remaining_quantity', 0);
+    }
+
+    public function scopeExceptAdmin($query)
+    {
+        return $query->where(function ($q) {
+            $q->where('is_admin', true)->orWhereNull('user_id');
+        });
+
     }
 
     /**
@@ -441,16 +356,6 @@ class Ad extends Model
     public function slug() : string
     {
         return str_slug($this->id . ' ' . $this->title);
-    }
-
-    /**
-     * Get the condition identifier of the ad.
-     *
-     * @return int
-     */
-    public function getConditionId() : int
-    {
-        return $this->condition_id;
     }
 
     /**

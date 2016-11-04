@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActionLog extends Model
 {
-    use \Sneefr\Models\Traits\StaffFilterable;
-
     /**
      * Event name given when an ad was viewed by someone
      */

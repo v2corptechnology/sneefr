@@ -2,10 +2,10 @@
     <div class="home__section home__section--padding">
         <h4 class="home__section__title">
 
-            @lang('common.trending_shops')
+            @lang('home.highlighted_shops')
 
             <span class="home__section__description">
-                @lang('common.trending_description')
+                @lang('home.highlighted_description')
             </span>
         </h4>
 

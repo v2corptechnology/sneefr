@@ -46,8 +46,8 @@
 
                     <tr style="{{ $sm_font }} margin: 0;">
 						<td style="{{ $lg_font }} color: #000000; font-weight: 500; border-radius: 3px 3px 0 0; background-color: #ffffff; margin: 0; padding: 20px;" bgcolor="#FF9F00" valign="top">
-                            <a href="{{ route('home') }}" title="Visit Sneefr.com">
-                                <img src="{{ asset('img/logo-sneefr.svg') }}" alt="Sneefr" height="40">
+                            <a href="{{ route('home') }}" title="Visit Sidewalks.city">
+                                <img src="{{ asset('img/logo-sidewalks.png') }}" alt="Sidewalks" height="40">
                             </a>
 						</td>
 					</tr>

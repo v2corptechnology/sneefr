@@ -9,10 +9,12 @@
                 <p>@lang('modal.delete_account_body')</p>
             </div>
             <div class="modal-footer">
-                {!! Form::open(['route' => ['profiles.destroy', auth()->user()], 'method' => 'delete']) !!}
-                <button class="btn btn-danger" type="submit">@lang('modal.delete_account_confirm')</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('modal.delete_account_cancel')</button>
-                {!! Form::close() !!}
+                <form action="{{ route('profiles.destroy', auth()->user()) }}" method="post">
+                    {!! csrf_field() !!}
+                    {!! method_field('delete') !!}
+                    <button class="btn btn-danger" type="submit">@lang('modal.delete_account_confirm')</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('modal.delete_account_cancel')</button>
+                </form>
             </div>
         </div>
     </div>

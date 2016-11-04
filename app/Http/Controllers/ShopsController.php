@@ -5,7 +5,7 @@ namespace Sneefr\Http\Controllers;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemFactory;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Subscription;
-use Sneefr\Http\Requests\StoreShop;
+use Sneefr\Http\Requests\StoreShopRequest;
 use Sneefr\Jobs\UpdateShopColors;
 use Sneefr\Models\Ad;
 use Sneefr\Models\Shop;
@@ -102,12 +102,12 @@ class ShopsController extends Controller
     /**
      * Store a new shop entry in the database.
      *
-     * @param \Sneefr\Http\Requests\StoreShop $request
+     * @param \Sneefr\Http\Requests\StoreShopRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function store(StoreShop $request)
+    public function store(StoreShopRequest $request)
     {
         // Check if the user has no shop
         if (auth()->user()->hasShop()) {
@@ -169,11 +169,11 @@ class ShopsController extends Controller
      * Persist changes made on the shop.
      *
      * @param \Sneefr\Models\Shop             $shop
-     * @param \Sneefr\Http\Requests\StoreShop $request
+     * @param \Sneefr\Http\Requests\StoreShopRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Shop $shop, StoreShop $request)
+    public function update(Shop $shop, StoreShopRequest $request)
     {
         $this->authorize($shop);
 
@@ -246,11 +246,11 @@ class ShopsController extends Controller
     /**
      * Check the request has at least one image.
      *
-     * @param \Sneefr\Http\Requests\StoreShop $request
+     * @param \Sneefr\Http\Requests\StoreShopRequest $request
      *
      * @return bool
      */
-    private function imagesHasBeenChanged(StoreShop $request) : bool
+    private function imagesHasBeenChanged(StoreShopRequest $request) : bool
     {
         return $request->hasFile('cover') || $request->hasFile('logo');
     }

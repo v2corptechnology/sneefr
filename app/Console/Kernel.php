@@ -14,9 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Sneefr\Console\Commands\ClearAlgoliaIndex::class,
         \Sneefr\Console\Commands\ImportYelpShop::class,
-        \Sneefr\Console\Commands\InitAlgoliaIndices::class,
     ];
 
     /**
@@ -29,7 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
-        //$schedule->command('yelp:import')->everyFiveMinutes();
+        //$schedule->command('yelp:import')->everyMinute();
 
         // Calls made every hour
 

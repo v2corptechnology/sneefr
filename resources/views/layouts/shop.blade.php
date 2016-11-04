@@ -88,7 +88,7 @@
             <span class="profile-nav__item">
                 <i class="fa fa-map-marker"></i> {{ $shop->getLocation() }}
 
-                @if (auth()->check() && $shop->isOwner() && App::environment('local', 'staging'))
+                @if (auth()->check() && auth()->user()->isAdmin())
                     <form class="form-inline" style="display: inline-block;" action="{{ route('shops.destroy', $shop) }}" method="post">
                         {!! method_field('DELETE') !!}
                         {!! csrf_field() !!}
@@ -170,15 +170,15 @@
                             </a>
                         </h2>
                     </li>
+                    @if ($shop->isOwner() || auth()->check() && auth()->user()->isAdmin())
                     <li>
-                        @if ($shop->isOwner())
-                            <a class="btn btn-block btn-primary btn-primary2"
-                               href="{{ route('shops.edit', $shop) }}" title="___">
-                                <i class="fa fa-cog"></i>
-                                Edit
-                            </a>
-                        @endif
+                        <a class="btn btn-block btn-primary btn-primary2"
+                           href="{{ route('shops.edit', $shop) }}" title="___">
+                            <i class="fa fa-cog"></i>
+                            Edit
+                        </a>
                     </li>
+                    @endif
                 </ul>
             </div>
 

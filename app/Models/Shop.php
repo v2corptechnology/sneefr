@@ -4,26 +4,13 @@ namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Shop extends Model
 {
     use LogsActivity, Searchable, SoftDeletes;
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'shops';
 
     /**
      * The attributes we can mass assign.
@@ -98,6 +85,11 @@ class Shop extends Model
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class)->valid();
+    }
+
+    public static function scopeHighlighted($query)
+    {
+        return $query->withCount('ads')->orderBy('ads_count', 'desc');
     }
 
     /**

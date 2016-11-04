@@ -12,9 +12,6 @@
                     <ul class="media-list content">
                         @foreach ($reports['users'] as $person)
                             <li class="media">
-                                <div class="media-left">
-                                    {!! HTML::profilePicture($person->getSocialNetworkId(), 'pop', 50, ['media-object']) !!}
-                                </div>
                                 <div class="media-body">
                                     <h4 class="media-heading h5">
                                         <a href="{{ route('profiles.show', $person) }}">{{ $person->present()->fullName() }}</a>

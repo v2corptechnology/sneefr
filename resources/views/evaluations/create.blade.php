@@ -6,12 +6,8 @@
 <div class="container">
 
     <header class="hero hero--centered">
-        @if ($ad->shop)
-            <img class="hero__img img-rounded" alt="{{ $ad->shop->getName() }}"
-                 src="{{ $ad->shop->getLogo('200x200') }}" width="100" height="100">
-        @elseif ($ad->seller)
-            {!! HTML::profilePicture($ad->seller->getSocialNetworkId(), $ad->seller->present()->fullName(), $dimensions = 100, ['hero__img', 'img-rounded'])  !!}
-        @endif
+        <img class="hero__img img-rounded" alt="{{ $ad->shop->getName() }}"
+             src="{{ $ad->shop->getLogo('200x200') }}" width="100" height="100">
         <h1 class="hero__title">@lang('evaluations.create.heading')</h1>
         <p class="hero__tagline">@lang('evaluations.create.tagline')</p>
     </header>

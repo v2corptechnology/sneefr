@@ -20,7 +20,7 @@ return [
 
     'close'                       => "Close",
     'delete_account_header'       => "Are you sure?",
-    'delete_account_body'         => "If you delete your account, your messages and ads will be deleted and you will no longer appear on sneefR.",
+    'delete_account_body'         => "If you delete your account, your messages and ads will be deleted and you will no longer appear on Sidewalks.",
     'delete_account_confirm'      => "Delete",
     'delete_account_cancel'       => "No, I'm staying!",
     'report_ad_header'            => "Report\":title\"?",

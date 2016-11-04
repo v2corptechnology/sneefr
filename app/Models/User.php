@@ -102,25 +102,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return (bool) $this->shop()->count();
     }
 
-
-    public function scopeExceptStaff($query)
-    {
-        return $query->where('id', '>', 4);
-    }
-
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
-    }
-
-    /**
-     * Relationship to the evaluations of this user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function evaluations()
-    {
-        return $this->morphMany(Evaluation::class, 'evaluated');
     }
 
     /**
@@ -244,7 +228,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function isAdmin() : bool
     {
-        return in_array($this->facebook_id, config('sneefr.staff_facebook_ids.administrators'));
+        return (bool) $this->is_admin;
     }
 
     /**
@@ -255,5 +239,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getPhoneAttribute() : PhoneNumber
     {
         return new PhoneNumber($this->attributes['phone']);
+    }
+
+    /**
+     * Get the url for the logo, given the dimensions.
+     *
+     * @param mixed $dimensions
+     *
+     * @return string
+     */
+    public function getPicture($dimensions = '80x80') : string
+    {
+        return \Img::avatar($this->getSocialNetworkId(), $dimensions);
     }
 }

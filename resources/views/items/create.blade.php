@@ -62,7 +62,6 @@
                         'title'         => old('title', request()->get('title')),
                         'amount'        => old('amount'),
                         'description'   => old('description'),
-                        'condition_id'  => old('condition_id', 3),
                         'location'      => old('location', auth()->user()->getLocation()),
                         'latitude'      => old('latitude', auth()->user()->getLatitude()),
                         'longitude'     => old('longitude', auth()->user()->getLongitude()),

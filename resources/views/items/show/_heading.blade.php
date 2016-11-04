@@ -7,7 +7,6 @@
     <h1 class="item__heading">{{ $ad->present()->title() }}</h1>
 
     <div class="item__meta">
-        <span class="item__condition">Condition : <strong>{{ $ad->present()->condition() }}</strong></span>
         <span class="item__stock">@choice('ad.show.stock', $ad->remaining_quantity, ['nb' => $ad->remaining_quantity])</span>
     </div>
 
