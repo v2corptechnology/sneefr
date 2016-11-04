@@ -3,20 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-md-4">
-            <ul class="summary">
-                <li class="summary__item">
-                    <h2 class="summary__head">
-                        <i class="fa fa-tag summary__icon"></i>
-                        <a href="{{ route('admin.tools') }}">Tags</a>
-                    </h2>
-                </li>
-                <li class="summary__item">
-                    <h2 class="summary__head">
-                        <i class="fa fa-diamond summary__icon"></i>
-                        <a href="{{ route('highlightedShops.index') }}">Highlighted shops</a>
-                    </h2>
-                </li>
-            </ul>
+            @include('admin._tools_sidebar')
         </div>
         <div class="col-md-8">
             <div class="content">
