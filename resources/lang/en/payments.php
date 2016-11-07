@@ -14,7 +14,7 @@ return [
         'delivery_heading'         => "Choose one delivery method proposed by the seller",
         'delivery_pick_label'      => "I'll pick it myself",
         'delivery_us_label'        => "Us delivery (+:price)",
-        'delivery_worldwide_label' => "Us delivery (+:price)",
+        'delivery_worldwide_label' => "Worldwide delivery (+:price)",
         'extra_label'              => "Extra info",
         'extra_placeholder'        => "Comments, size, color, ...",
         'tips'                     => [
