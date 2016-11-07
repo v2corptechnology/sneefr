@@ -4,137 +4,146 @@ use NumberFormatter;
 
 class Price
 {
-    /*
-     * Raw format is divided by one to be outputted.
-     */
-    const FORMAT_RAW = 1;
-
-    /*
-     * Readable format is divided by 100 to be outputted.
-     */
-    const FORMAT_READABLE = 100;
-
     /**
-     * The output format for the price.
-     *
-     * @var string raw|readable
-     */
-    public $format;
-
-    /**
-     * The price value we are working with.
-     *
      * @var int
      */
-    public $value;
+    private $cents;
 
     /**
-     * The amount this price stands for.
-     *
      * @var string
      */
-    protected $amount;
+    private $currency;
 
     /**
-     * The currency used with this price.
-     * Follows the ISO 4217 currency codes.
-     *
-     * @var string
+     * @var int
      */
-    protected $currency;
+    private $deliveryCost = 0;
 
     /**
-     * @var \Sneefr\Delivery
+     * @var int
      */
-    protected $delivery;
+    private $quantity = 1;
+
+    /**
+     * @var int
+     */
+    private $taxPercentage = 0;
 
     /**
      * Price constructor.
      *
-     * @param int              $amount
-     * @param string           $currency
-     * @param \Sneefr\Delivery $delivery
+     * @param int    $cents
+     * @param string $currency
      */
-    public function __construct(int $amount, string $currency = 'USD', Delivery $delivery = null)
+    public function __construct(int $cents, string $currency = 'USD')
     {
-        $this->amount = $amount;
+        $this->cents = $cents;
         $this->currency = $currency;
-        $this->format = self::FORMAT_RAW;
-        $this->delivery = $delivery;
     }
 
     /**
-     * Magic method to output the price nicely.
+     * Named constructor to get a price starting with cents
      *
-     * @return string
-     */
-    public function __toString() : string
-    {
-        return $this->amount / $this->format;
-    }
-
-    /**
-     * Get the price in raw format (*100).
+     * @param int $cents
      *
      * @return \Sneefr\Price
      */
-    public function raw() : self
+    public static function fromCents(int $cents) : Price
     {
-        $this->format = self::FORMAT_RAW;
+        return new Price($cents);
+    }
+
+    /**
+     * Get the current price amount.
+     *
+     * @return float
+     */
+    public function get() : float
+    {
+        $totalAmount = $this->cents * $this->quantity;
+
+        $tax = ($totalAmount * $this->taxPercentage) / 100;
+
+        return ($totalAmount + $this->deliveryCost + $tax) / 100;
+    }
+
+    /**
+     * Get the current price amount in cents.
+     *
+     * @return int
+     */
+    public function cents() : int
+    {
+        return $this->cents;
+    }
+
+    /**
+     * Set the delivery cost.
+     *
+     * @param int $deliveryCostCents
+     *
+     * @return \Sneefr\Price
+     */
+    public function delivery(int $deliveryCostCents = 0) : self
+    {
+        $this->deliveryCost = $deliveryCostCents;
 
         return $this;
     }
 
     /**
-     * Get the price in readable format (/100).
+     * Set the quantity of items for calculating the price.
+     *
+     * @param int $quantity
      *
      * @return \Sneefr\Price
      */
-    public function readable() : self
+    public function for (int $quantity = 1) : self
     {
-        $this->format = self::FORMAT_READABLE;
+        $this->quantity = $quantity;
 
         return $this;
-    }
-
-    public function readable2() : string
-    {
-        return $this->format();
-    }
-
-    /**
-     * Add the fee to the current amount.
-     *
-     * @param string $feeName
-     *
-     * @return \Sneefr\Price
-     */
-    public function withFee(string $feeName) : self
-    {
-        $this->amount += $this->delivery->amountFor($feeName);
-
-        return $this;
-    }
-
-    /**
-     * Get the price currency.
-     *
-     * @return string
-     */
-    public function getCurrency() : string
-    {
-        return $this->currency;
     }
 
     /**
      * Format the number according to currency rules
      *
+     * @param string $currency
+     *
      * @return string
      */
-    private function format()
+    public function formatted(string $currency = null) : string
     {
-        $formatter = new NumberFormatter(trans('common.locale_name'),  NumberFormatter::CURRENCY);
+        $currency = $currency ?? $this->currency ?? trans('common.currency');
 
-        return $formatter->formatCurrency($this->amount / 100, trans('common.currency'));
+        return $this->formatForCurrency($currency);
+    }
+
+    /**
+     * Set the tax percentage to apply.
+     *
+     * @param int $taxPercentage
+     *
+     * @return \Sneefr\Price
+     */
+    public function tax(int $taxPercentage = 9) : self
+    {
+        $this->taxPercentage = $taxPercentage;
+
+        return $this;
+    }
+
+    /**
+     * Format an amount into a currency-aware string.
+     *
+     * @param string $currency
+     *
+     * @return string
+     */
+    private function formatForCurrency(string $currency) : string
+    {
+        $formatter = new NumberFormatter(trans('common.locale_name'), NumberFormatter::CURRENCY);
+
+        return $formatter->formatCurrency($this->cents / 100, $currency);
     }
 }
