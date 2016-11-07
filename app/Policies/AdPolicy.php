@@ -60,6 +60,10 @@ class AdPolicy
      */
     public function buy(User $user, Ad $ad)
     {
+        if ($ad->remaining_quantity < 1) {
+            abort(403, "There is no more stock for this item");
+        }
+
         return true;
     }
 
