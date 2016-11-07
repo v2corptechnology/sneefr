@@ -41,7 +41,7 @@ class EmailPurchaseConfirmationToSeller implements ShouldQueue
             'ad'        => $event->ad,
             'buyer'     => $event->buyer,
             'quantity'  => $request->get('quantity', 1),
-            'price'     => $price->readable2(),
+            'price'     => $price->formatted(),
             'address'   => $this->buildAddress($request),
             'extraInfo' => $request->get('extra'),
         ];

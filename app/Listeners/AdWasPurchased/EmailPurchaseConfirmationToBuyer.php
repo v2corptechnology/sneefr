@@ -40,7 +40,7 @@ class EmailPurchaseConfirmationToBuyer implements ShouldQueue
             'ad'           => $event->ad,
             'shop'         => $event->ad->shop,
             'quantity'     => $request->get('quantity', 1),
-            'price'        => $price->readable2(),
+            'price'        => $price->formatted(),
             'evaluateLink' => route('evaluations.create', ['ad' => $event->ad->getId()]),
         ];
 

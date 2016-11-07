@@ -26,7 +26,7 @@
 
                         <h1 class="box__title">How many of these do you want ?</h1>
 
-                        <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
+                        <span class="hidden js-price">{{ $ad->price()->formatted() }}</span>
 
                         <div class="form-group">
                             {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
@@ -37,8 +37,8 @@
                         <input type="hidden" name="ad" value="{{ $ad->id }}">
 
                         <div class="box--jumbo">
-                            <span class="js-final-price" data-amount-with-delivery="{{ $ad->negotiatedPrice() }}">
-                                {!! $ad->present()->negotiatedPrice() !!}
+                            <span class="js-final-price" data-amount-with-delivery="{{ $ad->price()->formatted() }}">
+                                {!! $ad->price()->formatted() !!}
                             </span>
                         </div>
 
@@ -47,9 +47,9 @@
                             <h1 class="box__title">@lang('payments.create.delivery_heading')</h1>
                             <div class="form-group">
 
-                                @foreach ($ad->present()->getFees() as $name => $fee)
+                                @foreach ($ad->delivery->getFees() as $name => $fee)
                                     <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
-                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee * 100 }}"
+                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee }}"
                                                name="delivery" value="{{ $name }}" id="delivery-{{ $name }}" required autocomplete="off">
                                         @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
                                     </label>
@@ -89,7 +89,7 @@
                                         data-email="{{ auth()->user()->getEmail() }}"
                                         data-currency="USD" data-name="Sidewalks"
                                         data-description="{{ $ad->present()->title() }}"
-                                        data-amount="{{ $ad->negotiatedPrice() }}"
+                                        data-amount="{{ $ad->price()->cents() }}"
                                         @if ($ad->isInShop()) disabled @endif
                                         title="@lang('payments.create.btn_secure_title')">
                                     <i class="fa fa-lock"></i> @lang('payments.create.btn_secure')

@@ -45,7 +45,7 @@ switch ($detail ?? null) {
         <h1 class="card__title" itemprop="name">
 
             <span class="offer" itemscope itemtype="http://schema.org/Offer">
-                <span class="price" itemprop="price">{!! $ad->present()->price() !!}</span>
+                <span class="price" itemprop="price">{!! $ad->price()->formatted() !!}</span>
             </span>
 
             <span class="card__title-separator">&bull;</span>

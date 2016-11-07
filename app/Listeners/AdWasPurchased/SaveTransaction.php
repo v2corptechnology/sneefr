@@ -36,7 +36,7 @@ class SaveTransaction implements ShouldQueue
             'charge'   => [
                 'amount'   => $event->charge->amount,
                 'currency' => $event->charge->currency,
-                'price'    => $price->readable2(),
+                'price'    => $price->formatted(),
                 'data'     => (array) $event->charge,
             ],
         ];
