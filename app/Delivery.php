@@ -51,9 +51,12 @@ class Delivery
 
     public function getFees() : array
     {
-        $allowedDeliveries = $this->fees;
+        $fees = $this->fees;
+        foreach ($fees as $key => $value) {
+            $fees[$key] = $value;
+        }
 
-        return $allowedDeliveries;
+        return $fees;
     }
 
     public function getCurrency() : string
@@ -61,8 +64,12 @@ class Delivery
         return $this->currency;
     }
 
-    public function amountFor(string $fee) : float
+    public function amountFor(string $fee = null) : float
     {
+        if (! $fee) {
+            return 0;
+        }
+
         return (float) $this->fees[$fee];
     }
 }
