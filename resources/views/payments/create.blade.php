@@ -29,9 +29,9 @@
                                 @for($i = 1; $i <= $ad->remaining_quantity; $i++)
                                     <option value="{{ $i }}" {{ $i == 1 ? 'selected' : null }}
                                             @foreach($ad->delivery->getFees() as $name => $fee)
-                                            data-{{ $name }}-tax="{{ $ad->price()->for($i)->taxOnly()->formatted() }}"
-                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->fee($fee)->formatted() }}"
-                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->fee($fee)->cents() }}"
+                                            data-{{ $name }}-tax="{{ $ad->price()->for($i)->tax()->taxOnly()->formatted() }}"
+                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->tax()->fee($fee)->formatted() }}"
+                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->tax()->fee($fee)->cents() }}"
                                             @endforeach
                                     >{{ $i }}</option>
                                 @endfor
@@ -66,7 +66,7 @@
                         <div class="form-group">
                             <div class="box--jumbo">
                                 <span class="js-price">
-                                    {!! $ad->price()->formatted() !!}
+                                    {!! $ad->price()->tax()->formatted() !!}
                                 </span>
                             </div>
                             <small>(incl. 9% taxes <span class="js-tax">{{ $ad->price()->taxOnly()->formatted() }}</span>)</small>
