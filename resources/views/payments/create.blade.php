@@ -55,7 +55,7 @@
                             {{ $ad->shop->getLocation() }}
                         </p>
 
-                        <div class="js-extra-info hidden">
+                        <div class="js-extra-info">
                             <label for="extra" class="box__title">@lang('payments.create.extra_label')</label>
                             <textarea class="form-control  js-comment" name="extra" id="extra"
                                       cols="10" rows="3" placeholder="@lang('payments.create.extra_placeholder')"></textarea>
@@ -71,7 +71,7 @@
                             </div>
                             <small>(incl. 9% taxes <span class="js-tax">{{ $ad->price()->taxOnly()->formatted() }}</span>)</small>
                             </div>
-                        
+
                         <input type="hidden" name="payment_token" class="js-payment-token">
 
                         <div class="form-group">

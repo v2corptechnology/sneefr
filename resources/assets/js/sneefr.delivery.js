@@ -38,12 +38,8 @@
             // Update Stripe's charged amount
             $('.js-add-stripe').attr('data-amount', priceDetails[selectedFee + 'Cents']);
 
-
-            // Display targeted delivery info
-            $('.js-extra-info').removeClass('hidden');
-
             // Display info specific to this delivery
-            $('.js-delivery-info-' + selectedFee).removeClass('hidden');
+            $('.js-delivery-info').addClass('hidden').filter('.js-delivery-info-' + selectedFee).removeClass('hidden');
         },
     };
 
