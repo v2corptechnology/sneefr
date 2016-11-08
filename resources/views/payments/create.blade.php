@@ -60,7 +60,7 @@
                                     <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
                                         <input class="js-delivery-option" type="radio"
                                                name="delivery" value="{{ $name }}" required autocomplete="off">
-                                        @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
+                                        @lang('payments.create.delivery_'.$name.'_label', ['price' => \Sneefr\Price::fromCents($fee)->formatted() ])
                                     </label>
                                 @endforeach
                                 <input type="hidden" name="pick-address" value="{{ $ad->shop->getLocation() }}">
