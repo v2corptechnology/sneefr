@@ -57,7 +57,7 @@
                             <div class="form-group">
 
                                 @foreach ($ad->delivery->getFees() as $name => $fee)
-                                    <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
+                                    <label class="radio-inline delivery__option">
                                         <input class="js-delivery-option" type="radio"
                                                name="delivery" value="{{ $name }}" required autocomplete="off">
                                         @lang('payments.create.delivery_'.$name.'_label', ['price' => \Sneefr\Price::fromCents($fee)->formatted() ])
