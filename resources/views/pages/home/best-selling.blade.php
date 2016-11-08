@@ -12,7 +12,7 @@
                 </span>
                 <span class="col-xs-8 is-narrow-pl">
                     <h1 class="best-selling__heading is-truncated">{{ $item->present()->title() }}</h1>
-                    <p>{!! $item->present()->price() !!}</p>
+                    <p>{!! $item->price()->formatted() !!}</p>
                 </span>
                 </a>
             </article>

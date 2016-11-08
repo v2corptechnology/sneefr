@@ -31,25 +31,6 @@ class AdPresenter extends Presenter
         return sprintf($format, "{$rkm} m");
     }
 
-    public function price($amount = null)
-    {
-        $amount = $amount ?? $this->model->price()->readable();
-
-        return $this->formatAmount((string) $amount);
-    }
-
-    public function priceWithFee($fee)
-    {
-        $amount = $this->model->price()->withFee($fee)->readable();
-
-        return $this->formatAmount((string) $amount);
-    }
-
-    public function negotiatedPrice()
-    {
-        return $this->formatAmount((string) $this->model->negotiatedPrice()->readable());
-    }
-
     public function description()
     {
         return nl2br(strip_tags($this->model->description));
@@ -64,26 +45,5 @@ class AdPresenter extends Presenter
     public function evaluationRatio()
     {
         return (int) $this->model->getSellerEvaluationRatio() * 100;
-    }
-
-    public function getFees()
-    {
-        $fees = $this->model->delivery->getFees();
-        foreach ($fees as $key => $value) {
-            $fees[$key] = $value/ 100;
-        }
-
-        return $fees;
-    }
-
-    protected function formatAmount(float $amount) : string
-    {
-        $formatter = new NumberFormatter(trans('common.locale_name'),  NumberFormatter::CURRENCY);
-
-        $price =  $formatter->formatCurrency($amount, trans('common.currency'));
-
-        $symbol = $formatter->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
-
-        return str_replace($symbol, "", $price) . $symbol;
     }
 }

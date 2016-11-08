@@ -13,7 +13,7 @@
     <hr class="item__separator">
 
     <div class="item__buttons">
-        <span class="item__price">{{ $ad->present()->price() }}</span>
+        <span class="item__price">{{ $ad->price()->formatted() }}</span>
 
         @include('items.show._buy_dropdown', ['ad' => $ad])
 

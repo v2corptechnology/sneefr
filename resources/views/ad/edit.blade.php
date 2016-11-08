@@ -69,7 +69,7 @@
                         'buttonText'    => trans('ad_form.edit.apply_button'),
                         'name'          => auth()->user()->present()->fullName(),
                         'title'         => old('title', $ad->getTitle()),
-                        'amount'        => old('amount', $ad->price()->readable()),
+                        'amount'        => old('amount', $ad->price()->get()),
                         'description'   => old('description', $ad->rawDescription()),
                         'location'      => old('location', $ad->location()),
                         'latitude'      => old('latitude', $ad->latitude()),

@@ -3,56 +3,43 @@
 
         init: function () {
             // Options available
-            this.options = $('.js-delivery-option');
+            this.fees = $('.js-delivery-option');
 
             // Quantity
-            this.quantity = $('.js-quantity');
+            this.quantities = $('.js-quantity');
 
             // Price
             this.price = $('.js-price');
+
+            // Taxes
+            this.tax = $('.js-tax')
 
             // Finally bind the events
             this.bindEvents();
         },
 
         bindEvents: function () {
-            this.options.add(this.quantity).on('change', $.proxy(this.makePrice, this));
+            this.fees.add(this.quantities).on('change', $.proxy(this.updatePrice, this));
+
+            this.fees.first().trigger('click');
         },
 
-        makePrice: function (event) {
+        updatePrice: function (event) {
             // Be safe my friend !
             event.preventDefault();
 
-            // Total amount (*100)
-            var $checkedDelivery = $('.js-delivery-option:checked'),
-                fee = $checkedDelivery.data('delivery-fee') || 0,
-                amount = parseInt(this.quantity.val()) * parseInt(this.price.text()) + fee,
-                textAmount = "" + amount;
+            var priceDetails = this.quantities.find(':selected').data(),
+                selectedFee = $("input[name=delivery]:checked").val();
 
-            // Update the payment box to bill the correct price
-            if ($checkedDelivery.length) {
-                $('.js-add-stripe').attr('data-amount', amount)
-                    // Enable pay button
-                    .attr('disabled', false)
-            } else {
-                $('.js-add-stripe').attr('data-amount', amount)
-                    // Disable pay button
-                    .attr('disabled', true)
-            }
-
+            // Update displayed tax amount
+            this.tax.text(priceDetails[selectedFee + 'Tax']);
             // Update displayed price
-            $(".js-final-price").html( textAmount.slice(0, -2) + '.' + textAmount.slice(-2)+ '$');
+            this.price.text(priceDetails[selectedFee + 'Total']);
+            // Update Stripe's charged amount
+            $('.js-add-stripe').attr('data-amount', priceDetails[selectedFee + 'Cents']);
 
-            // Display targeted delivery info
-            $('.js-delivery-info').addClass('hidden');
-            if ($checkedDelivery.length) {
-
-                // Display extra info
-                $('.js-extra-info').removeClass('hidden');
-
-                // Display info specific to this delivery
-                $('.js-delivery-info-' + $checkedDelivery.val()).removeClass('hidden');
-            }
+            // Display info specific to this delivery
+            $('.js-delivery-info').addClass('hidden').filter('.js-delivery-info-' + selectedFee).removeClass('hidden');
         },
     };
 
