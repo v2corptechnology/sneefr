@@ -53,7 +53,7 @@ class Delivery
     {
         $fees = $this->fees;
         foreach ($fees as $key => $value) {
-            $fees[$key] = $value;
+            $fees[$key] = (int) $value;
         }
 
         return $fees;
