@@ -114,7 +114,7 @@ class Price
      */
     public function formatted(string $currency = null) : string
     {
-        $currency = $currency ?? $this->currency ?? trans('common.currency');
+        $currency = $currency ?? $this->currency;
 
         return $this->formatForCurrency($currency);
     }
@@ -154,8 +154,10 @@ class Price
      *
      * @return string
      */
-    private function formatForCurrency(string $currency) : string
+    private function formatForCurrency(string $currency = null) : string
     {
+        $currency = $currency ?? trans('common.currency');
+
         $formatter = new NumberFormatter(trans('common.locale_name'), NumberFormatter::CURRENCY);
 
         return $formatter->formatCurrency($this->get(), $currency);
