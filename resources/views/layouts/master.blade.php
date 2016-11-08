@@ -7,7 +7,7 @@
     <meta name="description" content="@lang('common.site_description')" />
 
     @section('styles')
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ elixir('css/all.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @show
