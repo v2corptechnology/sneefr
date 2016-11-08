@@ -24,12 +24,20 @@
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">
                         {!! csrf_field() !!}
 
-                        <h1 class="box__title">How many of these do you want ?</h1>
-
-                        <span class="hidden js-price">{{ $ad->price()->formatted() }}</span>
-
                         <div class="form-group">
-                            {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
+                            <label class="box__title" for="quantity">How many of these do you want ?</label>
+                            <br>
+                            <select name="quantity" id="quantity" class="js-quantity" required autocomplete="off">
+                                @for($i = 1; $i <= $ad->remaining_quantity; $i++)
+                                    <option value="{{ $i }}"
+                                        @foreach($ad->delivery->getFees() as $name => $fee)
+                                            data-{{ $name }}-tax="{{ $ad->price()->for($i)->taxOnly()->formatted() }}"
+                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->delivery($fee)->formatted() }}"
+                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->delivery($fee)->cents() }}"
+                                        @endforeach
+                                    >{{ $i }}</option>
+                                @endfor
+                            </select>
                         </div>
 
                         <h1 class="box__title">@lang('payments.create.box_heading')</h1>
@@ -37,20 +45,21 @@
                         <input type="hidden" name="ad" value="{{ $ad->id }}">
 
                         <div class="box--jumbo">
-                            <span class="js-final-price" data-amount-with-delivery="{{ $ad->price()->formatted() }}">
+                            <span class="js-price">
                                 {!! $ad->price()->formatted() !!}
                             </span>
                         </div>
+                        <small>(incl. 9% taxes <span class="js-tax">{{ $ad->price()->taxOnly()->formatted() }}</span>)</small>
 
-                        @if ($ad->isInShop())
+                    @if ($ad->isInShop())
                             <hr class="box__separator">
                             <h1 class="box__title">@lang('payments.create.delivery_heading')</h1>
                             <div class="form-group">
 
                                 @foreach ($ad->delivery->getFees() as $name => $fee)
                                     <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
-                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee }}"
-                                               name="delivery" value="{{ $name }}" id="delivery-{{ $name }}" required autocomplete="off">
+                                        <input class="js-delivery-option" type="radio"
+                                               name="delivery" value="{{ $name }}" required autocomplete="off">
                                         @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
                                     </label>
                                 @endforeach
