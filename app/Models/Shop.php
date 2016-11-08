@@ -261,6 +261,16 @@ class Shop extends Model
     }
 
     /**
+     * Check the claimed status of this shop.
+     *
+     * @return bool
+     */
+    public function isClaimed() : bool
+    {
+        return false;
+    }
+
+    /**
      * Get the map URL of this place.
      *
      * @param int  $width

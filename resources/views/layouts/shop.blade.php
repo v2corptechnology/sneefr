@@ -170,14 +170,25 @@
                             </a>
                         </h2>
                     </li>
+
                     @if ($shop->isOwner() || auth()->check() && auth()->user()->isAdmin())
-                    <li>
-                        <a class="btn btn-block btn-primary btn-primary2"
-                           href="{{ route('shops.edit', $shop) }}" title="___">
-                            <i class="fa fa-cog"></i>
-                            Edit
-                        </a>
-                    </li>
+                        <li>
+                            <a class="btn btn-block btn-primary btn-primary2"
+                               href="{{ route('shops.edit', $shop) }}" title="___">
+                                <i class="fa fa-cog"></i>
+                                Edit
+                            </a>
+                        </li>
+                    @endif
+
+                    @unless ($shop->isClaimed())
+                        <li>
+                            <a class="btn btn-block btn-primary btn-primary2"
+                               href="#" title="___">
+                                <i class="fa fa-handshake-o"></i>
+                                Claim my shop
+                            </a>
+                        </li>
                     @endif
                 </ul>
             </div>
