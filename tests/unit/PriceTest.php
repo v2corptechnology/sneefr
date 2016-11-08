@@ -24,6 +24,7 @@ class PriceTest extends TestCase
         $price = Price::fromCents(1984);
 
         $this->assertEquals(1984, $price->cents());
+        $this->assertEquals(19840, $price->for(10)->cents());
     }
 
     public function test_it_gets_price_for_multiple_items()
@@ -53,6 +54,8 @@ class PriceTest extends TestCase
         $price = Price::fromCents(1050);
 
         $this->assertEquals('€10.50', $price->formatted('eur'));
+        $this->assertEquals('$10.50', $price->formatted());
         $this->assertEquals('$10.50', $price->formatted('usd'));
+        $this->assertEquals('$21.00', $price->for(2)->formatted());
     }
 }

@@ -74,7 +74,7 @@ class Price
      */
     public function cents() : int
     {
-        return $this->cents;
+        return $this->get() * 100;
     }
 
     /**
@@ -144,6 +144,6 @@ class Price
     {
         $formatter = new NumberFormatter(trans('common.locale_name'), NumberFormatter::CURRENCY);
 
-        return $formatter->formatCurrency($this->cents / 100, $currency);
+        return $formatter->formatCurrency($this->get(), $currency);
     }
 }
