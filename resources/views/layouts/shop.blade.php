@@ -181,7 +181,7 @@
                         </li>
                     @endif
 
-                    @unless ($shop->isClaimed())
+                    @unless ($shop->isClaimedBy(auth()->id()))
                         <li>
                             <form action="{{ route('shopClaimer.store', $shop) }}" method="post">
                                 {!! csrf_field() !!}

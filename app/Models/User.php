@@ -107,6 +107,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function claims()
+    {
+        return $this->hasMany(Claim::class);
+    }
+
     /**
      * All the sales or purchases of the user.
      *
