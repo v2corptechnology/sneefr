@@ -58,4 +58,12 @@ class PriceTest extends TestCase
         $this->assertEquals('$10.50', $price->formatted('usd'));
         $this->assertEquals('$21.00', $price->for(2)->formatted());
     }
+
+    public function test_it_return_tax()
+    {
+        $price = Price::fromCents(1000);
+
+        $this->assertEquals(0.9, $price->taxOnly(9)->get());
+        $this->assertEquals(9, $price->taxOnly(9)->for(10)->get());
+    }
 }

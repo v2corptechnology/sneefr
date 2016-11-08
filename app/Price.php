@@ -134,6 +134,20 @@ class Price
     }
 
     /**
+     * Get the amount this tax costs.
+     *
+     * @param int $taxPercentage
+     *
+     * @return \Sneefr\Price
+     */
+    public function taxOnly(int $taxPercentage = 9) : Price
+    {
+        $taxFee = (($this->cents * $this->quantity) * $taxPercentage) / 100;
+
+        return new Price($taxFee, $this->currency);
+    }
+
+    /**
      * Format an amount into a currency-aware string.
      *
      * @param string $currency
