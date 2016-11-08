@@ -133,7 +133,7 @@
                                                 <tr>
                                                     <td>@lang('ad.show.delivery_'.$name)</td>
                                                     <td><span class="text-{{ $fee ? 'gold' : 'black' }}">@choice('ad.show.delevery_fee',$fee, ['fee' => $fee] )</span></td>
-                                                    <td><span class="text-blue pull-right">{{ $ad->price()->delivery($fee)->formatted() }}</span></td>
+                                                    <td><span class="text-blue pull-right">{{ $ad->price()->fee($fee)->formatted() }}</span></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -17,7 +17,7 @@ class Price
     /**
      * @var int
      */
-    private $deliveryCost = 0;
+    private $fee = 0;
 
     /**
      * @var int
@@ -64,7 +64,7 @@ class Price
 
         $tax = ($totalAmount * $this->taxPercentage) / 100;
 
-        return ($totalAmount + $this->deliveryCost + $tax) / 100;
+        return ($totalAmount + $this->fee + $tax) / 100;
     }
 
     /**
@@ -80,13 +80,13 @@ class Price
     /**
      * Set the delivery cost.
      *
-     * @param int $deliveryCostCents
+     * @param int $feeInCents
      *
      * @return \Sneefr\Price
      */
-    public function delivery(int $deliveryCostCents = 0) : self
+    public function fee(int $feeInCents = 0) : self
     {
-        $this->deliveryCost = $deliveryCostCents;
+        $this->fee = $feeInCents;
 
         return $this;
     }

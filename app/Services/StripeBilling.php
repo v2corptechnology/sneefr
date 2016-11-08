@@ -157,7 +157,7 @@ class StripeBilling implements BillingInterface
         $deliveryCost = $ad->delivery->amountFor($request->input('delivery'));
 
         return [
-            'amount'          => $ad->price()->for($quantity)->delivery($deliveryCost)->cents(),
+            'amount'          => $ad->price()->for($quantity)->fee($deliveryCost)->cents(),
             'description'     => 'SneefR : ' . $ad->present()->title() . '(ID: ' . $ad->getId() . ')',
             'token'           => $request->input('stripeToken'),
             'stripeAccountId' => $ad->seller->payment['stripe_user_id'],

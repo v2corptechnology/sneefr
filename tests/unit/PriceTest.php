@@ -42,11 +42,11 @@ class PriceTest extends TestCase
         $this->assertEquals(12.1, $price->tax(21)->get());
     }
 
-    public function test_it_gets_price_with_delivery()
+    public function test_it_gets_price_with_fee()
     {
         $price = Price::fromCents(1000);
 
-        $this->assertEquals(35, $price->delivery(2500)->get());
+        $this->assertEquals(35, $price->fee(2500)->get());
     }
 
     public function test_it_formats_price_to_a_currency()

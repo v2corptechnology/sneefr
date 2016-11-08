@@ -32,8 +32,8 @@
                                     <option value="{{ $i }}"
                                         @foreach($ad->delivery->getFees() as $name => $fee)
                                             data-{{ $name }}-tax="{{ $ad->price()->for($i)->taxOnly()->formatted() }}"
-                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->delivery($fee)->formatted() }}"
-                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->delivery($fee)->cents() }}"
+                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->fee($fee)->formatted() }}"
+                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->fee($fee)->cents() }}"
                                         @endforeach
                                     >{{ $i }}</option>
                                 @endfor
