@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::get('me', ['as' => 'me.show', 'uses' =>'SettingsController@show']);
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    // Claim a shop
+    Route::post('shopClaimer/{shop}/store', ['as' => 'shopClaimer.store', 'uses' => 'ShopClaimerController@store']);
 
     /** Resources */
     // Ads

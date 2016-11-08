@@ -183,11 +183,13 @@
 
                     @unless ($shop->isClaimed())
                         <li>
-                            <a class="btn btn-block btn-primary btn-primary2"
-                               href="#" title="___">
-                                <i class="fa fa-handshake-o"></i>
-                                Claim my shop
-                            </a>
+                            <form action="{{ route('shopClaimer.store', $shop) }}" method="post">
+                                {!! csrf_field() !!}
+                                <button class="btn btn-block btn-primary btn-primary2" type="submit">
+                                    <i class="fa fa-handshake-o"></i>
+                                    Claim my shop
+                                </button>
+                            </form>
                         </li>
                     @endif
                 </ul>
