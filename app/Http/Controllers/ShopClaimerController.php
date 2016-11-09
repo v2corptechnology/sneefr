@@ -7,6 +7,13 @@ use Sneefr\Models\Shop;
 
 class ShopClaimerController extends Controller
 {
+    public function index()
+    {
+        $claims = Claim::latest()->with('user', 'shop')->get();
+
+        return view('admin.claims.index', compact('claims'));
+    }
+
     public function store(Shop $shop)
     {
         if ($shop->isClaimedBy(auth()->id()) || auth()->user()->claims->count() > 0) {
