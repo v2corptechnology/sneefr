@@ -31,14 +31,14 @@ class AddAvatar
      */
     public function handle(UserRegistered $event)
     {
-        if(!$event->user->getgetSocialNetworkId()){
+        if(!$event->user->getSocialNetworkId()){
             return false;
         }
 
         // Path for uploading
         $path = "avatar/" . $event->user->getId() . '.jpg';
 
-        $url = 'http://graph.facebook.com/' . $event->user->getgetSocialNetworkId() . '/picture?type=large';
+        $url = 'http://graph.facebook.com/' . $event->user->getSocialNetworkId() . '/picture?type=large';
 
         $file = file_get_contents($url);
         
