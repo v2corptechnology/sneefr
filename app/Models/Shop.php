@@ -277,7 +277,7 @@ class Shop extends Model
      *
      * @return bool
      */
-    public function isClaimedBy(int $userId) : bool
+    public function isClaimedBy(int $userId = null) : bool
     {
         return (bool) $this->claims->where('user_id', $userId)->count();
     }
