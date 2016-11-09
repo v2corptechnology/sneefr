@@ -32,8 +32,16 @@
                                     <small>{{ $claim->shop->getDescription() }}</small>
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-default btn-sm">Approve</button>
-                                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                    <form style="display:inline" action="{{ route('claims.update', $claim) }}" method="post">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('patch') !!}
+                                        <button type="submit" class="btn btn-default btn-sm">Approve</button>
+                                    </form>
+                                    <form style="display:inline" action="{{ route('claims.destroy', $claim) }}" method="post">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('delete') !!}
+                                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

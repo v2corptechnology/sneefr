@@ -3,6 +3,8 @@
 namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Sneefr\Events\ClaimApproved;
+use Sneefr\Events\ClaimRejected;
 use Sneefr\Models\Claim;
 use Sneefr\Models\Shop;
 
@@ -30,5 +32,26 @@ class ClaimsController extends Controller
         return redirect()
             ->route('shops.show', $shop)
             ->with('success', 'Your claim is pending and a moderator will contact you in less than 24 hours.');
+    }
+
+    public function update(Claim $claim)
+    {
+        // Attach the shop to the claimer user
+        $claim->shop->update(['user_id' => $claim->user->getId()]);
+
+        $claim->delete();
+
+        event(new ClaimApproved($claim));
+
+        return redirect()->route('claims.index');
+    }
+
+    public function destroy(Claim $claim)
+    {
+        $claim->delete();
+
+        event(new ClaimRejected($claim));
+
+        return redirect()->route('claims.index');
     }
 }
