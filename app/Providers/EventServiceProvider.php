@@ -26,14 +26,6 @@ class EventServiceProvider extends ServiceProvider
             \Sneefr\Listeners\AdWasPurchased\CreatePendingEvaluation::class,
         ],
 
-        \Sneefr\Events\ClaimApproved::class => [
-            \Sneefr\Listeners\ClaimApproved\NotifyClaimer::class,
-        ],
-
-        \Sneefr\Events\ClaimRejected::class => [
-            \Sneefr\Listeners\ClaimRejected\NotifyClaimer::class,
-        ],
-
         \Sneefr\Events\ItemWasViewed::class => [
             \Sneefr\Listeners\ItemWasViewed\SaveView::class,
         ],

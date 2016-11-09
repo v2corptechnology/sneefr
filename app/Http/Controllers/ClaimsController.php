@@ -3,10 +3,11 @@
 namespace Sneefr\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Sneefr\Events\ClaimApproved;
-use Sneefr\Events\ClaimRejected;
+use Illuminate\Support\Facades\Notification;
 use Sneefr\Models\Claim;
 use Sneefr\Models\Shop;
+use Sneefr\Notifications\ClaimApproved;
+use Sneefr\Notifications\ClaimRejected;
 
 class ClaimsController extends Controller
 {
@@ -41,7 +42,7 @@ class ClaimsController extends Controller
 
         $claim->delete();
 
-        event(new ClaimApproved($claim));
+        Notification::send($claim->user, new ClaimApproved($claim));
 
         return redirect()->route('claims.index');
     }
@@ -50,7 +51,7 @@ class ClaimsController extends Controller
     {
         $claim->delete();
 
-        event(new ClaimRejected($claim));
+        Notification::send($claim->user, new ClaimRejected($claim));
 
         return redirect()->route('claims.index');
     }
