@@ -38,7 +38,7 @@ class ImportYelpShop extends Command
      */
     public function handle()
     {
-        $offset = cache()->get('yelp_import_offset', '1');
+        $offset = cache()->get('yelp_import_offset', '1') + env('YELP_BASE_OFFSET', 0);
 
         $shops = YelpClient::getBusinessesAround(34.052235, -118.243683, ['offset' => $offset]);
 
@@ -74,6 +74,8 @@ class ImportYelpShop extends Command
 
             $shop->tags()->attach(Tag::whereIn('alias', $yelp['categories'])->pluck('id')->toArray());
         }
+
+        \Log::debug('Done offset', [$offset]);
     }
 
     /**
