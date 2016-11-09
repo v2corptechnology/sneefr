@@ -32,11 +32,13 @@
                                     <small>{{ $claim->shop->getDescription() }}</small>
                                 </td>
                                 <td>
-                                    <form style="display:inline" action="{{ route('claims.update', $claim) }}" method="post">
-                                        {!! csrf_field() !!}
-                                        {!! method_field('patch') !!}
-                                        <button type="submit" class="btn btn-default btn-sm">Approve</button>
-                                    </form>
+                                    @unless ($claim->user->hasShop())
+                                        <form style="display:inline" action="{{ route('claims.update', $claim) }}" method="post">
+                                            {!! csrf_field() !!}
+                                            {!! method_field('patch') !!}
+                                            <button type="submit" class="btn btn-default btn-sm">Approve</button>
+                                        </form>
+                                    @endunless
                                     <form style="display:inline" action="{{ route('claims.destroy', $claim) }}" method="post">
                                         {!! csrf_field() !!}
                                         {!! method_field('delete') !!}
