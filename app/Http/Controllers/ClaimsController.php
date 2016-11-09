@@ -2,10 +2,11 @@
 
 namespace Sneefr\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Sneefr\Models\Claim;
 use Sneefr\Models\Shop;
 
-class ShopClaimerController extends Controller
+class ClaimsController extends Controller
 {
     public function index()
     {
@@ -14,8 +15,10 @@ class ShopClaimerController extends Controller
         return view('admin.claims.index', compact('claims'));
     }
 
-    public function store(Shop $shop)
+    public function store(Request $request)
     {
+        $shop = Shop::findOrFail($request->input('shop_id'));
+
         if ($shop->isClaimedBy(auth()->id()) || auth()->user()->claims->count() > 0) {
             return redirect()
                 ->route('shops.show', $shop)

@@ -183,8 +183,9 @@
 
                     @unless ($shop->isClaimedBy(auth()->id()))
                         <li>
-                            <form action="{{ route('shopClaimer.store', $shop) }}" method="post">
+                            <form action="{{ route('claims.store') }}" method="post">
                                 {!! csrf_field() !!}
+                                <input type="hidden" name="shop_id" value="{{ $shop->getId() }}">
                                 <button class="btn btn-block btn-primary btn-primary2" type="submit">
                                     <i class="fa fa-handshake-o"></i>
                                     Claim my shop

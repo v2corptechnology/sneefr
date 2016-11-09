@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
     // Claim a shop
-    Route::post('shopClaimer/{shop}/store', ['as' => 'shopClaimer.store', 'uses' => 'ShopClaimerController@store']);
+    Route::post('claims/store', ['as' => 'claims.store', 'uses' => 'ClaimsController@store']);
 
     /** Resources */
     // Ads
@@ -115,7 +115,7 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
     Route::resource('highlightedShops', 'HighlightedShopsController');
-    Route::get('shopClaimer/', ['as' => 'shopClaimer.index', 'uses' => 'ShopClaimerController@index']);
+    Route::get('claims', ['as' => 'claims.index', 'uses' => 'ClaimsController@index']);
 });
 
 
