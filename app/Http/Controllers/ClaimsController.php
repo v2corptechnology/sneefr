@@ -35,6 +35,14 @@ class ClaimsController extends Controller
             ->with('success', 'Your claim is pending and a moderator will contact you in less than 24 hours.');
     }
 
+    /**
+     * The claim is approved, attribute the shop to the user.
+     *
+     * @param \Sneefr\Models\Claim $claim
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function update(Claim $claim)
     {
         // Attach the shop to the claimer user
@@ -47,6 +55,14 @@ class ClaimsController extends Controller
         return redirect()->route('claims.index');
     }
 
+    /**
+     * The claim is rejected, forget about it.
+     *
+     * @param \Sneefr\Models\Claim $claim
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
     public function destroy(Claim $claim)
     {
         $claim->delete();
