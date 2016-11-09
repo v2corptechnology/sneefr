@@ -78,6 +78,16 @@ class Shop extends Model
     }
 
     /**
+     * Claims about this shop.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function claims()
+    {
+        return $this->hasMany(Claim::class);
+    }
+
+    /**
      * Relationship to the evaluations of this shop.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -258,6 +268,18 @@ class Shop extends Model
         $userId = $userId ?? auth()->id();
 
         return $this->owner->getId() === $userId;
+    }
+
+    /**
+     * Check the claimed status of this shop.
+     *
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function isClaimedBy(int $userId) : bool
+    {
+        return (bool) $this->claims->where('user_id', $userId)->count();
     }
 
     /**

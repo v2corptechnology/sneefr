@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 use Laracodes\Presenter\Traits\Presentable;
 use Laravel\Cashier\Billable;
 use Sneefr\PhoneNumber;
@@ -18,7 +19,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, LogsActivity, SoftDeletes, Billable, Presentable;
+    use Authenticatable, Authorizable, CanResetPassword, LogsActivity, SoftDeletes, Billable, Presentable, Notifiable;
 
     protected $dates = ['birthdate', 'trial_ends_at', 'deleted_at'];
 
@@ -105,6 +106,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public function claims()
+    {
+        return $this->hasMany(Claim::class);
     }
 
     /**
