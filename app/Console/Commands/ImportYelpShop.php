@@ -35,15 +35,24 @@ class ImportYelpShop extends Command
 
         $matrix = $this->buildMatrix(33.5, 34.4, -118.4, -117.6);
 
-        $returnedShops = $this->getAllShopsAround($matrix[$index][0], $matrix[$index][1]);
+        $returnedShops = collect();
+
+        while($returnedShops->count() == 0) {
+
+            $index = cache()->get('yelp_import_index');
+
+            $returnedShops = $this->getAllShopsAround($matrix[$index][0], $matrix[$index][1]);
+
+            \Log::info("Skip index {$index} {$matrix[$index][0]},{$matrix[$index][1]}");
+
+            cache()->increment('yelp_import_index');
+        }
 
         $shops = $this->deduplicate($returnedShops);
 
         $this->insertShops($shops);
 
         $this->addTags($shops);
-
-        cache()->increment('yelp_import_index');
 
         \Log::info("Imported index {$index} {$matrix[$index][0]},{$matrix[$index][1]}", [
             'found' => $returnedShops->count(),
