@@ -168,6 +168,8 @@ class ImportYelpShop extends Command
                     'description'      => $yelp['phone'] ?? null,
                     'yelp_data'        => $yelp,
                 ]),
+                'created_at' => (string) \Carbon\Carbon::now(),
+                'updated_at' => (string) \Carbon\Carbon::now(),
             ];
         }
 
