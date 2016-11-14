@@ -27,9 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // Very frequent calls
 
-        if (env('RUN_YELP_IMPORT', false)) {
-            $schedule->command('yelp:import')->everyMinute();
-        }
+        $schedule->command('yelp:import')->everyMinute();
 
         // Calls made every hour
 
