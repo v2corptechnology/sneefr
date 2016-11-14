@@ -25,16 +25,6 @@ class ImportYelpShop extends Command
     protected $description = 'Import yelp shops into our database';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        cache()->flush();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return mixed
