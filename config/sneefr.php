@@ -7,15 +7,17 @@ return [
     | Config for sneefr website
     |--------------------------------------------------------------------------
     */
-    'APP_DEBUGBAR' => env('APP_DEBUGBAR'),
-    'APP_ENV'      => env('APP_ENV'),
+    'APP_DEBUGBAR'    => env('APP_DEBUGBAR'),
+    'APP_ENV'         => env('APP_ENV'),
+    'YELP_BASE_INDEX' => env('YELP_BASE_INDEX'),
+    'RUN_YELP_IMPORT' => env('RUN_YELP_IMPORT'),
 
     /*
     |--------------------------------------------------------------------------
     | Keys used across different services
     |--------------------------------------------------------------------------
     */
-    'keys'         => [
+    'keys'            => [
         'APP_HASH_KEY'           => env('APP_HASH_KEY'),
         // Google services
         'GOOGLE_API_KEY'         => env('GOOGLE_API_KEY'),

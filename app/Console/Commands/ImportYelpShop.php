@@ -31,7 +31,7 @@ class ImportYelpShop extends Command
      */
     public function handle()
     {
-        $index = cache()->get('yelp_import_index', env('YELP_BASE_INDEX', 0));
+        $index = cache()->get('yelp_import_index', config('sneefr.YELP_BASE_INDEX', 0));
 
         $matrix = $this->buildMatrix(33.5, 34.4, -118.4, -117.6);
 
