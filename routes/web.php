@@ -13,7 +13,6 @@ Route::get('privacy', ['as' => 'privacy', 'uses' => 'PagesController@privacy']);
 // Pricing screen
 Route::get('pricing', ['as' => 'pricing', 'uses' => 'PagesController@pricing']);
 
-
 /** Auth mechanisms */
 
 Auth::routes();
@@ -57,6 +56,8 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::get('me', ['as' => 'me.show', 'uses' =>'SettingsController@show']);
     // Messages
     Route::post('messages/{item}', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    // Claim a shop
+    Route::post('claims/store', ['as' => 'claims.store', 'uses' => 'ClaimsController@store']);
 
     /** Resources */
     // Ads
@@ -113,6 +114,7 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
     Route::resource('highlightedShops', 'HighlightedShopsController');
+    Route::resource('claims', 'ClaimsController', ['except' => ['create']]);
 });
 
 

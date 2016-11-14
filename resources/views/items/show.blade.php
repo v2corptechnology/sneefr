@@ -16,10 +16,10 @@
         <meta property="og:image" content="{{ $image }}"/>
     @endforeach
     <meta property="product:retailer_item_id" content="{{ $ad->getId() }}"/>
-    <meta property="product:price:amount" content="{{ $ad->price()->readable() }}"/>
-    <meta property="product:price:currency" content="EUR"/>
+    <meta property="product:price:amount" content="{{ $ad->price()->get() }}"/>
+    <meta property="product:price:currency" content="USD"/>
     <meta property="product:availability" content="in stock"/>
-    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale" content="en_US">
     <meta property="article:author"
           content="https://www.facebook.com/{{ $ad->seller->getSocialNetworkId() }}">
 @endsection
@@ -129,11 +129,11 @@
                                 <div role="tabpanel" class="tab-pane" id="delivery">
                                     <table class="table ad__description__table">
                                         <tbody>
-                                            @foreach ($ad->present()->getFees() as $name => $fee)
+                                            @foreach ($ad->delivery->getFees() as $name => $fee)
                                                 <tr>
                                                     <td>@lang('ad.show.delivery_'.$name)</td>
                                                     <td><span class="text-{{ $fee ? 'gold' : 'black' }}">@choice('ad.show.delevery_fee',$fee, ['fee' => $fee] )</span></td>
-                                                    <td><span class="text-blue pull-right">{{ $ad->present()->priceWithFee($name) }}</span></td>
+                                                    <td><span class="text-blue pull-right">{{ $ad->price()->fee($fee)->formatted() }}</span></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

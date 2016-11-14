@@ -609,19 +609,7 @@ class Ad extends Model
      */
     public function price() : Price
     {
-        return new Price($this->amount, $this->currency, $this->delivery);
-    }
-
-    /**
-     * Get the negotiated price object.
-     *
-     * @return \Sneefr\Price
-     */
-    public function negotiatedPrice() : Price
-    {
-        $amount = $this->final_amount ?? $this->amount;
-
-        return new Price($amount, $this->currency, $this->delivery);
+        return new Price($this->amount, $this->currency);
     }
 
     public function canMakeSecurePayement(): bool

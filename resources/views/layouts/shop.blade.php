@@ -170,14 +170,28 @@
                             </a>
                         </h2>
                     </li>
+
                     @if ($shop->isOwner() || auth()->check() && auth()->user()->isAdmin())
-                    <li>
-                        <a class="btn btn-block btn-primary btn-primary2"
-                           href="{{ route('shops.edit', $shop) }}" title="___">
-                            <i class="fa fa-cog"></i>
-                            Edit
-                        </a>
-                    </li>
+                        <li>
+                            <a class="btn btn-block btn-primary btn-primary2"
+                               href="{{ route('shops.edit', $shop) }}" title="___">
+                                <i class="fa fa-cog"></i>
+                                Edit
+                            </a>
+                        </li>
+                    @endif
+
+                    @unless ($shop->isClaimedBy(auth()->id()))
+                        <li>
+                            <form action="{{ route('claims.store') }}" method="post">
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="shop_id" value="{{ $shop->getId() }}">
+                                <button class="btn btn-block btn-primary btn-primary2" type="submit">
+                                    <i class="fa fa-handshake-o"></i>
+                                    Claim my shop
+                                </button>
+                            </form>
+                        </li>
                     @endif
                 </ul>
             </div>

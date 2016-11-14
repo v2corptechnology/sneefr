@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-sneefr navbar-menu">
+<nav class="navbar navbar-default navbar-sneefr navbar-menu {{ auth()->check() ? '' : 'visible-xs' }}">
     <div class="container">
         {{-- Brand and toggle get grouped for better mobile display --}}
         <div class="navbar-header">
@@ -94,10 +94,6 @@
         {{-- Collect the nav links, forms, and other content for toggling --}}
         <div class="collapse navbar-collapse" id="js-nav-menu">
             <ul class="nav navbar-nav">
-
-                <li class="{{ setActive('home') }}">
-                    <a href="{{ route('home') }}" title="Home">Home</a>
-                </li>
 
                 {{-- Item creation --}}
                 @if (auth()->check() && auth()->user()->shop )

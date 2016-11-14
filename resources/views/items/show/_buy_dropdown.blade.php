@@ -5,14 +5,16 @@
 
 <div class="btn-group btn-group-lg pull-right">
 
-    @if ($ad->isMine() )
-        <a class="btn btn-primary" href="{{ route('items.edit', $ad) }}" title=""><i class="fa fa-fw fa-pencil"></i> Edit</a>
-    @elseif (auth()->check())
-        <a href="{{ route('payments.create', ['ad' => $ad]) }}" title=""
-           class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
-    @else
-        <a href="#LoginBefore" data-toggle="modal" title=""
-           class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+    @if ($ad->remaining_quantity)
+        @if ($ad->isMine() )
+            <a class="btn btn-primary" href="{{ route('items.edit', $ad) }}" title=""><i class="fa fa-fw fa-pencil"></i> Edit</a>
+        @elseif (auth()->check())
+            <a href="{{ route('payments.create', ['ad' => $ad]) }}" title=""
+               class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+        @else
+            <a href="#LoginBefore" data-toggle="modal" title=""
+               class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+        @endif
     @endif
 
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

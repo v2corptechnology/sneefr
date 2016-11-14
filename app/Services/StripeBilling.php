@@ -153,12 +153,11 @@ class StripeBilling implements BillingInterface
      */
     public function generateChargeDetails(Ad $ad, BillingRequest $request)
     {
-        $deliveryCost = $request->has('delivery')
-            ? $ad->delivery->amountFor($request->input('delivery'))
-            : 0;
+        $quantity = $request->input('quantity', 1);
+        $deliveryCost = $ad->delivery->amountFor($request->input('delivery'));
 
         return [
-            'amount'          => ($request->input('quantity', 1) * (string) $ad->negotiatedPrice()) + $deliveryCost,
+            'amount'          => $ad->price()->for($quantity)->fee($deliveryCost)->cents(),
             'description'     => 'SneefR : ' . $ad->present()->title() . '(ID: ' . $ad->getId() . ')',
             'token'           => $request->input('stripeToken'),
             'stripeAccountId' => $ad->seller->payment['stripe_user_id'],

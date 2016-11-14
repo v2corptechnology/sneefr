@@ -22,7 +22,7 @@
                                     <a href="{{ route('ad.show', [$ad->id]) }}">{{ $ad->title }}</a>
                                 </h4>
                                 <h6 class="text-muted">
-                                    {!! $ad->present()->price() !!} par
+                                    {!! $ad->price()->formatted() !!} par
                                     {{ $ad->user->present()->fullName() }}
                                 </h6>
                                 {!! $ad->description !!}

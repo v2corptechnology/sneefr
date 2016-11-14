@@ -24,57 +24,59 @@
                     <form action="{{ route('payments.store') }}" method="POST" class="js-payment-form">
                         {!! csrf_field() !!}
 
-                        <h1 class="box__title">How many of these do you want ?</h1>
-
-                        <span class="hidden js-price">{{ $ad->negotiatedPrice() }}</span>
+                        <div class="form-group">
+                            <label class="box__title">I want <select name="quantity" id="quantity" class="js-quantity" required>
+                                @for($i = 1; $i <= $ad->remaining_quantity; $i++)
+                                    <option value="{{ $i }}" {{ $i == 1 ? 'selected' : null }}
+                                            @foreach($ad->delivery->getFees() as $name => $fee)
+                                            data-{{ $name }}-tax="{{ $ad->price()->for($i)->tax()->taxOnly()->formatted() }}"
+                                            data-{{ $name }}-total="{{ $ad->price()->for($i)->tax()->fee($fee)->formatted() }}"
+                                            data-{{ $name }}-cents="{{ $ad->price()->for($i)->tax()->fee($fee)->cents() }}"
+                                            @endforeach
+                                    >{{ $i }}</option>
+                                @endfor
+                            </select> of these,</label>
+                        </div>
 
                         <div class="form-group">
-                            {!! Form::selectRange('quantity', 1, $ad->remaining_quantity, 1, ['class' => 'js-quantity', 'autocomplete' => 'off']) !!}
+                            <label class="box__title">Delivered to</label><br>
+                            @foreach ($ad->delivery->getFees() as $name => $fee)
+                                <label class="radio-inline delivery__option">
+                                    <input class="js-delivery-option" type="radio"
+                                           name="delivery" value="{{ $name }}" required autocomplete="off">
+                                    @lang('payments.create.delivery_'.$name.'_label', ['price' => \Sneefr\Price::fromCents($fee)->formatted() ])
+                                </label>
+                            @endforeach
+                            <input type="hidden" name="pick-address" value="{{ $ad->shop->getLocation() }}">
                         </div>
 
-                        <h1 class="box__title">@lang('payments.create.box_heading')</h1>
+                        <p class="bg-info text-info text-left js-delivery-info js-delivery-info-pick hidden">
+                            <strong>{{ $ad->shop->getName() }}</strong><br>
+                            {{ $ad->shop->getLocation() }}
+                        </p>
 
-                        <input type="hidden" name="ad" value="{{ $ad->id }}">
-
-                        <div class="box--jumbo">
-                            <span class="js-final-price" data-amount-with-delivery="{{ $ad->negotiatedPrice() }}">
-                                {!! $ad->present()->negotiatedPrice() !!}
-                            </span>
-                        </div>
-
-                        @if ($ad->isInShop())
-                            <hr class="box__separator">
-                            <h1 class="box__title">@lang('payments.create.delivery_heading')</h1>
-                            <div class="form-group">
-
-                                @foreach ($ad->present()->getFees() as $name => $fee)
-                                    <label class="radio-inline delivery__option" for="delivery-{{ $name }}">
-                                        <input class="js-delivery-option" type="radio" data-delivery-fee="{{ $fee * 100 }}"
-                                               name="delivery" value="{{ $name }}" id="delivery-{{ $name }}" required autocomplete="off">
-                                        @lang('payments.create.delivery_'.$name.'_label', ['price' => $fee . $ad->delivery->getCurrency() ])
-                                    </label>
-                                @endforeach
-                                <input type="hidden" name="pick-address" value="{{ $ad->shop->getLocation() }}">
-
-                            </div>
-
-                            <p class="bg-info text-info text-left js-delivery-info js-delivery-info-pick hidden">
-                                <strong>{{ $ad->shop->getName() }}</strong><br>
-                                {{ $ad->shop->getLocation() }}
-                            </p>
-                        @endif
-
-                        <hr class="box__separator">
-
-                        <div class="form-group text-left js-extra-info hidden">
-                            <label for="extra">@lang('payments.create.extra_label')</label>
+                        <div class="js-extra-info">
+                            <label for="extra" class="box__title">@lang('payments.create.extra_label')</label>
                             <textarea class="form-control  js-comment" name="extra" id="extra"
                                       cols="10" rows="3" placeholder="@lang('payments.create.extra_placeholder')"></textarea>
                         </div>
 
+                        <hr class="box__separator">
+
+                        <div class="form-group">
+                            <div class="box--jumbo">
+                                <span class="js-price">
+                                    {!! $ad->price()->tax()->formatted() !!}
+                                </span>
+                            </div>
+                            <small>(incl. 9% taxes <span class="js-tax">{{ $ad->price()->taxOnly()->formatted() }}</span>)</small>
+                            </div>
+
                         <input type="hidden" name="payment_token" class="js-payment-token">
 
                         <div class="form-group">
+
+                            <input type="hidden" name="ad" value="{{ $ad->id }}">
 
                             @if ($ad->canMakeSecurePayement())
 
@@ -89,7 +91,7 @@
                                         data-email="{{ auth()->user()->getEmail() }}"
                                         data-currency="USD" data-name="Sidewalks"
                                         data-description="{{ $ad->present()->title() }}"
-                                        data-amount="{{ $ad->negotiatedPrice() }}"
+                                        data-amount="{{ $ad->price()->cents() }}"
                                         @if ($ad->isInShop()) disabled @endif
                                         title="@lang('payments.create.btn_secure_title')">
                                     <i class="fa fa-lock"></i> @lang('payments.create.btn_secure')
