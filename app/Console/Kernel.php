@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
 
         if (config('sneefr.RUN_YELP_IMPORT', false)) {
             $schedule->command('yelp:import')->everyMinute();
-            $schedule->command('artisan scout:import',  ['\\Sneefr\\Models\\Shop'])->everyTenMinutes();
+            $schedule->command('scout:import',  ['\\Sneefr\\Models\\Shop'])->everyTenMinutes();
         }
 
         // Calls made every hour
