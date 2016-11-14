@@ -13,7 +13,6 @@ Route::get('privacy', ['as' => 'privacy', 'uses' => 'PagesController@privacy']);
 // Pricing screen
 Route::get('pricing', ['as' => 'pricing', 'uses' => 'PagesController@pricing']);
 
-
 /** Auth mechanisms */
 
 Auth::routes();
