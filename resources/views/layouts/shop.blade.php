@@ -103,7 +103,7 @@
 
     <div class="timeline">
         <div class="row">
-            
+
             <div class="col-md-4">
                 <ul class="summary">
                     <li class="summary__item{{ setActive('xxx', '--selected') }} text-center summary__item--header"
@@ -181,7 +181,7 @@
                         </li>
                     @endif
 
-                    @unless ($shop->isClaimedBy(auth()->id()))
+                    @unless ($shop->hasOwner())
                         <li>
                             <form action="{{ route('claims.store') }}" method="post">
                                 {!! csrf_field() !!}
@@ -198,18 +198,20 @@
 
             <div class="col-md-8">
 
-                @if (! $shop->owner->subscribed('shop') && $shop->isOwner())
-                    @include('shops._subscription')
-                @elseif (! $shop->owner->payment()->hasOne() && $shop->isOwner())
-                    <p class="text-warning bg-warning">
-                        @lang('shops.show.link_payment', [
-                            'link' => link_to_route('me.show',
-                                trans('shops.show.link_payment_action'),
-                                auth()->user(),
-                                ['title' => trans('shops.show.link_payment_action_title')]
-                            )
-                        ])
-                    </p>
+                @if ($shop->isOwner())
+                    @if (! $shop->owner->subscribed('shop'))
+                        @include('shops._subscription')
+                    @elseif (! $shop->owner->payment()->hasOne())
+                        <p class="text-warning bg-warning">
+                            @lang('shops.show.link_payment', [
+                                'link' => link_to_route('me.show',
+                                    trans('shops.show.link_payment_action'),
+                                    auth()->user(),
+                                    ['title' => trans('shops.show.link_payment_action_title')]
+                                )
+                            ])
+                        </p>
+                    @endif
                 @endif
 
                 @yield('shop_content')
