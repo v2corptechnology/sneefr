@@ -8,11 +8,6 @@
                 @lang('home.highlighted_description')
             </span>
         </h4>
-
-        <a href="{{ route('search.index', ['type' => 'shop']) }}"
-           class="btn btn-default-o pull-right">
-            @lang('button.see_all')
-        </a>
     </div>
 </div>
 
