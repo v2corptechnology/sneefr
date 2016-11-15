@@ -4,7 +4,6 @@ namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -267,7 +266,7 @@ class Shop extends Model
     {
         $userId = $userId ?? auth()->id();
 
-        return $this->owner->getId() === $userId;
+        return $this->owner && $this->owner->getId() === $userId;
     }
 
     /**
