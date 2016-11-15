@@ -282,6 +282,16 @@ class Shop extends Model
     }
 
     /**
+     * Check if the shop already have an owner.
+     *
+     * @return bool
+     */
+    public function hasOwner() : bool
+    {
+        return (bool) $this->user_id;
+    }
+
+    /**
      * Get the map URL of this place.
      *
      * @param int  $width
