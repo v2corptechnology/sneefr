@@ -153,7 +153,6 @@ class ImportYelpShop extends Command
 
         foreach ($shops as $yelp) {
             $shopsData[] = [
-                'user_id' => 1,
                 'slug'    => $yelp['id'],
                 'data'    => json_encode([
                     'name'             => $yelp['name'],

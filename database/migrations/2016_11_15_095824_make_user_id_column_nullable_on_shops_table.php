@@ -18,6 +18,8 @@ class MakeUserIdColumnNullableOnShopsTable extends Migration
 
             DB::statement('ALTER TABLE `shops` MODIFY `user_id` INTEGER UNSIGNED NULL;');
         });
+
+        \Sneefr\Models\Shop::withTrashed()->where('user_id', 1)->update(['user_id' => null]);
     }
 
     /**
@@ -27,6 +29,8 @@ class MakeUserIdColumnNullableOnShopsTable extends Migration
      */
     public function down()
     {
+        \Sneefr\Models\Shop::withTrashed()->whereNull('user_id')->update(['user_id' => 1]);
+
         Schema::table('shops', function (Blueprint $table) {
             DB::statement('ALTER TABLE `shops` MODIFY `user_id` INTEGER UNSIGNED NOT NULL;');
 
