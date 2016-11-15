@@ -19,7 +19,7 @@
 @foreach($shops as $shop)
     <div class="col-sm-6">
 
-        @include('partials.card', ['item' => $shop, 'multiple' => true])
+        @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200'])
 
     </div>
 @endforeach

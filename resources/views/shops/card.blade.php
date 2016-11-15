@@ -30,8 +30,10 @@ list($width, $height) = explode('x', $coverSize);
             </div>
         @endif
 
-        <footer class="card__footer">
-            <p>{{ ($shop->ads_count ?? $shop->ads->count()) . ' ads' }}</p>
-        </footer>
+        @if ($footer ?? null)
+            <footer class="card__footer">
+                <p>{{ ($shop->ads_count ?? $shop->ads->count()) . ' ads' }}</p>
+            </footer>
+        @endif
     </div>
 </article>
