@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->float('lat', 10, 6)->nullable();
             $table->float('long', 10, 6)->nullable();
             $table->json('data')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->json('payment')->nullable()->default(null);
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();
