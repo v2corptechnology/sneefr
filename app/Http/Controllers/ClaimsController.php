@@ -22,6 +22,12 @@ class ClaimsController extends Controller
     {
         $shop = Shop::findOrFail($request->input('shop_id'));
 
+        if (auth()->user()->shop) {
+            return redirect()
+                ->route('shops.show', $shop)
+                ->with('error', 'You already have one shop, contact us to claim this one too.');
+        }
+
         if ($shop->isClaimedBy(auth()->id()) || auth()->user()->claims->count() > 0) {
             return redirect()
                 ->route('shops.show', $shop)

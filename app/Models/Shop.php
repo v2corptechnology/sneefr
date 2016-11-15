@@ -4,7 +4,6 @@ namespace Sneefr\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -267,7 +266,7 @@ class Shop extends Model
     {
         $userId = $userId ?? auth()->id();
 
-        return $this->owner->getId() === $userId;
+        return $this->owner && $this->owner->getId() === $userId;
     }
 
     /**
@@ -280,6 +279,16 @@ class Shop extends Model
     public function isClaimedBy(int $userId = null) : bool
     {
         return (bool) $this->claims->where('user_id', $userId)->count();
+    }
+
+    /**
+     * Check if the shop already have an owner.
+     *
+     * @return bool
+     */
+    public function hasOwner() : bool
+    {
+        return (bool) $this->user_id;
     }
 
     /**

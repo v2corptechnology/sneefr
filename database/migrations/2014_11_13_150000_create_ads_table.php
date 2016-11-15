@@ -18,7 +18,6 @@ class CreateAdsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->unsignedInteger('shop_id')->nullable();
             $table->unsignedInteger('remaining_quantity');
-            $table->integer('category_id')->unsigned();
             $table->string('title');
             $table->text('description')->nullable();
             $table->bigInteger('amount');
@@ -29,7 +28,6 @@ class CreateAdsTable extends Migration
             $table->float('latitude', 10, 6)->nullable();
             $table->float('longitude', 10, 6)->nullable();
             $table->json('images');
-            $table->integer('condition_id')->unsigned();
 
             // Define timestamps to record dates and times of changes.
             $table->timestamps();
@@ -37,7 +35,6 @@ class CreateAdsTable extends Migration
 
             // Foreign keys and indices
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
