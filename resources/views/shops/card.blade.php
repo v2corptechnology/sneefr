@@ -6,7 +6,7 @@ list($width, $height) = explode('x', $coverSize);
 ?>
 
 <article class="card {{ $classes ?? null }}" itemscope itemtype="http://schema.org/Product">
-    <figure class="card__gallery">
+    <figure class="card__gallery card__gallery--vignette">
         <a href="{{ route('shops.show', $shop) }}" title="{{ $shop->getName() }}">
             <img class="card__image" src="{{ $shop->getCover($coverSize) }}"
                  srcset="{{ $shop->getCover($coverSize.'@2x') }} 2x"

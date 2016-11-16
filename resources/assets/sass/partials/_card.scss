@@ -39,6 +39,19 @@
 
 .card__image--hidden {visibility: hidden;}
 
+.card__gallery--vignette {
+  &::after {
+    box-shadow: inset 0 0 3em rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    content: "";
+  }
+}
+
 .card__title {
   font-size: 1.4rem;
   font-weight: bold;
