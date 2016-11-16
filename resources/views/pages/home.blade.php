@@ -5,7 +5,7 @@
         <div class="row">
 
             {{-- Trending shops --}}
-            <div class="col-sm-9">
+            <div class="col-sm-12">
 
                 @include('pages.home.quote')
 

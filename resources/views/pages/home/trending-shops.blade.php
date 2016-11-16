@@ -12,7 +12,7 @@
 </div>
 
 @foreach($shops as $shop)
-    <div class="col-sm-6">
+    <div class="col-sm-4">
 
         @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200'])
 
