@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($shops->count() < 4)
+                        @if ($shops->count() < 6)
                             <tr>
                                 <td colspan="2">
                                     <div class="row">

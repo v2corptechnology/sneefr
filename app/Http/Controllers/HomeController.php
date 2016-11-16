@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $topShops = cache()->rememberForever('highlighted_shops', function () {
-            return Shop::highlighted()->take(4)->get();
+            return Shop::highlighted()->take(6)->get();
         })->load('evaluations');
 
         return view('pages.home', compact('topShops'));
