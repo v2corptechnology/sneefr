@@ -9,7 +9,7 @@ return [
     'currency_symbol'    => "$",
     'pub'                => [
         'title'       => "Shop owner?",
-        'description' => "Sidewalks hepls you sell online and attract more customers in your city. No fees on sales.",
+        'description' => "Sidewalks helps you sell online and attract more customers in your city. No fees on sales.",
     ],
     'footer'             => [
         'legal_notice'    => "Legal notice",
