@@ -138,7 +138,10 @@ class ImportYelpShop extends Command
         $shops = Shop::whereIn('slug', $shops->pluck('id'))->get();
 
         foreach ($shops as $shop) {
-            $shop->tags()->attach(Tag::whereIn('alias', $shop->data['yelp_data']['categories'])->pluck('id')->toArray());
+            // Do not ask scout to directly index
+            Shop::withoutSyncingToSearch(function () use ($shop) {
+                $shop->tags()->attach(Tag::whereIn('alias', $shop->data['yelp_data']['categories'])->pluck('id')->toArray());
+            });
         }
     }
 
@@ -172,7 +175,10 @@ class ImportYelpShop extends Command
             ];
         }
 
-        Shop::insert($shopsData);
+        // Do not ask scout to directly index
+        Shop::withoutSyncingToSearch(function () use ($shopsData) {
+            Shop::insert($shopsData);
+        });
     }
 
     private function getAllShopsAround($latitude, $longitude) : Collection
