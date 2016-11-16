@@ -11,7 +11,6 @@ return [
         'title'       => "Shop owner?",
         'description' => "Sidewalks hepls you sell online and attract more customers in your city. No fees on sales.",
     ],
-    'browse_by_category' => "Browse categories",
     'footer'             => [
         'legal_notice'    => "Legal notice",
         'terms_condition' => "Terms and conditions",

@@ -18,12 +18,6 @@
 
         </div>
 
-        <div class="row" id="shop-categories">
-
-            @include('pages.home.shops-by-category', ['tags' => $tags, 'shops' => $shopsInTag])
-
-        </div>
-
     </div>
 
     <div class="shop__pub text-center color-white">
