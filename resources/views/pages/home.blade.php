@@ -5,7 +5,7 @@
         <div class="row">
 
             {{-- Trending shops --}}
-            <div class="col-sm-9">
+            <div class="col-sm-12">
 
                 @include('pages.home.quote')
 
@@ -15,18 +15,6 @@
 
                 </div>
             </div>
-
-            {{-- Best selling --}}
-            <div class="col-sm-3 ">
-
-                @include('pages.home.best-selling', ['items' => $bestSellers])
-
-            </div>
-        </div>
-
-        <div class="row" id="shop-categories">
-
-            @include('pages.home.shops-by-category', ['tags' => $tags, 'shops' => $shopsInTag])
 
         </div>
 

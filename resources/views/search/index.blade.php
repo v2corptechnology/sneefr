@@ -80,9 +80,10 @@
         @elseif ($type == 'shop')
 
             @foreach ($shops as $shop)
+
                 <div class="col-sm-4 col-md-3">
 
-                    @include('shops.card', ['shop' => $shop, 'coverSize' => '260x200', 'classes' => 'card--center'])
+                    @include('shops.card', ['shop' => $shop, 'coverSize' => '265x200'])
 
                 </div>
             @endforeach

@@ -15,7 +15,7 @@ class HighlightedShopsController extends Controller
     public function index()
     {
         $shops = cache()->rememberForever('highlighted_shops', function () {
-            return Shop::highlighted()->with('evaluations')->take(4)->get();
+            return Shop::highlighted()->with('evaluations')->take(config('sneefr.home_featured_items'))->get();
         });
 
         return view('admin.highlightedShops.index', compact('shops'));
@@ -85,7 +85,7 @@ class HighlightedShopsController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $shops = cache()->get('highlighted_shops', Shop::highlighted()->with('evaluations')->take(4)->get());
+        $shops = cache()->get('highlighted_shops', Shop::highlighted()->with('evaluations')->take(config('sneefr.home_featured_items'))->get());
 
         cache()->forget('highlighted_shops');
 

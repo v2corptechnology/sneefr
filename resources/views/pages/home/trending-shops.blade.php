@@ -1,25 +1,19 @@
 <div class="col-sm-12">
-    <div class="home__section home__section--padding">
-        <h4 class="home__section__title">
+    <h2 class="section-title">
+        @lang('home.highlighted_shops')
 
-            @lang('home.highlighted_shops')
-
-            <span class="home__section__description">
-                @lang('home.highlighted_description')
-            </span>
-        </h4>
-
-        <a href="{{ route('search.index', ['type' => 'shop']) }}"
-           class="btn btn-default-o pull-right">
-            @lang('button.see_all')
-        </a>
-    </div>
+        <span class="section-title__extra">
+            @lang('home.highlighted_description')
+        </span>
+    </h2>
 </div>
 
 @foreach($shops as $shop)
-    <div class="col-sm-6">
+    <div class="col-sm-4">
 
-        @include('partials.card', ['item' => $shop, 'multiple' => true])
+        <?php $classes = $loop->remaining < ($loop->count / 2) ? 'hidden-xs' : null; ?>
+
+        @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200', 'classes' => $classes])
 
     </div>
 @endforeach

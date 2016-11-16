@@ -1,13 +1,6 @@
 /****************************
 /*    General
 ****************************/
-.is-truncated {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  white-space: nowrap;
-}
 
 .color-pink {
   color: #ff1b54;
@@ -35,12 +28,6 @@
   color: #ffffff;;
   border: solid 1px #ffffff;
   background-color: #555555;;
-}
-
-
-.no-lr-padding {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .btn-blue {
