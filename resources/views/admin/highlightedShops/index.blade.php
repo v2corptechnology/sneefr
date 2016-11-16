@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($shops->count() < 6)
+                        @if ($shops->count() < config('sneefr.home_featured_items'))
                             <tr>
                                 <td colspan="2">
                                     <div class="row">
