@@ -1,14 +1,11 @@
 <div class="col-sm-12">
-    <div class="home__section home__section--padding">
-        <h4 class="home__section__title">
+    <h2 class="section-title">
+        @lang('home.highlighted_shops')
 
-            @lang('home.highlighted_shops')
-
-            <span class="home__section__description">
-                @lang('home.highlighted_description')
-            </span>
-        </h4>
-    </div>
+        <span class="section-title__extra">
+            @lang('home.highlighted_description')
+        </span>
+    </h2>
 </div>
 
 @foreach($shops as $shop)
