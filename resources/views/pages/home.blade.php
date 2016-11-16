@@ -16,12 +16,6 @@
                 </div>
             </div>
 
-            {{-- Best selling --}}
-            <div class="col-sm-3 ">
-
-                @include('pages.home.best-selling', ['items' => $bestSellers])
-
-            </div>
         </div>
 
         <div class="row" id="shop-categories">

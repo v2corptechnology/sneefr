@@ -25,7 +25,6 @@ class HomeController extends Controller
             return $query->where('alias', $selectedTag);
         })->with('shops')->get()->pluck('shops')->flatten()->shuffle()->take(6);
 
-        $bestSellers = Ad::take(6)->get();
 
         $topShops = cache()->rememberForever('highlighted_shops', function () {
             return Shop::highlighted()->take(4)->get();

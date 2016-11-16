@@ -69,29 +69,6 @@
   margin-top: 100px;
 }
 
-.best-selling {
-  margin-bottom: 2rem;
-}
-
-.best-selling__item {
-  &:hover, &:focus {
-    .best-selling__heading {
-      text-decoration: underline;
-    }
-  }
-}
-
-.best-selling__heading {
-  color: #595959;
-  font-size: 1.4rem;
-  font-weight: normal;
-  margin: 0;
-}
-
-.best-selling__image {
-  border-radius: 2px;
-}
-
 /* Extra Small Devices, Phones */
 @media only screen and (max-width : 480px) {
   .home__header__content {
@@ -163,41 +140,6 @@
 
 .home__section__title--small{
   font-size: 18px;
-}
-
-
-/****************************
-/*     Categorie list
-****************************/
-
-.home__categories {
-  list-style: none;
-  padding-left: 15px;
-  font-family: "Open Sans";
-  font-size: 16px;
-  font-weight: 600;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.94;
-
-  a {
-    color: #878787;
-  }
-}
-
-li.home__categories__item--active, li.home__categories__child--active {
-    a {
-      color: #000000;
-    }
-}
-
-.home__categories--child {
-  padding-left: 20px;
-  font-size: 14px;
-}
-
-.home__categories__item--checked {
-  margin-left: -20px;
 }
 
 /****************************
