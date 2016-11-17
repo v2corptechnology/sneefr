@@ -617,4 +617,24 @@ class Ad extends Model
     {
         return (bool) (($this->isInShop() && $this->seller->payment()->hasOne()) && $this->amount >= 100 );
     }
+
+    /**
+     * Is a tag price linked to this item ?
+     *
+     * @return bool
+     */
+    public function hasTagPrice() : bool
+    {
+        return isset($this->data['tag_price']);
+    }
+
+    /**
+     * Get the tag price object.
+     *
+     * @return \Sneefr\Price
+     */
+    public function tagPrice() : Price
+    {
+        return new Price($this->data['tag_price'], $this->currency);
+    }
 }

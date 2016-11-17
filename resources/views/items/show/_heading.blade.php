@@ -13,7 +13,10 @@
     <hr class="item__separator">
 
     <div class="item__buttons">
-        <del class="item__tagprice text-muted">{{ $ad->price()->formatted() }}</del>
+
+        @if ($ad->hasTagPrice())
+            <del class="item__tagprice text-muted">{{ $ad->tagPrice()->formatted() }}</del>
+        @endif
 
         <span class="item__price">{{ $ad->price()->formatted() }}</span>
 
