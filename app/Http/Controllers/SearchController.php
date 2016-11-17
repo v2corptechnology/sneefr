@@ -19,13 +19,16 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->get('q');
+        $query = $request->get('query');
         $type = $request->get('type', 'ad');
         //$sort = $request->get('sort');
         //$order = $request->get('order', 'desc');
 
         $ads = Ad::search($query)->paginate(16);
+        $ads->setPath(route('search.index', ['type' => 'ad']));
+
         $shops = Shop::search($query)->paginate(16);
+        $shops->setPath(route('search.index', ['type' => 'shop']));
 
         // When displaying ads, detect commonly linked categories to query terms
         if ($type === 'ad') {

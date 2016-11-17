@@ -73,7 +73,7 @@
 
             <div class="col-sm-12 text-center">
 
-                {{ $ads->appends(['type' => 'ad'])->links() }}
+                {{ $ads->links() }}
 
             </div>
 
@@ -90,7 +90,7 @@
 
             <div class="col-sm-12 text-center">
 
-                {{ $shops->appends(['type' => 'shop'])->links() }}
+                {{ $shops->links() }}
 
             </div>
 
