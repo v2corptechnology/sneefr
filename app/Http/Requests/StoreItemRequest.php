@@ -52,6 +52,7 @@ class StoreItemRequest extends Request
 
         // Change amount to cents
         $input['amount'] = $this->get('amount') * 100;
+        $input['full_amount'] = $this->get('full_amount') * 100;
 
         // Normalize delivery input
         $input['delivery'] = Ad::normalizeDeliveryOptions($this);
