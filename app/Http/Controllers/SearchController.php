@@ -30,9 +30,11 @@ class SearchController extends Controller
         $shops = Shop::search($query)->paginate(16);
         $shops->setPath(route('search.index', ['type' => 'shop']));
 
+        $results = $type == 'shop' ? $shops : $ads;
+
         // Log the search action
         Queue::push(new SaveSearch($query, auth()->id(), $request));
 
-        return view('search.index', compact('ads', 'shops', 'query', 'type', 'request'));
+        return view('search.index', compact('ads', 'shops', 'results', 'query', 'type'));
     }
 }

@@ -42,41 +42,23 @@
             </nav>
         </div>
 
-        @if ($type == 'ad')
+        @foreach ($results as $item)
+            <div class="col-sm-4 col-md-3">
 
-            {{-- Display the found ads using a partial --}}
-            @foreach ($ads as $ad)
-                <div class="col-sm-4 col-md-3">
-
-                    @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200'])
-
-                </div>
-            @endforeach
-
-            <div class="col-sm-12 text-center">
-
-                {{ $ads->links() }}
+                @if ($type == 'shop')
+                    @include('ads.card', ['shop' => $item, 'coverSize' => '260x200'])
+                @else
+                    @include('ads.card', ['ad' => $item, 'gallerySize' => '260x200'])
+                @endif
 
             </div>
+        @endforeach
 
-        @elseif ($type == 'shop')
+        <div class="col-sm-12 text-center">
 
-            @foreach ($shops as $shop)
+            {{ $results->links() }}
 
-                <div class="col-sm-4 col-md-3">
-
-                    @include('shops.card', ['shop' => $shop, 'coverSize' => '265x200'])
-
-                </div>
-            @endforeach
-
-            <div class="col-sm-12 text-center">
-
-                {{ $shops->links() }}
-
-            </div>
-
-        @endif
+        </div>
     </div>
 </div>
 @stop
