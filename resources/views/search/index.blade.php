@@ -42,25 +42,7 @@
             </nav>
         </div>
 
-        {{--
-            If the person is searching for ads and think we found
-            categories that are related to the specified search
-            terms, show links to searches in these categories.
-        --}}
         @if ($type == 'ad')
-
-            @if ($linkedCategories)
-                <div class="col-md-12">
-                    <p class="bg-warning">
-                        <b>@choice('search.linked_categories', count($linkedCategories))</b>
-                        @foreach ($linkedCategories as $linkedCategoryId)
-                            <a href="{{ route('search.index', ['category' => $linkedCategoryId]) }}">
-                                @lang("category.{$linkedCategoryId}")
-                            </a>
-                        @endforeach
-                    </p>
-                </div>
-            @endif
 
             {{-- Display the found ads using a partial --}}
             @foreach ($ads as $ad)
