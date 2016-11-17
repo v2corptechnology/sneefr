@@ -51,14 +51,14 @@
 </div>
 
 @if (auth()->user()->isAdmin())
-    <label class="control-label" for="tag_amount">
+    <label class="control-label" for="full_amount">
         Full price, muchachos style
     </label>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <input class="form-control" type="number"
-                       name="data[tag_price]" id="tag_amount" min="1"
+                       name="full_amount" id="full_amount" min="1"
                        placeholder="Caramba!"
                        title="@lang('ad_form.create.price_title')"
                        pattern="\d+(,\d{2})?">

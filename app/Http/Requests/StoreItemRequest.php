@@ -52,17 +52,7 @@ class StoreItemRequest extends Request
 
         // Change amount to cents
         $input['amount'] = $this->get('amount') * 100;
-        if (isset($input['data']['tag_price'])) {
-
-            // Change amount to cents
-            $tagprice = $input['data']['tag_price'] * 100;
-
-            if (!$tagprice) {
-                unset($input['data']['tag_price']);
-            } else {
-                $input['data']['tag_price'] = $tagprice;
-            }
-        }
+        $input['full_amount'] = $this->get('full_amount') * 100;
 
         // Normalize delivery input
         $input['delivery'] = Ad::normalizeDeliveryOptions($this);

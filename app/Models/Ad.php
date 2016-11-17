@@ -31,14 +31,14 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'shop_id', 'data', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
+    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'full_amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
      *
      * @var array
      */
-    protected static $logAttributes = ['shop_id', 'title', 'description', 'amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
+    protected static $logAttributes = ['shop_id', 'title', 'description', 'amount', 'full_amount', 'location', 'latitude', 'longitude', 'images', 'final_amount'];
 
     /**
      * The attributes that should be casted to native types.
@@ -49,9 +49,9 @@ class Ad extends Model
         'images'      => 'array',
         'transaction' => 'array',
         'amount'      => 'float',
+        'full_amount' => 'float',
         'latitude'    => 'float',
         'longitude'   => 'float',
-        'data'        => 'array',
     ];
 
     /**
@@ -619,22 +619,22 @@ class Ad extends Model
     }
 
     /**
-     * Is a tag price linked to this item ?
+     * Is a full amount linked to this item ?
      *
      * @return bool
      */
-    public function hasTagPrice() : bool
+    public function hasFullAmount() : bool
     {
-        return isset($this->data['tag_price']);
+        return (bool) $this->full_amount;
     }
 
     /**
-     * Get the tag price object.
+     * Get the full amount price object.
      *
      * @return \Sneefr\Price
      */
     public function tagPrice() : Price
     {
-        return new Price($this->data['tag_price'], $this->currency);
+        return new Price($this->full_amount, $this->currency);
     }
 }

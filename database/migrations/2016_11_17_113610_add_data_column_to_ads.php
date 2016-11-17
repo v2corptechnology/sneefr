@@ -14,7 +14,7 @@ class AddDataColumnToAds extends Migration
     public function up()
     {
         Schema::table('ads', function (Blueprint $table) {
-            $table->json('data')->nullable()->after('shop_id');
+            $table->bigInteger('full_amount')->nullable()->default(null)->after('amount');
         });
     }
 
@@ -26,7 +26,7 @@ class AddDataColumnToAds extends Migration
     public function down()
     {
         Schema::table('ads', function (Blueprint $table) {
-            $table->dropColumn('data');
+            $table->dropColumn('full_amount');
         });
     }
 }

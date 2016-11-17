@@ -14,7 +14,7 @@
 
     <div class="item__buttons">
 
-        @if ($ad->hasTagPrice())
+        @if ($ad->hasFullAmount())
             <del class="item__tagprice text-muted">{{ $ad->tagPrice()->formatted() }}</del>
         @endif
 
