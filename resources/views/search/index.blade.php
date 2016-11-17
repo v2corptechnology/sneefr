@@ -17,10 +17,10 @@
             <nav class="sort">
                 <ul class="menu">
                     <li class="menu__item @if ($type == 'ad') active @endif">
-                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'q' => $query])
+                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'query' => $query])
                         }}">@choice('search.type_ad_label', $ads->total(), ['nb' => $ads->total()])</a></li>
                     <li class="menu__item @if ($type == 'shop') active @endif">
-                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'q' => $query])
+                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'query' => $query])
                         }}">@choice('search.type_shop_label', $shops->total(), ['nb' => $shops->total()])</a>
                     </li>
 
