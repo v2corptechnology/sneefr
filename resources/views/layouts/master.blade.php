@@ -87,7 +87,13 @@
     @stack('footer-js')
 
     <script>(function(G,o,O,g,l){G.GoogleAnalyticsObject=O;G[O]||(G[O]=function(){(G[O].q=G[O].q||[]).push(arguments)});G[O].l=+new Date;g=o.createElement('script'),l=o.scripts[0];g.src='//www.google-analytics.com/analytics.js';l.parentNode.insertBefore(g,l)}(this,document,'ga'));ga('create','UA-61083626-1','auto');ga('send','pageview')</script>
-
+    <script>
+        (function(h,e,a,t,m,p) {
+            m=e.createElement(a);m.async=!0;m.src=t;
+            p=e.getElementsByTagName(a)[0];p.parentNode.insertBefore(m,p);
+        })(window,document,'script','https://u.heatmap.it/log.js');
+    </script>
+    
     @section('tracking')
     @show
 
