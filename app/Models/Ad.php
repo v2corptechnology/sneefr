@@ -31,7 +31,7 @@ class Ad extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'shop_id', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
+    protected $fillable = ['user_id', 'shop_id', 'data', 'remaining_quantity', 'title', 'description', 'amount', 'final_amount', 'currency', 'delivery', 'location', 'latitude', 'longitude', 'images'];
 
     /**
      * The attributes that needs to be logged by the LogsActivity trait.
@@ -46,11 +46,12 @@ class Ad extends Model
      * @var array
      */
     protected $casts = [
-        'images'       => 'array',
-        'transaction'  => 'array',
-        'amount'       => 'float',
-        'latitude'     => 'float',
-        'longitude'    => 'float',
+        'images'      => 'array',
+        'transaction' => 'array',
+        'amount'      => 'float',
+        'latitude'    => 'float',
+        'longitude'   => 'float',
+        'data'        => 'array',
     ];
 
     /**
