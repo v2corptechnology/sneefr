@@ -37,22 +37,18 @@ class ImportYelpShop extends Command
 
         $returnedShops = collect();
 
-        $shops = $this->deduplicate($returnedShops);
-
-        while($returnedShops->count() == 0 || $shops->count() == 0) {
+        while($returnedShops->count() == 0) {
 
             $index = cache()->get('yelp_import_index');
 
             $returnedShops = $this->getAllShopsAround($matrix[$index][0], $matrix[$index][1]);
 
-            \Log::warning("Skip index {$index} {$matrix[$index][0]},{$matrix[$index][1]}", [
-                'found' => $returnedShops->count(),
-                'inserted' => $shops->count(),
-                'duplicates' => $returnedShops->count() - $shops->count()
-            ]);
+            \Log::info("Skip index {$index} {$matrix[$index][0]},{$matrix[$index][1]}");
 
             cache()->increment('yelp_import_index');
         }
+
+        $shops = $this->deduplicate($returnedShops);
 
         $this->insertShops($shops);
 
