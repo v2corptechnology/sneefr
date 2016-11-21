@@ -24,7 +24,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @for ($i = 0; $i <= $shops->count() / 6; $i++)
+                    @for ($i = 0; $i < $shops->count() / 6; $i++)
                         <tr>
                             <td colspan="3">
                                 <form action="{{ route('highlightedShopHeadings.update', $i) }}" method="post">
