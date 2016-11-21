@@ -1,23 +1,30 @@
 @foreach($highlights->chunk(6) as $shops)
 
-    <div class="col-sm-12">
-        <h2 class="section-title">
-            @lang('home.highlighted_shops')
+    <?php $heading = cache()->get('highlighted_shops_headings', collect())->get($loop->index); ?>
 
-            <span class="section-title__extra">
-            @lang('home.highlighted_description')
-        </span>
-        </h2>
-    </div>
+    @if ($heading)
 
-    @foreach($shops as $shop)
-        <div class="col-sm-4">
+        <div class="col-sm-12">
+            <h2 class="section-title">
 
-            <?php $classes = $loop->remaining < ($loop->count / 2) ? 'hidden-xs' : null; ?>
+                {{ $heading['title'] }}
 
-            @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200', 'classes' => $classes])
+                <span class="section-title__extra">
+                    {{ $heading['description']  }}
+                </span>
 
+            </h2>
         </div>
-    @endforeach
+
+        @foreach($shops as $shop)
+            <div class="col-sm-4">
+
+                <?php $classes = $loop->remaining < ($loop->count / 2) ? 'hidden-xs' : null; ?>
+
+                @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200', 'classes' => $classes])
+
+            </div>
+        @endforeach
+    @endif
 
 @endforeach
