@@ -17,7 +17,7 @@
 
                 <div class="row">
 
-                    @include('pages.home.trending-shops', ['shops' => $topShops])
+                    @include('pages.home.trending-shops', ['highlights' => $highlights])
 
                 </div>
             </div>

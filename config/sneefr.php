@@ -13,7 +13,7 @@ return [
     'RUN_YELP_IMPORT' => env('RUN_YELP_IMPORT'),
 
     // Number of items featured
-    'home_featured_items' => 6,
+    'home_featured_items' => 18,
 
     /*
     |--------------------------------------------------------------------------
