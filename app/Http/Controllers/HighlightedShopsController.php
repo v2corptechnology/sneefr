@@ -18,7 +18,9 @@ class HighlightedShopsController extends Controller
             return Shop::highlighted()->with('evaluations')->take(config('sneefr.home_featured_items'))->get();
         });
 
-        return view('admin.highlightedShops.index', compact('shops'));
+        $headings = cache()->get('highlighted_shops_headings', collect());
+
+        return view('admin.highlightedShops.index', compact('shops', 'headings'));
     }
 
     /**

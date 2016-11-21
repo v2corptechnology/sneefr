@@ -11,10 +11,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $topShops = cache()->rememberForever('highlighted_shops', function () {
+        $highlights = cache()->rememberForever('highlighted_shops', function () {
             return Shop::highlighted()->get();
         })->load('evaluations')->take(config('sneefr.home_featured_items'));
 
-        return view('pages.home', compact('topShops'));
+        return view('pages.home', compact('highlights'));
     }
 }

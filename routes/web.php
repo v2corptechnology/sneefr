@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth', 'team.admin']], function ($router) {
     Route::get('demo', 'DemoController@index');
 
     Route::resource('highlightedShops', 'HighlightedShopsController');
+    Route::resource('highlightedShopHeadings', 'HighlightedShopHeadingsController');
     Route::resource('claims', 'ClaimsController', ['except' => ['create']]);
 });
 
