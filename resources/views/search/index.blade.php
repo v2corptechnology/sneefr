@@ -17,10 +17,10 @@
             <nav class="sort">
                 <ul class="menu">
                     <li class="menu__item @if ($type == 'ad') active @endif">
-                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'q' => $query])
+                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'ad', 'query' => $query])
                         }}">@choice('search.type_ad_label', $ads->total(), ['nb' => $ads->total()])</a></li>
                     <li class="menu__item @if ($type == 'shop') active @endif">
-                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'q' => $query])
+                        <a class="menu__item-link" href="{{ route('search.index', ['type' => 'shop', 'query' => $query])
                         }}">@choice('search.type_shop_label', $shops->total(), ['nb' => $shops->total()])</a>
                     </li>
 
@@ -42,58 +42,23 @@
             </nav>
         </div>
 
-        {{--
-            If the person is searching for ads and think we found
-            categories that are related to the specified search
-            terms, show links to searches in these categories.
-        --}}
-        @if ($type == 'ad')
+        @foreach ($results as $item)
+            <div class="col-sm-4 col-md-3">
 
-            @if ($linkedCategories)
-                <div class="col-md-12">
-                    <p class="bg-warning">
-                        <b>@choice('search.linked_categories', count($linkedCategories))</b>
-                        @foreach ($linkedCategories as $linkedCategoryId)
-                            <a href="{{ route('search.index', ['category' => $linkedCategoryId]) }}">
-                                @lang("category.{$linkedCategoryId}")
-                            </a>
-                        @endforeach
-                    </p>
-                </div>
-            @endif
-
-            {{-- Display the found ads using a partial --}}
-            @foreach ($ads as $ad)
-                <div class="col-sm-4 col-md-3">
-
-                    @include('ads.card', ['ad' => $ad, 'gallerySize' => '260x200'])
-
-                </div>
-            @endforeach
-
-            <div class="col-sm-12 text-center">
-
-                {{ $ads->appends(['type' => 'ad'])->links() }}
+                @if ($type == 'shop')
+                    @include('items.card', ['shop' => $item, 'coverSize' => '260x200'])
+                @else
+                    @include('items.card', ['ad' => $item, 'gallerySize' => '260x200'])
+                @endif
 
             </div>
+        @endforeach
 
-        @elseif ($type == 'shop')
+        <div class="col-sm-12 text-center">
 
-            @foreach ($shops as $shop)
-                <div class="col-sm-4 col-md-3">
+            {{ $results->links() }}
 
-                    @include('shops.card', ['shop' => $shop, 'coverSize' => '260x200', 'classes' => 'card--center'])
-
-                </div>
-            @endforeach
-
-            <div class="col-sm-12 text-center">
-
-                {{ $shops->appends(['type' => 'shop'])->links() }}
-
-            </div>
-
-        @endif
+        </div>
     </div>
 </div>
 @stop

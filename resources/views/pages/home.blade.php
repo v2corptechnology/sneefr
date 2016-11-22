@@ -5,28 +5,22 @@
         <div class="row">
 
             {{-- Trending shops --}}
-            <div class="col-sm-9">
+            <div class="col-sm-12">
 
-                @include('pages.home.quote')
+                <div class="home__header">
+                    <div class="home__header__content">
+                        <h1 class="home__header__title">@lang('home.hero.heading')</h1>
+                        <p class="home__header__dscription">@lang('home.hero.text')</p>
+                        <span class="home__header__locale"><i class="fa fa-map-marker"></i> @lang('home.hero.footer')</span>
+                    </div>
+                </div>
 
                 <div class="row">
 
-                    @include('pages.home.trending-shops', ['shops' => $topShops])
+                    @include('pages.home.trending-shops', ['highlights' => $highlights])
 
                 </div>
             </div>
-
-            {{-- Best selling --}}
-            <div class="col-sm-3 ">
-
-                @include('pages.home.best-selling', ['items' => $bestSellers])
-
-            </div>
-        </div>
-
-        <div class="row" id="shop-categories">
-
-            @include('pages.home.shops-by-category', ['tags' => $tags, 'shops' => $shopsInTag])
 
         </div>
 

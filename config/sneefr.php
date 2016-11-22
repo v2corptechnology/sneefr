@@ -12,6 +12,9 @@ return [
     'YELP_BASE_INDEX' => env('YELP_BASE_INDEX'),
     'RUN_YELP_IMPORT' => env('RUN_YELP_IMPORT'),
 
+    // Number of items featured
+    'home_featured_items' => 18,
+
     /*
     |--------------------------------------------------------------------------
     | Keys used across different services

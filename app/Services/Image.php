@@ -26,13 +26,14 @@ class Image
      * @var array
      */
     protected $patterns = [
-        'ad'         => 'bound/{dimensions}/q75.tjpg/_originals_/{name}',
-        'ad_cropped' => 'crop/{dimensions}/q75.tjpg/_originals_/{name}',
-        'avatar'     => 'crop/{dimensions}/q75/http://s3.amazonaws.com/sneefr.prod.ad-images/avatar/{name}',
-        'cover'      => 'crop/{dimensions}/q75.tjpg/_shops_/{name}',
-        'logo'       => 'crop/{dimensions}/q75/_shops_/{name}',
-        'cover_yelp' => 'crop/{dimensions}/q75.tjpg/{name}',
-        'logo_yelp'  => 'crop/{dimensions}/q75/{name}',
+        'ad'            => 'bound/{dimensions}/q75.tjpg/_originals_/{name}',
+        'ad_cropped'    => 'crop/{dimensions}/q75.tjpg/_originals_/{name}',
+        'avatar'        => 'crop/{dimensions}/q75/http://s3.amazonaws.com/sneefr.prod.ad-images/avatar/{name}',
+        'cover'         => 'crop/{dimensions}/q75.tjpg/_shops_/{name}',
+        'logo'          => 'crop/{dimensions}/q75/_shops_/{name}',
+        'cover_yelp'    => 'crop/{dimensions}/q75.tjpg/{name}',
+        'cover_default' => 'crop/{dimensions}/q75.tjpg/https://sidewalks.city/img/logo-sidewalks.png',
+        'logo_yelp'     => 'crop/{dimensions}/q75/{name}',
     ];
 
     /**
@@ -156,7 +157,11 @@ class Image
             return $this->getImageUrl('cover_yelp', $shop->getCoverName(), $dimensions);
         }
 
-        $name = $shop->getRouteKey().'/'.$shop->getCoverName();
+        if (! $shop->getCoverName()) {
+            return $this->getImageUrl('cover_default', null, $dimensions);
+        } else {
+            $name = $shop->getRouteKey().'/'.$shop->getCoverName();
+        }
 
         return $this->getImageUrl('cover', $name, $dimensions);
     }

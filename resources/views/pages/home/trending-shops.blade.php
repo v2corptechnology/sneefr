@@ -1,25 +1,30 @@
-<div class="col-sm-12">
-    <div class="home__section home__section--padding">
-        <h4 class="home__section__title">
+@foreach($highlights->chunk(6) as $shops)
 
-            @lang('home.highlighted_shops')
+    <?php $heading = cache()->get('highlighted_shops_headings', collect())->get($loop->index); ?>
 
-            <span class="home__section__description">
-                @lang('home.highlighted_description')
-            </span>
-        </h4>
+    @if ($heading)
 
-        <a href="{{ route('search.index', ['type' => 'shop']) }}"
-           class="btn btn-default-o pull-right">
-            @lang('button.see_all')
-        </a>
-    </div>
-</div>
+        <div class="col-sm-12">
+            <h2 class="section-title">
 
-@foreach($shops as $shop)
-    <div class="col-sm-6">
+                {{ $heading['title'] }}
 
-        @include('partials.card', ['item' => $shop, 'multiple' => true])
+                <span class="section-title__extra">
+                    {{ $heading['description']  }}
+                </span>
 
-    </div>
+            </h2>
+        </div>
+
+        @foreach($shops as $shop)
+            <div class="col-sm-4">
+
+                <?php $classes = $loop->remaining < ($loop->count / 2) ? 'hidden-xs' : null; ?>
+
+                @include('shops.card', ['shop' => $shop, 'coverSize' => '410x200', 'classes' => $classes])
+
+            </div>
+        @endforeach
+    @endif
+
 @endforeach

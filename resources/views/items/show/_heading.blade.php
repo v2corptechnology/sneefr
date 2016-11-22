@@ -13,6 +13,11 @@
     <hr class="item__separator">
 
     <div class="item__buttons">
+
+        @if ($ad->hasFullAmount())
+            <del class="item__tagprice text-muted">{{ $ad->tagPrice()->formatted() }}</del>
+        @endif
+
         <span class="item__price">{{ $ad->price()->formatted() }}</span>
 
         @include('items.show._buy_dropdown', ['ad' => $ad])

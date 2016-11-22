@@ -10,9 +10,9 @@
         <form class="navbar-form navbar-left has-no-mb" action="{{ route('search.index') }}">
             <div class="row">
                 <div class="col-sm-6 is-narrow-pr">
-                    <input type="search" class="form-control" name="q"
+                    <input type="search" class="form-control" name="query"
                            placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
-                           value="{{ request()->get('q') }}">
+                           value="{{ request()->get('query') }}">
                 </div>
                 <div class="col-sm-4 is-narrow-pl is-narrow-pr">
                     <input type="text" class="form-control has-no-mb" name="location"
@@ -73,9 +73,9 @@
                 <form class="navbar-form navbar-left" action="{{ route('search.index') }}">
                     <div class="row">
                         <div class="col-xs-10 is-narrow-pr is-narrow-pl">
-                            <input type="search" class="form-control" name="q"
+                            <input type="search" class="form-control" name="query"
                                    placeholder="What do you want to buy? Phonecase, wallet, tshirt…"
-                                   value="{{ request()->get('q') }}">
+                                   value="{{ request()->get('query') }}">
                             <input type="text" class="form-control has-no-mb" name="location"
                                    placeholder="Where? Los Angeles, CA" disabled>
                         </div>
@@ -141,7 +141,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="adminMenu">
                                     <li><a href="{{ route('admin.users') }}">Stats</a></li>
-                                    <li><a href="{{ route('admin.tools') }}">Tools</a></li>
+                                    <li><a href="{{ route('highlightedShops.index') }}">Tools</a></li>
                                     <li><a href="{{ url('logs') }}">Logs</a></li>
                                 </ul>
                             </div>

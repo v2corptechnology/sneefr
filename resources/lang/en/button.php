@@ -23,6 +23,4 @@ return [
     'register'          => "Register",
     'forgot_password'   => "Forgot Your Password?",
     'learn_more'        => "Learn More",
-    'see_more'          => "See more",
-    'see_all'           => "See All",
 ];

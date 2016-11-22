@@ -17,13 +17,46 @@
             <div class="content">
                 <table class="table table-hover table-striped table-condensed">
                     <thead>
+                    <tr>
+                        <th width="30%">Title</th>
+                        <th width="55%">Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for ($i = 0; $i < $shops->count() / 6; $i++)
+                        <tr>
+                            <td colspan="3">
+                                <form action="{{ route('highlightedShopHeadings.update', $i) }}" method="post">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('put') !!}
+                                    <div class="col-md-3">
+                                        <input class="form-control" name="title" type="text" value="{{ $headings->get($i, ['title' => 'Trending shops', 'description' => 'Selected for you every week'])['title'] }}">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input class="form-control" name="description" type="text" value="{{ $headings->get($i, ['title' => 'Trending shops', 'description' => 'Selected for you every week'])['description'] }}">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-default btn-block">Update</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    @endfor
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="content">
+                <table class="table table-hover table-striped table-condensed">
+                    <thead>
                         <tr>
                             <th width="75%">Shop</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($shops->count() < 4)
+                        @if ($shops->count() < config('sneefr.home_featured_items'))
                             <tr>
                                 <td colspan="2">
                                     <div class="row">

@@ -18,7 +18,7 @@ return [
         'name_placeholder'        => "Phile's Fabulous Shop",
         'slug_label'              => "Personalized URL of your shop",
         'slug_prepend'            => "https://",
-        'slug_append'             => ".sneefr.com",
+        'slug_append'             => ".sidewalks.city",
         'slug_placeholder'        => "phile-s-fabulous-shop",
         'description_label'       => "Description of your shop",
         'description_placeholder' => "Hours, location, policies, additional details",
