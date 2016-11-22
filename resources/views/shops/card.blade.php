@@ -6,7 +6,7 @@ list($width, $height) = explode('x', $coverSize);
 ?>
 
 <a class="card {{ $classes ?? null }}" href="{{ route('shops.show', $shop) }}" title="{{ $shop->getName() }}">
-    <figure class="card__gallery">
+    <figure class="card__gallery card__gallery--vignette">
         <img class="card__image" src="{{ $shop->getCover($coverSize) }}"
              srcset="{{ $shop->getCover($coverSize.'@2x') }} 2x"
              alt="{{ $shop->getName() }}" width="{{ $width }}"
