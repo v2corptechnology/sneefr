@@ -92,7 +92,6 @@
                                         data-currency="USD" data-name="Sidewalks"
                                         data-description="{{ $ad->present()->title() }}"
                                         data-amount="{{ $ad->price()->cents() }}"
-                                        @if ($ad->isInShop()) disabled @endif
                                         title="@lang('payments.create.btn_secure_title')">
                                     <i class="fa fa-lock"></i> @lang('payments.create.btn_secure')
                                 </button>
