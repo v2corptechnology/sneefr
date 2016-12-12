@@ -46,7 +46,7 @@
             <div class="col-sm-4 col-md-3">
 
                 @if ($type == 'shop')
-                    @include('items.card', ['shop' => $item, 'coverSize' => '260x200'])
+                    @include('shops.card', ['shop' => $item, 'coverSize' => '260x200'])
                 @else
                     @include('items.card', ['ad' => $item, 'gallerySize' => '260x200'])
                 @endif
